@@ -1,0 +1,4 @@
+# These three files are unchanged official schema snapshots.
+submission.schema.json -text
+train_public.schema.json -text
+val_public.schema.json -text

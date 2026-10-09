@@ -1,0 +1,599 @@
+{
+  "generated_at_utc": "2026-10-09T15:25:45.197724+00:00",
+  "source_root": "数字人综合情感陪伴对话模型",
+  "inspection_scope": "Read and statically inspect JSON/JSONL; no official source code executed; no personal dialogue text emitted; no licensing inference",
+  "jsonschema_installed": false,
+  "splits": {
+    "train": {
+      "physical_lines": 8338,
+      "valid_json_rows": 8338,
+      "invalid_json_rows": 0,
+      "parse_errors": [],
+      "blank_lines": 0,
+      "data_path": "训练-验证-数据集/train/train_public.jsonl",
+      "data_sha256": "184a47471f8d6f70fa21b9265b0a4d4e51c3748ba25af39a801884a2da35341a",
+      "schema_path": "训练-验证-数据集/train/train_public.schema.json",
+      "schema_sha256": "a9467e520b06a96859acaa2ff022e395d08ff6ad5e8ae3532a22cc24c630cada",
+      "schema_draft": "https://json-schema.org/draft/2020-12/schema",
+      "schema_check_method": "self-written checker covering every validation keyword found in these actual schemas; not a general Draft 2020-12 validator",
+      "schema_keywords": [
+        "$defs",
+        "$ref",
+        "$schema",
+        "additionalProperties",
+        "enum",
+        "items",
+        "minItems",
+        "minLength",
+        "minimum",
+        "pattern",
+        "properties",
+        "required",
+        "type",
+        "uniqueItems"
+      ],
+      "unsupported_schema_keywords": [],
+      "schema_invalid_rows": 0,
+      "schema_error_counts": {},
+      "top_level_key_sets": {
+        "conversation_id|prediction_points|turns": 8338
+      },
+      "unique_conversation_ids": 8338,
+      "duplicate_conversation_id_rows": 0,
+      "unique_complete_role_content_dialogs": 8136,
+      "duplicate_complete_dialog_extra_rows": 202,
+      "duplicate_complete_dialog_groups": 202,
+      "largest_duplicate_multiplicity": 2,
+      "turn_count_per_conversation": {
+        "n": 8338,
+        "min": 2,
+        "max": 50,
+        "mean": 14.14,
+        "distribution": {
+          "2": 38,
+          "4": 1172,
+          "6": 685,
+          "8": 854,
+          "10": 882,
+          "12": 905,
+          "14": 628,
+          "16": 878,
+          "18": 589,
+          "20": 605,
+          "22": 51,
+          "24": 128,
+          "26": 136,
+          "28": 100,
+          "30": 130,
+          "32": 78,
+          "34": 69,
+          "36": 37,
+          "38": 65,
+          "40": 33,
+          "42": 59,
+          "44": 66,
+          "46": 61,
+          "48": 29,
+          "50": 60
+        }
+      },
+      "total_turns": 117902,
+      "role_distribution": {
+        "user": 58951,
+        "assistant": 58951
+      },
+      "prediction_points_per_conversation": {
+        "n": 8338,
+        "min": 0,
+        "max": 8,
+        "mean": 2.238,
+        "distribution": {
+          "0": 5,
+          "1": 2224,
+          "2": 3069,
+          "3": 2107,
+          "4": 734,
+          "5": 164,
+          "6": 29,
+          "7": 4,
+          "8": 2
+        }
+      },
+      "total_prediction_points": 18657,
+      "duplicate_conversation_target_prediction_keys": 0,
+      "emotion_distribution": {
+        "counts": {
+          "anxiety": 6340,
+          "fear": 1388,
+          "mixed": 945,
+          "relaxed": 2819,
+          "joy": 171,
+          "neutral": 654,
+          "anger": 855,
+          "sadness": 1085,
+          "helplessness": 1575,
+          "shame": 752,
+          "loneliness": 876,
+          "care": 79,
+          "gratitude": 695,
+          "pride": 234,
+          "surprise": 64,
+          "disgust": 125
+        },
+        "percent": {
+          "anxiety": 33.982,
+          "fear": 7.44,
+          "mixed": 5.065,
+          "relaxed": 15.11,
+          "joy": 0.917,
+          "neutral": 3.505,
+          "anger": 4.583,
+          "sadness": 5.816,
+          "helplessness": 8.442,
+          "shame": 4.031,
+          "loneliness": 4.695,
+          "care": 0.423,
+          "gratitude": 3.725,
+          "pride": 1.254,
+          "surprise": 0.343,
+          "disgust": 0.67
+        }
+      },
+      "profile_label_mentions": {
+        "personality_traits": {
+          "sensitive": 5165,
+          "introverted": 717,
+          "high_conscientiousness": 2281,
+          "assertive": 675,
+          "conservative": 1364,
+          "emotionally_stable": 336,
+          "agreeable": 361,
+          "extroverted": 37,
+          "casual": 27,
+          "open": 59
+        },
+        "interests": {
+          "music": 133,
+          "career_development": 1472,
+          "pets": 744,
+          "study_exam": 746,
+          "games": 704,
+          "sports_fitness": 625,
+          "reading_writing": 316,
+          "programming_technology": 82,
+          "art_design": 341,
+          "social": 764,
+          "travel_outdoor": 144,
+          "film_animation": 108
+        },
+        "style": {
+          "rational": 4418,
+          "colloquial": 654,
+          "high_emotional_expression": 945,
+          "direct": 2603,
+          "detailed": 1121,
+          "brief": 1166,
+          "indirect": 516,
+          "formal": 128,
+          "humorous": 81,
+          "emoji_user": 27,
+          "low_emotional_expression": 3
+        }
+      },
+      "empty_profile_array_counts": {
+        "interests": 12919,
+        "style": 8731,
+        "personality_traits": 10492
+      },
+      "memory_refs_per_prediction": {
+        "n": 18657,
+        "min": 0,
+        "max": 9,
+        "mean": 2.059,
+        "distribution": {
+          "0": 437,
+          "1": 4398,
+          "2": 8673,
+          "3": 4141,
+          "4": 839,
+          "5": 136,
+          "6": 22,
+          "7": 8,
+          "8": 1,
+          "9": 2
+        }
+      },
+      "total_memory_ref_mentions": 38417,
+      "unique_memory_refs": 26883,
+      "memory_refs_all_match_pattern": true,
+      "memory_refs_note": "Opaque memory identifiers, not turn identifiers. These JSONL records do not supply a memory bank or a mapping from memory IDs to their content.",
+      "reference_response_characters": {
+        "min": 2,
+        "max": 1809,
+        "mean": 218.471
+      },
+      "target_user_rank_distribution": {
+        "1": 589,
+        "2": 2430,
+        "3": 3371,
+        "4": 2677,
+        "5": 2344,
+        "6": 1688,
+        "7": 1107,
+        "8": 1348,
+        "9": 742,
+        "10": 564,
+        "11": 239,
+        "12": 323,
+        "13": 255,
+        "14": 182,
+        "15": 158,
+        "16": 152,
+        "17": 89,
+        "18": 77,
+        "19": 58,
+        "20": 57,
+        "21": 52,
+        "22": 39,
+        "23": 55,
+        "24": 35,
+        "25": 26
+      },
+      "semantic_checks": {
+        "assistant_not_next_turn_id": 4,
+        "duplicate_turn_id_conversations": 0,
+        "non_contiguous_or_unsorted_turn_ids": 0,
+        "non_alternating_conversations": 0,
+        "first_role_not_user": 0,
+        "target_user_turn_id_missing": 0,
+        "target_id_role_not_user": 0,
+        "assistant_response_turn_id_missing": 0,
+        "assistant_id_role_not_assistant": 0,
+        "reference_response_differs_from_assistant_turn": 0
+      },
+      "nonadjacent_response_prediction_points": [
+        {
+          "conversation_id": "train_conv_000628",
+          "target_user_turn_id": 15,
+          "assistant_response_turn_id": 14,
+          "assistant_precedes_target": true
+        },
+        {
+          "conversation_id": "train_conv_000817",
+          "target_user_turn_id": 33,
+          "assistant_response_turn_id": 32,
+          "assistant_precedes_target": true
+        },
+        {
+          "conversation_id": "train_conv_003644",
+          "target_user_turn_id": 7,
+          "assistant_response_turn_id": 6,
+          "assistant_precedes_target": true
+        },
+        {
+          "conversation_id": "train_conv_003695",
+          "target_user_turn_id": 9,
+          "assistant_response_turn_id": 8,
+          "assistant_precedes_target": true
+        }
+      ]
+    },
+    "val": {
+      "physical_lines": 900,
+      "valid_json_rows": 900,
+      "invalid_json_rows": 0,
+      "parse_errors": [],
+      "blank_lines": 0,
+      "data_path": "训练-验证-数据集/val/val_public.jsonl",
+      "data_sha256": "097c0639ef7370a18a54670ec3c8390ce5dc87c1ed95f436cef07b68dfed7668",
+      "schema_path": "训练-验证-数据集/val/val_public.schema.json",
+      "schema_sha256": "4b995d80aba99883bda63e2fa18b161a2784e501f98316295f4618b0a0c4af10",
+      "schema_draft": "https://json-schema.org/draft/2020-12/schema",
+      "schema_check_method": "self-written checker covering every validation keyword found in these actual schemas; not a general Draft 2020-12 validator",
+      "schema_keywords": [
+        "$defs",
+        "$ref",
+        "$schema",
+        "additionalProperties",
+        "enum",
+        "items",
+        "minItems",
+        "minLength",
+        "minimum",
+        "pattern",
+        "properties",
+        "required",
+        "type",
+        "uniqueItems"
+      ],
+      "unsupported_schema_keywords": [],
+      "schema_invalid_rows": 0,
+      "schema_error_counts": {},
+      "top_level_key_sets": {
+        "conversation_id|prediction_points|turns": 900
+      },
+      "unique_conversation_ids": 900,
+      "duplicate_conversation_id_rows": 0,
+      "unique_complete_role_content_dialogs": 900,
+      "duplicate_complete_dialog_extra_rows": 0,
+      "duplicate_complete_dialog_groups": 0,
+      "largest_duplicate_multiplicity": 1,
+      "turn_count_per_conversation": {
+        "n": 900,
+        "min": 4,
+        "max": 50,
+        "mean": 13.036,
+        "distribution": {
+          "4": 173,
+          "6": 118,
+          "8": 76,
+          "10": 85,
+          "12": 80,
+          "14": 55,
+          "16": 98,
+          "18": 63,
+          "20": 55,
+          "22": 1,
+          "24": 14,
+          "26": 11,
+          "28": 7,
+          "30": 12,
+          "32": 4,
+          "34": 6,
+          "36": 4,
+          "38": 6,
+          "40": 3,
+          "42": 6,
+          "44": 10,
+          "46": 4,
+          "48": 4,
+          "50": 5
+        }
+      },
+      "total_turns": 11732,
+      "role_distribution": {
+        "user": 5866,
+        "assistant": 5866
+      },
+      "prediction_points_per_conversation": {
+        "n": 900,
+        "min": 1,
+        "max": 9,
+        "mean": 2.616,
+        "distribution": {
+          "1": 167,
+          "2": 250,
+          "3": 314,
+          "4": 125,
+          "5": 28,
+          "6": 10,
+          "7": 4,
+          "8": 1,
+          "9": 1
+        }
+      },
+      "total_prediction_points": 2354,
+      "duplicate_conversation_target_prediction_keys": 0,
+      "emotion_distribution": {
+        "counts": {
+          "anxiety": 751,
+          "gratitude": 118,
+          "relaxed": 409,
+          "helplessness": 142,
+          "loneliness": 115,
+          "anger": 115,
+          "neutral": 53,
+          "fear": 124,
+          "care": 11,
+          "shame": 118,
+          "pride": 40,
+          "sadness": 131,
+          "joy": 20,
+          "mixed": 177,
+          "disgust": 21,
+          "surprise": 9
+        },
+        "percent": {
+          "anxiety": 31.903,
+          "gratitude": 5.013,
+          "relaxed": 17.375,
+          "helplessness": 6.032,
+          "loneliness": 4.885,
+          "anger": 4.885,
+          "neutral": 2.251,
+          "fear": 5.268,
+          "care": 0.467,
+          "shame": 5.013,
+          "pride": 1.699,
+          "sadness": 5.565,
+          "joy": 0.85,
+          "mixed": 7.519,
+          "disgust": 0.892,
+          "surprise": 0.382
+        }
+      },
+      "profile_label_mentions": {
+        "personality_traits": {
+          "casual": 4,
+          "sensitive": 487,
+          "agreeable": 53,
+          "high_conscientiousness": 205,
+          "introverted": 52,
+          "conservative": 253,
+          "assertive": 74,
+          "open": 4,
+          "emotionally_stable": 9,
+          "extroverted": 2
+        },
+        "interests": {
+          "social": 23,
+          "film_animation": 13,
+          "career_development": 128,
+          "sports_fitness": 84,
+          "art_design": 32,
+          "games": 81,
+          "reading_writing": 40,
+          "music": 19,
+          "travel_outdoor": 21,
+          "study_exam": 95,
+          "programming_technology": 1,
+          "pets": 106
+        },
+        "style": {
+          "colloquial": 54,
+          "rational": 585,
+          "direct": 281,
+          "high_emotional_expression": 57,
+          "formal": 22,
+          "brief": 120,
+          "detailed": 147,
+          "indirect": 59,
+          "humorous": 8
+        }
+      },
+      "empty_profile_array_counts": {
+        "personality_traits": 1456,
+        "interests": 1763,
+        "style": 1218
+      },
+      "memory_refs_per_prediction": {
+        "n": 2354,
+        "min": 0,
+        "max": 7,
+        "mean": 2.034,
+        "distribution": {
+          "0": 41,
+          "1": 568,
+          "2": 1117,
+          "3": 538,
+          "4": 82,
+          "5": 5,
+          "6": 1,
+          "7": 2
+        }
+      },
+      "total_memory_ref_mentions": 4789,
+      "unique_memory_refs": 3301,
+      "memory_refs_all_match_pattern": true,
+      "memory_refs_note": "Opaque memory identifiers, not turn identifiers. These JSONL records do not supply a memory bank or a mapping from memory IDs to their content.",
+      "reference_response_characters": {
+        "min": 3,
+        "max": 1754,
+        "mean": 158.24
+      },
+      "target_user_rank_distribution": {
+        "1": 103,
+        "2": 375,
+        "3": 425,
+        "4": 334,
+        "5": 275,
+        "6": 199,
+        "7": 121,
+        "8": 169,
+        "9": 93,
+        "10": 74,
+        "11": 25,
+        "12": 33,
+        "13": 26,
+        "14": 20,
+        "15": 17,
+        "16": 12,
+        "17": 7,
+        "18": 7,
+        "19": 6,
+        "20": 7,
+        "21": 9,
+        "22": 7,
+        "23": 3,
+        "24": 6,
+        "25": 1
+      },
+      "semantic_checks": {
+        "duplicate_turn_id_conversations": 0,
+        "non_contiguous_or_unsorted_turn_ids": 0,
+        "non_alternating_conversations": 0,
+        "first_role_not_user": 0,
+        "target_user_turn_id_missing": 0,
+        "target_id_role_not_user": 0,
+        "assistant_response_turn_id_missing": 0,
+        "assistant_id_role_not_assistant": 0,
+        "assistant_not_next_turn_id": 0,
+        "reference_response_differs_from_assistant_turn": 0
+      },
+      "nonadjacent_response_prediction_points": []
+    }
+  },
+  "cross_split": {
+    "conversation_id_overlap": 0,
+    "complete_role_content_dialog_overlap": 0,
+    "memory_ref_overlap": 0,
+    "schema_differences": [
+      {
+        "path": "$.properties.conversation_id.pattern",
+        "train": "^train_conv_[0-9]{6}$",
+        "val": "^val_conv_[0-9]{6}$"
+      }
+    ]
+  },
+  "inference_sample": {
+    "physical_lines": 3,
+    "valid_json_rows": 3,
+    "invalid_json_rows": 0,
+    "parse_errors": [],
+    "blank_lines": 0,
+    "data_path": "test_inference_data.jsonl",
+    "data_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+    "top_level_key_sets": {
+      "conversation_id|history|id|target_user_turn_id": 3
+    },
+    "unique_ids": 3,
+    "unique_conversation_ids": 2,
+    "duplicate_ids": 0,
+    "history_lengths": {
+      "n": 3,
+      "min": 5,
+      "max": 7,
+      "mean": 5.667,
+      "distribution": {
+        "5": 2,
+        "7": 1
+      }
+    },
+    "last_history_role_counts": {
+      "user": 3
+    },
+    "history_checks": {},
+    "repeated_conversation_prefix_checks": [
+      {
+        "shorter_history_length": 5,
+        "longer_history_length": 7,
+        "shorter_is_exact_prefix": true
+      }
+    ],
+    "reference_target_fields_present": false,
+    "memory_bank_fields_present": false,
+    "train_conversation_id_overlap": 0,
+    "val_conversation_id_overlap": 0,
+    "submission_schema_path": "participant/templates/submission_schema.json",
+    "submission_schema_sha256": "91c42d56ae433212aab7905eabdbb96cf8463c2f887dc46b3f31647ab3a5d591",
+    "submission_id_constraint": {
+      "type": "string",
+      "pattern": "^test_[0-9]{6}_t[0-9]+$"
+    },
+    "input_ids": [
+      "test1_000001_t5",
+      "test1_000001_t7",
+      "test1_000002_t5"
+    ],
+    "input_ids_passing_submission_pattern": 0,
+    "id_discrepancy_note": "The sample uses test1_... identifiers while the included submission schema accepts test_... only. Preserve input IDs; seek official clarification rather than silently renaming them."
+  },
+  "contract_implications": [
+    "Prediction inputs are history sliced through target_user_turn_id inclusive, with current user included once. Reference answer and later turns must not enter model input.",
+    "Generate the official sixteen-category emotion_label, three user_profile arrays and memory_refs as well as response_text; the six-category demonstration emotion is not a lossless official label representation.",
+    "memory_refs are opaque mem_XXXXXX identifiers. Do not interpret their numeric suffix as turn_id, invent a memory-bank mapping, or use reference memory IDs as inference inputs.",
+    "Four training prediction points refer to a preceding assistant. Quarantine or explicitly resolve them; five training conversations have no annotated prediction points.",
+    "Keep validation conversations out of training. Train has 202 repeated full-dialog groups; train and validation have no complete-dialog overlap.",
+    "The three inference examples are smoke fixtures, not a labelled benchmark. IDs must be preserved, and the sample/schema pattern contradiction needs official clarification."
+  ]
+}

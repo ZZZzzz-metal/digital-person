@@ -1,0 +1,2 @@
+# Preserve official reference bytes, including LF shell scripts, on all platforms.
+* -text
