@@ -1,0 +1,59 @@
+{
+  "checked_at_utc": "2026-10-10T13:25:37.751751+00:00",
+  "scope": "B2 actual localhost sessions + SQLite persistence; fictional stored message fixture",
+  "python_version": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "passed": true,
+  "checks": [
+    {
+      "name": "actual_stub_startup_and_health_without_identity_cookie",
+      "passed": true
+    },
+    {
+      "name": "server_generated_separate_cookies_with_HttpOnly_SameSite_Path",
+      "passed": true
+    },
+    {
+      "name": "two_cookie_users_have_isolated_list_history_and_delete",
+      "passed": true
+    },
+    {
+      "name": "invalid_input_returns_contract_400_error",
+      "passed": true
+    },
+    {
+      "name": "HTTP_history_reads_atomic_pair_from_explicit_fictional_store_fixture",
+      "passed": true
+    },
+    {
+      "name": "exactly_health_plus_four_session_operations",
+      "passed": true
+    },
+    {
+      "name": "restart_preserves_both_anonymous_users_and_completed_messages",
+      "passed": true
+    },
+    {
+      "name": "owner_delete_removes_only_own_session_and_history",
+      "passed": true
+    }
+  ],
+  "all_owned_processes_stopped": true,
+  "raw_cookies_recorded": false,
+  "real_generation_performed": false,
+  "official_container_verified": false,
+  "port": 8000,
+  "command": [
+    "python",
+    "-m",
+    "uvicorn",
+    "server.app:app",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8000"
+  ],
+  "openapi_operations": 5,
+  "owned_processes_started": 2,
+  "startup_log": "INFO:     Started server process [49856]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nINFO:     127.0.0.1:64517 - \"GET /health HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64518 - \"POST /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64519 - \"POST /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64518 - \"GET /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64519 - \"GET /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64518 - \"GET /api/sessions/session_4d8d499abd434d71b8be107117998761/messages HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64519 - \"GET /api/sessions/session_4d8d499abd434d71b8be107117998761/messages HTTP/1.1\" 404 Not Found\nINFO:     127.0.0.1:64519 - \"DELETE /api/sessions/session_4d8d499abd434d71b8be107117998761 HTTP/1.1\" 404 Not Found\nINFO:     127.0.0.1:64518 - \"POST /api/sessions HTTP/1.1\" 400 Bad Request\nINFO:     127.0.0.1:64518 - \"GET /api/sessions/session_4d8d499abd434d71b8be107117998761/messages HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64518 - \"GET /openapi.json HTTP/1.1\" 200 OK\nINFO:     Started server process [35140]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nINFO:     127.0.0.1:64525 - \"GET /health HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64526 - \"GET /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64526 - \"GET /api/sessions/session_4d8d499abd434d71b8be107117998761/messages HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64527 - \"GET /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64526 - \"DELETE /api/sessions/session_4d8d499abd434d71b8be107117998761 HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64526 - \"GET /api/sessions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:64526 - \"GET /api/sessions/session_4d8d499abd434d71b8be107117998761/messages HTTP/1.1\" 404 Not Found\nINFO:     127.0.0.1:64527 - \"GET /api/sessions HTTP/1.1\" 200 OK\n"
+}
