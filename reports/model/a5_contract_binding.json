@@ -1,0 +1,167 @@
+{
+  "node": "合同绑定检查（B 的 contracts 自动切换）",
+  "explanation": "引擎在构造时解析合同：b2_core.contracts 齐全就用 B 的，否则整体退回 A 的兜底。伪造模块只存在于内存，仓库里不会出现 src/b2_core/contracts.py。",
+  "scenarios": [
+    {
+      "scenario": "fallback",
+      "note": "仓库里没有 b2_core.contracts，应当用 A 的兜底 dataclass。",
+      "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+      "reply_class": "b2_core.a_impl.dtos.CoreReply",
+      "prediction_class": "b2_core.a_impl.dtos.OfficialPrediction",
+      "profile_class": "b2_core.a_impl.dtos.UserProfile",
+      "uses_a_types": true,
+      "uses_b_types": false,
+      "prediction_as_dict": {
+        "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [],
+          "interests": [
+            "study_exam"
+          ],
+          "style": []
+        },
+        "memory_refs": []
+      },
+      "trace_is_mock": true,
+      "problems": []
+    },
+    {
+      "scenario": "b_contracts_full",
+      "note": "B 的合同齐全时，引擎应当自动改用 B 的类型。",
+      "contract_source": "b2_core.contracts",
+      "reply_class": "__main__.CoreReply",
+      "prediction_class": "__main__.OfficialPrediction",
+      "profile_class": "__main__.UserProfile",
+      "uses_a_types": false,
+      "uses_b_types": true,
+      "prediction_as_dict": {
+        "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [],
+          "interests": [
+            "study_exam"
+          ],
+          "style": []
+        },
+        "memory_refs": []
+      },
+      "trace_is_mock": true,
+      "problems": []
+    },
+    {
+      "scenario": "b_contracts_incomplete",
+      "note": "B 的合同缺 OfficialPrediction 时，应当整体退回兜底，不能一半 B 一半 A。",
+      "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+      "reply_class": "b2_core.a_impl.dtos.CoreReply",
+      "prediction_class": "b2_core.a_impl.dtos.OfficialPrediction",
+      "profile_class": "b2_core.a_impl.dtos.UserProfile",
+      "uses_a_types": true,
+      "uses_b_types": false,
+      "prediction_as_dict": {
+        "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [],
+          "interests": [
+            "study_exam"
+          ],
+          "style": []
+        },
+        "memory_refs": []
+      },
+      "trace_is_mock": true,
+      "problems": []
+    },
+    {
+      "scenario": "b_contracts_explodes",
+      "note": "B 的合同在属性访问时抛异常，应当安全退回兜底而不是把异常抛给调用方。",
+      "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+      "reply_class": "b2_core.a_impl.dtos.CoreReply",
+      "prediction_class": "b2_core.a_impl.dtos.OfficialPrediction",
+      "profile_class": "b2_core.a_impl.dtos.UserProfile",
+      "uses_a_types": true,
+      "uses_b_types": false,
+      "prediction_as_dict": {
+        "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [],
+          "interests": [
+            "study_exam"
+          ],
+          "style": []
+        },
+        "memory_refs": []
+      },
+      "trace_is_mock": true,
+      "problems": []
+    },
+    {
+      "scenario": "real_engine_with_b_contracts",
+      "note": "交付的真实引擎在 B 的合同下也必须能跑通两个接口。",
+      "contract_source": "b2_core.contracts",
+      "engine": {
+        "engine": "ModelEngine",
+        "is_mock": false,
+        "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+        "config_path": "D:\\digital-person\\weights\\inference_config.json",
+        "model_dir": "D:\\digital-person\\weights\\sft-short",
+        "contract_source": "b2_core.contracts",
+        "loaded": true,
+        "load_seconds": 2.198,
+        "params": 494032768,
+        "param_dtypes": [
+          "torch.float32"
+        ],
+        "device": "cpu",
+        "threads": 16,
+        "max_input_tokens": 3072,
+        "generation": {
+          "max_new_tokens": 256,
+          "do_sample": true,
+          "temperature": 0.3,
+          "top_p": 0.9,
+          "repetition_penalty": 1.15
+        },
+        "official_generation": {
+          "max_new_tokens": 1200,
+          "do_sample": false,
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "repetition_penalty": 1.0
+        },
+        "patch": null
+      },
+      "reply_class": "__main__.CoreReply",
+      "prediction_class": "__main__.OfficialPrediction",
+      "profile_class": "__main__.UserProfile",
+      "uses_b_types": true,
+      "reply": "这事儿挺让人提心吊胆的，要不要想一下怎么给自己打分？",
+      "emotion": "anxious",
+      "expression": "concern",
+      "is_mock": false,
+      "prediction": {
+        "response_text": "嗯，这事儿听着挺重要的，要不要我陪你把这事儿说说？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [
+            "introverted"
+          ],
+          "interests": [
+            "study_exam"
+          ],
+          "style": [
+            "colloquial"
+          ]
+        },
+        "memory_refs": []
+      },
+      "seconds": 5.04,
+      "problems": []
+    }
+  ],
+  "failures": [],
+  "note": "这是集成路径检查，不是效果评估，也不是官方评分。"
+}

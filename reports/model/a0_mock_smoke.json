@@ -1,0 +1,168 @@
+{
+  "node": "A0 MockEngine 冒烟检查",
+  "engine": {
+    "engine": "MockEngine",
+    "is_mock": true,
+    "model_version": "mock-v1",
+    "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+    "config_path": null,
+    "note": "mock 只验证程序链路，不能用于评价模型效果。"
+  },
+  "checks": {
+    "cases": 6,
+    "multi_turn_cases": 1,
+    "official_samples": 3,
+    "failures": []
+  },
+  "samples": [
+    {
+      "input": "我最近一想到考试就紧张，晚上也睡不好。",
+      "expected_emotion": "anxious",
+      "reply": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+      "emotion": "anxious",
+      "expression": "concern",
+      "model_version": "mock-v1",
+      "is_mock": true
+    },
+    {
+      "input": "今天面试终于过了，太开心了！",
+      "expected_emotion": "happy",
+      "reply": "听得出来你心情不错。想多讲讲是什么让你这么高兴吗？",
+      "emotion": "happy",
+      "expression": "smile",
+      "model_version": "mock-v1",
+      "is_mock": true
+    },
+    {
+      "input": "室友总是半夜打游戏，说了也不听，烦死了。",
+      "expected_emotion": "angry",
+      "reply": "换谁遇上都会觉得憋屈。当时具体发生什么了？",
+      "emotion": "angry",
+      "expression": "listening",
+      "model_version": "mock-v1",
+      "is_mock": true
+    },
+    {
+      "input": "感觉最近做什么都没意思，有点低落。",
+      "expected_emotion": "sad",
+      "reply": "这件事确实让人不好受。想的话可以多讲一点，我在这儿听。",
+      "emotion": "sad",
+      "expression": "concern",
+      "model_version": "mock-v1",
+      "is_mock": true
+    },
+    {
+      "input": "今天天气还行，没什么特别的。",
+      "expected_emotion": "neutral",
+      "reply": "我在听，你继续说。你想从哪件事说起？",
+      "emotion": "neutral",
+      "expression": "neutral",
+      "model_version": "mock-v1",
+      "is_mock": true
+    },
+    {
+      "input": "嗯，就这样吧。",
+      "expected_emotion": "neutral",
+      "reply": "我在听，你继续说。你想从哪件事说起？",
+      "emotion": "neutral",
+      "expression": "neutral",
+      "model_version": "mock-v1",
+      "is_mock": true
+    }
+  ],
+  "multi_turn": {
+    "input": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "我下周要考高数。"
+        },
+        {
+          "role": "assistant",
+          "content": "听起来你有点惦记这件事。"
+        },
+        {
+          "role": "user",
+          "content": "对，我特别怕考砸。"
+        }
+      ],
+      "memory_context": "小然在读大二。小然在准备高数考试。",
+      "persona": "伴学：中文日常陪伴助手",
+      "max_new_tokens": 128,
+      "temperature": 0.3
+    },
+    "reply": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+    "emotion": "anxious"
+  },
+  "official_samples": [
+    {
+      "sample_id": "test1_000001_t5",
+      "prediction": {
+        "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+        "emotion_label": "anxiety",
+        "user_profile": {
+          "personality_traits": [
+            "high_conscientiousness",
+            "casual"
+          ],
+          "interests": [
+            "career_development"
+          ],
+          "style": [
+            "rational",
+            "low_emotional_expression"
+          ]
+        },
+        "memory_refs": []
+      },
+      "schema_valid": true,
+      "problems": []
+    },
+    {
+      "sample_id": "test1_000001_t7",
+      "prediction": {
+        "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+        "emotion_label": "relaxed",
+        "user_profile": {
+          "personality_traits": [
+            "high_conscientiousness",
+            "casual"
+          ],
+          "interests": [
+            "career_development"
+          ],
+          "style": [
+            "colloquial",
+            "direct",
+            "rational"
+          ]
+        },
+        "memory_refs": []
+      },
+      "schema_valid": true,
+      "problems": []
+    },
+    {
+      "sample_id": "test1_000002_t5",
+      "prediction": {
+        "response_text": "我在听，你继续说。你想从哪件事说起？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [
+            "casual"
+          ],
+          "interests": [
+            "travel_outdoor"
+          ],
+          "style": [
+            "brief",
+            "colloquial"
+          ]
+        },
+        "memory_refs": []
+      },
+      "schema_valid": true,
+      "problems": []
+    }
+  ]
+}

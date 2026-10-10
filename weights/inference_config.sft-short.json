@@ -1,0 +1,42 @@
+{
+  "config_version": "a-inference-v1",
+  "engine": "local_transformers",
+  "note": "A4 候选模型的评测配置（临时）。A6 确认候选可用后，会把 weights/inference_config.json 也指到同一个 model_dir。",
+  "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+  "model_dir": "sft-short",
+  "patch_file": null,
+  "license_file": "LICENSES/Qwen2.5-0.5B-Instruct-LICENSE.txt",
+  "device": "auto",
+  "dtype": "float32",
+  "max_input_tokens": 3072,
+  "torch_threads": 16,
+  "trust_remote_code": false,
+  "generation": {
+    "max_new_tokens": 256,
+    "do_sample": true,
+    "temperature": 0.3,
+    "top_p": 0.9,
+    "repetition_penalty": 1.05
+  },
+  "official_generation": {
+    "max_new_tokens": 1200,
+    "do_sample": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "repetition_penalty": 1.0
+  },
+  "retry_generation": {
+    "max_new_tokens": 256,
+    "do_sample": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "repetition_penalty": 1.0
+  },
+  "fallback_generation": {
+    "max_new_tokens": 160,
+    "do_sample": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "repetition_penalty": 1.05
+  }
+}

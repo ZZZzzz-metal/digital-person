@@ -1,0 +1,288 @@
+{
+  "node": "官方生成合同冒烟检查",
+  "test_file": "submission\\official-reference\\test_inference_data.jsonl",
+  "engine": {
+    "engine": "ModelEngine",
+    "is_mock": false,
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+    "config_path": "D:\\digital-person\\weights\\inference_config.json",
+    "model_dir": "D:\\digital-person\\weights\\sft-short",
+    "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+    "loaded": true,
+    "load_seconds": 2.195,
+    "params": 494032768,
+    "param_dtypes": [
+      "torch.float32"
+    ],
+    "device": "cpu",
+    "threads": 16,
+    "max_input_tokens": 3072,
+    "generation": {
+      "max_new_tokens": 256,
+      "do_sample": true,
+      "temperature": 0.3,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15
+    },
+    "official_generation": {
+      "max_new_tokens": 1200,
+      "do_sample": false,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "repetition_penalty": 1.0
+    },
+    "patch": null
+  },
+  "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+  "official_prompt_sha": "64629316743543e0",
+  "emotions_available": [
+    "joy",
+    "gratitude",
+    "relaxed",
+    "care",
+    "pride",
+    "neutral",
+    "surprise",
+    "mixed",
+    "sadness",
+    "loneliness",
+    "anxiety",
+    "anger",
+    "fear",
+    "disgust",
+    "shame",
+    "helplessness"
+  ],
+  "profile_groups": {
+    "personality_traits": [
+      "extroverted",
+      "introverted",
+      "open",
+      "conservative",
+      "high_conscientiousness",
+      "casual",
+      "agreeable",
+      "assertive",
+      "emotionally_stable",
+      "sensitive"
+    ],
+    "interests": [
+      "study_exam",
+      "programming_technology",
+      "reading_writing",
+      "film_animation",
+      "music",
+      "games",
+      "sports_fitness",
+      "travel_outdoor",
+      "pets",
+      "social",
+      "career_development",
+      "art_design"
+    ],
+    "style": [
+      "brief",
+      "detailed",
+      "colloquial",
+      "formal",
+      "direct",
+      "indirect",
+      "humorous",
+      "rational",
+      "high_emotional_expression",
+      "low_emotional_expression",
+      "emoji_user"
+    ]
+  },
+  "samples": [
+    {
+      "sample_id": "test1_000001_t5",
+      "history_turns": 5,
+      "prediction": {
+        "response_text": "嗯，这事儿挺磨人的，要不要先想点什么能让自己不那么紧绷？",
+        "emotion_label": "relaxed",
+        "user_profile": {
+          "personality_traits": [
+            "high_conscientiousness"
+          ],
+          "interests": [
+            "study_exam"
+          ],
+          "style": [
+            "indirect"
+          ]
+        },
+        "memory_refs": []
+      },
+      "trace": {
+        "sample_id": "test1_000001_t5",
+        "mode": "json",
+        "is_mock": false,
+        "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+        "parse_failed": false,
+        "parse_failures": 0,
+        "emotion_source": "model",
+        "profile_source": "model",
+        "response_source": "model",
+        "memory_refs_policy": "public_test_empty",
+        "schema_valid": true,
+        "schema_problems": [],
+        "raw_head": "{\"response_text\":\"嗯，这事儿挺磨人的，要不要先想点什么能让自己不那么紧绷？\",\"emotion_label\":\"relaxed\",\"user_profile\":{\"personality_traits\":[\"high_conscientiousness\"],\"interests\":[\"study_exam\"],\"style\":[\"indirect\"]},\"memory_refs\"",
+        "elapsed_ms": 4453.779200001009,
+        "prompt_tokens": 697,
+        "new_tokens": 61,
+        "dropped_turns": 0,
+        "contract_source": "b2_core.a_impl.dtos (A 兜底合同)"
+      },
+      "elapsed_seconds": 4.45,
+      "problems": []
+    },
+    {
+      "sample_id": "test1_000001_t7",
+      "history_turns": 7,
+      "prediction": {
+        "response_text": "嗯，你想做什么呢？\n\n如果你真的不想说话，那就先找个安静的地方躺一会儿，然后慢慢想，要不要先把那些“卡壳”的地方捋一遍，然后再想想有没有可以做得更好的地方。\n\n你要是愿意说出来，那我就陪你把这些事做完，你会觉得自己已经做了好多，也就不需要这么拼命想了。",
+        "emotion_label": "relaxed",
+        "user_profile": {
+          "personality_traits": [
+            "high_conscientiousness",
+            "casual"
+          ],
+          "interests": [
+            "career_development"
+          ],
+          "style": [
+            "colloquial",
+            "direct",
+            "rational"
+          ]
+        },
+        "memory_refs": []
+      },
+      "trace": {
+        "sample_id": "test1_000001_t7",
+        "mode": "fallback_rules",
+        "is_mock": false,
+        "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+        "parse_failed": false,
+        "parse_failures": 0,
+        "emotion_source": "rules",
+        "profile_source": "rules",
+        "response_source": "model",
+        "memory_refs_policy": "public_test_empty",
+        "schema_valid": true,
+        "schema_problems": [],
+        "raw_head": "{\"response_text\":\"{\"emotion_label\":\"neutral\",\"user_profile\":{\"personality_traits\":[\"high_conscientiousness\"],\"interests\":[\"study_exam\"],\"style\":[\"indirect\"]},\"{\"response_text\":\"{\"emotion_label\":\"neutr",
+        "elapsed_ms": 97048.54859999978,
+        "prompt_tokens": 3176,
+        "new_tokens": 1306,
+        "dropped_turns": 0,
+        "contract_source": "b2_core.a_impl.dtos (A 兜底合同)"
+      },
+      "elapsed_seconds": 97.05,
+      "problems": []
+    },
+    {
+      "sample_id": "test1_000002_t5",
+      "history_turns": 5,
+      "prediction": {
+        "response_text": "这事儿听着确实让人提不起劲儿来，要不要想一下换一种更轻松的方式呢？",
+        "emotion_label": "neutral",
+        "user_profile": {
+          "personality_traits": [
+            "casual"
+          ],
+          "interests": [
+            "travel_outdoor"
+          ],
+          "style": [
+            "brief",
+            "colloquial"
+          ]
+        },
+        "memory_refs": []
+      },
+      "trace": {
+        "sample_id": "test1_000002_t5",
+        "mode": "fallback_rules",
+        "is_mock": false,
+        "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+        "parse_failed": true,
+        "parse_failures": 2,
+        "emotion_source": "rules",
+        "profile_source": "rules",
+        "response_source": "model",
+        "memory_refs_policy": "public_test_empty",
+        "schema_valid": true,
+        "schema_problems": [],
+        "raw_head": "{\"response_text\":\"嗯，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺",
+        "elapsed_ms": 94203.86579999831,
+        "prompt_tokens": 1043,
+        "new_tokens": 1478,
+        "dropped_turns": 0,
+        "contract_source": "b2_core.a_impl.dtos (A 兜底合同)"
+      },
+      "elapsed_seconds": 94.2,
+      "problems": []
+    }
+  ],
+  "independence_check": {
+    "sample_id": "test1_000001_t5",
+    "identical": true,
+    "first": {
+      "response_text": "嗯，这事儿挺磨人的，要不要先想点什么能让自己不那么紧绷？",
+      "emotion_label": "relaxed",
+      "user_profile": {
+        "personality_traits": [
+          "high_conscientiousness"
+        ],
+        "interests": [
+          "study_exam"
+        ],
+        "style": [
+          "indirect"
+        ]
+      },
+      "memory_refs": []
+    },
+    "replay": {
+      "response_text": "嗯，这事儿挺磨人的，要不要先想点什么能让自己不那么紧绷？",
+      "emotion_label": "relaxed",
+      "user_profile": {
+        "personality_traits": [
+          "high_conscientiousness"
+        ],
+        "interests": [
+          "study_exam"
+        ],
+        "style": [
+          "indirect"
+        ]
+      },
+      "memory_refs": []
+    }
+  },
+  "mock_comparison": {
+    "prediction": {
+      "response_text": "听起来这件事让你一直悬着心。你愿意说说最让你悬心的那部分吗？",
+      "emotion_label": "anxiety",
+      "user_profile": {
+        "personality_traits": [
+          "high_conscientiousness",
+          "casual"
+        ],
+        "interests": [
+          "career_development"
+        ],
+        "style": [
+          "rational",
+          "low_emotional_expression"
+        ]
+      },
+      "memory_refs": []
+    },
+    "is_mock": true,
+    "problems": []
+  },
+  "failures": []
+}

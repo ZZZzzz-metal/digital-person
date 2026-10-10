@@ -1,0 +1,36 @@
+{
+  "config_version": "a-train-v1",
+  "note": "A4 小规模训练配置。路径相对本文件所在目录解析。",
+  "base_model_dir": "../weights/base-qwen2.5-0.5b-instruct",
+  "base_model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+  "output_dir": "../weights/sft-short",
+  "candidate_model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+  "data": {
+    "train": "../data/training/processed/train.jsonl",
+    "valid": "../data/training/processed/valid.jsonl"
+  },
+  "data_version": "a2-synthetic-v1 (chat 150 + official 50)",
+  "trainable_layers": 4,
+  "train_lm_head": false,
+  "max_len": 448,
+  "seed": 20261010,
+  "lr": 5e-05,
+  "weight_decay": 0.0,
+  "grad_accum": 8,
+  "micro_batch": 8,
+  "max_epochs": 2,
+  "max_steps": 30,
+  "max_minutes": 40,
+  "warmup_steps": 5,
+  "grad_clip": 1.0,
+  "device": "cpu",
+  "dtype": "float32",
+  "torch_threads": 16,
+  "log_every": 5,
+  "val_every": 10,
+  "budget": {
+    "gpu_card_hours_cap": 6,
+    "gpu_card_hours_used": 0,
+    "note": "本机无 GPU（torch 2.14.1+cpu，cuda_available=False），本次为本地 CPU 尝试，未消耗任何付费算力或 GPU 卡时。若队长提供 20 卡时券对应的实例，再按 6 卡时上限重跑。"
+  }
+}

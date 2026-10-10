@@ -1,0 +1,61 @@
+{
+  "node": "A2 数据集整理",
+  "seed": 20261010,
+  "raw_path": "data\\training\\raw\\sessions.jsonl",
+  "raw_sessions": 200,
+  "rejected_sessions": [],
+  "duplicate_sessions_removed": [],
+  "kept_sessions": 200,
+  "split_sizes": {
+    "train": 160,
+    "valid": 20,
+    "holdout": 20
+  },
+  "split_overlap_check": {
+    "session_ids_overlap": false
+  },
+  "source": "synthetic_auto_generated",
+  "license": "internal-fictional-no-real-personal-data",
+  "limitations": [
+    "全部为模板化自动生成的虚构对话，不是真人访谈，也不是官方训练数据。",
+    "助手回复来自片段池组合，与用户具体内容的相关性有限。",
+    "official 目标的情绪与画像由 A 的规则标注，不是人工标注或官方标签。",
+    "合成 memory_context 是会话级的，没有时间戳；只在第 2 个预测点之后注入。",
+    "data/eval/cases.json 的 12 个评测案例不参与训练，也不与训练会话重叠。"
+  ],
+  "eval_set_isolation": {
+    "eval_cases_path": "data/eval/cases.json",
+    "eval_cases_used_in_training": false,
+    "note": "评测案例是 A 手写的固定案例，与合成会话无同一会话重叠。"
+  },
+  "effective_samples": {
+    "train_total": 200,
+    "train_chat": 150,
+    "train_official": 50,
+    "valid_total": 120,
+    "holdout_total": 80,
+    "budget_note": "A4 约束：有效样本不超过 200；训练集 = chat 150 + official 50。"
+  },
+  "train_categories": {
+    "记忆引用与纠正": 42,
+    "日常倾诉": 24,
+    "宿舍相处": 25,
+    "话题切换": 43,
+    "学习压力": 41,
+    "积极分享": 25
+  },
+  "valid_categories": {
+    "积极分享": 53,
+    "宿舍相处": 18,
+    "话题切换": 10,
+    "记忆引用与纠正": 22,
+    "日常倾诉": 13,
+    "学习压力": 4
+  },
+  "available_prediction_points": {
+    "train": 757,
+    "valid": 90,
+    "holdout": 91
+  },
+  "problems": []
+}
