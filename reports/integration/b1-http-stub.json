@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-10T12:47:17.525471+00:00",
+  "scope": "B1 HTTP/lifecycle only; no generation or official inference",
+  "python_version": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "mode": "stub",
+  "passed": true,
+  "process_started": true,
+  "owned_process_stopped": true,
+  "real_inference_verified": false,
+  "official_container_verified": false,
+  "port": 8000,
+  "command": [
+    "python",
+    "-m",
+    "uvicorn",
+    "server.app:app",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8000"
+  ],
+  "http_status": 200,
+  "health": {
+    "status": "ok",
+    "model_ready": true,
+    "is_mock": true,
+    "model_version": "stub-b1"
+  },
+  "openapi_paths": [
+    "/health"
+  ],
+  "startup_log": "INFO:     Started server process [23964]\nINFO:     Waiting for application startup.\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nINFO:     127.0.0.1:49552 - \"GET /health HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:49552 - \"GET /openapi.json HTTP/1.1\" 200 OK\n"
+}

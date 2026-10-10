@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-10T12:47:19.333886+00:00",
+  "scope": "B1 HTTP/lifecycle only; no generation or official inference",
+  "python_version": "3.12.14",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "mode": "real",
+  "passed": true,
+  "process_started": true,
+  "owned_process_stopped": true,
+  "real_inference_verified": false,
+  "official_container_verified": false,
+  "port": 8000,
+  "command": [
+    "python",
+    "-m",
+    "uvicorn",
+    "server.app:app",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8000"
+  ],
+  "http_status": 200,
+  "health": {
+    "status": "degraded",
+    "model_ready": false,
+    "is_mock": false,
+    "model_version": "unavailable"
+  },
+  "openapi_paths": [
+    "/health"
+  ],
+  "startup_log": "INFO:     Started server process [38016]\nINFO:     Waiting for application startup.\nEngine initialization failed in real mode; health remains degraded\nTraceback (most recent call last):\n  File \"C:\\Users\\20964\\Documents\\ChatGPT\\MC\\digital-person-b0\\src\\server\\app.py\", line 77, in lifespan\n    from b2_core.model import ModelEngine\nModuleNotFoundError: No module named 'b2_core.model'\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)\nINFO:     127.0.0.1:49566 - \"GET /health HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:49566 - \"GET /openapi.json HTTP/1.1\" 200 OK\n"
+}

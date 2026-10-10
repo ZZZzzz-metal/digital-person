@@ -1,0 +1,60 @@
+{
+  "$defs": {
+    "Message": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "user",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "content": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Content",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ],
+      "title": "Message",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Model input carries the unchanged source ID; generation never creates ID.",
+  "properties": {
+    "sample_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Sample Id",
+      "type": "string"
+    },
+    "history": {
+      "items": {
+        "$ref": "#/$defs/Message"
+      },
+      "minItems": 1,
+      "title": "History",
+      "type": "array"
+    },
+    "memory_context": {
+      "default": "",
+      "title": "Memory Context",
+      "type": "string"
+    }
+  },
+  "required": [
+    "sample_id",
+    "history"
+  ],
+  "title": "OfficialRequest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}

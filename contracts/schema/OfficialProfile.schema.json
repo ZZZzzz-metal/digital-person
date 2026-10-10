@@ -1,0 +1,77 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "personality_traits": {
+      "items": {
+        "enum": [
+          "extroverted",
+          "introverted",
+          "open",
+          "conservative",
+          "high_conscientiousness",
+          "casual",
+          "agreeable",
+          "assertive",
+          "emotionally_stable",
+          "sensitive"
+        ],
+        "type": "string"
+      },
+      "title": "Personality Traits",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "interests": {
+      "items": {
+        "enum": [
+          "study_exam",
+          "programming_technology",
+          "reading_writing",
+          "film_animation",
+          "music",
+          "games",
+          "sports_fitness",
+          "travel_outdoor",
+          "pets",
+          "social",
+          "career_development",
+          "art_design"
+        ],
+        "type": "string"
+      },
+      "title": "Interests",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "style": {
+      "items": {
+        "enum": [
+          "brief",
+          "detailed",
+          "colloquial",
+          "formal",
+          "direct",
+          "indirect",
+          "humorous",
+          "rational",
+          "high_emotional_expression",
+          "low_emotional_expression",
+          "emoji_user"
+        ],
+        "type": "string"
+      },
+      "title": "Style",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "personality_traits",
+    "interests",
+    "style"
+  ],
+  "title": "OfficialProfile",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}

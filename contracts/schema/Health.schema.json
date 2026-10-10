@@ -1,0 +1,37 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "ok",
+        "degraded"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "model_ready": {
+      "title": "Model Ready",
+      "type": "boolean"
+    },
+    "is_mock": {
+      "title": "Is Mock",
+      "type": "boolean"
+    },
+    "model_version": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Model Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "model_ready",
+    "is_mock",
+    "model_version"
+  ],
+  "title": "Health",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}
