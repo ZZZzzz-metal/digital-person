@@ -23,7 +23,12 @@ class UnitEngine:
         raise AssertionError("GET /health must not call generate")
 
 
-def test_default_stub_health_and_only_b1_business_route(monkeypatch):
+@pytest.fixture(autouse=True)
+def isolate_default_database(tmp_path, monkeypatch):
+    monkeypatch.setenv("B2_DB_PATH", str(tmp_path / "health.sqlite3"))
+
+
+def test_default_stub_health_and_b2_business_routes(monkeypatch):
     monkeypatch.delenv("B2_MODE", raising=False)
     application = create_app()
     assert application.state.engine is None
@@ -36,9 +41,17 @@ def test_default_stub_health_and_only_b1_business_route(monkeypatch):
             "is_mock": True,
             "model_version": "stub-b1",
         }
-        assert set(client.get("/openapi.json").json()["paths"]) == {"/health"}
+        assert "set-cookie" not in response.headers
+        paths = client.get("/openapi.json").json()["paths"]
+        assert set(paths) == {
+            "/health",
+            "/api/sessions",
+            "/api/sessions/{session_id}/messages",
+            "/api/sessions/{session_id}",
+        }
+        assert sum(len(operations) for operations in paths.values()) == 5
         assert client.post("/api/chat", json={}).status_code == 404
-        assert client.get("/api/sessions").status_code == 404
+        assert client.get("/api/sessions").json() == []
         assert client.get("/api/memories").status_code == 404
 
 

@@ -11,11 +11,11 @@
 | B：记忆、后端与参赛部署 | [B 任务书](docs/分工/B-记忆后端与参赛部署.md) |
 | C：前端数字人与作品交付 | [C 任务书](docs/分工/C-前端数字人与作品交付.md) |
 
-当前 B1 交付共享类型、21 组 schema/虚构协议样例、可启动的后端健康接口和独立开发环境。B0 官方资料核对已经完成；聊天、会话、产品长期记忆和正式离线适配按 B2–B6 继续实施。
+当前 B2 在已交付的共享类型、健康后端和独立环境上增加匿名身份、SQLite/InMemory 存储与会话接口。B0 官方资料核对已经完成；产品长期记忆、聊天模型编排和正式离线适配按 B3–B6 继续实施。
 
 后续接手先读 [B 进度记录](reports/integration/B-进度记录.md)，核对分支和工作区变化，只补读当前阶段需要的资料。Agent 负责推送分支和 PR，用户手动合并、拉取；每完成用户点名的阶段就停止。
 
-## 开发演示后端（B1）
+## 开发演示后端（B1–B2）
 
 在项目根目录执行以下 PowerShell 命令。实际验收使用 Windows、Python 3.12.14；下列锁只包含后端与协议测试，A 的训练/模型依赖及最终 GPU 容器依赖另行确定。
 
@@ -33,7 +33,31 @@ $env:B2_MODE = "stub"
 Invoke-RestMethod http://127.0.0.1:8000/health
 ```
 
-默认 stub 返回 `status=ok`、`model_ready=true`、`is_mock=true`、`model_version=stub-b1`。`model_ready` 表示演示 engine 已初始化，不是模型效果或正式测评通过。本轮唯一业务路由是 `GET /health`；聊天、会话和记忆接口还未实现，访问会返回 404。
+默认 stub 返回 `status=ok`、`model_ready=true`、`is_mock=true`、`model_version=stub-b1`。`model_ready` 表示演示 engine 已初始化，不是模型效果或正式测评通过。B2 提供健康及四个会话操作；聊天和记忆 HTTP 接口尚未实现。
+
+默认数据文件 `.runtime/b2.sqlite3` 位于项目根目录下，自动创建且被 Git 忽略；如需更换本项目数据文件，启动前设置 `$env:B2_DB_PATH = ".runtime/other.sqlite3"`。后端重启后，同一浏览器 cookie 可以继续读取旧会话。首次 `/api` 访问由服务端分配匿名 cookie `b2_anon`，前端不传 user_id；未知 cookie 不会获得他人的身份。丢失 cookie 会创建新匿名用户，这里没有账号恢复流程。
+
+会话接口使用同一个 cookie，返回原共享 schema：
+
+| 操作 | 方法与路径 | 输入/结果 |
+|---|---|---|
+| 创建 | POST `/api/sessions` | `{}` 或 `{\"title\":\"新会话\"}` → SessionDTO |
+| 列表 | GET `/api/sessions` | 当前用户 SessionDTO 数组 |
+| 消息历史 | GET `/api/sessions/{id}/messages` | 按保存顺序的 Message 数组，新会话为 `[]` |
+| 删除 | DELETE `/api/sessions/{id}` | `{\"ok\":true}`，只删该会话及 messages/turns |
+
+不属于当前 cookie 的会话和不存在的会话统一返回 404/error 对象；参数错误返回 400/error 对象。有有效 pending 的会话删除返回 409，完成或释放后可重试删除。成功删除只触及该会话，未来用户级长期记忆保留。C 可先对接四个接口，聊天和记忆仍使用自身标明的 mock。
+
+另开一个 PowerShell 窗口可以连续检查同一用户：
+
+```powershell
+$b2Session = Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/sessions -ContentType application/json -Body '{"title":"B2演示会话"}' -SessionVariable b2Cookies
+Invoke-RestMethod -Uri http://127.0.0.1:8000/api/sessions -WebSession $b2Cookies
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/sessions/$($b2Session.id)/messages" -WebSession $b2Cookies
+Invoke-RestMethod -Method Delete -Uri "http://127.0.0.1:8000/api/sessions/$($b2Session.id)" -WebSession $b2Cookies
+```
+
+数据库只保存 cookie token 的 SHA-256 和独立 user_id，不保存原 cookie；token 不写入验收报告。cookie 默认 HttpOnly、SameSite=Lax，Secure=false 用于本机 HTTP；HTTPS 部署时设置 `B2_COOKIE_SECURE=1`。
 
 若 Windows 临时目录不可写，先在项目内准备临时目录，再重试环境安装：
 
@@ -61,10 +85,12 @@ $env:B2_MODEL_CONFIG = "weights/inference_config.json"
 .\.venv\Scripts\python.exe -m pip check
 .\.venv\Scripts\python.exe contracts/export_schema.py --check
 .\.venv\Scripts\python.exe -m pytest tests/server -q
-.\.venv\Scripts\python.exe reports/integration/verify_b1_http.py --mode stub --port 8000
+.\.venv\Scripts\python.exe reports/integration/verify_b2_http.py --port 8000
 ```
 
-最后一项会短暂启动自己的后端、读取健康 JSON 并关闭该进程；运行时不要同时占用同一个端口，可用 `--port 0` 分配空闲端口。真实模式检查改为 `--mode real`，可能加载 A 的本地模型，不是正式离线测评。实测结果见 [B1 验收](reports/integration/B1验收.md)。
+最后一项使用独立临时 SQLite 文件，启动自己的 stub 后端，检查两用户会话隔离、消息读取和重启持久化，然后关闭自己创建的进程；运行时不要同时占用同一个端口，可用 `--port 0` 分配空闲端口。消息检查使用明确标记的虚构 fixture，不调用模型。历史 [B1 验收](reports/integration/B1验收.md) 保留，本轮实测见 [B2 验收](reports/integration/B2验收.md)。
+
+B2 存储提供 reserve/complete/abort：同会话一次占用，完成后按 turn ID 返回原结果，两条消息和 turn 结果原子保存，失败释放占用而不写半条消息。默认 pending 租期 300 秒，用于进程中断后的恢复；旧 token 无法提交或释放后来创建的占用。该租期是演示存储策略，不是官方推理限制。B4 再把这些操作接入聊天模型流程。
 
 ## 官方资料与离线入口
 

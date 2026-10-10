@@ -4,9 +4,9 @@
 
 ## 当前阶段与操作边界
 
-- 用户已发出 **B1 start**，B1 已完成验证、提交、推送和 PR，现在停止等待用户合并/拉取及下一阶段指令；不进入 B2–B8。
+- 用户已要求 **继续 B2**；B2 已完成验证、提交、推送和 PR，现在停止等待用户合并/拉取及下一阶段指令；不进入 B3–B8。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
-- 当前工作分支 `codex/b2-b1-contracts`，从 B0 提交 `3b1e45f` 开始。当前目录历史名为 `digital-person-b0`，里面正在进行 B1；不要因目录名误认阶段。
+- 当前工作分支 `codex/b2-storage-sessions`，从 B1 最后文档提交 `c85e9717d4e960e76169c9f35215de8cfdb32ef3` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
@@ -23,7 +23,7 @@
 - 团队继续遵循原参考计时/complete 逻辑、镜像大小留余量，目标北京时间 10/19 18:00 前提交；这些是内部策略，不是官方新增规则。
 - 算力券最后读取值为 20/20 4090 GPU 卡时，显示有效至 10/16 23:17:54；未开机耗券。该记录不是此后实时余额，不含账号/券标识。
 
-## 已完成：B1（已推送，等待用户合并/拉取）
+## 已完成：B1（已合并）
 
 - 目标：共享 Pydantic 类型、生成 schema 与虚构协议样例、只导出类型的包入口、FastAPI 健康接口、明确演示 stub、真实模式失败不降级、独立可安装环境。
 - 已交付共享 Pydantic DTO、21 schemas/21 虚构协议样例及检查脚本、只导出类型的包入口、server 骨架、独立后端环境与版本锁。`GET /health` 是本轮唯一实际业务路由；其他 API 留到 B2–B4，C 先使用本地 mock。
@@ -35,11 +35,22 @@
 - 实现及验收提交 `8224955bb2f41d297f6733d233a4a37d61694acb` 已实际推送，创建 [PR #5](https://github.com/ZZZzzz-metal/digital-person/pull/5)，目标 main。创建时状态 open、未合并；不把后来用户合并状态预写为已完成。本文的发布记录另作一次文档提交，同样推送到本 PR。
 - 完整结果见 [B1 验收](B1验收.md)、[结构化记录](b1-verification.json)、[A 接口核对](b1-a-contract-compatibility.json)。没有等待用户解决的 B1 技术阻塞。
 
+## 已完成：B2（已推送，等待用户合并/拉取）
+
+- 启动时只读确认 PR #5 已合并，远端 main 当时为 `6c6bb78b8d754a28405585a491cb2b68d6453202`；没有 fetch/pull/merge。从本地已验证的 B1 提交继续，避免重复资料获取和环境安装。
+- 已先在总约定增加 B2 存储/匿名身份合同；现有 API DTO/schema 不改字段。当前任务为 SQLiteStore/InMemoryStore、随机匿名 cookie、会话 CRUD/消息历史和 turn 原子保存/去重/并发控制。
+- `/api/chat` 编排与产品长期记忆不在本轮实现；用测试 fixture 检查存储成功/失败语义，不声称真实模型已验收。保留 B1 的明确 mock/real 健康行为。
+- SQLiteStore/InMemoryStore、匿名身份、四个会话操作和 turn 占用/完成/释放已实现；内存版本为每实例独立 SQLite :memory:，不复用演示文件。有效 pending 删除 409，过期后可恢复；complete 返回 None，成功重试通过 reserve 取原 ChatResponse。
+- 实际 **123/123 测试通过**（44 合同、20 健康、28 API、31 存储），21 schemas/21 fixtures 一致，pip check 无冲突；沿用 B1 环境，无新增依赖。已实际验证 SQLite 第二条消息写入失败回滚整轮、两连接竞争、租期旧 token、重试、归属和深副本。
+- 实际 HTTP **8 项通过**，两个自建 Uvicorn 进程验证两用户、消息 fixture 读取和 SQLite 重启持久化，均已关闭。没有模型生成或聊天路由，没有原始 cookie 入报告。
+- 实现及验收提交 `f2b54797be85f69b3cb6a52d08e05435e31b8f95` 已实际推送，创建 [PR #6](https://github.com/ZZZzzz-metal/digital-person/pull/6)，目标 main，17 个文件，仅 B 分工区域。创建时 open、未合并；发布记录另作一次文档提交并推送到同一 PR。
+- 结果见 [B2 验收](B2验收.md)、[结构化记录](b2-verification.json)、[HTTP 实测](b2-http-smoke.json)。没有 B2 人工技术阻塞。
+
 ## 恢复与下一步
 
 1. 核对当前分支和工作区，再阅读本轮验收记录。若记录说已通过而代码/锁/样例后来改变，仅重跑受影响的最小检查。
-2. B1 验收已完成，代码/依赖/合同未变时不用再从头核对官方资料或重复全部测试。先确认发布提交/PR 是否已完成，及用户是否已合并/拉取。
-3. 本轮停在 B1，等待用户点名 B2。B2 接手读取总约定第 6/8 节、B 任务书的 B2 与当前 types/server；实现匿名用户、存储及会话接口。用户手动合并和拉取，Agent 不代替操作。
+2. B0–B2 已验证，未变的部分不重复从头核对或全部测试。当前只核对 B2 提交/PR 发布及用户是否已合并/拉取；不要重新安装已验证的环境。
+3. B2 发布后停止等待 B3 指令。B3 接手读总约定第 6/8 节、B 任务书 B3、store.py 和现有 API，增加 memory.py 与记忆 CRUD；可扩展 users.memory_enabled 和用户级 memories 表，不改 A/C 实现，也不提前做 B4 聊天编排。
 4. 正式模型、训练、GPU 容器、可回退参赛候选和赛事上传尚未验收；需要相应后续阶段实际运行，不能由 B1 演示成功替代。
 
 主要依据：[总约定](../../docs/分工/00-总约定.md)、[B 任务书](../../docs/分工/B-记忆后端与参赛部署.md)、[B0 验收](B0验收.md)、[官方答复](B0-官方答复-2026-10-10.md)。本文件不保存账号、密码、cookie、token 或真实聊天。
