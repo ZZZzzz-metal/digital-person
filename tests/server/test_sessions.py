@@ -171,7 +171,7 @@ def test_secure_cookie_can_be_enabled_for_https(tmp_path, monkeypatch):
         assert "secure" in response.headers["set-cookie"].lower()
 
 
-def test_sessions_and_memory_routes_are_available_chat_remains_unimplemented(storage):
+def test_sessions_memory_and_chat_routes_are_available(storage):
     with TestClient(create_app(mode="stub", store=storage)) as client:
         paths = client.get("/openapi.json").json()["paths"]
         assert set(paths) == {
@@ -179,7 +179,8 @@ def test_sessions_and_memory_routes_are_available_chat_remains_unimplemented(sto
             "/api/sessions/{session_id}", "/api/memories",
             "/api/memories/settings", "/api/memories/{key}",
             "/api/memories/{memory_id}",
+            "/api/chat",
         }
-        assert sum(len(operations) for operations in paths.values()) == 10
-        assert_error(client.post("/api/chat", json={}), 404, "NOT_FOUND")
+        assert sum(len(operations) for operations in paths.values()) == 11
+        assert_error(client.post("/api/chat", json={}), 400, "INVALID_REQUEST")
         assert client.get("/api/memories").json() == {"enabled": True, "items": []}

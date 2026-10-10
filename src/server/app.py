@@ -1,12 +1,14 @@
-"""Anonymous session and memory API; real failures never select a stub."""
+"""Anonymous session, memory and chat API; real failures never select a stub."""
 
 from __future__ import annotations
 
 import logging
+import math
 import os
 from collections.abc import Callable
 from contextlib import asynccontextmanager
 from pathlib import Path
+from threading import Lock
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -17,6 +19,7 @@ from starlette.exceptions import HTTPException
 
 from b2_core.contracts import Engine, ErrorDetail, ErrorResponse, Health
 from b2_core.store import MemoryDisabled, ResourceNotFound, SQLiteStore, Store, StoreBusy, StoreError, TurnInProgress
+from .chat import ChatError, InferenceWorker, router as chat_router
 from .memories import router as memories_router
 from .sessions import router as sessions_router
 from .stub import StubEngine
@@ -70,6 +73,7 @@ def create_app(
     engine_factory: Callable[[], Engine] | None = None,
     store: Store | None = None,
     db_path: str | Path | None = None,
+    chat_timeout_seconds: float | None = None,
 ) -> FastAPI:
     """Create the API without opening a database or loading a model.
 
@@ -78,7 +82,9 @@ def create_app(
     metadata validation, including real mode's explicit non-mock declaration.
     An injected store stays owned by its caller; the default SQLite store is
     opened and closed by each application lifespan. The engine is initialized
-    only once even when an application lifespan is reused.
+    only once even when an application lifespan is reused. The worker is owned
+    by this app; a shared gate survives lifespans because closing a worker does
+    not terminate an already running model thread.
     """
     selected_mode = os.getenv("B2_MODE", "stub") if mode is None else mode
     if selected_mode not in ("stub", "real"):
@@ -104,11 +110,27 @@ def create_app(
     if secure_setting not in ("0", "1"):
         raise ValueError("B2_COOKIE_SECURE must be '0' or '1'")
     cookie_secure = secure_setting == "1"
+    if chat_timeout_seconds is None:
+        try:
+            selected_timeout = float(os.getenv("B2_CHAT_TIMEOUT_SECONDS", "60"))
+        except (ValueError, OverflowError):
+            raise ValueError("B2_CHAT_TIMEOUT_SECONDS must be a finite number in (0, 240]") from None
+    else:
+        if isinstance(chat_timeout_seconds, bool) or not isinstance(chat_timeout_seconds, (int, float)):
+            raise ValueError("chat_timeout_seconds must be a finite number in (0, 240]")
+        try:
+            selected_timeout = float(chat_timeout_seconds)
+        except OverflowError:
+            raise ValueError("chat_timeout_seconds must be a finite number in (0, 240]") from None
+    if not math.isfinite(selected_timeout) or not 0 < selected_timeout <= 240:
+        raise ValueError("B2_CHAT_TIMEOUT_SECONDS must be a finite number in (0, 240]")
 
     @asynccontextmanager
     async def lifespan(application: FastAPI):
         if owns_store and application.state.store is None:
             application.state.store = SQLiteStore(selected_db_path)
+        if application.state.inference_worker is None:
+            application.state.inference_worker = InferenceWorker(application.state.inference_gate)
         if not application.state.initialized:
             # A failed real initialization also counts as attempted: health
             # requests cannot cause retries, model reloads, or a mock fallback.
@@ -139,12 +161,15 @@ def create_app(
         try:
             yield
         finally:
+            if application.state.inference_worker is not None:
+                application.state.inference_worker.close()
+                application.state.inference_worker = None
             if owns_store and application.state.store is not None:
                 application.state.store.close()
                 application.state.store = None
 
     application = FastAPI(
-        title="伴学匿名会话与记忆 API",
+        title="伴学匿名会话、记忆与聊天 API",
         version="0.1.0",
         lifespan=lifespan,
     )
@@ -152,6 +177,9 @@ def create_app(
     application.state.engine = None
     application.state.initialization_error = None
     application.state.store = store
+    application.state.inference_gate = Lock()
+    application.state.inference_worker = None
+    application.state.chat_timeout_seconds = selected_timeout
     application.state.health = Health(
         status="degraded",
         model_ready=False,
@@ -172,6 +200,10 @@ def create_app(
     @application.exception_handler(StoreError)
     async def store_error(_: Request, exc: StoreError):
         return _store_error_response(exc)
+
+    @application.exception_handler(ChatError)
+    async def chat_error(_: Request, exc: ChatError):
+        return _error_response(503, exc.code, exc.message)
 
     @application.middleware("http")
     async def anonymous_identity(request: Request, call_next):
@@ -210,6 +242,7 @@ def create_app(
 
     application.include_router(sessions_router)
     application.include_router(memories_router)
+    application.include_router(chat_router)
 
     def openapi():
         if application.openapi_schema is None:

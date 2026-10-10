@@ -28,7 +28,7 @@ def isolate_default_database(tmp_path, monkeypatch):
     monkeypatch.setenv("B2_DB_PATH", str(tmp_path / "health.sqlite3"))
 
 
-def test_default_stub_health_and_b3_business_routes(monkeypatch):
+def test_default_stub_health_and_b4_business_routes(monkeypatch):
     monkeypatch.delenv("B2_MODE", raising=False)
     application = create_app()
     assert application.state.engine is None
@@ -52,9 +52,10 @@ def test_default_stub_health_and_b3_business_routes(monkeypatch):
             "/api/memories/settings",
             "/api/memories/{key}",
             "/api/memories/{memory_id}",
+            "/api/chat",
         }
-        assert sum(len(operations) for operations in paths.values()) == 10
-        assert client.post("/api/chat", json={}).status_code == 404
+        assert sum(len(operations) for operations in paths.values()) == 11
+        assert client.post("/api/chat", json={}).status_code == 400
         assert client.get("/api/sessions").json() == []
         assert client.get("/api/memories").json() == {"enabled": True, "items": []}
 

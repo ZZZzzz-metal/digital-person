@@ -4,9 +4,9 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B3**；本轮记忆 CRUD、纯检索与开关/纠正/隔离已验证、提交、推送并创建 PR，现停止等用户合并/拉取及 B4 指令，不进入 B4–B8。
+- 用户已要求 **继续 B4**；本轮后端/真实基线已交付并推送 PR #8，停止等待后续指令，不进入 B5–B8。C页面联调仍待其源码。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
-- 当前工作分支 `codex/b3-memory`，从 B2 最后文档提交 `ac80f5892c2f1afce64cbec159fb02d496f02177` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
+- 当前工作分支 `codex/b4-chat`，从 B3 最后文档提交 `44d7363101e96e9fc58a71d55f2fd4fcb9d8da64` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
@@ -46,7 +46,7 @@
 - 实现及验收提交 `f2b54797be85f69b3cb6a52d08e05435e31b8f95` 已实际推送，创建 [PR #6](https://github.com/ZZZzzz-metal/digital-person/pull/6)，目标 main，17 个文件，仅 B 分工区域。创建时 open、未合并；发布记录另作一次文档提交并推送到同一 PR。
 - 结果见 [B2 验收](B2验收.md)、[结构化记录](b2-verification.json)、[HTTP 实测](b2-http-smoke.json)。没有 B2 人工技术阻塞。
 
-## 已完成：B3（已推送，等待用户合并/拉取）
+## 已完成：B3（已合并）
 
 - B3 启动时只读确认 PR #6 已合并，head 为 `ac80f5892c2f1afce64cbec159fb02d496f02177`；发布前观察 main 为 `1826b1a5a9a6cb209184f73768db4e4110e49d52`。没有 fetch/pull/merge，也没有重装环境。
 - 先更新总约定第 8 节记忆存储方法/关闭管理语义，再并行实现；沿用现有 DTO/schema 字段，不改 A/C 模型与前端。
@@ -58,11 +58,26 @@
 - 本轮结果见 [B3 验收](B3验收.md)、[结构化结果](b3-verification.json)、[HTTP 实测](b3-http-smoke.json)。无 B3 人工技术阻塞。
 - 实现与验收提交 `f785f6be8199dfef2f91421daa6de77966dee5dd` 已实际推送，创建 [PR #7](https://github.com/ZZZzzz-metal/digital-person/pull/7)，目标 main，19 个文件仅 B 分工区域。创建时 open、未合并，head 与本地一致。本文发布记录另作一次文档提交并推送到同一 PR；不把用户未来的合并预写为已完成。
 
+## B4：后端与真实基线已验证并推送（待用户合并）
+
+- 先更新总约定第8节聊天合同，再实现纯 build_core_request/run_turn 和 POST /api/chat；DTO/schema不改字段，不修改A/C文件。模型启动一次，相关候选记忆接入，成功缓存原样返回，失败/超时/取消不保存半轮并允许原ID重试。
+- 实际 **294/294 测试通过**：新聊天49、纯turn29、旧回归216；21 schemas/21 fixtures一致，后端pip check无冲突，原后端环境与锁沿用。额外验证旧超时线程跨lifespan保持gate、直接cancel清理、模型自身ChatError不透传原输入；迟到结果不落库。
+- 实际独立stub HTTP 7项/8次明确mock生成通过；真实A公开基线HTTP 7项/8次真实生成通过，其中同会话6轮、12条有序消息、成功重复不增调用/消息、新会话记忆和另一cookie隔离。两个模式各自创建一个服务，均已关闭，无原始cookie入报告。
+- 真实版本 `b2-a-qwen2.5-0.5b-instruct-base-v1`，494,032,768参数、float32/CPU/16线程，原始采样配置保留，初始化一次，A代码固定main `259fac62d8d5bc8ceb6104e1d49b68cfd063996b` 的只读副本，使用当前B Pydantic合同；当前main dtos摘要不同于旧A6清单，实际源码逐文件SHA另存。
+- 原样基线8文件999,597,690字节，SHA全部匹配A，HF revision `7ae557604adf67be50417f59c2c2f167def9a775`。已验证资源在 `reports/integration/.b4-work/real-assets/`，原配置/许可保留；独立 `.runtime/b4-real-env/` Python3.12.14/torch2.14.1+cpu/transformers5.19.0，pip check通过。这些本地资源被忽略，不上传Git，不是正式GPU容器候选。
+- 真实候选记忆输入符合高数→线代/关闭规则，但基线第三轮没有回答线代，而是询问考试科目；未声称模型记忆准确率或训练质量通过。B不修A模型。情绪/表情是A规则，回复是真实模型。
+- C前端当前未交付，页面联调performed=false，准确缺项见 b4-c-handoff-check.json。A的sft-short完整训练权重在别人的电脑，未在这里验收；继续使用已验证公开基线。无B代码技术阻塞，正式适配/禁网GPU容器/镜像/赛事提交为后续阶段。
+- 本轮报告 [B4验收](B4验收.md)、[结构化结果](b4-verification.json)、[真实HTTP](b4-real-http.json)、资源/环境/源码摘要均已保存。未消耗算力券、未训练、未fetch/pull/merge。
+- 实现/验收提交 `8b5d43b94acc5da1cc5e4d35c1bde56e118ce729` 已实际推送，创建 [PR #8](https://github.com/ZZZzzz-metal/digital-person/pull/8)，目标main，23个文件仅B分工区域。创建时open/未合并，head与本地一致；不把用户未来合并预写为完成。本文发布记录另作一次文档提交并推送到同一PR。
+
 ## 恢复与下一步
 
+- B4 启动只读确认 PR #7 已合并，main 当时为 `259fac62d8d5bc8ceb6104e1d49b68cfd063996b`；A model/a_impl/prompts 与 A0–A7 报告已取得只读参考副本，不改项目 A 文件或 fetch/pull/merge。共享聊天合同已先更新。
+- B4当前实际运行方法与剩余项见上节/B4验收；A源码只读副本为 `../tmp/b4_20261010/upstream-A/src`，可配合公开 b4-a-source-check.json 核验后复现，不需要重下载基线或重装环境。不得将准备报告的 model_inference_verified=false 误读为最终真实HTTP未通过，它们是不同时间/范围的记录。
+
 1. 核对当前分支和工作区，再阅读本轮验收记录。若记录说已通过而代码/锁/样例后来改变，仅重跑受影响的最小检查。
-2. B0–B3 已验证，未变的部分不重复从头核对或全部测试。当前只核对 B3 提交/PR 发布及用户是否已合并/拉取；不要重新安装已验证的环境。
-3. B3 发布后停止等待 B4 指令。B4 接手读总约定第 6–8 节、B 任务书 B4，使用已有 store/memory/server 和 A 已发布模型接口实现 run_turn/聊天编排；本地尚未拉取 A 不代表队伍缺 A。不要改 A/C 实现，不提前做 B5 官方适配。
+2. B0–B4后端已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下次先核对B4实际发布记录及远端只读状态。
+3. 本轮发布后停止，等待用户点名B5；不要提前写官方适配器。C交付后才补实际页面联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
 4. 正式模型、训练、GPU 容器、可回退参赛候选和赛事上传尚未验收；需要相应后续阶段实际运行，不能由 B1 演示成功替代。
 
 主要依据：[总约定](../../docs/分工/00-总约定.md)、[B 任务书](../../docs/分工/B-记忆后端与参赛部署.md)、[B0 验收](B0验收.md)、[官方答复](B0-官方答复-2026-10-10.md)。本文件不保存账号、密码、cookie、token 或真实聊天。
