@@ -153,23 +153,33 @@ def resolve_contracts() -> ContractBinding:
     """
     module = _try_import_contracts()
     wanted = ("CoreRequest", "CoreReply", "Message", "OfficialRequest", "OfficialPrediction")
+    reason = "b2_core.contracts 不存在或导入失败"
     if module is not None:
-        missing = [name for name in wanted if not hasattr(module, name)]
-        if not missing:
-            official_turn = getattr(module, "OfficialTurn", OfficialTurn)
-            return ContractBinding(
-                source=CONTRACT_SOURCE_B,
-                CoreReply=module.CoreReply,
-                CoreRequest=module.CoreRequest,
-                Message=module.Message,
-                OfficialPrediction=module.OfficialPrediction,
-                OfficialRequest=module.OfficialRequest,
-                OfficialTurn=official_turn,
-                messages=(),
-            )
-        reason = f"b2_core.contracts 缺少: {missing}"
-    else:
-        reason = "b2_core.contracts 不存在或导入失败"
+        # 连「检查属性」也要防：B 的模块可能在属性访问或类型构造时才抛异常
+        # （例如 pydantic 版本不匹配）。任何一种异常都必须整体退回兜底，
+        # 不能让适配层把异常抛给调用方，也不能留下半套类型。
+        try:
+            missing = [name for name in wanted if not hasattr(module, name)]
+        except Exception as exc:  # noqa: BLE001
+            missing = None
+            reason = f"b2_core.contracts 读取属性失败: {type(exc).__name__}: {exc}"
+        if missing is not None and not missing:
+            try:
+                official_turn = getattr(module, "OfficialTurn", OfficialTurn)
+                return ContractBinding(
+                    source=CONTRACT_SOURCE_B,
+                    CoreReply=module.CoreReply,
+                    CoreRequest=module.CoreRequest,
+                    Message=module.Message,
+                    OfficialPrediction=module.OfficialPrediction,
+                    OfficialRequest=module.OfficialRequest,
+                    OfficialTurn=official_turn,
+                    messages=(),
+                )
+            except Exception as exc:  # noqa: BLE001
+                reason = f"b2_core.contracts 读取类型失败: {type(exc).__name__}: {exc}"
+        elif missing:
+            reason = f"b2_core.contracts 缺少: {missing}"
 
     return ContractBinding(
         source=CONTRACT_SOURCE_FALLBACK,

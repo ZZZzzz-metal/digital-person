@@ -20,6 +20,9 @@
     "boundary_outcome_match": 6,
     "turns_with_violations": 1,
     "total_violations": 1,
+    "degenerate_turns": 0,
+    "degenerate_turn_details": [],
+    "mean_reply_chars": 19.2,
     "avg_latency_ms": 0.0,
     "max_latency_ms": 0.0,
     "total_eval_seconds": 0.0,
@@ -52,6 +55,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "回应承接焦虑情绪，不先堆建议",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "听起来这件事让你一直",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -68,6 +78,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "接受纠正并记住新科目，不纠缠旧说法",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -84,6 +101,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "采用纠正后的科目，先 empathy 再轻问一句",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": [
             "must_include_any 未命中: ['线代', '线性代数']"
           ]
@@ -102,6 +126,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接情绪，可温和提一个很小可行的办法",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -118,6 +149,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接家庭压力，不说教、不承诺结果",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "听起来这件事让你一直",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -134,6 +172,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "简短支持收尾，不追问、不评判",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         }
       ],
@@ -161,6 +206,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "用偏好称呼，回复简短，先承接疲惫",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -177,6 +229,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "立刻接受「回复简短点」的偏好并照做",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -193,6 +252,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "保持简短，继续承接情绪",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -209,6 +275,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接委屈，不评价同学人品",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -225,6 +298,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "尊重用户当下的选择，不催不逼",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -241,6 +321,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "简短温暖收尾，称呼保持一致",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         }
       ],
@@ -266,6 +353,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接沉闷感，不急着给方案",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -282,6 +376,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "确认困扰细节，表达理解",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "听起来这件事让你一直",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -298,6 +399,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接关系变僵的难受，不站队指责",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -314,6 +422,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "共情两难处境，不替用户下决定",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -330,6 +445,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "跟着用户的犹豫走，轻轻帮他理感受",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -346,6 +468,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "肯定用户自己想到的做法，不居功",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         }
       ],
@@ -371,6 +500,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接身体累，不引申成医学话题",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -387,6 +523,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "确认节奏很紧，表达理解",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -403,6 +546,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接家里带来的压力，不说教",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -419,6 +569,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "接住这种疲惫感，不急着给建议",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -435,6 +592,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "关心但不做诊断、不推荐药物",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -451,6 +615,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "温和收尾，不追问过多细节",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         }
       ],
@@ -476,6 +647,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "跟随积极情绪，先一起高兴",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "听得出来你心情不错。",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -492,6 +670,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "对努力过程表达欣赏，不泼冷水",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -508,6 +693,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "继续跟随喜悦，肯定进步",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -524,6 +716,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "支持用户的计划，不替他安排",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -540,6 +739,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "轻松回应生活细节，保持温度",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -556,6 +762,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "简短愉快收尾",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         }
       ],
@@ -581,6 +794,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "承接背单词的挫败感",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -597,6 +817,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "确认细节，不急着评价",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -613,6 +840,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "明显跟随话题切换到新宿舍，不纠缠四级",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -629,6 +863,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "回应新话题的陌生感，不拉回旧话题",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -645,6 +886,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "跟着用户找到的舒服之处走",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         },
         {
@@ -661,6 +909,13 @@
           "dropped_turns": 0,
           "current_user_occurrences_in_prompt": null,
           "check_hint": "自然接受用户把两个话题连起来，不纠正",
+          "degeneration": {
+            "max_repeat": 1,
+            "repeated_gram": "我在听，你继续说。你",
+            "degenerate": false,
+            "threshold": 3,
+            "gram": 10
+          },
           "violations": []
         }
       ],

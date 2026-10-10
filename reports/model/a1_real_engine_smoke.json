@@ -8,7 +8,7 @@
     "model_dir": "D:\\digital-person\\weights\\sft-short",
     "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
     "loaded": true,
-    "load_seconds": 1.776,
+    "load_seconds": 2.448,
     "params": 494032768,
     "param_dtypes": [
       "torch.float32"
@@ -32,7 +32,7 @@
     },
     "patch": null
   },
-  "init_seconds": 9.072,
+  "init_seconds": 12.931,
   "checks": {
     "offline_flags": {
       "HF_HUB_OFFLINE": "1",
@@ -60,7 +60,7 @@
       "expression": "concern",
       "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
       "is_mock": false,
-      "elapsed_ms": 1281.3,
+      "elapsed_ms": 2349.9,
       "prompt_tokens": 132,
       "new_tokens": 29,
       "device": "cpu",
@@ -73,7 +73,7 @@
       "expression": "smile",
       "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
       "is_mock": false,
-      "elapsed_ms": 634.8,
+      "elapsed_ms": 1023.1,
       "prompt_tokens": 128,
       "new_tokens": 11,
       "device": "cpu",
@@ -86,7 +86,7 @@
       "expression": "listening",
       "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
       "is_mock": false,
-      "elapsed_ms": 507.8,
+      "elapsed_ms": 905.2,
       "prompt_tokens": 132,
       "new_tokens": 9,
       "device": "cpu",

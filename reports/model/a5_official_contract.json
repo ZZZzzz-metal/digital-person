@@ -9,7 +9,7 @@
     "model_dir": "D:\\digital-person\\weights\\sft-short",
     "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
     "loaded": true,
-    "load_seconds": 1.773,
+    "load_seconds": 2.195,
     "params": 494032768,
     "param_dtypes": [
       "torch.float32"
@@ -128,13 +128,13 @@
         "schema_valid": true,
         "schema_problems": [],
         "raw_head": "{\"response_text\":\"嗯，这事儿挺磨人的，要不要先想点什么能让自己不那么紧绷？\",\"emotion_label\":\"relaxed\",\"user_profile\":{\"personality_traits\":[\"high_conscientiousness\"],\"interests\":[\"study_exam\"],\"style\":[\"indirect\"]},\"memory_refs\"",
-        "elapsed_ms": 3312.070900001345,
+        "elapsed_ms": 4453.779200001009,
         "prompt_tokens": 697,
         "new_tokens": 61,
         "dropped_turns": 0,
         "contract_source": "b2_core.a_impl.dtos (A 兜底合同)"
       },
-      "elapsed_seconds": 3.31,
+      "elapsed_seconds": 4.45,
       "problems": []
     },
     {
@@ -173,13 +173,13 @@
         "schema_valid": true,
         "schema_problems": [],
         "raw_head": "{\"response_text\":\"{\"emotion_label\":\"neutral\",\"user_profile\":{\"personality_traits\":[\"high_conscientiousness\"],\"interests\":[\"study_exam\"],\"style\":[\"indirect\"]},\"{\"response_text\":\"{\"emotion_label\":\"neutr",
-        "elapsed_ms": 59483.797400000185,
+        "elapsed_ms": 97048.54859999978,
         "prompt_tokens": 3176,
         "new_tokens": 1306,
         "dropped_turns": 0,
         "contract_source": "b2_core.a_impl.dtos (A 兜底合同)"
       },
-      "elapsed_seconds": 59.48,
+      "elapsed_seconds": 97.05,
       "problems": []
     },
     {
@@ -216,13 +216,13 @@
         "schema_valid": true,
         "schema_problems": [],
         "raw_head": "{\"response_text\":\"嗯，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺烦人的，这事儿挺",
-        "elapsed_ms": 61387.545399999,
+        "elapsed_ms": 94203.86579999831,
         "prompt_tokens": 1043,
         "new_tokens": 1478,
         "dropped_turns": 0,
         "contract_source": "b2_core.a_impl.dtos (A 兜底合同)"
       },
-      "elapsed_seconds": 61.39,
+      "elapsed_seconds": 94.2,
       "problems": []
     }
   ],
