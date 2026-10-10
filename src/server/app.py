@@ -1,4 +1,4 @@
-"""Anonymous session API. Real startup failures never select a stub."""
+"""Anonymous session and memory API; real failures never select a stub."""
 
 from __future__ import annotations
 
@@ -16,7 +16,8 @@ from starlette.concurrency import run_in_threadpool
 from starlette.exceptions import HTTPException
 
 from b2_core.contracts import Engine, ErrorDetail, ErrorResponse, Health
-from b2_core.store import ResourceNotFound, SQLiteStore, Store, StoreBusy, StoreError, TurnInProgress
+from b2_core.store import MemoryDisabled, ResourceNotFound, SQLiteStore, Store, StoreBusy, StoreError, TurnInProgress
+from .memories import router as memories_router
 from .sessions import router as sessions_router
 from .stub import StubEngine
 
@@ -36,7 +37,7 @@ def _store_error_response(exc: StoreError) -> JSONResponse:
     if isinstance(exc, ResourceNotFound):
         # Missing resources and another user's resources are indistinguishable.
         return _error_response(404, "NOT_FOUND", "资源不存在")
-    if isinstance(exc, (StoreBusy, TurnInProgress)):
+    if isinstance(exc, (StoreBusy, TurnInProgress, MemoryDisabled)):
         return _error_response(409, exc.code, exc.message)
     return _error_response(500, "STORE_ERROR", "存储操作未完成")
 
@@ -143,7 +144,7 @@ def create_app(
                 application.state.store = None
 
     application = FastAPI(
-        title="伴学匿名会话 API",
+        title="伴学匿名会话与记忆 API",
         version="0.1.0",
         lifespan=lifespan,
     )
@@ -208,6 +209,7 @@ def create_app(
         return application.state.health
 
     application.include_router(sessions_router)
+    application.include_router(memories_router)
 
     def openapi():
         if application.openapi_schema is None:

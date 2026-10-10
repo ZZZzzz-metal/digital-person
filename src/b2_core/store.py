@@ -19,7 +19,10 @@ from threading import RLock
 from typing import Callable, Iterator, Protocol, runtime_checkable
 from uuid import uuid4
 
-from .contracts import ChatRequest, ChatResponse, Message, SessionCreate, SessionDTO
+from .contracts import (
+    ChatRequest, ChatResponse, MemoryItem, MemoryKey, MemoryList, MemorySettings,
+    Message, SessionCreate, SessionDTO,
+)
 
 
 class StoreError(RuntimeError):
@@ -79,6 +82,13 @@ class StaleReservation(StoreError):
         super().__init__(message)
 
 
+class MemoryDisabled(StoreError):
+    code = "MEMORY_DISABLED"
+
+    def __init__(self, message: str = "记忆已关闭，请先开启后保存") -> None:
+        super().__init__(message)
+
+
 @dataclass(frozen=True)
 class AnonymousIdentity:
     user_id: str
@@ -104,6 +114,11 @@ class Store(Protocol):
     def reserve_turn(self, user_id: str, session_id: str, client_turn_id: str) -> TurnReservation | ChatResponse: ...
     def complete_turn(self, reservation: TurnReservation, user_text: str, response: ChatResponse) -> None: ...
     def abort_turn(self, reservation: TurnReservation) -> None: ...
+    def list_memories(self, user_id: str) -> MemoryList: ...
+    def set_memory_enabled(self, user_id: str, enabled: bool) -> MemoryList: ...
+    def save_memory(self, user_id: str, key: MemoryKey, value: str) -> MemoryItem: ...
+    def delete_memory(self, user_id: str, memory_id: str) -> None: ...
+    def clear_memories(self, user_id: str) -> None: ...
     def close(self) -> None: ...
 
 
@@ -206,6 +221,14 @@ class SQLiteStore:
                             OR (status = 'completed' AND response_json IS NOT NULL)),
                         PRIMARY KEY(session_id, client_turn_id)
                     )""",
+                    """CREATE TABLE IF NOT EXISTS memories (
+                        id TEXT PRIMARY KEY,
+                        user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                        key TEXT NOT NULL,
+                        value TEXT NOT NULL,
+                        updated_at TEXT NOT NULL,
+                        UNIQUE(user_id, key)
+                    )""",
                     "CREATE INDEX IF NOT EXISTS sessions_by_user ON sessions(user_id)",
                     "CREATE INDEX IF NOT EXISTS messages_by_session ON messages(session_id, id)",
                     """CREATE UNIQUE INDEX IF NOT EXISTS one_pending_turn_per_session
@@ -244,7 +267,7 @@ class SQLiteStore:
                 raise
 
     def _user(self, user_id: str) -> sqlite3.Row:
-        row = self._conn.execute("SELECT id FROM users WHERE id = ?", (user_id,)).fetchone()
+        row = self._conn.execute("SELECT id, memory_enabled FROM users WHERE id = ?", (user_id,)).fetchone()
         if row is None:
             raise ResourceNotFound()
         return row
@@ -261,6 +284,21 @@ class SQLiteStore:
     @staticmethod
     def _session_dto(row: sqlite3.Row) -> SessionDTO:
         return SessionDTO(id=row["id"], title=row["title"], created_at=row["created_at"])
+
+    @staticmethod
+    def _memory_dto(row: sqlite3.Row) -> MemoryItem:
+        return MemoryItem(id=row["id"], key=row["key"], value=row["value"], updated_at=row["updated_at"])
+
+    def _memory_list(self, user_id: str, enabled: bool) -> MemoryList:
+        # Caller holds a transaction and has checked the user. Disabled state
+        # must not fetch any memory values, even to discard them afterwards.
+        if not enabled:
+            return MemoryList(enabled=False, items=[])
+        rows = self._conn.execute(
+            "SELECT id, key, value, updated_at FROM memories WHERE user_id = ? ORDER BY updated_at DESC, id",
+            (user_id,),
+        ).fetchall()
+        return MemoryList(enabled=True, items=[self._memory_dto(row) for row in rows])
 
     @staticmethod
     def _in_progress(row: sqlite3.Row, session_id: str) -> TurnInProgress:
@@ -408,6 +446,60 @@ class SQLiteStore:
                    AND token = ? AND status = 'pending'""",
                 (reservation.session_id, reservation.client_turn_id, reservation.token),
             )
+
+    def list_memories(self, user_id: str) -> MemoryList:
+        _identifier(user_id, "user_id")
+        with self._transaction():
+            user = self._user(user_id)
+            return self._memory_list(user_id, bool(user["memory_enabled"]))
+
+    def set_memory_enabled(self, user_id: str, enabled: bool) -> MemoryList:
+        _identifier(user_id, "user_id")
+        settings = MemorySettings(enabled=enabled)
+        with self._transaction(write=True):
+            self._user(user_id)
+            self._conn.execute(
+                "UPDATE users SET memory_enabled = ? WHERE id = ?",
+                (int(settings.enabled), user_id),
+            )
+            return self._memory_list(user_id, settings.enabled)
+
+    def save_memory(self, user_id: str, key: MemoryKey, value: str) -> MemoryItem:
+        _identifier(user_id, "user_id")
+        with self._transaction(write=True):
+            user = self._user(user_id)
+            if not user["memory_enabled"]:
+                raise MemoryDisabled()
+            # Validate all new content before the first write. Upsert preserves
+            # the old row ID, while deletion and later creation get a new ID.
+            item = MemoryItem(id="memory_" + uuid4().hex, key=key, value=value, updated_at=_timestamp(self._now()))
+            self._conn.execute(
+                """INSERT INTO memories(id, user_id, key, value, updated_at) VALUES (?, ?, ?, ?, ?)
+                   ON CONFLICT(user_id, key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at""",
+                (item.id, user_id, item.key, item.value, item.updated_at),
+            )
+            row = self._conn.execute(
+                "SELECT id, key, value, updated_at FROM memories WHERE user_id = ? AND key = ?",
+                (user_id, item.key),
+            ).fetchone()
+            return self._memory_dto(row)
+
+    def delete_memory(self, user_id: str, memory_id: str) -> None:
+        _identifier(user_id, "user_id")
+        _identifier(memory_id, "memory_id")
+        with self._transaction(write=True):
+            self._user(user_id)
+            cursor = self._conn.execute(
+                "DELETE FROM memories WHERE id = ? AND user_id = ?", (memory_id, user_id)
+            )
+            if cursor.rowcount != 1:
+                raise ResourceNotFound()
+
+    def clear_memories(self, user_id: str) -> None:
+        _identifier(user_id, "user_id")
+        with self._transaction(write=True):
+            self._user(user_id)
+            self._conn.execute("DELETE FROM memories WHERE user_id = ?", (user_id,))
 
     def close(self) -> None:
         with self._lock:

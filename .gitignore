@@ -24,6 +24,7 @@ dist/
 reports/integration/.b0-work/
 reports/integration/.b1-work/
 reports/integration/.b2-work/
+reports/integration/.b3-work/
 
 # Model weights, raw datasets, generated submission archives
 *.safetensors
