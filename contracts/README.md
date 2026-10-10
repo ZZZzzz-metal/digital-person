@@ -1,16 +1,18 @@
 # B1 共享合同
 
-类型来源为 `src/b2_core/contracts.py`。`schema/` 和 `examples/` 全部由 Pydantic 生成，供 A 实现模型接口、C 对接前端；B1 提供合同和健康骨架，B2 沿用这些 DTO 实现会话 API，聊天、记忆、官方适配在后续阶段实现。
+类型来源为 `src/b2_core/contracts.py`。`schema/` 和 `examples/` 全部由 Pydantic 生成，供 A 实现模型接口、C 对接前端；B1 提供合同和健康骨架，B2/B3 沿用这些 DTO 实现会话与记忆 API，聊天与官方适配在后续阶段实现。
 
 | 使用方 | 输入与输出 | 边界 |
 |---|---|---|
 | 演示模型 A | `Engine.generate(CoreRequest) -> CoreReply` | 六类 `emotion`、四种 `expression`；engine 有布尔 `is_mock` 和非空 `model_version` |
-| 演示页面 C | `ChatRequest`、`ChatResponse`、会话/记忆 DTO | 本轮参考记忆表示候选；当前已提供健康和会话 CRUD/消息读取，聊天/记忆 HTTP 等后续阶段 |
+| 演示页面 C | `ChatRequest`、`ChatResponse`、会话/记忆 DTO | 本轮参考记忆表示候选；当前已提供健康、会话 CRUD/消息读取与记忆 CRUD，聊天 HTTP 等 B4 |
 | 官方生成 A | `OfficialEngine.generate_official(OfficialRequest) -> OfficialPrediction` | 输入携带原样 sample_id；独立十六类情绪、三组唯一画像数组、四字段生成结果；不生成 ID 或演示元数据 |
 
 `Engine` 与 `OfficialEngine` 是静态 Python Protocol，不会创建模型，也不替代应用对 metadata 和实际返回值的校验。`b2_core/__init__.py` 只导出类型，不导入 A 的模型、Torch、Transformers 或后端。
 
 所有对象拒绝额外字段，采用严格类型，避免字符串 `"false"` 被当布尔值。消息和成功回复必须含非空白字符。演示输入最多 2,000 字符，记忆 key 使用总约定五项白名单，记忆值先 trim 再验证 1–200 字符。时间戳必须为 UTC ISO 8601 且以 `Z` 结尾。
+
+B3 未改 DTO/schema 字段。记忆关闭后列表为空，保存 409 `MEMORY_DISABLED`；用户明确删除/清空仍允许，重新开启可见保留值。同用户同 key 纠正保留 id，只返回新值；不从模型输出自动落库。共享 Store 新方法和纯 build_memory_context 说明见总约定第 8 节；A/C 合并拉取后按该约定接入。
 
 `CoreRequest.messages` 与 `OfficialRequest.history` 非空且最后一条为本轮 user；传入历史已经包含当前输入，调用者不能再次追加。该末条角色规则是 Pydantic 跨字段校验，JSON Schema 本身不能完全表达；“当前输入一次”还需要后续历史编排负责，DTO 不按相同文本去重。画像/引用唯一性同时由 Pydantic 和生成 schema 验证。外部 JSON Schema 校验时间格式时应启用 `format` 检查；客户端记忆值先 trim 再校验 schema，以与服务端一致。
 

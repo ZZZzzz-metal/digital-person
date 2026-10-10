@@ -4,9 +4,9 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B2**；B2 已完成验证、提交、推送和 PR，现在停止等待用户合并/拉取及下一阶段指令；不进入 B3–B8。
+- 用户已要求 **继续 B3**；本轮记忆 CRUD、纯检索与开关/纠正/隔离已验证、提交、推送并创建 PR，现停止等用户合并/拉取及 B4 指令，不进入 B4–B8。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
-- 当前工作分支 `codex/b2-storage-sessions`，从 B1 最后文档提交 `c85e9717d4e960e76169c9f35215de8cfdb32ef3` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
+- 当前工作分支 `codex/b3-memory`，从 B2 最后文档提交 `ac80f5892c2f1afce64cbec159fb02d496f02177` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
@@ -35,7 +35,7 @@
 - 实现及验收提交 `8224955bb2f41d297f6733d233a4a37d61694acb` 已实际推送，创建 [PR #5](https://github.com/ZZZzzz-metal/digital-person/pull/5)，目标 main。创建时状态 open、未合并；不把后来用户合并状态预写为已完成。本文的发布记录另作一次文档提交，同样推送到本 PR。
 - 完整结果见 [B1 验收](B1验收.md)、[结构化记录](b1-verification.json)、[A 接口核对](b1-a-contract-compatibility.json)。没有等待用户解决的 B1 技术阻塞。
 
-## 已完成：B2（已推送，等待用户合并/拉取）
+## 已完成：B2（已合并）
 
 - 启动时只读确认 PR #5 已合并，远端 main 当时为 `6c6bb78b8d754a28405585a491cb2b68d6453202`；没有 fetch/pull/merge。从本地已验证的 B1 提交继续，避免重复资料获取和环境安装。
 - 已先在总约定增加 B2 存储/匿名身份合同；现有 API DTO/schema 不改字段。当前任务为 SQLiteStore/InMemoryStore、随机匿名 cookie、会话 CRUD/消息历史和 turn 原子保存/去重/并发控制。
@@ -46,11 +46,23 @@
 - 实现及验收提交 `f2b54797be85f69b3cb6a52d08e05435e31b8f95` 已实际推送，创建 [PR #6](https://github.com/ZZZzzz-metal/digital-person/pull/6)，目标 main，17 个文件，仅 B 分工区域。创建时 open、未合并；发布记录另作一次文档提交并推送到同一 PR。
 - 结果见 [B2 验收](B2验收.md)、[结构化记录](b2-verification.json)、[HTTP 实测](b2-http-smoke.json)。没有 B2 人工技术阻塞。
 
+## 已完成：B3（已推送，等待用户合并/拉取）
+
+- B3 启动时只读确认 PR #6 已合并，head 为 `ac80f5892c2f1afce64cbec159fb02d496f02177`；发布前观察 main 为 `1826b1a5a9a6cb209184f73768db4e4110e49d52`。没有 fetch/pull/merge，也没有重装环境。
+- 先更新总约定第 8 节记忆存储方法/关闭管理语义，再并行实现；沿用现有 DTO/schema 字段，不改 A/C 模型与前端。
+- 用户确认的五项白名单事实 CRUD 已实现；同 key 更新保留 id，跨会话与删除会话保留记忆。关闭 list/settings 返回 false/[]，不读事实，save 返回 409 MEMORY_DISABLED；重新开启恢复旧值。关闭期间允许明确删除/清空，清空不改开关且只删本人。
+- 纯 build_memory_context 最多五条相关事实；不相关为空，数据以 JSON 包装，不是系统指令。返回的是候选 DTO，不能称模型已使用或保证抗提示注入；不从情绪/画像自动落库。
+- 实际 **216/216 测试通过**（44合同、20健康、28会话、31原存储、39记忆API、38记忆存储、16纯检索）。SQLite authorizer 实测关闭路径不查询 memories；两实例同 key 竞争唯一；旧 B2 布局补表保留已有数据；高数→线代和关闭的 CoreRequest 输入构造通过。
+- 实际 HTTP **10 项通过**，两个自建 Uvicorn 进程检查身份隔离、纠正、开关/清空与 SQLite 重启，均已关闭，原始 cookie 不记录。没有模型生成；/api/chat 仍未实现。
+- 21 schemas/21 fixtures 一致、pip check 无冲突，沿用 B1 环境无新增依赖。旧验收记录和 JSON 不替换为当前结果。
+- 本轮结果见 [B3 验收](B3验收.md)、[结构化结果](b3-verification.json)、[HTTP 实测](b3-http-smoke.json)。无 B3 人工技术阻塞。
+- 实现与验收提交 `f785f6be8199dfef2f91421daa6de77966dee5dd` 已实际推送，创建 [PR #7](https://github.com/ZZZzzz-metal/digital-person/pull/7)，目标 main，19 个文件仅 B 分工区域。创建时 open、未合并，head 与本地一致。本文发布记录另作一次文档提交并推送到同一 PR；不把用户未来的合并预写为已完成。
+
 ## 恢复与下一步
 
 1. 核对当前分支和工作区，再阅读本轮验收记录。若记录说已通过而代码/锁/样例后来改变，仅重跑受影响的最小检查。
-2. B0–B2 已验证，未变的部分不重复从头核对或全部测试。当前只核对 B2 提交/PR 发布及用户是否已合并/拉取；不要重新安装已验证的环境。
-3. B2 发布后停止等待 B3 指令。B3 接手读总约定第 6/8 节、B 任务书 B3、store.py 和现有 API，增加 memory.py 与记忆 CRUD；可扩展 users.memory_enabled 和用户级 memories 表，不改 A/C 实现，也不提前做 B4 聊天编排。
+2. B0–B3 已验证，未变的部分不重复从头核对或全部测试。当前只核对 B3 提交/PR 发布及用户是否已合并/拉取；不要重新安装已验证的环境。
+3. B3 发布后停止等待 B4 指令。B4 接手读总约定第 6–8 节、B 任务书 B4，使用已有 store/memory/server 和 A 已发布模型接口实现 run_turn/聊天编排；本地尚未拉取 A 不代表队伍缺 A。不要改 A/C 实现，不提前做 B5 官方适配。
 4. 正式模型、训练、GPU 容器、可回退参赛候选和赛事上传尚未验收；需要相应后续阶段实际运行，不能由 B1 演示成功替代。
 
 主要依据：[总约定](../../docs/分工/00-总约定.md)、[B 任务书](../../docs/分工/B-记忆后端与参赛部署.md)、[B0 验收](B0验收.md)、[官方答复](B0-官方答复-2026-10-10.md)。本文件不保存账号、密码、cookie、token 或真实聊天。
