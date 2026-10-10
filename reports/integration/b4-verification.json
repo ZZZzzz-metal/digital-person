@@ -1,0 +1,124 @@
+{
+  "checked_at_utc": "2026-10-10T15:03:46.066337+00:00",
+  "branch": "codex/b4-chat",
+  "base_commit": "44d7363101e96e9fc58a71d55f2fd4fcb9d8da64",
+  "previous_PR_7_merged_at_start": true,
+  "main_sha_observed": "259fac62d8d5bc8ceb6104e1d49b68cfd063996b",
+  "no_fetch_pull_merge_performed": true,
+  "scope": "B4 pure turn helpers, chat orchestration, real A baseline integration and retry",
+  "b4_backend_verified": true,
+  "b4_all_acceptance_complete": false,
+  "C_frontend_integration_performed": false,
+  "C_frontend_missing_evidence": "b4-c-handoff-check.json",
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "backend_environment_reused": true,
+    "backend_dependencies_changed": false,
+    "isolated_CPU_environment": "b4-real-environment.json"
+  },
+  "pytest": {
+    "tests": 294,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "groups": {
+      "tests.server.test_chat": 49,
+      "tests.server.test_contracts": 44,
+      "tests.server.test_health": 20,
+      "tests.server.test_memories": 39,
+      "tests.server.test_memory_context": 16,
+      "tests.server.test_memory_store": 38,
+      "tests.server.test_sessions": 28,
+      "tests.server.test_store": 31,
+      "tests.server.test_turn": 29
+    },
+    "junit_suite_seconds": 7.351,
+    "reported_elapsed_seconds": 7.58,
+    "observed_exit_code": 0,
+    "command": "python -m pytest tests/server -q --junitxml=reports/integration/.b4-work/pytest.xml -o faulthandler_timeout=20",
+    "warnings": [
+      "Existing Starlette httpx TestClient deprecation",
+      "Two existing serialization warnings from deliberate invalid-bool negative tests"
+    ]
+  },
+  "schema_check": {
+    "command": "python contracts/export_schema.py --check",
+    "observed_exit_code": 0,
+    "schemas": 21,
+    "fictional_examples": 21,
+    "shared_DTO_fields_changed": false
+  },
+  "dependency_check": {
+    "command": "python -m pip check",
+    "observed_exit_code": 0,
+    "stdout": "No broken requirements found."
+  },
+  "HTTP": {
+    "stub": {
+      "report": "b4-stub-http.json",
+      "observed_exit_code": 0,
+      "checks_passed": 7,
+      "completed_generations": 8,
+      "real_generation_performed": false
+    },
+    "real": {
+      "report": "b4-real-http.json",
+      "observed_exit_code": 0,
+      "checks_passed": 7,
+      "completed_generations": 8,
+      "six_turns_one_session": true,
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "real_generation_performed": true,
+      "is_mock": false,
+      "device": "CPU",
+      "all_owned_processes_stopped": true,
+      "outbound_socket_guard": true,
+      "official_container_verified": false
+    }
+  },
+  "A_source": "b4-a-source-check.json",
+  "assets": "b4-real-assets.json",
+  "training_performed_by_B": false,
+  "A_trained_candidate_verified_here": false,
+  "GPU_coupon_used": false,
+  "official_inference_or_container_verified": false,
+  "contest_submission_performed": false,
+  "verified_fallback_scope": "A public base model retained for CPU demo development; not an official contest/container candidate",
+  "observed_quality_limit": {
+    "memory_candidates_verified_at_engine_input": true,
+    "model_memory_answer_accuracy_verified": false,
+    "third_turn_after_correction_reply": "记得你最近考了哪些科目？这样我可以帮你规划复习计划。",
+    "note": "The baseline asked about the exam subject instead of answering the corrected 线代; no trained-memory accuracy or quality improvement is claimed.",
+    "emotion_expression_source": "A rules",
+    "reply_source": "actual local model"
+  },
+  "remaining_items": [
+    "C must publish apps/web source, lock and real API startup instructions for actual page integration",
+    "A sft-short full trained weights remain on another computer; transfer required before testing that candidate",
+    "B5 official input/output adapter and B6 network-disabled GPU container remain future stages"
+  ],
+  "tested_file_sha256": {
+    "src/b2_core/contracts.py": "85203a1cfc4aac1941f2fd44bb64ac8b9e3c2ed8818ab578e25a6da5871c4ab1",
+    "src/b2_core/memory.py": "f8dcbf8aad8d4cd6f537a513c8b226fa9979f66dc6e40dd9f9abcd40e77f65f1",
+    "src/b2_core/store.py": "2c78aa8b942381d3a802dc054911af4e7a87b2cf261151b6f62b21ca1a2ad367",
+    "src/b2_core/turn.py": "33a1b9a1715c4929b127767b4511896407b49b77cb242f69aac5370a83d84389",
+    "src/server/app.py": "5e2f6c5faba0744f0e4beefd85353d3a7b082ee302409543aa5415e024be3358",
+    "src/server/chat.py": "2d1bf771f080ffd41f962f51382e29ab263051cdf85fe118b0af00c48b56123b",
+    "src/server/sessions.py": "a5d95eaff696cd1dbef16808dbb68d7754f4d471d2dc4999463e67ce24a47e20",
+    "src/server/memories.py": "ecfa7fd49a4b5ec9e92d6729c9bc350e80fabc111f22cdc1f300cf85bcd8bc77",
+    "src/server/stub.py": "6ad1f6b0165773b3a3f45a24abc62bbb5a76996ccfe084765b1deee61552b06a",
+    "tests/server/test_turn.py": "7a41caaf9a6502c25f64002933de3e6f0f4dca55b64b64fd9b5a8e94687746a1",
+    "tests/server/test_chat.py": "435da3dce243899e704ad4d5a358dbc3eac0c3ae6df826859f160a92330c8d8c",
+    "tests/server/test_health.py": "fba3201fb9e544937632c1551ecd60d6c97dd221513204dfddae6da727c19b6a",
+    "tests/server/test_sessions.py": "0d5cb64b2248ed1464c44b2cb9487e3ad473ec1b3663343466bc6329efaf426c",
+    "requirements-backend.lock.txt": "c49f84fc9e750f366832b4bb5b5e1eb7d032eb83ab32d1b8a05157c6c75daaf9",
+    "pyproject.toml": "737e6d7e0fe4d72be9d20cc025bef79c276e8912767b2bc3b6e9517bcf1da721",
+    "reports/integration/verify_b4_http.py": "cb37d8707903826277be58c3ee76d62284354b6bb6a8e8b0f10594baa04805cc"
+  },
+  "hash_note": "Hashes identify tested local bytes before Git CRLF/LF conversion; historic stage evidence is not replaced.",
+  "corrected_attempts": [
+    "Initial schema command used a nonexistent generate_schemas.py; corrected to export_schema.py --check and passed.",
+    "Review exposed a model-thrown ChatError leak; corrected isolation, added regression, then 294 tests passed."
+  ]
+}
