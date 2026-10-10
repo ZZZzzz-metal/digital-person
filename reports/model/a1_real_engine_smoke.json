@@ -1,0 +1,100 @@
+{
+  "node": "A1 真实本地引擎冒烟检查",
+  "engine": {
+    "engine": "ModelEngine",
+    "is_mock": false,
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+    "config_path": "D:\\digital-person\\weights\\inference_config.json",
+    "model_dir": "D:\\digital-person\\weights\\sft-short",
+    "contract_source": "b2_core.a_impl.dtos (A 兜底合同)",
+    "loaded": true,
+    "load_seconds": 1.776,
+    "params": 494032768,
+    "param_dtypes": [
+      "torch.float32"
+    ],
+    "device": "cpu",
+    "threads": 16,
+    "max_input_tokens": 3072,
+    "generation": {
+      "max_new_tokens": 256,
+      "do_sample": true,
+      "temperature": 0.3,
+      "top_p": 0.9,
+      "repetition_penalty": 1.15
+    },
+    "official_generation": {
+      "max_new_tokens": 1200,
+      "do_sample": false,
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "repetition_penalty": 1.0
+    },
+    "patch": null
+  },
+  "init_seconds": 9.072,
+  "checks": {
+    "offline_flags": {
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "contract_source_note": "b2_core.a_impl.dtos (A 兜底合同)",
+    "load_once": true,
+    "context_trim": {
+      "max_input_tokens": 512,
+      "dropped_turns": 14,
+      "dropped_messages": 28,
+      "prompt_tokens": 128,
+      "reply": "听着这声音挺舒服的，要不要紧？"
+    },
+    "context_too_long_error": "ContextTooLongError: 移除全部历史轮次后提示词仍为 1719 tokens，超过预算 512；不截断当前问题。",
+    "missing_weights_error": "本地模型目录文件不完整: D:\\digital-person\\weights\\.scratch\\negative-check\\empty-model 缺少 ['weights(*.safetensors|*.bin|*.pt)', 'tokenizer(*.json|spiece.model)']；拒绝以随机初始化继续，也不会退回 mock。",
+    "missing_dir_error": "本地模型目录不存在: D:\\digital-person\\weights\\.scratch\\negative-check\\does-not-exist"
+  },
+  "failures": [],
+  "samples": [
+    {
+      "input": "我最近一想到考试就紧张，晚上也睡不好。",
+      "reply": "这事儿挺正常的，你可以试试做些放松身心的事儿，像是听音乐、泡个热水澡或者做一些你喜欢的运动。",
+      "emotion": "anxious",
+      "expression": "concern",
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+      "is_mock": false,
+      "elapsed_ms": 1281.3,
+      "prompt_tokens": 132,
+      "new_tokens": 29,
+      "device": "cpu",
+      "current_user_occurrences_in_prompt": 1
+    },
+    {
+      "input": "今天面试终于过了，太开心了！",
+      "reply": "这真是太棒了，你现在最想说什么？",
+      "emotion": "happy",
+      "expression": "smile",
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+      "is_mock": false,
+      "elapsed_ms": 634.8,
+      "prompt_tokens": 128,
+      "new_tokens": 11,
+      "device": "cpu",
+      "current_user_occurrences_in_prompt": 1
+    },
+    {
+      "input": "室友总是半夜打游戏，说了也不听，烦死了。",
+      "reply": "要不要把这事儿告诉你的房东？",
+      "emotion": "angry",
+      "expression": "listening",
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+      "is_mock": false,
+      "elapsed_ms": 507.8,
+      "prompt_tokens": 132,
+      "new_tokens": 9,
+      "device": "cpu",
+      "current_user_occurrences_in_prompt": 1
+    }
+  ],
+  "denied_fields": [
+    "显存占用（本机无 GPU，未测）",
+    "GPU 型号（本机无 GPU，未测）"
+  ]
+}

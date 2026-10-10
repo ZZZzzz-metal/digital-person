@@ -1,0 +1,101 @@
+{
+  "node": "A4 小规模训练尝试",
+  "config_path": "D:\\digital-person\\training\\model_config.json",
+  "config": {
+    "config_version": "a-train-v1",
+    "note": "A4 小规模训练配置。路径相对本文件所在目录解析。",
+    "base_model_dir": "../weights/base-qwen2.5-0.5b-instruct",
+    "base_model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "output_dir": "../weights/sft-short",
+    "candidate_model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
+    "data": {
+      "train": "../data/training/processed/train.jsonl",
+      "valid": "../data/training/processed/valid.jsonl"
+    },
+    "data_version": "a2-synthetic-v1 (chat 150 + official 50)",
+    "trainable_layers": 4,
+    "train_lm_head": false,
+    "max_len": 448,
+    "seed": 20261010,
+    "lr": 5e-05,
+    "weight_decay": 0.0,
+    "grad_accum": 8,
+    "micro_batch": 8,
+    "max_epochs": 2,
+    "max_steps": 30,
+    "max_minutes": 40,
+    "warmup_steps": 5,
+    "grad_clip": 1.0,
+    "device": "cpu",
+    "dtype": "float32",
+    "torch_threads": 16,
+    "log_every": 5,
+    "val_every": 10,
+    "budget": {
+      "gpu_card_hours_cap": 6,
+      "gpu_card_hours_used": 0,
+      "note": "本机无 GPU（torch 2.14.1+cpu，cuda_available=False），本次为本地 CPU 尝试，未消耗任何付费算力或 GPU 卡时。若队长提供 20 卡时券对应的实例，再按 6 卡时上限重跑。"
+    }
+  },
+  "smoke_mode": false,
+  "started_at": "2026-10-10 18:17:16",
+  "status": "completed",
+  "device": "cpu",
+  "gpu_available": false,
+  "gpu_card_hours_used": 0,
+  "notes": [],
+  "blockers": [
+    "本机无 GPU（cuda_available=False）。A4 要求最多 6 GPU 卡时，但当前环境无法消耗 GPU 卡时；本次为 CPU 尝试，未使用付费算力，20 卡时券对应的实例仍需队长在咪咕仝学平台创建并提供访问权限。"
+  ],
+  "parametrization": {
+    "total_params": 494032768,
+    "trainable_params": 59650432,
+    "trainable_ratio": 0.120742,
+    "trainable_layers": 4,
+    "train_lm_head": false,
+    "frozen_layers": 20
+  },
+  "data": {
+    "train_file": "D:\\digital-person\\data\\training\\processed\\train.jsonl",
+    "valid_file": "D:\\digital-person\\data\\training\\processed\\valid.jsonl",
+    "train_examples": 200,
+    "train_skipped_over_length": 0,
+    "train_skipped_ids": [],
+    "valid_examples": 120,
+    "valid_skipped_over_length": 0,
+    "train_examples_truncated": 36,
+    "valid_examples_truncated": 25,
+    "mean_train_tokens": 320.0,
+    "max_len": 448,
+    "seed": 20261010,
+    "lr": 5e-05,
+    "micro_batch": 8,
+    "grad_accum": 8,
+    "effective_batch_examples": 64,
+    "max_steps": 30,
+    "max_minutes": 40.0,
+    "step_definition": "1 step = 1 次 optimizer.step() = micro_batch × grad_accum 条样本"
+  },
+  "output_dir": "D:\\digital-person\\weights\\sft-short",
+  "weights_bytes": 1976163472,
+  "weights_mb": 1884.62,
+  "steps_done": 6,
+  "stopped_reason": "epochs_done",
+  "train_minutes": 7.326,
+  "loss_first": 3.6161279678344727,
+  "loss_last": 2.466796875,
+  "val_loss": 2.29822,
+  "mean_step_seconds": 8.818,
+  "steps_log": "training\\logs\\sft-short.steps.jsonl",
+  "reload_check": {
+    "attempted": true,
+    "loaded": true,
+    "params": 494032768,
+    "probe_reply": "你今天还好吗？",
+    "probe_non_empty": true
+  },
+  "tied_tensors_dropped": [
+    "lm_head.weight 与 model.embed_tokens.weight 共享存储，只保存后者"
+  ],
+  "finished_at": "2026-10-10 18:25:59"
+}

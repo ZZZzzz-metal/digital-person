@@ -1,0 +1,2 @@
+{"step": 1, "epoch": 1, "loss": 3.138122, "lr": 1e-05, "elapsed_minutes": 1.215, "step_seconds": 8.988}
+{"step": 5, "epoch": 2, "loss": 2.194058, "lr": 5e-05, "elapsed_minutes": 5.859, "step_seconds": 8.69}

@@ -187,6 +187,33 @@ class MockEngine:
             is_mock=True,
         )
 
+    def generate_with_trace(self, request: Any) -> dict[str, Any]:
+        """与真实引擎同形的带元数据接口，方便评测脚本对两种引擎跑同一套检查。"""
+        normalized = dtos.normalize_core_request(request)
+        latest = normalized.messages[-1].content
+        emotion = emotion_rules.estimate_demo_emotion(latest)
+        reply = dtos.build_reply(
+            self._binding,
+            reply=self._template_reply(latest, emotion),
+            emotion=emotion,
+            expression=emotion_rules.map_expression(emotion),
+            model_version=self.model_version,
+            is_mock=True,
+        )
+        return {
+            "reply": reply,
+            "latest_user": latest,
+            "emotion": emotion,
+            "emotion_source": "rules",
+            "elapsed_ms": 0.0,
+            "prompt_tokens": 0,
+            "new_tokens": 0,
+            "dropped_turns": 0,
+            "dropped_messages": 0,
+            "device": "none",
+            "system_prompt_chars": 0,
+        }
+
     def generate_official(self, request: Any) -> Any:
         prediction, _trace = self.official_trace(request)
         return prediction

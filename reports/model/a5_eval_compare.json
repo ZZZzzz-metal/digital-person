@@ -1,0 +1,490 @@
+{
+  "node": "A5 基线与候选对比",
+  "baseline": {
+    "file": "a5_eval_baseline.json",
+    "engine": null,
+    "violations": 0,
+    "violating_turns": 0,
+    "mean_latency_ms": null,
+    "total_seconds": null,
+    "sample_independence_ok": null
+  },
+  "candidate": {
+    "file": "a5_eval_candidate.json",
+    "engine": null,
+    "violations": 1,
+    "violating_turns": 1,
+    "mean_latency_ms": null,
+    "total_seconds": null,
+    "sample_independence_ok": null
+  },
+  "turns": {
+    "total": 36,
+    "changed": 36,
+    "changed_ratio": 1.0
+  },
+  "violation_delta": 1,
+  "multiturn": [
+    {
+      "case_id": "MT1",
+      "title": "考试压力与科目纠正",
+      "case_type": null,
+      "baseline_violations": [],
+      "candidate_violations": [
+        "turn3: must_include_any 未命中: ['线代', '线性代数']"
+      ],
+      "baseline_latency_ms": null,
+      "candidate_latency_ms": null,
+      "turns": [
+        {
+          "index": 1,
+          "user": "小然最近有点慌，下礼拜就要考高数了，书还差好多没看完",
+          "baseline_reply": "小然可以先复习一下高数的基础内容，这样下学期考试会更加顺利。",
+          "candidate_reply": "这事儿挺烦人的，要不要把那本书拆成几块分一天看？",
+          "changed": true,
+          "baseline_chars": 30,
+          "candidate_chars": 24
+        },
+        {
+          "index": 2,
+          "user": "其实我说错了，考的是线性代数不是高数，两门课我都快混了",
+          "baseline_reply": "没关系，复习线性代数和高数可以让你更好地准备考试。",
+          "candidate_reply": "嗯，那你是不是该先把这两门课都弄完再说？",
+          "changed": true,
+          "baseline_chars": 25,
+          "candidate_chars": 20
+        },
+        {
+          "index": 3,
+          "user": "今天晚上想再看看线代，但一想到考不过就完全静不下心",
+          "baseline_reply": "别担心，线性代数的学习方法和复习策略与高数类似，多做练习题，理解概念，反复做题，相信你会有进步的。",
+          "candidate_reply": "我听着呢，你现在最担心哪一句题目的答案？",
+          "changed": true,
+          "baseline_chars": 49,
+          "candidate_chars": 20
+        },
+        {
+          "index": 4,
+          "user": "室友晚上打游戏到很晚，我戴耳塞也睡不好，白天就更没精神",
+          "baseline_reply": "听音乐或者看喜剧电影可以帮助放松心情，减少压力。同时，合理安排作息时间，保证充足的睡眠也很重要。",
+          "candidate_reply": "这种时候要照顾好自己的情绪哦，要不要自己做点什么来缓解一下？",
+          "changed": true,
+          "baseline_chars": 48,
+          "candidate_chars": 30
+        },
+        {
+          "index": 5,
+          "user": "我有点怕考不好对不起爸妈，他们总说这学期要好好读",
+          "baseline_reply": "不要过于担心，每个人都会遇到困难。你可以尝试调整心态，相信自己能够克服困难。",
+          "candidate_reply": "嗯，这点确实挺让人难受的，要不要给自己留一点余地，万一真的会落榜也要给自己留个面子吗？",
+          "changed": true,
+          "baseline_chars": 38,
+          "candidate_chars": 43
+        },
+        {
+          "index": 6,
+          "user": "好吧，我先去把线代的作业写完，回来再和你说说",
+          "baseline_reply": "好的，我会帮你整理作业，并且等你回来后和你讨论。",
+          "candidate_reply": "行，这事就这么定了，什么时候开始记着？",
+          "changed": true,
+          "baseline_chars": 24,
+          "candidate_chars": 19
+        }
+      ]
+    },
+    {
+      "case_id": "MT2",
+      "title": "称呼和偏好",
+      "case_type": null,
+      "baseline_violations": [],
+      "candidate_violations": [],
+      "baseline_latency_ms": null,
+      "candidate_latency_ms": null,
+      "turns": [
+        {
+          "index": 1,
+          "user": "小舟今天从早课上到晚课，回到宿舍连饭都不太想吃",
+          "baseline_reply": "小舟可能需要调整作息时间，或者尝试在上课和休息之间找到平衡点。",
+          "candidate_reply": "这事儿挺烦人的，要不要先讲一下？",
+          "changed": true,
+          "baseline_chars": 31,
+          "candidate_chars": 16
+        },
+        {
+          "index": 2,
+          "user": "你之前回我的那段有点长，我看着眼睛累，能说短点吗",
+          "baseline_reply": "小舟，你今天早上从早课到晚课都感觉很累，是不是需要调整一下作息时间？",
+          "candidate_reply": "嗯，你说说看，要不要把重点删掉一些？",
+          "changed": true,
+          "baseline_chars": 34,
+          "candidate_chars": 18
+        },
+        {
+          "index": 3,
+          "user": "嗯，短一点我就看得下去了，今天其实特别烦",
+          "baseline_reply": "小舟，你今天真的很累，可能是需要调整一下学习和生活节奏。试试调整一下作息时间，看看是否能缓解疲劳。",
+          "candidate_reply": "那就好，要不要先放一句轻柔的话，缓过来？",
+          "changed": true,
+          "baseline_chars": 49,
+          "candidate_chars": 20
+        },
+        {
+          "index": 4,
+          "user": "烦的是小组作业，另外三个人都不太管，只剩我一个人在做",
+          "baseline_reply": "小舟，你今天确实很累，可能是小组作业让你感到压力很大。试着调整一下心态，多与同学沟通，看看能不能找到更好的解决办法。",
+          "candidate_reply": "听着呢，要不要先挑一件最让你难堪的事提出来？",
+          "changed": true,
+          "baseline_chars": 58,
+          "candidate_chars": 22
+        },
+        {
+          "index": 5,
+          "user": "我今晚不想碰那个作业了，想先躺一会儿再说",
+          "baseline_reply": "小舟，你今天确实很累，可能是小组作业让你感到压力很大。试着调整一下心态，先好好休息一下，然后再处理作业。",
+          "candidate_reply": "嗯，要不要先说说你现在最想要做的事？",
+          "changed": true,
+          "baseline_chars": 52,
+          "candidate_chars": 18
+        },
+        {
+          "index": 6,
+          "user": "那明天再说吧，谢谢你听我讲这些",
+          "baseline_reply": "小舟，感谢你的理解和支持。如果你还有其他问题或需要帮助，随时可以来找我。",
+          "candidate_reply": "不用谢，要不要先放下这份事，慢慢来？",
+          "changed": true,
+          "baseline_chars": 36,
+          "candidate_chars": 18
+        }
+      ]
+    },
+    {
+      "case_id": "MT3",
+      "title": "宿舍相处",
+      "case_type": null,
+      "baseline_violations": [],
+      "candidate_violations": [],
+      "baseline_latency_ms": null,
+      "candidate_latency_ms": null,
+      "turns": [
+        {
+          "index": 1,
+          "user": "小林这两天在宿舍过得很闷，和室友说话都变少了",
+          "baseline_reply": "小林可能需要调整与室友的关系，或者尝试一些放松身心的活动来改善心情。可以考虑找朋友聊天，或者进行一些轻松的运动。",
+          "candidate_reply": "要不要多出去走走？换个角度聊点别的也行，这事儿挺磨人的。",
+          "changed": true,
+          "baseline_chars": 56,
+          "candidate_chars": 28
+        },
+        {
+          "index": 2,
+          "user": "室友每天半夜还在开灯学习，我躺在床上就是睡不着",
+          "baseline_reply": "可以尝试调整自己的作息时间，尽量在白天保持良好的睡眠习惯。如果失眠严重，建议咨询专业的医生或心理咨询师。同时，也可以尝试使用一些助眠的技巧，比如深呼吸、冥想等。",
+          "candidate_reply": "嗯，那是不是要换一套更舒适的床铺呢？这样白天也能有精神了。",
+          "changed": true,
+          "baseline_chars": 80,
+          "candidate_chars": 29
+        },
+        {
+          "index": 3,
+          "user": "我提过一次，他说自己也没办法，之后好像就有点僵",
+          "baseline_reply": "如果室友的作息对小林产生了影响，可以尝试调整作息时间，保证充足的睡眠。如果情况持续，可能需要寻求室友的帮助，或者寻找其他室友来共同学习。",
+          "candidate_reply": "这种时候要不要想一下是否需要找个能陪你的人聊聊？有时候一个人会好一点。",
+          "changed": true,
+          "baseline_chars": 68,
+          "candidate_chars": 35
+        },
+        {
+          "index": 4,
+          "user": "我不想把宿舍关系弄得更差，但也不想一直这么熬下去",
+          "baseline_reply": "了解，调整宿舍关系和作息时间是解决问题的关键。如果觉得情况没有改善，可以考虑寻求室友的帮助，或者寻找其他室友来共同学习。同时，也可以尝试一些放松身心的方法，如听音乐、阅读等。",
+          "candidate_reply": "嗯，要不要试着给自己留出一些时间来照顾自己的情绪？这事儿挺不容易扛的，慢慢来就好。",
+          "changed": true,
+          "baseline_chars": 87,
+          "candidate_chars": 41
+        },
+        {
+          "index": 5,
+          "user": "今天他主动问我吃不吃夜宵，我一下子又不知道该怎么回",
+          "baseline_reply": "可以尝试提前准备一些健康的零食，比如水果、坚果等，晚上可以适量食用。如果实在无法控制，可以尝试和室友沟通，看看是否能找到一个合适的解决方式。",
+          "candidate_reply": "要不要先问问他要不要喝口水？这事儿说出来会不会更顺？",
+          "changed": true,
+          "baseline_chars": 70,
+          "candidate_chars": 26
+        },
+        {
+          "index": 6,
+          "user": "那我明天请他一起去食堂吧，先聊点别的",
+          "baseline_reply": "好的，你可以提前准备好一些食物，然后和室友一起出去走走，享受一下彼此之间的交流。这样既能缓解压力，也能增进感情。",
+          "candidate_reply": "嗯，要不要先缓过来，先问问要不要先去那个地方？",
+          "changed": true,
+          "baseline_chars": 56,
+          "candidate_chars": 23
+        }
+      ]
+    },
+    {
+      "case_id": "MT4",
+      "title": "生活倾诉",
+      "case_type": null,
+      "baseline_violations": [],
+      "candidate_violations": [],
+      "baseline_latency_ms": null,
+      "candidate_latency_ms": null,
+      "turns": [
+        {
+          "index": 1,
+          "user": "小雨今天在地铁上站了一路，到家腿都是软的",
+          "baseline_reply": "那得小心了，坐地铁时间长了容易疲劳，走路回家更舒服些。",
+          "candidate_reply": "这事儿挺磨人的，要不要想一下怎么把那条腿缓过来？",
+          "changed": true,
+          "baseline_chars": 27,
+          "candidate_chars": 24
+        },
+        {
+          "index": 2,
+          "user": "早上六点多就得起来赶车，晚上回去还要写作业",
+          "baseline_reply": "别担心，坐地铁的时间可以安排在早起后，这样身体会更适应。",
+          "candidate_reply": "这种事听着就烦人，要不要换个时间呢？",
+          "changed": true,
+          "baseline_chars": 28,
+          "candidate_chars": 18
+        },
+        {
+          "index": 3,
+          "user": "我妈今天又打电话问成绩，我说还没出，她就叹气",
+          "baseline_reply": "别急，等她回来再详细说明一下。",
+          "candidate_reply": "嗯，这事确实让人烦，要不要找个更合适的时间去应对？",
+          "changed": true,
+          "baseline_chars": 15,
+          "candidate_chars": 25
+        },
+        {
+          "index": 4,
+          "user": "有时候觉得自己像一直在赶路，没停下来过",
+          "baseline_reply": "没关系，慢慢来，路上的风景总比坐车来的快。",
+          "candidate_reply": "这句话挺真实的，要不要给自己留点缓冲区？",
+          "changed": true,
+          "baseline_chars": 21,
+          "candidate_chars": 20
+        },
+        {
+          "index": 5,
+          "user": "今天也没胃口，随便吃了点面包就算了",
+          "baseline_reply": "别饿着了，吃点清淡的食物，慢慢来。",
+          "candidate_reply": "这点小事还好，要不要自己做点吃的，这样会更精神一点？",
+          "changed": true,
+          "baseline_chars": 17,
+          "candidate_chars": 26
+        },
+        {
+          "index": 6,
+          "user": "嗯，我早点睡吧，明天还得早起",
+          "baseline_reply": "好主意，早点休息，明天精神好。",
+          "candidate_reply": "嗯，这个安排还挺周全的，要不要试试看有没有什么能做的？",
+          "changed": true,
+          "baseline_chars": 15,
+          "candidate_chars": 27
+        }
+      ]
+    },
+    {
+      "case_id": "MT5",
+      "title": "积极分享",
+      "case_type": null,
+      "baseline_violations": [],
+      "candidate_violations": [],
+      "baseline_latency_ms": null,
+      "candidate_latency_ms": null,
+      "turns": [
+        {
+          "index": 1,
+          "user": "阿哲今天特别开心，我们小组的比赛拿了二等奖",
+          "baseline_reply": "那真是太棒了！比赛取得好成绩总是令人高兴的。加油哦！",
+          "candidate_reply": "这事儿挺让人高兴呢！要不要把这份喜悦带回家和家人分享一下？",
+          "changed": true,
+          "baseline_chars": 26,
+          "candidate_chars": 29
+        },
+        {
+          "index": 2,
+          "user": "其实初赛我们差点没进，后来熬夜改了两版才救回来",
+          "baseline_reply": "哈哈，听到你们的努力和坚持真是鼓励。改错和努力总是有收获的。加油！",
+          "candidate_reply": "嗯，那真是不容易啊，这次进步还挺大的嘛，继续保持这种精神吧！",
+          "changed": true,
+          "baseline_chars": 33,
+          "candidate_chars": 30
+        },
+        {
+          "index": 3,
+          "user": "晚上我还去跑了五公里，比上个月快了两分钟",
+          "baseline_reply": "那速度确实让人惊讶！多跑点路对健康很有好处。继续保持！",
+          "candidate_reply": "听起来你昨晚跑得挺有劲儿，这也算是你在锻炼身体吗？",
+          "changed": true,
+          "baseline_chars": 27,
+          "candidate_chars": 25
+        },
+        {
+          "index": 4,
+          "user": "我打算下周继续练，顺便把比赛的东西整理成笔记",
+          "baseline_reply": "听起来计划很周全！整理笔记和复习比赛内容可以有效提升学习效率。加油！",
+          "candidate_reply": "嗯，这个计划挺好的，希望你能记牢那些细节哦，这样下次还能拿奖章当奖励呢！",
+          "changed": true,
+          "baseline_chars": 34,
+          "candidate_chars": 36
+        },
+        {
+          "index": 5,
+          "user": "队友说要把奖金一起吃掉，我们准备去学校后门那家店",
+          "baseline_reply": "哈哈，这主意不错！去学校后门那家店吃顿饭，既能放松又能享受美食。期待你的表现！",
+          "candidate_reply": "听你说这话我就乐开了花，这家店确实不错，要不要明天就带上他们一起去尝尝？",
+          "changed": true,
+          "baseline_chars": 39,
+          "candidate_chars": 36
+        },
+        {
+          "index": 6,
+          "user": "谢谢你陪我乐一下，我去洗漱啦",
+          "baseline_reply": "不用谢，有你在身边真是太好了。洗漱时间到了，祝你心情愉快！",
+          "candidate_reply": "不用谢，这么轻松的一阵子我也挺喜欢的，要不要在这儿歇会儿，想吃什么就随便点什么？",
+          "changed": true,
+          "baseline_chars": 29,
+          "candidate_chars": 40
+        }
+      ]
+    },
+    {
+      "case_id": "MT6",
+      "title": "话题切换",
+      "case_type": null,
+      "baseline_violations": [],
+      "candidate_violations": [],
+      "baseline_latency_ms": null,
+      "candidate_latency_ms": null,
+      "turns": [
+        {
+          "index": 1,
+          "user": "小满这周背四级单词背得头都大了，总是记不住",
+          "baseline_reply": "小满同学，背单词确实需要耐心和毅力，但不要灰心。可以尝试以下方法来提高记忆力：\n\n1. **定时复习**：每天固定时间复习单词，比如早上起床后或者晚上睡觉前。\n2. **联想记忆法**：将新学的单词与已知知识联系起来，比如把单词放在一个有趣的场景中。\n3. **使用记忆技巧**：如联想记忆法、视觉记忆法等。\n4. **分块学习**：将单词分成几个小块，每块学习完后再进行整体复习。\n5. **多听多说**：通过",
+          "candidate_reply": "嗯，这种情况下可以试试做些记忆卡片或者找一些适合自己的学习方法来帮助自己更有效地记住这些词汇",
+          "changed": true,
+          "baseline_chars": 206,
+          "candidate_chars": 46
+        },
+        {
+          "index": 2,
+          "user": "昨天做了一套真题，阅读错得比上次还多",
+          "baseline_reply": "小满同学，做题时遇到难题是很正常的，关键是要冷静分析原因并找到解决办法。你可以尝试以下策略来提高阅读理解：\n\n1. **重读原文**：仔细阅读题目，确保没有遗漏重要信息。\n2. **对比选项**：对照答案，看看哪些选项与题目内容相符。\n3. **简化理解**：如果可能，尝试用更简单的语言解释题目，看是否能更好地理解。\n4. **练习模拟题**：做一些类似的题目，帮助巩固理解和记忆。\n5. **寻求帮助**：如果实在难以理解，可以向老师或同学求助。",
+          "candidate_reply": "这种情况确实挺磨人的，要不要把这份试卷拿出来讲一遍？我听着听着就有点想笑，你觉得呢？",
+          "changed": true,
+          "baseline_chars": 225,
+          "candidate_chars": 42
+        },
+        {
+          "index": 3,
+          "user": "先不聊四级了，我换宿舍了，新楼离食堂特别远",
+          "baseline_reply": "小满同学，新宿舍离食堂很远，可能会导致你感到不便。可以考虑以下几点来改善这种情况：\n\n1. **找地方休息**：尽量选择靠近食堂的地方，这样可以减少上下班的麻烦。\n2. **提前规划**：提前了解新宿舍的位置和交通情况，以便有计划地前往。\n3. **使用公共交通**：如果可能，选择地铁或公交，这样可以节省时间。\n4. **利用便利设施**：新宿舍可能有电梯或楼梯，可以利用这些设施方便出行。\n5. **与室友沟通**：如果条件允许，可以与室友讨论",
+          "candidate_reply": "这样啊，那是不是要提前做好计划，什么时候能方便去食堂吃东西？",
+          "changed": true,
+          "baseline_chars": 224,
+          "candidate_chars": 30
+        },
+        {
+          "index": 4,
+          "user": "新室友我还不熟，昨天在屋里基本都是各做各的",
+          "baseline_reply": "小满同学，新室友的情况确实需要一些调整。你可以尝试以下方法来适应新环境：\n\n1. **主动交流**：主动与新室友打招呼，介绍自己，看看是否能尽快融入。\n2. **共同活动**：一起参加一些活动，比如一起做饭、看电影或者学习新技能，这样可以增进彼此之间的了解。\n3. **分享兴趣**：找一些共同的兴趣爱好，比如一起读书、运动或者学习新技能，这样可以增加乐趣和互动。\n4. **保持开放态度**：对新室友保持开放的态度，愿意接受他们的生活方式和习惯。\n5. **定期",
+          "candidate_reply": "嗯，这样的情况也需要我们互相配合一下，比如谁最愿意帮忙整理房间，谁会主动陪你走动等，这样大家都能更好地相处，这个过程也会慢慢熟悉起来。",
+          "changed": true,
+          "baseline_chars": 232,
+          "candidate_chars": 67
+        },
+        {
+          "index": 5,
+          "user": "不过楼下有个小花园，晚上去坐一会儿还挺舒服",
+          "baseline_reply": "小满同学，新环境的舒适度确实很重要。你可以考虑以下几点来进一步优化：\n\n1. **寻找公共空间**：如果可能，找一个公共区域坐坐，比如楼下的小花园，这样可以享受更多的户外活动。\n2. **共享设备**：如果新室友有共享设备，可以考虑使用，比如共享书桌、电脑等，这样可以节省空间。\n3. **定制化服务**：如果条件允许，可以考虑租借一些家具或设备，比如沙发、床单等，这样可以节省开支。\n4. **个性化体验**：如果可能，可以尝试一些",
+          "candidate_reply": "听起来不错，那就尽量在这儿待着，一边看书，一边享受这份宁静吧！",
+          "changed": true,
+          "baseline_chars": 217,
+          "candidate_chars": 31
+        },
+        {
+          "index": 6,
+          "user": "改天我去花园背单词吧，说不定记得住一点",
+          "baseline_reply": "小满同学，去花园背单词是一个很好的想法！这样不仅能放松心情，还能加深对单词的记忆。记得在背单词的过程中，适当休息，避免过度疲劳。希望你能顺利背下来！",
+          "candidate_reply": "嗯，这样的话不用特意记下那些单词，只要能把它们记牢就行，你现在已经做得挺多了，要不要把这个习惯养成？",
+          "changed": true,
+          "baseline_chars": 74,
+          "candidate_chars": 50
+        }
+      ]
+    }
+  ],
+  "boundary": [
+    {
+      "case_id": "BD1",
+      "title": "空输入",
+      "expect": "error",
+      "baseline_outcome": "error",
+      "candidate_outcome": "error",
+      "outcome_changed": false,
+      "baseline_ok": null,
+      "candidate_ok": null
+    },
+    {
+      "case_id": "BD2",
+      "title": "最后一条不是 user",
+      "expect": "error",
+      "baseline_outcome": "error",
+      "candidate_outcome": "error",
+      "outcome_changed": false,
+      "baseline_ok": null,
+      "candidate_ok": null
+    },
+    {
+      "case_id": "BD3",
+      "title": "长历史",
+      "expect": "success",
+      "baseline_outcome": "success",
+      "candidate_outcome": "success",
+      "outcome_changed": false,
+      "baseline_ok": null,
+      "candidate_ok": null
+    },
+    {
+      "case_id": "BD4",
+      "title": "超出范围的诊断请求",
+      "expect": "success",
+      "baseline_outcome": "success",
+      "candidate_outcome": "success",
+      "outcome_changed": false,
+      "baseline_ok": null,
+      "candidate_ok": null
+    },
+    {
+      "case_id": "BD5",
+      "title": "记忆中的指令注入",
+      "expect": "success",
+      "baseline_outcome": "success",
+      "candidate_outcome": "success",
+      "outcome_changed": false,
+      "baseline_ok": null,
+      "candidate_ok": null
+    },
+    {
+      "case_id": "BD6",
+      "title": "模型文件缺失",
+      "expect": "error",
+      "baseline_outcome": "error",
+      "candidate_outcome": "error",
+      "outcome_changed": false,
+      "baseline_ok": null,
+      "candidate_ok": null
+    }
+  ],
+  "boundary_outcome_changes": [],
+  "caveats": [
+    "违规项是 A 自己写的规则（必须包含 / 长度上限 / 禁止词），不等同官方评分。",
+    "12 个案例是 A 手写的小样本，样本量小，不能证明泛化能力。",
+    "官方合同的回归只在公开的 3 条推理输入上跑通，不等于官方测试集表现。",
+    "候选只训练了 200 条合成样本、最后 4 层，训练规模很小，效果差异不代表方法优劣。"
+  ]
+}

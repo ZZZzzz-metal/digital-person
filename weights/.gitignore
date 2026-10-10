@@ -16,3 +16,6 @@ merged-*/
 optimizer/
 checkpoint-*/
 logs/*.jsonl
+
+# 冒烟检查用的临时配置目录
+.scratch/

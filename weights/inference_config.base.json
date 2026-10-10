@@ -1,9 +1,9 @@
 {
   "config_version": "a-inference-v2",
   "engine": "local_transformers",
-  "note": "A 分工给 B 的固定配置入口。所有路径都相对本文件所在目录解析，搬运整个 weights/ 目录后无需修改。当前默认指向 A4 训练出的候选模型；若要退回未训练的基础模型，把 model_dir 改成 base-qwen2.5-0.5b-instruct 并参考 inference_config.base.json。",
-  "model_version": "b2-a-qwen2.5-0.5b-instruct-sft-short-v1",
-  "model_dir": "sft-short",
+  "note": "备选配置：未训练的基础模型 Qwen2.5-0.5B-Instruct。基线的规则违规更少但回复更长、更爱给建议，且不会输出官方 JSON。B 若要保守回退，把 weights/inference_config.json 的 model_dir 改成 base-qwen2.5-0.5b-instruct 即可。",
+  "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+  "model_dir": "base-qwen2.5-0.5b-instruct",
   "patch_file": null,
   "license_file": "LICENSES/Qwen2.5-0.5B-Instruct-LICENSE.txt",
   "device": "auto",
@@ -16,7 +16,7 @@
     "do_sample": true,
     "temperature": 0.3,
     "top_p": 0.9,
-    "repetition_penalty": 1.15
+    "repetition_penalty": 1.05
   },
   "official_generation": {
     "max_new_tokens": 1200,
@@ -37,6 +37,6 @@
     "do_sample": false,
     "temperature": 1.0,
     "top_p": 1.0,
-    "repetition_penalty": 1.15
+    "repetition_penalty": 1.05
   }
 }
