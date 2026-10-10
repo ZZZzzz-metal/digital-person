@@ -4,7 +4,7 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B5**；本轮官方离线入口/校验与真实样例 CPU 验证完成，正在记录并推送，之后停止，不进入 B6–B8。C 页面仍可独立交付，不阻塞官方适配。
+- 用户已要求 **继续 B5**；本轮官方离线入口/校验与真实样例 CPU 验证完成，已推送 [PR #9](https://github.com/ZZZzzz-metal/digital-person/pull/9)，之后停止，不进入 B6–B8。C 页面仍可独立交付，不阻塞官方适配。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
 - 当前工作分支 `codex/b5-offline`，从 B4 最后文档提交 `58a2115b28f93ae73ad9948deeb26498b42c752d` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
@@ -79,6 +79,7 @@
 - 回退开发候选原结果保留 `reports/integration/.b5-work/real-20261010T154147Z-f99da41f/original-result`，逆序在同级reversed-result。A原配置/8文件/许可仍在 `.b4-work/real-assets`，实际CPU环境 `.runtime/b4-real-env`。这些忽略资产留本机，不上传大权重。所有自建模型/checker进程已停止。
 - B5运行/范围与结果：[B5验收](B5验收.md)、[结构化结果](b5-verification.json)、[真实报告](b5-real-offline.json)。生产运行 `python submission/participant/run_inference.py TEST RESULT --config LOCAL_CONFIG`，校验 `python submission/participant/check_output.py TEST RESULT`。禁止覆盖已有任一官方结果文件；真实helper见验收，不重复下载资源。
 - 无B5人工技术缺项；进程socketguard与CPU候选不等于B6禁网GPU Docker。Linux conda_env/镜像、挂载硬链接、GPU运行、50G冻结与参赛回退留B6，平台上传留B7；A训练候选/C页面由各自交付。
+- 实现/验收提交 `a571fcf846dbeb8bde7b7bb661b396d3e5ea5e73` 已实际推送，创建 [PR #9](https://github.com/ZZZzzz-metal/digital-person/pull/9)，目标main，21个文件仅B分工区域，创建时open/未合并且head与本地一致。本文发布记录另作文档提交并推送到同一PR；不得把用户未来合并预写成已完成。下一轮只读核对PR#9实际状态后再做用户点名的B6。
 
 - B4 启动只读确认 PR #7 已合并，main 当时为 `259fac62d8d5bc8ceb6104e1d49b68cfd063996b`；A model/a_impl/prompts 与 A0–A7 报告已取得只读参考副本，不改项目 A 文件或 fetch/pull/merge。共享聊天合同已先更新。
 - B4当前实际运行方法与剩余项见上节/B4验收；A源码只读副本为 `../tmp/b4_20261010/upstream-A/src`，可配合公开 b4-a-source-check.json 核验后复现，不需要重下载基线或重装环境。不得将准备报告的 model_inference_verified=false 误读为最终真实HTTP未通过，它们是不同时间/范围的记录。
