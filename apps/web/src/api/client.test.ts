@@ -8,6 +8,10 @@ describe('Shared Types and Formatters', () => {
     // 2026-10-10T12:00:00Z 对应北京时间 2026-10-10 20:00:00
     const beijing = formatBeijingTime('2026-10-10T12:00:00Z');
     expect(beijing).toBe('2026-10-10 20:00:00');
+
+    // 跨日与午夜 00:00:00 边界测试：2026-10-10T16:00:00Z 对应北京时间 2026-10-11 00:00:00
+    const midnight = formatBeijingTime('2026-10-10T16:00:00Z');
+    expect(midnight).toBe('2026-10-11 00:00:00');
   });
 
   it('has valid labels for memory keys, emotions, expressions', () => {
@@ -113,20 +117,59 @@ describe('MockEngine Service & ApiClient in Mock Mode', () => {
     await client.clearMemories();
     const emptyList = await client.getMemories();
     expect(emptyList.items).toEqual([]);
+
+    // 验证全部 5 种白名单 Key 保存与检索支持
+    await client.saveMemory('preferred_name', '小明');
+    await client.saveMemory('study_goal', '考研初试 380');
+    await client.saveMemory('exam_subject', '408专业课');
+    await client.saveMemory('response_preference', '温柔鼓励');
+    await client.saveMemory('hobby', '羽毛球');
+
+    const allMems = await client.getMemories();
+    expect(allMems.items).toHaveLength(5);
+
+    const sKey = await client.createSession('测试偏好');
+    const resPref = await client.sendChat({
+      session_id: sKey.id,
+      client_turn_id: 'turn-pref-1',
+      text: '希望你用我喜欢的语气和偏好跟我聊天',
+    });
+    expect(resPref.retrieved_memories.some((m) => m.key === 'response_preference')).toBe(true);
   });
 
   it('rejects invalid inputs with 400', async () => {
+    // 空白记忆值
     await expect(client.saveMemory('hobby', '   ')).rejects.toMatchObject({
       status: 400,
       error: { code: 'INVALID_REQUEST' },
     });
 
+    // 超过 200 字的记忆值
+    await expect(client.saveMemory('hobby', 'a'.repeat(201))).rejects.toMatchObject({
+      status: 400,
+      error: { code: 'INVALID_REQUEST' },
+    });
+
     const session = await client.createSession('测试400');
+
+    // 空白文本
     await expect(
       client.sendChat({
         session_id: session.id,
         client_turn_id: 'turn-blank',
         text: '    ',
+      })
+    ).rejects.toMatchObject({
+      status: 400,
+      error: { code: 'INVALID_REQUEST' },
+    });
+
+    // 超过 2000 字符文本
+    await expect(
+      client.sendChat({
+        session_id: session.id,
+        client_turn_id: 'turn-toolong',
+        text: '字'.repeat(2001),
       })
     ).rejects.toMatchObject({
       status: 400,

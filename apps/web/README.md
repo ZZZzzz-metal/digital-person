@@ -45,7 +45,7 @@ apps/web/
 # 1. 安装依赖（生成/校验 package-lock.json）
 npm install
 
-# 2. 真实后端模式启动（默认通过 Vite 代理访问 http://127.0.0.1:8000）
+# 2. 真实后端模式启动（默认通过 Vite 代理访问 http://127.0.0.1:8000；若本地 8000 端口被占，可配置 VITE_BACKEND_URL=http://127.0.0.1:8001）
 npm run dev
 
 # 3. 纯本地 Mock 模式启动（不启动后端即可完整演示，页面显式标识“演示数据”）
@@ -54,7 +54,7 @@ npm run dev:mock
 # 4. 类型检查
 npm run typecheck
 
-# 5. 单元测试（使用 Vitest 运行接口、mock、幂等、边界与错误分支测试）
+# 5. 单元测试与端到端集成测试（Vitest：覆盖接口契约、状态机、幂等、三大演示剧本与真实 FastAPI 端到端）
 npm run test
 
 # 6. 生产环境构建打包

@@ -31,8 +31,10 @@ export class ApiError extends Error {
 
 export class ApiClient {
   private mockMode: boolean;
+  private baseUrl: string;
+  private sessionCookie: string | null = null;
 
-  constructor(mockMode?: boolean) {
+  constructor(mockMode?: boolean, baseUrl: string = '') {
     if (typeof mockMode === 'boolean') {
       this.mockMode = mockMode;
     } else {
@@ -40,6 +42,7 @@ export class ApiClient {
       const envMock = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_MOCK : undefined;
       this.mockMode = envMock === '1' || envMock === 'true';
     }
+    this.baseUrl = baseUrl;
   }
 
   public isMock(): boolean {
@@ -48,6 +51,18 @@ export class ApiClient {
 
   public setMock(enabled: boolean): void {
     this.mockMode = enabled;
+  }
+
+  public setBaseUrl(url: string): void {
+    this.baseUrl = url;
+  }
+
+  public getSessionCookie(): string | null {
+    return this.sessionCookie;
+  }
+
+  public setSessionCookie(cookie: string | null): void {
+    this.sessionCookie = cookie;
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -60,9 +75,16 @@ export class ApiClient {
       headers['Content-Type'] = 'application/json';
     }
 
+    // Node 环境自动化测试支持 Cookie 透传
+    if (this.sessionCookie && !headers['Cookie']) {
+      headers['Cookie'] = this.sessionCookie;
+    }
+
+    const url = this.baseUrl ? `${this.baseUrl}${endpoint}` : endpoint;
+
     let res: Response;
     try {
-      res = await fetch(endpoint, {
+      res = await fetch(url, {
         ...options,
         headers,
         credentials: 'include', // 必须带上 b2_anon cookie
@@ -73,6 +95,15 @@ export class ApiClient {
         'NETWORK_ERROR',
         `网络连接失败: ${networkErr instanceof Error ? networkErr.message : '无法连接后端服务器'}`
       );
+    }
+
+    // 在 Node 环境下记录服务端下发的 b2_anon Set-Cookie
+    const setCookie = res.headers.get('set-cookie');
+    if (setCookie) {
+      const match = setCookie.match(/b2_anon=[^;]+/);
+      if (match) {
+        this.sessionCookie = match[0];
+      }
     }
 
     let data: any = null;

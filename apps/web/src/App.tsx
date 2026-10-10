@@ -18,6 +18,7 @@ import { ChatWindow } from './components/ChatWindow';
 import { MemoryPanel } from './components/MemoryPanel';
 
 interface PendingTurn {
+  sessionId: string;
   clientTurnId: string;
   text: string;
   status: 'sending' | 'failed';
@@ -35,11 +36,14 @@ export const App: React.FC = () => {
   // 会话与消息状态
   const [sessions, setSessions] = useState<SessionDTO[]>([]);
   const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const activeSessionIdRef = useRef<string | null>(null);
+  activeSessionIdRef.current = activeSessionId;
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [responseMetaMap, setResponseMetaMap] = useState<Record<number, ChatResponse>>({});
 
-  // 发送中/失败状态
-  const [pendingTurn, setPendingTurn] = useState<PendingTurn | null>(null);
+  // 发送中/失败状态：按 session_id 隔离，防止切换会话后污染其他会话
+  const [pendingTurns, setPendingTurns] = useState<Record<string, PendingTurn>>({});
 
   // 记忆状态
   const [memoryEnabled, setMemoryEnabled] = useState<boolean>(true);
@@ -99,12 +103,16 @@ export const App: React.FC = () => {
     async (sessionId: string) => {
       try {
         const msgs = await client.getSessionMessages(sessionId);
-        setMessages(msgs);
-        setResponseMetaMap({});
-        setPendingTurn(null);
+        if (activeSessionIdRef.current === sessionId) {
+          setMessages(msgs);
+          setResponseMetaMap({});
+        }
       } catch (err: unknown) {
-        console.error('加载消息失败:', err);
-        setMessages([]);
+        if (activeSessionIdRef.current === sessionId) {
+          console.error('加载消息失败:', err);
+          setMessages([]);
+          setResponseMetaMap({});
+        }
       }
     },
     [client]
@@ -122,6 +130,7 @@ export const App: React.FC = () => {
       loadActiveMessages(activeSessionId);
     } else {
       setMessages([]);
+      setResponseMetaMap({});
     }
   }, [activeSessionId, loadActiveMessages]);
 
@@ -129,7 +138,7 @@ export const App: React.FC = () => {
   const handleToggleMockMode = (mock: boolean) => {
     client.setMock(mock);
     setIsMockMode(mock);
-    setPendingTurn(null);
+    setPendingTurns({});
     setResponseMetaMap({});
     refreshHealth();
     loadSessions();
@@ -167,9 +176,19 @@ export const App: React.FC = () => {
   const handleDeleteSession = async (id: string) => {
     await client.deleteSession(id);
     setSessions((prev) => prev.filter((s) => s.id !== id));
+    setPendingTurns((prev) => {
+      const next = { ...prev };
+      delete next[id];
+      return next;
+    });
     if (activeSessionId === id) {
       const remaining = sessions.filter((s) => s.id !== id);
-      setActiveSessionId(remaining.length > 0 ? remaining[0].id : null);
+      const nextId = remaining.length > 0 ? remaining[0].id : null;
+      setActiveSessionId(nextId);
+      if (!nextId) {
+        setMessages([]);
+        setResponseMetaMap({});
+      }
     }
   };
 
@@ -180,45 +199,55 @@ export const App: React.FC = () => {
       return;
     }
 
+    const targetSessionId = activeSessionId;
     const clientTurnId =
       existingTurnId || `turn-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
 
-    setPendingTurn({
-      clientTurnId,
-      text,
-      status: 'sending',
-    });
+    setPendingTurns((prev) => ({
+      ...prev,
+      [targetSessionId]: {
+        sessionId: targetSessionId,
+        clientTurnId,
+        text,
+        status: 'sending',
+      },
+    }));
 
     try {
       const res = await client.sendChat({
-        session_id: activeSessionId,
+        session_id: targetSessionId,
         client_turn_id: clientTurnId,
         text,
       });
 
-      // 成功后写入消息列表与元数据
-      setMessages((prev) => {
-        const nextIdx = prev.length + 1; // assistant message index
+      // 仅当当前仍然停留在该会话时，才将消息和元数据贴入当前视图
+      // (严格落实 C2: 切换会话时不要把旧请求结果贴进新会话)
+      if (activeSessionIdRef.current === targetSessionId) {
+        const nextIdx = messages.length + 1; // assistant message index
         setResponseMetaMap((meta) => ({
           ...meta,
           [nextIdx]: res,
         }));
-        return [
+        setMessages((prev) => [
           ...prev,
           { role: 'user', content: text },
           { role: 'assistant', content: res.reply },
-        ];
+        ]);
+
+        // 更新数字人表情与情绪
+        setCurrentExpression(res.expression);
+        setCurrentEmotion(res.emotion);
+        setCurrentModelVersion(res.model_version);
+        setLastElapsedMs(res.elapsed_ms);
+        setLastIsMock(res.is_mock);
+      }
+
+      // 成功完成，清除该会话的 pending 状态
+      setPendingTurns((prev) => {
+        const next = { ...prev };
+        delete next[targetSessionId];
+        return next;
       });
-
-      // 更新数字人表情与情绪
-      setCurrentExpression(res.expression);
-      setCurrentEmotion(res.emotion);
-      setCurrentModelVersion(res.model_version);
-      setLastElapsedMs(res.elapsed_ms);
-      setLastIsMock(res.is_mock);
-
-      // 成功完成，清除 pendingTurn
-      setPendingTurn(null);
 
       // 刷新记忆（若有变动可能）
       loadMemories();
@@ -229,19 +258,25 @@ export const App: React.FC = () => {
       } else if (err && typeof err === 'object' && 'error' in err) {
         errMsg = (err as any).error.message || errMsg;
       }
-      setPendingTurn({
-        clientTurnId,
-        text,
-        status: 'failed',
-        errorMessage: errMsg,
-      });
+      setPendingTurns((prev) => ({
+        ...prev,
+        [targetSessionId]: {
+          sessionId: targetSessionId,
+          clientTurnId,
+          text,
+          status: 'failed',
+          errorMessage: errMsg,
+        },
+      }));
     }
   };
 
   // 重试当前失败的轮次（严格保持 client_turn_id）
+  const activePendingTurn = activeSessionId ? pendingTurns[activeSessionId] || null : null;
+
   const handleRetryPending = async () => {
-    if (!pendingTurn) return;
-    await handleSendMessage(pendingTurn.text, pendingTurn.clientTurnId);
+    if (!activePendingTurn) return;
+    await handleSendMessage(activePendingTurn.text, activePendingTurn.clientTurnId);
   };
 
   // 记忆操作
@@ -299,7 +334,7 @@ export const App: React.FC = () => {
             sessionTitle={activeSession?.title || '未选择会话'}
             messages={messages}
             latestResponseMeta={responseMetaMap}
-            pendingTurn={pendingTurn}
+            pendingTurn={activePendingTurn}
             onSendMessage={(t) => handleSendMessage(t)}
             onRetryPending={handleRetryPending}
             disabled={!activeSessionId}

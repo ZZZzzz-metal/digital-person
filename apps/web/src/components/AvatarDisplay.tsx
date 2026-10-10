@@ -29,14 +29,17 @@ export const AvatarDisplay: React.FC<AvatarDisplayProps> = ({
   isMock = false,
   onSelectExpressionPreview,
 }) => {
-  const currentSvg = AVATAR_MAP[expression] || AVATAR_MAP.neutral;
+  // 总约定与 C2: 表情以响应的 expression 为准；未知值用 neutral
+  const safeExpression: Expression =
+    expression && AVATAR_MAP[expression] ? expression : 'neutral';
+  const currentSvg = AVATAR_MAP[safeExpression];
 
   return (
     <div className="avatar-panel">
       <div className="avatar-image-container">
         <img
           src={currentSvg}
-          alt={`数字人表情: ${EXPRESSION_LABELS[expression] || expression}`}
+          alt={`数字人表情: ${EXPRESSION_LABELS[safeExpression]}`}
           className="avatar-image"
         />
         {isMock && <div className="mock-badge-floating">演示数据</div>}
@@ -44,8 +47,8 @@ export const AvatarDisplay: React.FC<AvatarDisplayProps> = ({
 
       <div className="avatar-meta">
         <div className="badge-row">
-          <span className={`status-badge expression-${expression}`}>
-            表情: {EXPRESSION_LABELS[expression] || expression}
+          <span className={`status-badge expression-${safeExpression}`}>
+            表情: {EXPRESSION_LABELS[safeExpression]}
           </span>
           <span className="status-badge emotion-badge">
             情绪估计: {EMOTION_LABELS[emotion] || emotion}

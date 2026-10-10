@@ -35,10 +35,21 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="header-status-group">
-        {/* 模式标识 */}
-        <div className={`mode-badge ${isMockMode ? 'badge-mock' : 'badge-real'}`}>
+        {/* 模式标识：C1/C3 持续显示“演示数据”，说明刷新是否重置 */}
+        <div
+          className={`mode-badge ${isMockMode || health?.is_mock ? 'badge-mock' : 'badge-real'}`}
+          title={
+            isMockMode
+              ? '纯前端本地 Mock 模式：页面刷新保留本地修改，点击“重置演示数据”可恢复初始状态'
+              : health?.is_mock
+              ? '后端当前运行在 Stub 模式，响应带有 is_mock: true 演示标识'
+              : '真实后端模式：连接本地 FastAPI 服务与离线模型引擎'
+          }
+        >
           {isMockMode ? (
-            <span className="badge-text-mock">⚠️ 演示数据模式 (纯前端 Mock)</span>
+            <span className="badge-text-mock">⚠️ 演示数据模式 (纯前端 Mock，刷新保留修改)</span>
+          ) : health?.is_mock ? (
+            <span className="badge-text-mock">⚠️ 演示数据 (后端 Stub 模式)</span>
           ) : (
             <span className="badge-text-real">⚡ 真实后端模式 (FastAPI / 本地引擎)</span>
           )}
