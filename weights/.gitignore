@@ -1,0 +1,18 @@
+# A 分工的大权重不进 Git（00-总约定：大权重和原始数据不进入 Git）。
+# 只保留小文件：inference_config*.json、MANIFEST.json、LICENSES/。
+# 这个 .gitignore 放在 weights/ 内，只作用于 A 自己的目录，
+# 不改 B 负责的仓库根 .gitignore。
+
+# 基础模型与训练产出的完整权重目录
+base-qwen2.5-0.5b-instruct/
+sft-*/
+merged-*/
+
+# 权重张量文件与训练中间产物
+*.safetensors
+*.bin
+*.pt
+*.ckpt
+optimizer/
+checkpoint-*/
+logs/*.jsonl

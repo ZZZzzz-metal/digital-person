@@ -1,0 +1,42 @@
+{
+  "config_version": "a-inference-v1",
+  "engine": "local_transformers",
+  "note": "A 分工给 B 的固定配置入口。所有路径都相对本文件所在目录解析，搬运 weights/ 目录后无需修改。",
+  "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+  "model_dir": "base-qwen2.5-0.5b-instruct",
+  "patch_file": null,
+  "license_file": "base-qwen2.5-0.5b-instruct/LICENSE",
+  "device": "auto",
+  "dtype": "float32",
+  "max_input_tokens": 3072,
+  "torch_threads": 16,
+  "trust_remote_code": false,
+  "generation": {
+    "max_new_tokens": 256,
+    "do_sample": true,
+    "temperature": 0.3,
+    "top_p": 0.9,
+    "repetition_penalty": 1.05
+  },
+  "official_generation": {
+    "max_new_tokens": 1200,
+    "do_sample": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "repetition_penalty": 1.0
+  },
+  "retry_generation": {
+    "max_new_tokens": 256,
+    "do_sample": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "repetition_penalty": 1.0
+  },
+  "fallback_generation": {
+    "max_new_tokens": 160,
+    "do_sample": false,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "repetition_penalty": 1.05
+  }
+}
