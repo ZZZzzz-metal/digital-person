@@ -11,7 +11,7 @@
 | B：记忆、后端与参赛部署 | [B 任务书](docs/分工/B-记忆后端与参赛部署.md) |
 | C：前端数字人与作品交付 | [C 任务书](docs/分工/C-前端数字人与作品交付.md) |
 
-当前 B4 已接入聊天编排、历史与记忆、成功去重和失败重试。B0 官方资料核对已经完成；正式离线适配和容器验收按 B5–B6 继续实施。本阶段实际结果与准确剩余项见 [B4 验收](reports/integration/B4验收.md)。
+当前 B4 已接入聊天编排、历史与记忆、成功去重和失败重试；B5 增加直接调用 A 本地模型的官方离线入口、严格输入输出校验与计时报告。入口代码见 [submission/participant](submission/participant/README.md)，本阶段实际结果见 [B5 验收](reports/integration/B5验收.md)。Linux/GPU 禁网镜像在 B6 实测。
 
 后续接手先读 [B 进度记录](reports/integration/B-进度记录.md)，核对分支和工作区变化，只补读当前阶段需要的资料。Agent 负责推送分支和 PR，用户手动合并、拉取；每完成用户点名的阶段就停止。
 
@@ -95,7 +95,7 @@ $b4Body = [Text.Encoding]::UTF8.GetBytes((@{session_id=$b4Session.id;client_turn
 Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/chat -ContentType 'application/json; charset=utf-8' -Body $b4Body -WebSession $b4Cookies
 ```
 
-已成功的同 turn ID 返回原 response，不再次生成。相同文本但新 turn ID 是新的一轮。最近最多 12 条历史按完整轮次裁剪至 4,000 字符，当前输入最多 2,000 字符且只追加一次；A 再负责 tokenizer 上限。纯 `run_turn(CoreRequest,engine)` 不需要 HTTP、cookie、数据库或启动服务，不加载模型。演示与正式模型 DTO 不同，B5 再完成官方映射。
+已成功的同 turn ID 返回原 response，不再次生成。相同文本但新 turn ID 是新的一轮。最近最多 12 条历史按完整轮次裁剪至 4,000 字符，当前输入最多 2,000 字符且只追加一次；A 再负责 tokenizer 上限。纯 `run_turn(CoreRequest,engine)` 不需要 HTTP、cookie、数据库或启动服务，不加载模型。B5 官方入口使用独立 OfficialRequest/OfficialPrediction，不套用这些演示长度限制。
 
 同会话正在生成返回 409 `TURN_IN_PROGRESS`；同应用的模型正在生成返回 503 `MODEL_BUSY`；真实模型缺失/输出损坏/模型异常返回 503 `MODEL_UNAVAILABLE`；HTTP 等待超过 `B2_CHAT_TIMEOUT_SECONDS` 返回 503 `MODEL_TIMEOUT`。默认 60 秒，可设为大于 0 且不超过 240 秒，低于存储默认租期；这些是演示策略，不是官方限时。超时或取消不写消息、释放请求占用；Python 线程无法强杀，模型仍计算时 gate 保持占用，迟到结果丢弃。若模型一直卡住，需要重启该后端进程。
 
@@ -143,7 +143,7 @@ B2 存储提供 reserve/complete/abort，B4 已接入聊天：同会话一次占
 - [2026-10-10 官方答复](reports/integration/B0-官方答复-2026-10-10.md)：用户转贴的五条答复及执行口径；[有效输出合同](contracts/official/effective_submission.schema.json) 仅移除旧 ID 正则，保留原始文件。
 - [B0 验收](reports/integration/B0验收.md)：34/34 协议检查通过；未说明的细项和后续模型/容器验收分别记录。
 
-B0 核心协议核对完成；用户接受不阻碍开发的细项保留未知，不再主动追问。B1 已按用户点名启动。以上结论不表示模型、禁网容器或赛事提交已验收。
+B0 核心协议核对完成；用户接受不阻碍开发的细项保留未知，不再主动追问。B1–B4 演示后端已验收，B5 官方 CPU 离线流程的实际结果见本轮报告；这些结论不能替代禁网容器或赛事提交验收。
 
 官方运行方式（需先准备实际 Linux Docker 镜像、参考入口的 conda_env 和完整本地模型；镜像版本可参考平台，不限制）：
 
@@ -151,6 +151,15 @@ B0 核心协议核对完成；用户接受不阻碍开发的细项保留未知�
 bash /root/participant/start.sh TEST_FILE RESULT_DIR
 ```
 
-生成 submission.jsonl 和 performance_report.json；可直接加载本地模型或由入口启动本地 vLLM。ID 按新答复原样回填，另做输入/输出对齐检查；只统计前 100 条耗时，全量输入仍须输出。正式评测为两张 4090，每卡标称 24G，官方不设超时/上下文限制；memory_refs 不评分，团队默认 []。标准 Docker 镜像须在“50G以内”，具体计量口径及不足 100 条时的 complete 规则尚未说明。该命令是原始参考入口说明，团队正式适配/镜像尚未验收；B1 健康后端不能替代它。
+团队 B5 入口生成 submission.jsonl 和 performance_report.json，直接加载本地模型，一次初始化，不启动 HTTP。ID 按答复原样回填并独立检查顺序/数量；全量输出，只统计前 100 条。3 条公开样例按参考逻辑 complete=false，表示不足 100 条计时，并非漏生成。正式评测为两张 4090，每卡标称 24G，官方不设超时/上下文限制；A 的选用模型仍有 tokenizer 上限，超限会失败，不修改 A 配置掩盖问题。memory_refs 不评分，团队默认 []。标准 Docker 镜像须在“50G以内”，具体计量口径仍未知。
+
+合并 A/B 后，在 A 完整本地模型和兼容依赖已准备的环境中，开发机可直接执行：
+
+```powershell
+python submission/participant/run_inference.py submission/official-reference/test_inference_data.jsonl .runtime/b5-result --config weights/inference_config.base.json
+python submission/participant/check_output.py submission/official-reference/test_inference_data.jsonl .runtime/b5-result
+```
+
+结果目录须为新目录，已有两个官方结果文件任意一个都会拒绝覆盖。详细配置、已验证本机资源和复现方法见 [入口说明](submission/participant/README.md) 与 [B5 验收](reports/integration/B5验收.md)。此处 python 必须是装有 A 模型依赖的解释器，纯后端 .venv 不含 Torch/Transformers。
 
 训练由 A Agent 执行，B 使用算力做集成与离线验收；人提供实例和必要权限。Agent 推送 PR，用户手动合并和拉取。

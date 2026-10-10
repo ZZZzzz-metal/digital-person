@@ -4,9 +4,9 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B4**；本轮后端/真实基线已交付并推送 PR #8，停止等待后续指令，不进入 B5–B8。C页面联调仍待其源码。
+- 用户已要求 **继续 B5**；本轮官方离线入口/校验与真实样例 CPU 验证完成，正在记录并推送，之后停止，不进入 B6–B8。C 页面仍可独立交付，不阻塞官方适配。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
-- 当前工作分支 `codex/b4-chat`，从 B3 最后文档提交 `44d7363101e96e9fc58a71d55f2fd4fcb9d8da64` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
+- 当前工作分支 `codex/b5-offline`，从 B4 最后文档提交 `58a2115b28f93ae73ad9948deeb26498b42c752d` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
@@ -58,7 +58,7 @@
 - 本轮结果见 [B3 验收](B3验收.md)、[结构化结果](b3-verification.json)、[HTTP 实测](b3-http-smoke.json)。无 B3 人工技术阻塞。
 - 实现与验收提交 `f785f6be8199dfef2f91421daa6de77966dee5dd` 已实际推送，创建 [PR #7](https://github.com/ZZZzzz-metal/digital-person/pull/7)，目标 main，19 个文件仅 B 分工区域。创建时 open、未合并，head 与本地一致。本文发布记录另作一次文档提交并推送到同一 PR；不把用户未来的合并预写为已完成。
 
-## B4：后端与真实基线已验证并推送（待用户合并）
+## B4：后端与真实基线已验证并推送（已合并）
 
 - 先更新总约定第8节聊天合同，再实现纯 build_core_request/run_turn 和 POST /api/chat；DTO/schema不改字段，不修改A/C文件。模型启动一次，相关候选记忆接入，成功缓存原样返回，失败/超时/取消不保存半轮并允许原ID重试。
 - 实际 **294/294 测试通过**：新聊天49、纯turn29、旧回归216；21 schemas/21 fixtures一致，后端pip check无冲突，原后端环境与锁沿用。额外验证旧超时线程跨lifespan保持gate、直接cancel清理、模型自身ChatError不透传原输入；迟到结果不落库。
@@ -72,12 +72,20 @@
 
 ## 恢复与下一步
 
+- B5 已验收：共享合同/schema先改、团队官方独立入口/结果检查器已实现。沿用B4已验证CPU环境/完整基线，不重装/重下、不改A模型配置；启动只读确认PR#8合并，main `fce84b354ca0e6ab9cd1ec650198c0d45ab994bd`，A源码固定副本在 `../tmp/b5_20261010/upstream-A/src`，源摘要在b5-real-offline.json。没有fetch/pull/merge。
+- 实际新旧全回归368通过；最后仅改初始化异常脱敏/字节码缓存，受影响官方专项最终76通过，未变后端294保留。21 schemas/21 examples、pip check、Bash-n、原始参考12份摘要一致。不同测试合计370，不能写成单次全370。
+- 官方完整3条+独立新进程第1/第3条逆序，共5条真实预测，53/53检查通过；按ID完整预测一致、初始化每进程一次、每样本独立空store关闭、完整历史摘要不变、A dropped_turns=0。每条2次JSON解析失败后A真实文本fallback_rules，回复来自模型、情绪/画像rules；质量/官方分数未测。
+- 原始3条CPU均值26,560.4208ms，samples=rounds=3、required_rounds=100、complete=false按参考算法，不是假失败/漏生成；不能与双4090分数等同。成功输出SHA `52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0`。
+- 回退开发候选原结果保留 `reports/integration/.b5-work/real-20261010T154147Z-f99da41f/original-result`，逆序在同级reversed-result。A原配置/8文件/许可仍在 `.b4-work/real-assets`，实际CPU环境 `.runtime/b4-real-env`。这些忽略资产留本机，不上传大权重。所有自建模型/checker进程已停止。
+- B5运行/范围与结果：[B5验收](B5验收.md)、[结构化结果](b5-verification.json)、[真实报告](b5-real-offline.json)。生产运行 `python submission/participant/run_inference.py TEST RESULT --config LOCAL_CONFIG`，校验 `python submission/participant/check_output.py TEST RESULT`。禁止覆盖已有任一官方结果文件；真实helper见验收，不重复下载资源。
+- 无B5人工技术缺项；进程socketguard与CPU候选不等于B6禁网GPU Docker。Linux conda_env/镜像、挂载硬链接、GPU运行、50G冻结与参赛回退留B6，平台上传留B7；A训练候选/C页面由各自交付。
+
 - B4 启动只读确认 PR #7 已合并，main 当时为 `259fac62d8d5bc8ceb6104e1d49b68cfd063996b`；A model/a_impl/prompts 与 A0–A7 报告已取得只读参考副本，不改项目 A 文件或 fetch/pull/merge。共享聊天合同已先更新。
 - B4当前实际运行方法与剩余项见上节/B4验收；A源码只读副本为 `../tmp/b4_20261010/upstream-A/src`，可配合公开 b4-a-source-check.json 核验后复现，不需要重下载基线或重装环境。不得将准备报告的 model_inference_verified=false 误读为最终真实HTTP未通过，它们是不同时间/范围的记录。
 
 1. 核对当前分支和工作区，再阅读本轮验收记录。若记录说已通过而代码/锁/样例后来改变，仅重跑受影响的最小检查。
-2. B0–B4后端已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下次先核对B4实际发布记录及远端只读状态。
-3. 本轮发布后停止，等待用户点名B5；不要提前写官方适配器。C交付后才补实际页面联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
+2. B0–B5已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下次先核对B5实际发布记录及远端只读状态。
+3. 本轮发布后停止，等待用户点名B6；不提前构建/上传镜像。C交付后才补实际页面联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
 4. 正式模型、训练、GPU 容器、可回退参赛候选和赛事上传尚未验收；需要相应后续阶段实际运行，不能由 B1 演示成功替代。
 
 主要依据：[总约定](../../docs/分工/00-总约定.md)、[B 任务书](../../docs/分工/B-记忆后端与参赛部署.md)、[B0 验收](B0验收.md)、[官方答复](B0-官方答复-2026-10-10.md)。本文件不保存账号、密码、cookie、token 或真实聊天。
