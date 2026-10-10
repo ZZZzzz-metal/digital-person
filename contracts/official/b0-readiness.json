@@ -1,0 +1,256 @@
+{
+  "record_type": "team_b0_readiness_not_official_schema",
+  "checked_on_beijing": "2026-10-10",
+  "status": "partially_complete_continue_independent_work",
+  "b0_complete": false,
+  "evidence": {
+    "interface_review": "docs/官方接口核对.md",
+    "acceptance_report": "reports/integration/B0验收.md",
+    "local_probe_report": "reports/integration/b0-local-probes.json",
+    "source_manifest": "contracts/official/source-manifest.json",
+    "dataset_audit": "reports/integration/dataset-audit.json"
+  },
+  "sources": [
+    {
+      "id": "competition_home",
+      "url": "https://ai.migudm.cn/interactive/match/home?channel_id=1001",
+      "observed_on": "2026-10-10",
+      "publication_date": null,
+      "access": "browser_page",
+      "supports": [
+        "technical_scoring_weights",
+        "deadline_date_only"
+      ]
+    },
+    {
+      "id": "technical_rules",
+      "url": "https://ai.migudm.cn/interactive/rules/AI%E6%8A%80%E6%9C%AF%E8%B5%9B%E9%81%93%E5%8F%82%E8%B5%9B%E7%BB%86%E5%88%99.html",
+      "observed_on": "2026-10-10",
+      "publication_date": null,
+      "access": "browser_page_linked_from_competition_home",
+      "supports": [
+        "offline_docker",
+        "submission_channels",
+        "successful_attempt_policy"
+      ]
+    },
+    {
+      "id": "platform_create",
+      "url": "https://aigpu.migu.cn/train/control/container/create",
+      "observed_on": "2026-10-10",
+      "publication_date": null,
+      "access": "authenticated_browser_page_after_user_login",
+      "supports": [
+        "image_ui_label_only",
+        "market_resource_options_only"
+      ]
+    },
+    {
+      "id": "platform_card",
+      "url": "https://aigpu.migu.cn/train/consume/card/list",
+      "observed_on": "2026-10-10",
+      "publication_date": null,
+      "access": "authenticated_browser_page_after_user_login",
+      "supports": [
+        "voucher_type_balance_and_expiry_as_displayed"
+      ]
+    },
+    {
+      "id": "transformers_440_source",
+      "url": "https://github.com/huggingface/transformers/blob/v4.40.0/src/transformers/models/auto/modeling_auto.py",
+      "observed_on": "2026-10-10",
+      "version": "4.40.0",
+      "supports": [
+        "required_image_text_symbols_absent"
+      ]
+    },
+    {
+      "id": "transformers_450_source",
+      "url": "https://github.com/huggingface/transformers/blob/v4.50.0/src/transformers/models/auto/modeling_auto.py",
+      "observed_on": "2026-10-10",
+      "version": "4.50.0",
+      "supports": [
+        "required_image_text_symbols_present"
+      ]
+    },
+    {
+      "id": "transformers_450_exports",
+      "url": "https://github.com/huggingface/transformers/blob/v4.50.0/src/transformers/__init__.py",
+      "observed_on": "2026-10-10",
+      "version": "4.50.0",
+      "supports": [
+        "AutoModelForImageTextToText_export_present"
+      ]
+    },
+    {
+      "id": "competition_registration",
+      "url": "https://ai.migudm.cn/interactive/match/registration",
+      "observed_on": "2026-10-10",
+      "access": "browser_page_after_user_login",
+      "supports": [
+        "deadline_date_and_time",
+        "preexisting_registration_success_b2_theme"
+      ]
+    }
+  ],
+  "official_contract": {
+    "entrypoint": "bash /root/participant/start.sh TEST_FILE RESULT_DIR",
+    "input_argument": "concrete_jsonl_file",
+    "output_files": [
+      "submission.jsonl",
+      "performance_report.json"
+    ],
+    "fixed_conda_environment_in_reference": "conda_env",
+    "offline_docker_required": true,
+    "output_fields": [
+      "id",
+      "response_text",
+      "emotion_label",
+      "user_profile",
+      "memory_refs"
+    ],
+    "reference_bytes_verified_count": 12,
+    "reference_bytes_all_match": true,
+    "reference_files_modified": false
+  },
+  "official_scoring": {
+    "source_id": "competition_home",
+    "automated_total": 70,
+    "automated": {
+      "emotion_accuracy": 25,
+      "response_bleu4_rouge_l_bertscore": 20,
+      "profile_mean_accuracy_across_dimensions": 15,
+      "average_end_to_end_latency": 10
+    },
+    "expert_total": 30,
+    "expert": {
+      "technical_plan": 10,
+      "code": 10,
+      "platform_training_tuning_records": 10
+    },
+    "score_conversion_functions_verified": false
+  },
+  "official_submission_policy": {
+    "source_id": "technical_rules",
+    "maximum_successful_attempts": 5,
+    "failed_run_consumes_successful_attempt": false,
+    "final_result_selection": "last_successful_run",
+    "channels": [
+      "platform_instance_list_one_click_upload",
+      "external_filezilla_dedicated_storage_then_select_image_on_competition_page"
+    ],
+    "dedicated_storage_credentials_or_target_verified": false,
+    "image_size_limit": null,
+    "deadline_date": "2026-10-20",
+    "deadline_date_source_id": "competition_home",
+    "deadline_time": "23:59",
+    "deadline_timezone": null,
+    "attachment_pdf_time_is_tentative": true,
+    "deadline_time_source_id": "competition_registration"
+  },
+  "authenticated_platform_observation": {
+    "observed_on": "2026-10-10",
+    "image_category": "vLLM（大赛专用镜像-对话模型）",
+    "image_ui_label": "vLLM:0.19.0-ubuntu22.04-p3.12-cuda12.8",
+    "image_ui_version": "0.19.0",
+    "image_ui_python_version": "3.12",
+    "image_ui_cuda_version": "12.8",
+    "image_registry_address": null,
+    "image_digest": null,
+    "image_obtained": false,
+    "image_environment_verified": false,
+    "market_options_not_official_evaluation_allocation": [
+      {
+        "region": "西南二区",
+        "gpu_model": "RTX 4090",
+        "gpu_count": 1,
+        "cpu": 16,
+        "memory_gb": 64,
+        "system_disk_gb": 50,
+        "available_instances_at_observation": 4,
+        "aiq_per_hour_at_observation": 250
+      },
+      {
+        "region": "西南二区",
+        "gpu_model": "RTX 4090",
+        "gpu_count": 2,
+        "cpu": 32,
+        "memory_gb": 128,
+        "system_disk_gb": 100,
+        "available_instances_at_observation": 1,
+        "aiq_per_hour_at_observation": 500
+      }
+    ],
+    "gpu_voucher": {
+      "eligible_gpu": "RTX 4090",
+      "remaining_gpu_hours_at_observation": 20,
+      "total_gpu_hours": 20,
+      "valid_from_as_displayed": "2026-10-09 23:17:54",
+      "valid_until_as_displayed": "2026-10-16 23:17:54",
+      "display_timezone_verified": false,
+      "multi_gpu_deduction_rule_verified": false
+    },
+    "no_gpu_voucher": {
+      "remaining_hours_at_observation": 10,
+      "total_hours": 10,
+      "validity_display": "/"
+    },
+    "aiq_balance_at_observation": 0,
+    "instance_created_during_b0_observation": false,
+    "gpu_hours_consumed_during_b0_observation": 0,
+    "account_identifiers_recorded": false
+  },
+  "local_probe_status": {
+    "checked_at_beijing": "2026-10-10T15:52:15.396364+08:00",
+    "runtime": "Windows Python 3.12.14 and Git Bash",
+    "empty_input_rejected": true,
+    "duplicate_ids_rejected": true,
+    "missing_model_expected_error_observed": true,
+    "missing_model_exit_code": 1,
+    "missing_conda_activation_expected_error_observed": true,
+    "missing_conda_activation_exit_code": 1,
+    "predictions_generated": false,
+    "performance_report_generated": false,
+    "model_inference_verified": false,
+    "official_container_verified": false,
+    "official_submission_ready": false
+  },
+  "transformers_compatibility": {
+    "reference_requirement": "transformers>=4.40",
+    "required_symbols": [
+      "AutoModelForImageTextToText",
+      "MODEL_FOR_IMAGE_TEXT_TO_TEXT_MAPPING_NAMES"
+    ],
+    "version_440_source_contains_required_symbols": false,
+    "version_450_source_contains_required_symbols": true,
+    "evidence_type": "official_versioned_source_comparison_not_runtime_installation",
+    "first_compatible_version_verified": false,
+    "version_450_inference_verified": false,
+    "candidate_environment_version_locked": false
+  },
+  "known_package_inconsistencies": [
+    "all_three_sample_ids_disagree_with_output_schema_regex",
+    "three_sample_rows_cannot_satisfy_default_100_performance_rounds",
+    "PASS_print_does_not_require_performance_complete_true",
+    "partial_submission_and_stale_performance_report_possible_on_failure",
+    "training_has_4_temporally_invalid_prediction_points_5_pointless_conversations_202_duplicate_dialogue_groups",
+    "training_memory_refs_have_no_memory_bank_while_public_test_prompt_requires_empty_refs",
+    "transformers_440_requirement_does_not_cover_unconditional_image_text_imports"
+  ],
+  "remaining_unknowns": [
+    "obtainable_base_image_and_digest",
+    "actual_image_conda_and_package_versions",
+    "complete_immutable_file_path_list",
+    "official_evaluation_gpu_cpu_vram_memory_disk_limits",
+    "official_timeout_and_input_context_limits",
+    "model_and_dataset_license_rules",
+    "dedicated_storage_upload_details_and_image_size_limit",
+    "score_conversion_details",
+    "official_resolution_of_id_and_memory_ref_inconsistencies",
+    "real_model_offline_container_run_and_validated_outputs",
+    "deadline_timezone_not_explicit_in_ui"
+  ],
+  "model_inference_verified": false,
+  "official_container_verified": false,
+  "official_submission_ready": false
+}
