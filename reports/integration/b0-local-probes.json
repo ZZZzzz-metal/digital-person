@@ -1,5 +1,5 @@
 {
-  "checked_at_beijing": "2026-10-10T15:52:15.396364+08:00",
+  "checked_at_beijing": "2026-10-10T16:29:41.100614+08:00",
   "scope": "B0 reference bytes, input reader and missing-resource startup paths; no model inference",
   "reference_files": [
     {
@@ -84,7 +84,7 @@
       "exit_code": 1,
       "expected_error_observed": true,
       "stdout": "",
-      "stderr": "Traceback (most recent call last):\n  File \"<WORKSPACE>\\digital-person\\submission\\official-reference\\participant\\run_inference.py\", line 465, in <module>\n    main()\n  File \"<WORKSPACE>\\digital-person\\submission\\official-reference\\participant\\run_inference.py\", line 346, in main\n    local_model = model_path(config)\n                  ^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>\\digital-person\\submission\\official-reference\\participant\\run_inference.py\", line 135, in model_path\n    raise FileNotFoundError(f\"本地模型目录不存在: {resolved}\")\nFileNotFoundError: 本地模型目录不存在: <WORKSPACE>\\digital-person\\submission\\official-reference\\participant\\model\n",
+      "stderr": "Traceback (most recent call last):\n  File \"<WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\run_inference.py\", line 465, in <module>\n    main()\n  File \"<WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\run_inference.py\", line 346, in main\n    local_model = model_path(config)\n                  ^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\run_inference.py\", line 135, in model_path\n    raise FileNotFoundError(f\"本地模型目录不存在: {resolved}\")\nFileNotFoundError: 本地模型目录不存在: <WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\model\n",
       "submission_created": false,
       "performance_report_created": false
     },
@@ -94,7 +94,7 @@
       "exit_code": 1,
       "expected_error_observed": true,
       "stdout": "",
-      "stderr": "<WORKSPACE>/digital-person/submission/official-reference/participant/start.sh: line 5: activate: No such file or directory\n",
+      "stderr": "<WORKSPACE>/digital-person-b0/submission/official-reference/participant/start.sh: line 5: activate: No such file or directory\n",
       "submission_created": false,
       "performance_report_created": false,
       "official_linux_container_validation": false
@@ -102,6 +102,7 @@
   },
   "protocol_probes_as_expected": true,
   "predictions_generated": false,
+  "performance_report_generated": false,
   "model_inference_verified": false,
   "official_container_verified": false,
   "official_submission_ready": false

@@ -1,14 +1,15 @@
 {
   "record_type": "team_b0_readiness_not_official_schema",
   "checked_on_beijing": "2026-10-10",
-  "status": "partially_complete_continue_independent_work",
+  "status": "partially_complete_waiting_for_official_clarification",
   "b0_complete": false,
   "evidence": {
     "interface_review": "docs/官方接口核对.md",
     "acceptance_report": "reports/integration/B0验收.md",
     "local_probe_report": "reports/integration/b0-local-probes.json",
     "source_manifest": "contracts/official/source-manifest.json",
-    "dataset_audit": "reports/integration/dataset-audit.json"
+    "dataset_audit": "reports/integration/dataset-audit.json",
+    "source_package_check": "reports/integration/b0-source-package.json"
   },
   "sources": [
     {
@@ -90,6 +91,34 @@
       "supports": [
         "deadline_date_and_time",
         "preexisting_registration_success_b2_theme"
+      ]
+    },
+    {
+      "id": "platform_image_detail",
+      "url": "https://aigpu.migu.cn/train/control/mirror/detail?id=00000000-0000-0000-0000-000000000010",
+      "observed_on": "2026-10-10",
+      "access": "authenticated_browser_page",
+      "supports": [
+        "image_size_and_ui_version_only",
+        "deploy_action_only_no_registry_or_digest"
+      ]
+    },
+    {
+      "id": "platform_instance_list",
+      "url": "https://aigpu.migu.cn/train/control/container/list",
+      "observed_on": "2026-10-10",
+      "access": "authenticated_browser_page",
+      "supports": [
+        "no_existing_instances_at_observation"
+      ]
+    },
+    {
+      "id": "official_dataset_share",
+      "url": "https://yun.139.com/shareweb/#/w/i/2xG3smej8W29n",
+      "observed_on": "2026-10-10",
+      "access": "browser_directory_page_linked_by_official_rules",
+      "supports": [
+        "download_location_and_top_level_names_only"
       ]
     }
   ],
@@ -198,10 +227,13 @@
     "aiq_balance_at_observation": 0,
     "instance_created_during_b0_observation": false,
     "gpu_hours_consumed_during_b0_observation": 0,
-    "account_identifiers_recorded": false
+    "account_identifiers_recorded": false,
+    "image_details_ui_size_gb": 28.29,
+    "image_details_has_deploy_link": true,
+    "existing_instances_count_at_observation": 0
   },
   "local_probe_status": {
-    "checked_at_beijing": "2026-10-10T15:52:15.396364+08:00",
+    "checked_at_beijing": "2026-10-10T16:29:41.100614+08:00",
     "runtime": "Windows Python 3.12.14 and Git Bash",
     "empty_input_rejected": true,
     "duplicate_ids_rejected": true,
@@ -213,7 +245,8 @@
     "performance_report_generated": false,
     "model_inference_verified": false,
     "official_container_verified": false,
-    "official_submission_ready": false
+    "official_submission_ready": false,
+    "protocol_probes_as_expected": true
   },
   "transformers_compatibility": {
     "reference_requirement": "transformers>=4.40",
@@ -247,10 +280,43 @@
     "dedicated_storage_upload_details_and_image_size_limit",
     "score_conversion_details",
     "official_resolution_of_id_and_memory_ref_inconsistencies",
-    "real_model_offline_container_run_and_validated_outputs",
     "deadline_timezone_not_explicit_in_ui"
   ],
   "model_inference_verified": false,
   "official_container_verified": false,
-  "official_submission_ready": false
+  "official_submission_ready": false,
+  "delivery_scope": "B0 only; stop after push and report; user merges and pulls",
+  "official_dataset_share_observation": {
+    "source_id": "official_dataset_share",
+    "share_date_as_displayed": "2026-09-09",
+    "validity_as_displayed": "长期有效",
+    "top_level_names": [
+      "participant",
+      "训练-验证-数据集",
+      "README.md",
+      "test_inference_data.jsonl",
+      "咪咕仝学平台实例创建demo V1.docx"
+    ],
+    "readme_modified_as_displayed": "2026-09-29 20:16",
+    "readme_size_as_displayed": "1.37KB",
+    "readme_preview_requires_separate_cloud_login": true,
+    "online_file_bytes_compared": false,
+    "online_archive_hash_verified": false
+  },
+  "official_general_work_rights": {
+    "source_id": "technical_rules",
+    "original_work_required": true,
+    "must_not_infringe_others": true,
+    "work_copyright_owner": "original_author",
+    "organizer_use": "competition_evaluation",
+    "priority_cooperation_subject_to_further_agreement": true,
+    "specific_model_license_verified": false,
+    "specific_dataset_license_verified": false
+  },
+  "later_stage_unverified": [
+    "A_real_local_model_and_assets",
+    "B5_real_official_outputs",
+    "B6_offline_gpu_container_and_validated_fallback",
+    "B7_platform_submission"
+  ]
 }

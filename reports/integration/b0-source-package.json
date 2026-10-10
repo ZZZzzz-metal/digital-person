@@ -1,0 +1,22 @@
+{
+  "checked_at_beijing": "2026-10-10T16:29:20.356785+08:00",
+  "scope": "local user-provided ZIP integrity; online directory names only",
+  "archive_name": "数字人综合情感陪伴对话模型.zip",
+  "archive_bytes": 27076587,
+  "archive_sha256": "fb10cf4a3baae576e3fdc411d53a7df16b039ea8596d8d79c907a17077ff5072",
+  "manifest_bytes_match": true,
+  "manifest_sha256_match": true,
+  "crc_all_members_pass": true,
+  "archive_entries": 21,
+  "archive_files": 14,
+  "uncompressed_file_bytes": 79923605,
+  "top_level_names": [
+    "README.md",
+    "participant",
+    "test_inference_data.jsonl",
+    "咪咕仝学平台实例创建demo V1.docx",
+    "训练-验证-数据集"
+  ],
+  "online_file_bytes_compared": false,
+  "online_archive_hash_verified": false
+}

@@ -135,7 +135,10 @@ def main():
         else:
             probes["shell_missing_environment"] = {"status": "skipped", "reason": "No Bash, or activation might succeed; no full inference requested"}
 
-    checks_ok = all(probe.get("expected_error_observed", True) for probe in probes.values())
+    predictions_generated = any(probe.get("submission_created", False) for probe in probes.values())
+    performance_report_generated = any(probe.get("performance_report_created", False) for probe in probes.values())
+    checks_ok = (all(probe.get("expected_error_observed", True) for probe in probes.values())
+                 and not predictions_generated and not performance_report_generated)
     report = {
         "checked_at_beijing": datetime.now(timezone(timedelta(hours=8))).isoformat(),
         "scope": "B0 reference bytes, input reader and missing-resource startup paths; no model inference",
@@ -145,7 +148,9 @@ def main():
                              "ids": ids, "ids_matching_output_schema": sum(id_matches),
                              "schema_pattern": pattern},
         "probes": probes, "protocol_probes_as_expected": checks_ok,
-        "predictions_generated": False, "model_inference_verified": False,
+        "predictions_generated": predictions_generated,
+        "performance_report_generated": performance_report_generated,
+        "model_inference_verified": False,
         "official_container_verified": False, "official_submission_ready": False,
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)
@@ -154,6 +159,8 @@ def main():
                       "ids_matching_output_schema": sum(id_matches),
                       "startup_exit_codes": {key: value.get("exit_code") for key, value in probes.items() if "exit_code" in value},
                       "protocol_probes_as_expected": checks_ok,
+                      "predictions_generated": predictions_generated,
+                      "performance_report_generated": performance_report_generated,
                       "official_submission_ready": False}, ensure_ascii=False))
     return 0 if checks_ok else 1
 
