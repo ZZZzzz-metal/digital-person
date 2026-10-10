@@ -1,15 +1,19 @@
 {
   "record_type": "team_b0_readiness_not_official_schema",
   "checked_on_beijing": "2026-10-10",
-  "status": "partially_complete_waiting_for_official_clarification",
-  "b0_complete": false,
+  "status": "core_protocol_complete_user_accepts_nonblocking_unknowns",
+  "b0_complete": true,
   "evidence": {
     "interface_review": "docs/官方接口核对.md",
     "acceptance_report": "reports/integration/B0验收.md",
     "local_probe_report": "reports/integration/b0-local-probes.json",
     "source_manifest": "contracts/official/source-manifest.json",
     "dataset_audit": "reports/integration/dataset-audit.json",
-    "source_package_check": "reports/integration/b0-source-package.json"
+    "source_package_check": "reports/integration/b0-source-package.json",
+    "official_answers_user_relayed": "contracts/official/clarification-2026-10-10.json",
+    "official_answers_document": "reports/integration/B0-官方答复-2026-10-10.md",
+    "effective_output_schema": "contracts/official/effective_submission.schema.json",
+    "effective_schema_check": "reports/integration/b0-effective-schema-check.json"
   },
   "sources": [
     {
@@ -120,6 +124,25 @@
       "supports": [
         "download_location_and_top_level_names_only"
       ]
+    },
+    {
+      "id": "user_relayed_official_answers_20261010",
+      "received_on_beijing": "2026-10-10",
+      "access": "user_message_not_independently_verified_public_announcement",
+      "document": "reports/integration/B0-官方答复-2026-10-10.md",
+      "original_official_chat_attachment_received": false,
+      "supports": [
+        "exact_input_id_copy",
+        "reference_image_versions_not_fixed",
+        "no_official_external_image_download",
+        "two_4090_cards_24g",
+        "no_reported_official_timeout_context_limits",
+        "timed_prefix_100",
+        "memory_refs_not_scored",
+        "usage_restrictions_answer_unrestricted",
+        "standard_docker_image_50G_as_reported",
+        "external_storage_guidance_on_submission_page"
+      ]
     }
   ],
   "official_contract": {
@@ -140,7 +163,16 @@
     ],
     "reference_bytes_verified_count": 12,
     "reference_bytes_all_match": true,
-    "reference_files_modified": false
+    "reference_files_modified": false,
+    "current_id_rule": "exact_copy_of_corresponding_input_id",
+    "id_alignment_checked_separately_from_schema": true,
+    "current_id_rule_source_id": "user_relayed_official_answers_20261010",
+    "effective_team_output_schema": "contracts/official/effective_submission.schema.json",
+    "memory_refs_participates_in_scoring": false,
+    "memory_refs_team_default": [],
+    "memory_refs_empty_array_is_team_choice": true,
+    "image_versions_are_reference_not_fixed": true,
+    "official_external_image_download_provided": false
   },
   "official_scoring": {
     "source_id": "competition_home",
@@ -157,7 +189,9 @@
       "code": 10,
       "platform_training_tuning_records": 10
     },
-    "score_conversion_functions_verified": false
+    "score_conversion_functions_verified": false,
+    "timed_input_prefix_rows": 100,
+    "timing_source_id": "user_relayed_official_answers_20261010"
   },
   "official_submission_policy": {
     "source_id": "technical_rules",
@@ -175,7 +209,13 @@
     "deadline_time": "23:59",
     "deadline_timezone": null,
     "attachment_pdf_time_is_tentative": true,
-    "deadline_time_source_id": "competition_registration"
+    "deadline_time_source_id": "competition_registration",
+    "image_format_as_reported": "标准的docker镜像",
+    "image_size_limit_as_reported": "50G以内",
+    "image_size_limit_unit_and_compression_verified": false,
+    "image_rule_source_id": "user_relayed_official_answers_20261010",
+    "dedicated_storage_guidance_location_as_reported": "提交作品页面",
+    "dedicated_storage_guidance_actual_content_verified": false
   },
   "authenticated_platform_observation": {
     "observed_on": "2026-10-10",
@@ -230,10 +270,11 @@
     "account_identifiers_recorded": false,
     "image_details_ui_size_gb": 28.29,
     "image_details_has_deploy_link": true,
-    "existing_instances_count_at_observation": 0
+    "existing_instances_count_at_observation": 0,
+    "image_version_mandatory_as_current_rule": false
   },
   "local_probe_status": {
-    "checked_at_beijing": "2026-10-10T16:29:41.100614+08:00",
+    "checked_at_beijing": "2026-10-10T18:26:25.246388+08:00",
     "runtime": "Windows Python 3.12.14 and Git Bash",
     "empty_input_rejected": true,
     "duplicate_ids_rejected": true,
@@ -271,16 +312,12 @@
     "transformers_440_requirement_does_not_cover_unconditional_image_text_imports"
   ],
   "remaining_unknowns": [
-    "obtainable_base_image_and_digest",
-    "actual_image_conda_and_package_versions",
-    "complete_immutable_file_path_list",
-    "official_evaluation_gpu_cpu_vram_memory_disk_limits",
-    "official_timeout_and_input_context_limits",
-    "model_and_dataset_license_rules",
-    "dedicated_storage_upload_details_and_image_size_limit",
-    "score_conversion_details",
-    "official_resolution_of_id_and_memory_ref_inconsistencies",
-    "deadline_timezone_not_explicit_in_ui"
+    "official_evaluation_cpu_system_ram_disk_and_total_input_scale",
+    "complete_immutable_file_path_list_beyond_fixed_entry_and_reference_environment_name",
+    "precise_score_conversion_and_complete_for_short_inputs",
+    "50G_unit_compression_and_archive_specifics",
+    "actual_external_storage_guidance_and_access",
+    "explicit_deadline_timezone"
   ],
   "model_inference_verified": false,
   "official_container_verified": false,
@@ -314,9 +351,78 @@
     "specific_dataset_license_verified": false
   },
   "later_stage_unverified": [
-    "A_real_local_model_and_assets",
+    "A_real_local_model_assets_and_selected_model_license",
     "B5_real_official_outputs",
+    "B6_selected_image_dependencies_conda_packages_digest_and_assets",
     "B6_offline_gpu_container_and_validated_fallback",
-    "B7_platform_submission"
-  ]
+    "B7_platform_submission_and_storage_access"
+  ],
+  "b0_complete_definition": "core_entry_input_output_image_resource_timing_and_submission_rules_have_sources; user_accepts_nonblocking_unreported_details",
+  "b0_key_rules_clarified": true,
+  "this_round_clarification_verified": true,
+  "official_evaluation_resources": {
+    "source_id": "user_relayed_official_answers_20261010",
+    "gpu_count": 2,
+    "gpu_model": "RTX 4090",
+    "gpu_memory_description_verbatim": "2卡4090-24g",
+    "team_planning_interpretation": "two_cards_each_with_nominal_24G_not_one_48G_card",
+    "official_timeout_limit_reported": "none",
+    "official_context_length_limit_reported": "none",
+    "model_context_is_unlimited": false,
+    "timed_input_prefix_rows": 100,
+    "team_output_scope": "all_input_rows",
+    "cpu_system_ram_disk": null,
+    "total_input_rows": null,
+    "complete_semantics_for_fewer_than_100_rows": null,
+    "score_conversion_details": null,
+    "scoring_reference": "https://ai.migudm.cn/interactive/match/home?channel_id=1001",
+    "team_gpu_instance_created": false
+  },
+  "effective_schema_check": {
+    "checked_at_beijing": "2026-10-10T18:26:31.368493+08:00",
+    "status": "PASS",
+    "counts": {
+      "checks_total": 34,
+      "checks_passed": 34,
+      "checks_failed": 0,
+      "protocol_fixtures_total": 3,
+      "protocol_fixtures_passed": 3,
+      "structural_negative_cases_total": 9,
+      "structural_negative_cases_passed": 9
+    },
+    "python_version": "3.12.14",
+    "jsonschema_version": "4.26.0",
+    "protocol_fixture_only": true,
+    "model_inference_verified": false,
+    "prediction_files_written": false
+  },
+  "known_package_inconsistencies_scope": "historical_original_package_observations_preserved",
+  "resolved_operational_interpretations": [
+    "ignore_original_id_regex_and_require_exact_input_id_copy",
+    "memory_refs_not_scored_team_defaults_empty_array",
+    "no_fixed_image_version_or_official_external_download_prerequisite",
+    "official_two_4090_24g_and_no_reported_timeout_context_limits",
+    "time_first_100_rows_but_generate_all_input_rows",
+    "standard_docker_image_limit_reported_as_50G_not_converted_to_bytes"
+  ],
+  "usage_restrictions_reply": {
+    "source_id": "user_relayed_official_answers_20261010",
+    "answer_verbatim": "无限制",
+    "detailed_license_text_received": false,
+    "grants_third_party_model_copyright_license": false,
+    "selected_third_party_model_license_check_owner": "A"
+  },
+  "remaining_unknowns_are_b0_blockers": false,
+  "unknowns_disposition": {
+    "source": "user_message_in_this_chat_on_2026-10-10",
+    "instruction": "不确认的话会影响后续进行吗？不会影响就不去管了",
+    "team_assessment": "not_a_prerequisite_for_continued_development; verify_actual_runtime_in_later_stages",
+    "proactive_official_follow_up_required": false,
+    "preserve_unreported_values_as_unknown": true,
+    "short_input_report_policy": "retain_reference_complete_semantics_and_record_actual_sample_count",
+    "image_size_policy": "leave_sufficient_margin_for_all_measured_image_sizes",
+    "deadline_policy": "team_target_2026-10-19_18:00_Asia_Shanghai_not_a_claim_of_official_timezone",
+    "resource_policy": "read_actual_cpu_ram_disk_in_selected_runtime_at_B6",
+    "revisit_only_if_actual_runtime_or_submission_is_blocked": true
+  }
 }

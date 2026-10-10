@@ -51,6 +51,10 @@ def main():
     pattern = schema["properties"]["id"]["pattern"]
     ids = [row["id"] for row in rows]
     id_matches = [bool(re.fullmatch(pattern, identifier)) for identifier in ids]
+    effective = json.loads((ROOT / "contracts/official/effective_submission.schema.json").read_text(encoding="utf-8"))
+    id_rule = effective["properties"]["id"]
+    if id_rule != {"type": "string"}:
+        raise RuntimeError("Effective B0 ID contract must preserve input string IDs without prefix rewriting")
     versions = {}
     for name in ("torch", "transformers", "accelerate", "vllm", "jsonschema"):
         try:
@@ -146,7 +150,12 @@ def main():
         "installed_package_versions": versions,
         "inference_sample": {"rows": len(rows), "unique_ids": len(set(ids)),
                              "ids": ids, "ids_matching_output_schema": sum(id_matches),
-                             "schema_pattern": pattern},
+                             "schema_pattern": pattern,
+                             "schema_pattern_scope": "historical_original_snapshot_not_current_acceptance",
+                             "current_id_rule": "exact_copy_of_corresponding_input_id",
+                             "current_id_rule_source": "contracts/official/clarification-2026-10-10.json",
+                             "effective_schema": "contracts/official/effective_submission.schema.json",
+                             "effective_id_types_compatible": all(isinstance(identifier, str) for identifier in ids)},
         "probes": probes, "protocol_probes_as_expected": checks_ok,
         "predictions_generated": predictions_generated,
         "performance_report_generated": performance_report_generated,

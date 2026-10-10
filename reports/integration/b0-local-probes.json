@@ -1,5 +1,5 @@
 {
-  "checked_at_beijing": "2026-10-10T16:29:41.100614+08:00",
+  "checked_at_beijing": "2026-10-10T18:26:25.246388+08:00",
   "scope": "B0 reference bytes, input reader and missing-resource startup paths; no model inference",
   "reference_files": [
     {
@@ -68,7 +68,12 @@
       "test1_000002_t5"
     ],
     "ids_matching_output_schema": 0,
-    "schema_pattern": "^test_[0-9]{6}_t[0-9]+$"
+    "schema_pattern": "^test_[0-9]{6}_t[0-9]+$",
+    "schema_pattern_scope": "historical_original_snapshot_not_current_acceptance",
+    "current_id_rule": "exact_copy_of_corresponding_input_id",
+    "current_id_rule_source": "contracts/official/clarification-2026-10-10.json",
+    "effective_schema": "contracts/official/effective_submission.schema.json",
+    "effective_id_types_compatible": true
   },
   "probes": {
     "empty_input": {

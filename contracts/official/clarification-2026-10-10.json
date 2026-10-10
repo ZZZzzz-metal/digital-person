@@ -1,0 +1,95 @@
+{
+  "record_type": "team_record_of_user_relayed_official_answers_not_official_schema",
+  "received_on_beijing": "2026-10-10",
+  "provenance": {
+    "source": "user_message_in_this_chat",
+    "original_official_chat_attachment_received": false,
+    "independently_verified_public_announcement": false,
+    "source_document": "reports/integration/B0-官方答复-2026-10-10.md"
+  },
+  "answers_verbatim": [
+    {"question": 1, "topic": "input_output_id", "answer": "原样回填输入ID"},
+    {"question": 2, "topic": "image_and_environment", "answer": "不提供镜像外部下载，平台镜像相关版本可参考，不限制"},
+    {"question": 3, "topic": "evaluation_resources_timing_scoring", "answer": "（1) 2卡4090-24g，无超时和上下文长度限制; (2) 只统计前100条数据耗时；（3）参考参赛首页的评审标准"},
+    {"question": 4, "topic": "memory_refs_and_usage_restrictions", "answer": "memory_refs 不参与评分；无限制"},
+    {"question": 5, "topic": "external_upload_image_size_deadline", "answer": "外部专用存储请到提交作品页面，有对应引导，需要是标准的docker镜像，大小50G以内"}
+  ],
+  "execution_rules": {
+    "id": {
+      "strategy": "exact_copy_of_corresponding_input_id",
+      "input_output_alignment_required": true,
+      "rewrite_prefix_to_test": false,
+      "original_schema": "contracts/official/submission.schema.json",
+      "effective_team_schema": "contracts/official/effective_submission.schema.json",
+      "effective_schema_change": "remove_properties_id_pattern_only",
+      "original_files_modified": false
+    },
+    "base_image": {
+      "official_external_download_provided": false,
+      "platform_versions_are_reference": true,
+      "fixed_image_version_required_by_this_answer": false,
+      "official_registry_or_digest_required_as_b0_prerequisite": false,
+      "selected_image_environment_and_digest_verification_stage": "B6"
+    },
+    "evaluation": {
+      "gpu_count": 2,
+      "gpu_model": "RTX 4090",
+      "gpu_memory_description_verbatim": "2卡4090-24g",
+      "team_planning_interpretation": "two_cards_each_with_nominal_24G_not_one_48G_card",
+      "official_timeout_limit_reported": "none",
+      "official_context_length_limit_reported": "none",
+      "model_context_is_unlimited": false,
+      "timed_input_prefix_rows": 100,
+      "team_output_scope": "all_input_rows",
+      "cpu_system_ram_disk": null,
+      "total_input_rows": null,
+      "complete_semantics_for_fewer_than_100_rows": null,
+      "score_conversion_details": null,
+      "scoring_reference": "https://ai.migudm.cn/interactive/match/home?channel_id=1001",
+      "team_gpu_instance_created": false
+    },
+    "memory_refs": {
+      "participates_in_scoring": false,
+      "team_default": [],
+      "empty_array_is_team_choice": true,
+      "memory_bank_in_formal_test_confirmed": null,
+      "other_original_structural_constraints_preserved": true
+    },
+    "usage_restrictions": {
+      "answer_verbatim": "无限制",
+      "detailed_license_text_received": false,
+      "grants_third_party_model_copyright_license": false,
+      "selected_third_party_model_license_check_owner": "A"
+    },
+    "submission": {
+      "external_storage_guidance_location_as_reported": "提交作品页面",
+      "external_storage_guidance_actual_content_or_credentials_verified": false,
+      "image_format_as_reported": "标准的docker镜像",
+      "image_size_limit_as_reported": "50G以内",
+      "image_size_limit_bytes": null,
+      "image_size_limit_unit": null,
+      "compressed_or_uncompressed_size": null,
+      "specific_archive_format": null,
+      "deadline_timezone": null
+    }
+  },
+  "unanswered_details": [
+    "official_evaluation_cpu_system_ram_disk_and_total_input_scale",
+    "complete_immutable_file_path_list_beyond_fixed_entry_and_reference_environment_name",
+    "precise_score_conversion_and_complete_for_short_inputs",
+    "50G_unit_compression_and_archive_specifics",
+    "actual_external_storage_guidance_and_access",
+    "explicit_deadline_timezone"
+  ],
+  "unanswered_details_disposition": {
+    "basis": "user_accepts_not_pursuing_details_that_do_not_block_development_on_2026-10-10",
+    "block_core_b0_delivery": false,
+    "proactive_follow_up_required": false,
+    "values_remain_unknown_not_officially_confirmed": true,
+    "actual_environment_and_submission_checks_remain_required_in_later_stages": true
+  },
+  "model_inference_verified": false,
+  "official_container_verified": false,
+  "official_submission_ready": false,
+  "delivery_scope": "B0 clarification only; push and report, then stop; user merges and pulls"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "团队有效输出协议（非官方原始快照）：依据用户于 2026-10-10 转述的官方澄清，输出 id 必须原样回填输入 id，原始输出 schema 的 test_ 前缀 pattern 不能作为拒绝 test1 输入的依据。本文件从 submission.schema.json 原样派生，仅移除 properties.id.pattern，并增加本说明；id 的 string 类型、必填要求及全部其他约束保留。submission.schema.json 是不可修改的官方原始快照。输出 id 与对应输入 id 完全相等须单独校验，JSON Schema 验证本身不能替代该输入对齐检查。",
+  "type": "object",
+  "required": ["id", "response_text", "emotion_label", "user_profile", "memory_refs"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string"},
+    "response_text": {"type": "string"},
+    "emotion_label": {"enum": ["", "joy", "gratitude", "relaxed", "care", "pride", "neutral", "surprise", "mixed", "sadness", "loneliness", "anxiety", "anger", "fear", "disgust", "shame", "helplessness"]},
+    "user_profile": {
+      "type": "object",
+      "required": ["personality_traits", "interests", "style"],
+      "additionalProperties": false,
+      "properties": {
+        "personality_traits": {"type": "array", "uniqueItems": true, "items": {"enum": ["extroverted", "introverted", "open", "conservative", "high_conscientiousness", "casual", "agreeable", "assertive", "emotionally_stable", "sensitive"]}},
+        "interests": {"type": "array", "uniqueItems": true, "items": {"enum": ["study_exam", "programming_technology", "reading_writing", "film_animation", "music", "games", "sports_fitness", "travel_outdoor", "pets", "social", "career_development", "art_design"]}},
+        "style": {"type": "array", "uniqueItems": true, "items": {"enum": ["brief", "detailed", "colloquial", "formal", "direct", "indirect", "humorous", "rational", "high_emotional_expression", "low_emotional_expression", "emoji_user"]}}
+      }
+    },
+    "memory_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^mem_[0-9]{6}$"}}
+  }
+}
