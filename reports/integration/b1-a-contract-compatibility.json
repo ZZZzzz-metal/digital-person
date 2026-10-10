@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-10-10T12:48:43.318758+00:00",
+  "scope": "Read-only A DTO compatibility with fictional fixtures; no ModelEngine or generation",
+  "upstream_main_sha_observed": "0432ac9bdbed23442e64a85f203d8d849818cd3b",
+  "upstream_source": "src/b2_core/a_impl/dtos.py",
+  "source_sha256": "b94b8205a96ab162b8dedf68b40f70cade642cbc756d167b7faee831772fc778",
+  "source_url": "https://github.com/ZZZzzz-metal/digital-person/blob/0432ac9bdbed23442e64a85f203d8d849818cd3b/src/b2_core/a_impl/dtos.py",
+  "checks": {
+    "A_resolves_B_shared_types": true,
+    "CoreRequest_normalization_preserves_messages_and_memory": true,
+    "OfficialRequest_normalization_preserves_source_id_and_history": true,
+    "CoreReply_construction_accepts_fictional_mock_fixture": true,
+    "OfficialPrediction_construction_and_serialization_accept_four_field_fixture": true
+  },
+  "passed": true,
+  "project_A_files_modified": false,
+  "model_loaded": false,
+  "real_inference_verified": false
+}

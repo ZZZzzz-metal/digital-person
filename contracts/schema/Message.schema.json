@@ -1,0 +1,27 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "role": {
+      "enum": [
+        "user",
+        "assistant"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "content": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Content",
+      "type": "string"
+    }
+  },
+  "required": [
+    "role",
+    "content"
+  ],
+  "title": "Message",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}

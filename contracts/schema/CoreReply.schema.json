@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "reply": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Reply",
+      "type": "string"
+    },
+    "emotion": {
+      "default": "unknown",
+      "enum": [
+        "neutral",
+        "happy",
+        "sad",
+        "anxious",
+        "angry",
+        "unknown"
+      ],
+      "title": "Emotion",
+      "type": "string"
+    },
+    "expression": {
+      "default": "listening",
+      "enum": [
+        "neutral",
+        "smile",
+        "concern",
+        "listening"
+      ],
+      "title": "Expression",
+      "type": "string"
+    },
+    "model_version": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Model Version",
+      "type": "string"
+    },
+    "is_mock": {
+      "default": false,
+      "title": "Is Mock",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reply",
+    "model_version"
+  ],
+  "title": "CoreReply",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}

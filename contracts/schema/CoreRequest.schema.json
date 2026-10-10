@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "Message": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "user",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "content": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Content",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ],
+      "title": "Message",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "messages": {
+      "items": {
+        "$ref": "#/$defs/Message"
+      },
+      "minItems": 1,
+      "title": "Messages",
+      "type": "array"
+    },
+    "memory_context": {
+      "default": "",
+      "title": "Memory Context",
+      "type": "string"
+    },
+    "persona": {
+      "default": "伴学：中文日常陪伴助手",
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Persona",
+      "type": "string"
+    },
+    "max_new_tokens": {
+      "default": 256,
+      "maximum": 4096,
+      "minimum": 1,
+      "title": "Max New Tokens",
+      "type": "integer"
+    },
+    "temperature": {
+      "default": 0.3,
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Temperature",
+      "type": "number"
+    }
+  },
+  "required": [
+    "messages"
+  ],
+  "title": "CoreRequest",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}
