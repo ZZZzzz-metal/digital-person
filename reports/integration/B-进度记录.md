@@ -4,7 +4,7 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B2**，本轮只执行 B2，完成验证、提交、推送和 PR 后停止；不进入 B3–B8。
+- 用户已要求 **继续 B2**；B2 已完成验证、提交、推送和 PR，现在停止等待用户合并/拉取及下一阶段指令；不进入 B3–B8。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
 - 当前工作分支 `codex/b2-storage-sessions`，从 B1 最后文档提交 `c85e9717d4e960e76169c9f35215de8cfdb32ef3` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
@@ -35,7 +35,7 @@
 - 实现及验收提交 `8224955bb2f41d297f6733d233a4a37d61694acb` 已实际推送，创建 [PR #5](https://github.com/ZZZzzz-metal/digital-person/pull/5)，目标 main。创建时状态 open、未合并；不把后来用户合并状态预写为已完成。本文的发布记录另作一次文档提交，同样推送到本 PR。
 - 完整结果见 [B1 验收](B1验收.md)、[结构化记录](b1-verification.json)、[A 接口核对](b1-a-contract-compatibility.json)。没有等待用户解决的 B1 技术阻塞。
 
-## 本轮 B2：已验证，正在发布
+## 已完成：B2（已推送，等待用户合并/拉取）
 
 - 启动时只读确认 PR #5 已合并，远端 main 当时为 `6c6bb78b8d754a28405585a491cb2b68d6453202`；没有 fetch/pull/merge。从本地已验证的 B1 提交继续，避免重复资料获取和环境安装。
 - 已先在总约定增加 B2 存储/匿名身份合同；现有 API DTO/schema 不改字段。当前任务为 SQLiteStore/InMemoryStore、随机匿名 cookie、会话 CRUD/消息历史和 turn 原子保存/去重/并发控制。
@@ -43,7 +43,8 @@
 - SQLiteStore/InMemoryStore、匿名身份、四个会话操作和 turn 占用/完成/释放已实现；内存版本为每实例独立 SQLite :memory:，不复用演示文件。有效 pending 删除 409，过期后可恢复；complete 返回 None，成功重试通过 reserve 取原 ChatResponse。
 - 实际 **123/123 测试通过**（44 合同、20 健康、28 API、31 存储），21 schemas/21 fixtures 一致，pip check 无冲突；沿用 B1 环境，无新增依赖。已实际验证 SQLite 第二条消息写入失败回滚整轮、两连接竞争、租期旧 token、重试、归属和深副本。
 - 实际 HTTP **8 项通过**，两个自建 Uvicorn 进程验证两用户、消息 fixture 读取和 SQLite 重启持久化，均已关闭。没有模型生成或聊天路由，没有原始 cookie 入报告。
-- 结果见 [B2 验收](B2验收.md)、[结构化记录](b2-verification.json)、[HTTP 实测](b2-http-smoke.json)。提交和 PR 发布尚未完成，完成后更新本文；没有 B2 人工技术阻塞。
+- 实现及验收提交 `f2b54797be85f69b3cb6a52d08e05435e31b8f95` 已实际推送，创建 [PR #6](https://github.com/ZZZzzz-metal/digital-person/pull/6)，目标 main，17 个文件，仅 B 分工区域。创建时 open、未合并；发布记录另作一次文档提交并推送到同一 PR。
+- 结果见 [B2 验收](B2验收.md)、[结构化记录](b2-verification.json)、[HTTP 实测](b2-http-smoke.json)。没有 B2 人工技术阻塞。
 
 ## 恢复与下一步
 
