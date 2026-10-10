@@ -13,4 +13,6 @@
 
 公开测试原 prompt 要求 memory_refs=[]；训练标注存在引用但无 memory bank。团队仍默认 []，将其标为团队选择。答复原文和解释见 [clarification-2026-10-10.json](clarification-2026-10-10.json)、[官方接口核对](../../docs/官方接口核对.md)。有效合同的 [实跑检查报告](../../reports/integration/b0-effective-schema-check.json) 为内存协议 fixture，不是模型预测或平台验收。
 
-这里提供 schema 和证据，不表示已实现 Python DTO、训练模型或通过官方运行验收。
+[inference_input.schema.json](inference_input.schema.json) 是 B5 根据实际测试文件/参考读取代码编写的团队输入说明。仅 id/history 必需，关联元数据可选；target/末项 turn_id 关联、提供的 turn_id 正整数且唯一递增另由适配器检查。前面 turn_id 可省略，不要求角色严格交替。额外字段允许出现在源文件，但投影只取 id 与完整 role/content，标签/答案不传模型。该 schema 不是官方发布的修正版，不新增官方限制的声明。
+
+B1 已有独立官方 DTO；B5 的严格适配与实际 CPU 结果见 [入口](../../submission/participant/README.md)、[验收](../../reports/integration/B5验收.md)。原始 schema/参考脚本均保留，不用 CPU 结果冒称 Linux/GPU 容器或赛事评分通过。
