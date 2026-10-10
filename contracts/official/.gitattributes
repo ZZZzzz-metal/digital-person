@@ -2,3 +2,6 @@
 submission.schema.json -text
 train_public.schema.json -text
 val_public.schema.json -text
+
+# Team-derived contract: retain the bytes recorded in the B0 check report.
+effective_submission.schema.json -text
