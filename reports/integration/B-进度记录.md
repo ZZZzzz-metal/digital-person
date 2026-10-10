@@ -4,7 +4,7 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B4**；本轮只做聊天编排与 A 引擎接入/验证，完成推送和 PR 后停止，不进入 B5–B8。
+- 用户已要求 **继续 B4**；本轮后端/真实基线已交付并推送 PR #8，停止等待后续指令，不进入 B5–B8。C页面联调仍待其源码。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
 - 当前工作分支 `codex/b4-chat`，从 B3 最后文档提交 `44d7363101e96e9fc58a71d55f2fd4fcb9d8da64` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
@@ -58,7 +58,7 @@
 - 本轮结果见 [B3 验收](B3验收.md)、[结构化结果](b3-verification.json)、[HTTP 实测](b3-http-smoke.json)。无 B3 人工技术阻塞。
 - 实现与验收提交 `f785f6be8199dfef2f91421daa6de77966dee5dd` 已实际推送，创建 [PR #7](https://github.com/ZZZzzz-metal/digital-person/pull/7)，目标 main，19 个文件仅 B 分工区域。创建时 open、未合并，head 与本地一致。本文发布记录另作一次文档提交并推送到同一 PR；不把用户未来的合并预写为已完成。
 
-## B4：后端与真实基线已验证，待发布
+## B4：后端与真实基线已验证并推送（待用户合并）
 
 - 先更新总约定第8节聊天合同，再实现纯 build_core_request/run_turn 和 POST /api/chat；DTO/schema不改字段，不修改A/C文件。模型启动一次，相关候选记忆接入，成功缓存原样返回，失败/超时/取消不保存半轮并允许原ID重试。
 - 实际 **294/294 测试通过**：新聊天49、纯turn29、旧回归216；21 schemas/21 fixtures一致，后端pip check无冲突，原后端环境与锁沿用。额外验证旧超时线程跨lifespan保持gate、直接cancel清理、模型自身ChatError不透传原输入；迟到结果不落库。
@@ -67,7 +67,8 @@
 - 原样基线8文件999,597,690字节，SHA全部匹配A，HF revision `7ae557604adf67be50417f59c2c2f167def9a775`。已验证资源在 `reports/integration/.b4-work/real-assets/`，原配置/许可保留；独立 `.runtime/b4-real-env/` Python3.12.14/torch2.14.1+cpu/transformers5.19.0，pip check通过。这些本地资源被忽略，不上传Git，不是正式GPU容器候选。
 - 真实候选记忆输入符合高数→线代/关闭规则，但基线第三轮没有回答线代，而是询问考试科目；未声称模型记忆准确率或训练质量通过。B不修A模型。情绪/表情是A规则，回复是真实模型。
 - C前端当前未交付，页面联调performed=false，准确缺项见 b4-c-handoff-check.json。A的sft-short完整训练权重在别人的电脑，未在这里验收；继续使用已验证公开基线。无B代码技术阻塞，正式适配/禁网GPU容器/镜像/赛事提交为后续阶段。
-- 本轮报告 [B4验收](B4验收.md)、[结构化结果](b4-verification.json)、[真实HTTP](b4-real-http.json)、资源/环境/源码摘要均已保存。未消耗算力券、未训练、未fetch/pull/merge；本轮待提交推送后记录PR。
+- 本轮报告 [B4验收](B4验收.md)、[结构化结果](b4-verification.json)、[真实HTTP](b4-real-http.json)、资源/环境/源码摘要均已保存。未消耗算力券、未训练、未fetch/pull/merge。
+- 实现/验收提交 `8b5d43b94acc5da1cc5e4d35c1bde56e118ce729` 已实际推送，创建 [PR #8](https://github.com/ZZZzzz-metal/digital-person/pull/8)，目标main，23个文件仅B分工区域。创建时open/未合并，head与本地一致；不把用户未来合并预写为完成。本文发布记录另作一次文档提交并推送到同一PR。
 
 ## 恢复与下一步
 
