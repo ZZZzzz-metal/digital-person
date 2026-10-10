@@ -4,7 +4,7 @@
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B3**；本轮记忆 CRUD、纯检索与开关/纠正/隔离已验证，完成推送和 PR 后停止，不进入 B4–B8。
+- 用户已要求 **继续 B3**；本轮记忆 CRUD、纯检索与开关/纠正/隔离已验证、提交、推送并创建 PR，现停止等用户合并/拉取及 B4 指令，不进入 B4–B8。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
 - 当前工作分支 `codex/b3-memory`，从 B2 最后文档提交 `ac80f5892c2f1afce64cbec159fb02d496f02177` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
@@ -46,7 +46,7 @@
 - 实现及验收提交 `f2b54797be85f69b3cb6a52d08e05435e31b8f95` 已实际推送，创建 [PR #6](https://github.com/ZZZzzz-metal/digital-person/pull/6)，目标 main，17 个文件，仅 B 分工区域。创建时 open、未合并；发布记录另作一次文档提交并推送到同一 PR。
 - 结果见 [B2 验收](B2验收.md)、[结构化记录](b2-verification.json)、[HTTP 实测](b2-http-smoke.json)。没有 B2 人工技术阻塞。
 
-## 已完成验证：B3（发布信息在推送后补齐）
+## 已完成：B3（已推送，等待用户合并/拉取）
 
 - B3 启动时只读确认 PR #6 已合并，head 为 `ac80f5892c2f1afce64cbec159fb02d496f02177`；发布前观察 main 为 `1826b1a5a9a6cb209184f73768db4e4110e49d52`。没有 fetch/pull/merge，也没有重装环境。
 - 先更新总约定第 8 节记忆存储方法/关闭管理语义，再并行实现；沿用现有 DTO/schema 字段，不改 A/C 模型与前端。
@@ -56,6 +56,7 @@
 - 实际 HTTP **10 项通过**，两个自建 Uvicorn 进程检查身份隔离、纠正、开关/清空与 SQLite 重启，均已关闭，原始 cookie 不记录。没有模型生成；/api/chat 仍未实现。
 - 21 schemas/21 fixtures 一致、pip check 无冲突，沿用 B1 环境无新增依赖。旧验收记录和 JSON 不替换为当前结果。
 - 本轮结果见 [B3 验收](B3验收.md)、[结构化结果](b3-verification.json)、[HTTP 实测](b3-http-smoke.json)。无 B3 人工技术阻塞。
+- 实现与验收提交 `f785f6be8199dfef2f91421daa6de77966dee5dd` 已实际推送，创建 [PR #7](https://github.com/ZZZzzz-metal/digital-person/pull/7)，目标 main，19 个文件仅 B 分工区域。创建时 open、未合并，head 与本地一致。本文发布记录另作一次文档提交并推送到同一 PR；不把用户未来的合并预写为已完成。
 
 ## 恢复与下一步
 
