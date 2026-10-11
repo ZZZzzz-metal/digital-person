@@ -10,6 +10,7 @@
 - 用户新增偏好：**所有后续本机下载、大模型、打包产物与镜像放 D 盘**，C 盘空间不足。B6 实际包在 `D:/B2-B6-20261011/candidate-a34f8df`；已验证旧 B4/B5 资产不重下，保留原位置。云端下载使用实例磁盘。
 - **最新续做状态**：用户明确要求 Agent 自行安装配置。本机官方 WSL3.0.1 已实际安装，MSI退出0；VirtualMachinePlatform启用退出3010，需要Windows重启。WSL/Ubuntu两个安装包已在D下载并核对官方SHA/微软签名；交换盘也已设D。当前只待用户保存工作、手动重启，再回复继续。下一条实际命令 `.venv/Scripts/python.exe -B deploy/resume_b6_local.py --verify`；先核对boot和专用发行版D路径，不重复下载安装、不再开平台实例。详见 [本机环境续做](B6-本机环境续做.md)/[实际状态](b6-local-setup.json)。Ubuntu/Docker/NVIDIA工具包/正式镜像还未安装验收，不预写成功。
 - 续做工具增加Linux侧限时与超时输出记录；原容器验证工具补充自有CID限时停止/移除和cleanup失败记录。变更后仅重跑相关容器控制模块，实际33项通过（3项新增取消/清理风险场景，模拟Docker，非真实GPU验收）；Python/PowerShell/Bash静态检查和CLI通过。原79项/CPU30项保持历史证据，不重新下载/运行旧模型。
+- 本机环境续做及风险修复提交 `84e375b024076ebd89250959b3cb0c1a13be4552` 已实际推送到原 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10)，PR说明已更新。该次只读核对为open/未合并、远端head一致、mergeable=true/clean。此发布记忆另作一次文档提交到同PR；不预写用户合并，也不把重启或后续Linux安装视为已完成。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
