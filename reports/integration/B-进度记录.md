@@ -83,6 +83,7 @@
 - 本机无 Docker CLI/可用 WSL，进程非管理员；没有安装或重启系统。仅需人提供可实际启动 GPU Docker 的 Linux 主机/平台服务，或处理本机 WSL2/Docker 的管理员安装与必要重启；无需等待 A/C。
 - 单样例独立完整包真实 CPU 检查 **30/30通过**；推理/独立checker各退出0，原样5条历史、初始化1次、真实回复、独立空store关闭，原包前后30文件摘要一致。实际生成24,691.3615ms，两次JSON失败后A真实fallback_rules，情绪/画像rules，质量未评分。结果 D:/B2-B6-20261011/cpu-smoke-a34f8df/result，submission SHA7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828；安全报告 [b6-bundle-cpu-smoke.json](b6-bundle-cpu-smoke.json)，可复现helper verify_b6_bundle_cpu.py。它不等于 GPU/容器验收。B5原始CPU回退保留，不覆盖。
 - 本轮运行方法和准确缺项：[离线验收](离线验收.md)、[部署说明](../../deploy/README.md)、[结构化结果](b6-verification.json)。正式候选image ID/tar/GPULock均未取得，gpu_offline_verified=false、fallback_image_verified=false、contest_submitted=false，B7未开始。
+- 实现与验收报告已实际推送，报告提交 `92b57f92e70506bf65ae47538771902c91f0cf1e`，创建 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10)，目标 main，共23文件，仅B负责区域。创建后只读核对 open/未合并、head与本地一致、mergeable=true/clean；不把用户未来合并预写为完成。GitHub连接器创建返回403，使用同仓库既有Git凭据成功创建，凭据不保存/输出。本文发布记忆另作一次文档提交并推送到同PR，最终head另在实际远端核对。
 - 下一步仅在 Docker/GPU 环境到位后迁移已有包并运行 deploy/verify_container.py 的完整公开输入；不再重跑未变的 B0–B5、不重新领券/开机徒耗卡时、不把能力镜像当参赛镜像。上传工作仍由 Agent，用户合并/拉取。
 
 ## B5 历史验收与恢复依据（后续以当前 B6 状态为准）

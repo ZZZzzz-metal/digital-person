@@ -122,5 +122,10 @@
     "quality_scored": false,
     "gpu_verified": false,
     "docker_run": false
+  },
+  "publication": {
+    "url": "https://github.com/ZZZzzz-metal/digital-person/pull/10",
+    "record": "b6-publication.json",
+    "user_merges_and_pulls": true
   }
 }

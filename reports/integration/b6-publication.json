@@ -1,0 +1,18 @@
+{
+  "observed_at_utc": "2026-10-11T01:56:03.463112+00:00",
+  "scope": "read-only PR verification before publication-memory commit; later head may differ",
+  "branch": "codex/b6-container",
+  "PR": {
+    "number": 10,
+    "url": "https://github.com/ZZZzzz-metal/digital-person/pull/10",
+    "state": "open",
+    "head_sha": "92b57f92e70506bf65ae47538771902c91f0cf1e",
+    "merged": false,
+    "mergeable": true,
+    "mergeable_state": "clean",
+    "changed_files": 23
+  },
+  "manual_merge_and_pull_by_user": true,
+  "formal_gpu_offline_acceptance_passed": false,
+  "credentials_saved_or_printed": false
+}
