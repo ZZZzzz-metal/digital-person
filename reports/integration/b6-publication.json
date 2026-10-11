@@ -1,18 +1,42 @@
 {
-  "observed_at_utc": "2026-10-11T01:56:03.463112+00:00",
-  "scope": "read-only PR verification before publication-memory commit; later head may differ",
+  "observed_at_utc": "2026-10-11T05:21:21.494629+00:00",
+  "scope": "actual pushed B6 implementation/verification/A guide commit and PR update; this publication memory is committed afterward, so final head may differ",
   "branch": "codex/b6-container",
+  "implementation_and_actual_verification_commit": "6ed0cfd2f0911c73d6d75246efc277cbf8cb364b",
   "PR": {
     "number": 10,
     "url": "https://github.com/ZZZzzz-metal/digital-person/pull/10",
     "state": "open",
-    "head_sha": "92b57f92e70506bf65ae47538771902c91f0cf1e",
+    "head_sha": "6ed0cfd2f0911c73d6d75246efc277cbf8cb364b",
     "merged": false,
-    "mergeable": true,
-    "mergeable_state": "clean",
-    "changed_files": 23
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "changed_files": 44
   },
   "manual_merge_and_pull_by_user": true,
-  "formal_gpu_offline_acceptance_passed": false,
-  "credentials_saved_or_printed": false
+  "formal_gpu_offline_acceptance_passed": true,
+  "acceptance_scope": "local single RTX5060 Laptop, full three supplied samples, same immutable image network-none GPU inference/checker and exported archive identity chain; no official dual4090 score",
+  "actual_run_record": "b6-gpu-offline.json",
+  "delivery_record": "b6-gpu-delivery.json",
+  "B7_started": false,
+  "contest_submitted": false,
+  "credentials_saved_or_printed": false,
+  "previous_observation": {
+    "observed_at_utc": "2026-10-11T01:56:03.463112+00:00",
+    "scope": "read-only PR verification before publication-memory commit; later head may differ",
+    "branch": "codex/b6-container",
+    "PR": {
+      "number": 10,
+      "url": "https://github.com/ZZZzzz-metal/digital-person/pull/10",
+      "state": "open",
+      "head_sha": "92b57f92e70506bf65ae47538771902c91f0cf1e",
+      "merged": false,
+      "mergeable": true,
+      "mergeable_state": "clean",
+      "changed_files": 23
+    },
+    "manual_merge_and_pull_by_user": true,
+    "formal_gpu_offline_acceptance_passed": false,
+    "credentials_saved_or_printed": false
+  }
 }

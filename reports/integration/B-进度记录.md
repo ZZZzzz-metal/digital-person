@@ -5,7 +5,7 @@
 ## 当前阶段与操作边界
 
 - 用户点名的 **B6 已完成本机真实禁网 GPU 镜像验收**，不进入 B7–B8。使用一张 RTX 5060 Laptop（约8GB），不是正式双4090测评或模型质量验收；3条公开样例全输出，参考计时 complete=false，因为不足100条。
-- Agent 负责提交、推送分支/PR；用户手动合并和拉取。**不 fetch/pull/merge**。当前仓库 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0`、分支 `codex/b6-container`，原 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10) 等本次实际推送后更新发布记录；不预写已合并。
+- Agent 负责提交、推送分支/PR；用户手动合并和拉取。**不 fetch/pull/merge**。当前仓库 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0`、分支 `codex/b6-container`，原 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10) 已更新。本次实现/真实验收/说明提交 `6ed0cfd2f0911c73d6d75246efc277cbf8cb364b` 已实际推送，发布记录见 [b6-publication.json](b6-publication.json)；观察为open/未合并，不预写用户合并。
 - 本轮现有 `.venv`、A/B源码和完整基线复用；没有改 A model/prompts/weights 或 C 前端，没有重复下载权重。本机下载、大模型、镜像和 Linux VHD/交换盘均在 D。只修改 B 区域及共享总约定。
 - Windows已由人重启，WSL3.0.1、专用 B2-B6-Ubuntu22、Docker29.9.0/NVIDIA工具包1.20.1实际可用；Linux/Docker数据在 `D:/B2-B6-20261011/setup/wsl/B2-B6-Ubuntu22/ext4.vhdx`。不要再要求用户重启、重装或开云端实例。全局WSL配置已恢复原D交换盘配置；专用发行版DNS修复通过，真实安装/历史失败见 [本机续做](B6-本机环境续做.md)。不改其他环境或网络安全设置。
 - 最新真实全流程目录 `/root/b2-b6/runs/verify-20261011T050300Z-oci`，同实际 image ID 的3个容器 network none、退出0并清理自有CID；GPU内核、CUDA模型推理、独立checker、标准导出和完整OCI身份链均通过。实际结果 [b6-gpu-offline.json](b6-gpu-offline.json)、[交付摘要](b6-gpu-delivery.json)、[离线验收](离线验收.md)。
@@ -85,7 +85,7 @@
 - Torch2.8.0+cu128/CUDA12.8、Python3.11.13、激活conda_env，真实CUDA矩阵并同步通过；A ModelEngine非mock、初始化1次，全3公开样例历史不截断，每条独立空store关闭。输出SHA `52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0`，平均生成 8890.429456ms；3条均两次JSON解析失败后A真实文本回退，情绪/画像规则补齐，没有质量/官方分数结论。
 - 保存实际依赖元数据 `deploy/requirements-gpu.actual.txt` 与 `conda-gpu.actual.txt`。上游file URL是观察快照，不是可独立pip重新安装的配方；恢复首选已核验标准镜像归档。此轮未执行docker load后的再次GPU运行。
 - GPU回退镜像/结果/日志已复制D并校验SHA；B5旧CPU回退保留。`gpu_offline_verified=true`、`fallback_image_verified=true`仅限本机B6流程，`official_score_verified=false`、`contest_submitted=false`、B7未开始。
-- 发布沿用PR #10；本次提交/推送后的准确远端状态另更新 `b6-publication.json`，用户手动合并拉取。不新增云实例，不使用卡券训练A，不代写C。
+- 发布沿用PR #10；实际实现/验收/说明提交 `6ed0cfd2f0911c73d6d75246efc277cbf8cb364b` 已推送，PR标题/说明已更新，观察open/未合并、远端head相同。当时mergeable仍在GitHub计算（null/unknown），不编造clean；本文和发布记录另作文档提交推送，最终head再实际核对。用户手动合并拉取，不新增云实例，不使用卡券训练A，不代写C。
 
 ## B5 历史验收与恢复依据（后续以当前 B6 状态为准）
 
