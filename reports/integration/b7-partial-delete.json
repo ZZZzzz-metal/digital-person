@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "stage": "B7",
+  "observed_at_beijing": "2026-10-11T20:06:33.545697+08:00",
+  "authorization": "User explicitly requested deletion of the previously identified incomplete remote file.",
+  "endpoint": "183.222.230.93:50001",
+  "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+  "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+  "expected_partial_bytes": 63963136,
+  "delete_requested": true,
+  "delete_acknowledged": true,
+  "deletion_verified": true,
+  "observed_events": [
+    {
+      "event": "partial_delete_authenticated",
+      "tls": "TLSv1.3",
+      "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+      "basename": "AI-team-B2-B7-20261011-601aaf08.tar"
+    },
+    {
+      "event": "data_tls_connected",
+      "session_reused": true,
+      "transfer_command": "NLST",
+      "send_buffer_bytes": 4194304,
+      "tls_version": "TLSv1.3"
+    },
+    {
+      "event": "data_tls_connected",
+      "session_reused": true,
+      "transfer_command": "LIST",
+      "send_buffer_bytes": 4194304,
+      "tls_version": "TLSv1.3"
+    },
+    {
+      "event": "partial_delete_preflight_passed",
+      "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+      "bytes": 63963136,
+      "regular_file": true,
+      "fixed_endpoint": true
+    },
+    {
+      "event": "partial_delete_requested",
+      "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+      "expected_bytes": 63963136
+    },
+    {
+      "event": "partial_delete_acknowledged",
+      "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+      "reply_code": "250"
+    },
+    {
+      "event": "data_tls_connected",
+      "session_reused": true,
+      "transfer_command": "NLST",
+      "send_buffer_bytes": 4194304,
+      "tls_version": "TLSv1.3"
+    },
+    {
+      "event": "data_tls_connected",
+      "session_reused": true,
+      "transfer_command": "LIST",
+      "send_buffer_bytes": 4194304,
+      "tls_version": "TLSv1.3"
+    },
+    {
+      "event": "partial_delete_verified",
+      "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+      "old_bytes": 63963136,
+      "delete_reply_code": "250",
+      "nlst_absence_verified": true,
+      "list_absence_verified": true,
+      "list_entry_count": 0,
+      "size_reply_code": "550",
+      "uploads_performed": false,
+      "other_remote_files_modified": false,
+      "contest_submitted": false
+    }
+  ],
+  "raw_log": "D:\\B2-B7-20261011\\手动上传\\残留删除-20261011-200345.jsonl",
+  "raw_log_sha256": "089da312490367d0b7328bc630ef949ca8474bafb32746fdb73876340bf165fb",
+  "helper_sha256": "d985f5330988490a0b850d2e42d0f17609be1f8a5af183e6a0d62746d5d6cc48",
+  "safety": {
+    "fixed_basename_only": true,
+    "type_I_size_rechecked_before_delete": true,
+    "regular_file_checked": true,
+    "delete_retries": 0,
+    "standard_FTP_compare_and_delete_atomic": false,
+    "credential_bridge_cleaned": true,
+    "credentials_dpapi_reprepared": false,
+    "other_remote_files_modified": false,
+    "uploads_performed": false,
+    "contest_submit_clicked": false,
+    "local_archive_or_fallback_modified": false,
+    "image_rebuilt": false,
+    "support_message_sent": false
+  },
+  "limits": {
+    "STOR_553_resolved_by_deletion_verified": false,
+    "platform_error_root_cause": null
+  },
+  "local_mock_verification": {
+    "schema_version": 1,
+    "scope": "local mocks only",
+    "tests": 25,
+    "count": 186,
+    "passed": true,
+    "failures": 0,
+    "errors": 0,
+    "actual_network": false,
+    "actual_deletion_performed": false,
+    "real_credentials_read": false
+  },
+  "platform_after_delete": {
+    "observed_at": "2026-10-11T12:06:08.406Z",
+    "url": "https://aigpu.migu.cn/worksubmit",
+    "source": "external",
+    "region": "west1",
+    "upload_state": "not_uploaded",
+    "old_partial_selected": false,
+    "contest_submit_clicked": false,
+    "screenshot_local": "D:/B2-B7-20261011/手动上传/残留删除后-未上传.png"
+  }
+}
