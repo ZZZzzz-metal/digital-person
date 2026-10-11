@@ -1,0 +1,107 @@
+########################################################################
+# A 分工 GPU 不可用证据包（新实例，会话中途被收回 GPU 访问权）
+########################################################################
+采集时间(UTC) : Sun Oct 11 05:46:41 AM UTC 2026
+
+=== 1. 实例 / 容器身份 ===
+实例名(hostname)      : ai-traininfer-a60eedc8-963ea058-f75578f6b-b4t8t
+容器 PID1 启动时间    : Sun Oct 11 05:27:36 2026
+容器 cgroup           : 13:perf_event:/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-podf34da95a_95aa_4eaf_80e6_3b8bd6a42115.slice/cri-containerd-5e12339147401e012ed5fdf63353f612a38dc6e627d58d1e4797bf49069d5c08.scope
+容器 scope            : 5e12339147401e012ed5fdf63353f612a38dc6e627d58d1e4797bf49069d5c08
+宿主内核              : 5.10.0-60.18.0.50.oe2203.x86_64
+SSH 端口              : 58832
+申请规格              : 1 x NVIDIA GeForce RTX 4090（平台=咪咕仝学 AI算力实例）
+
+=== 2. 关键时间线（同一容器内实测）===
+2026-10-11 05:37:42 UTC  nvidia-smi -L 成功: GPU 0: NVIDIA GeForce RTX 4090 (UUID GPU-6eb99c9c-...)
+2026-10-11 05:37:42 UTC  root open("/dev/nvidiactl") = OK; torch.cuda.is_available()=True; device_count=1
+2026-10-11 05:37:42 UTC  CUDA 2048x2048 fp32 matmul PASS: sum=-35980.6171875, 45.97 ms, sm_89, 23.52 GB
+2026-10-11 05:38-05:39   容器环境/网络探测、开始上传基础模型（与 GPU 无关）
+2026-10-11 05:40-05:42   pip 安装 peft/accelerate/datasets（纯用户态 Python 包）
+2026-10-11 05:43:55 UTC  nvidia-smi 变为 "Failed to initialize NVML: Unknown Error"
+2026-10-11 05:43:55 UTC  root open("/dev/nvidiactl") = PermissionError [Errno 1] Operation not permitted
+2026-10-11 05:43-05:45   连续 6 次重试（每 15 秒），torch.cuda.is_available() 恒为 False、device_count 恒为 0
+容器在此期间未重启（hostname 与 PID1 启动时间均未变化），故障发生在运行中的容器内。
+
+=== 3. nvidia-smi 原始输出 ===
+Failed to initialize NVML: Unknown Error
+
+=== 4. 设备节点（仍存在，时间戳=镜像构建日）===
+crw-rw-rw- 1 root root 195,   5 Sep  9 15:21 /dev/nvidia5
+crw-rw-rw- 1 root root 195, 255 Sep  9 15:21 /dev/nvidiactl
+crw-rw-rw- 1 root root 508,   0 Sep  9 15:21 /dev/nvidia-uvm
+crw-rw-rw- 1 root root 508,   1 Sep  9 15:21 /dev/nvidia-uvm-tools
+
+=== 5. 以 root 直接打开设备节点（失败点）===
+OPEN FAIL /dev/nvidiactl PermissionError PermissionError(1, 'Operation not permitted')
+OPEN FAIL /dev/nvidia5 PermissionError PermissionError(1, 'Operation not permitted')
+OPEN FAIL /dev/nvidia-uvm PermissionError PermissionError(1, 'Operation not permitted')
+OPEN FAIL /dev/nvidia-uvm-tools PermissionError PermissionError(1, 'Operation not permitted')
+nvidia-caps exists: False
+NVIDIA_VISIBLE_DEVICES: None
+CUDA_VISIBLE_DEVICES  : None
+
+=== 6. torch 诊断（库可加载，但设备不可访问）===
+/opt/conda/envs/conda_env/lib/python3.12/site-packages/torch/cuda/__init__.py:1007: UserWarning: Can't initialize NVML
+  raw_cnt = _raw_device_count_nvml()
+dlopen OK   libcuda.so.1
+dlopen OK   libnvidia-ml.so.1
+torch 2.10.0+cu128 cuda_built 12.8
+cuda.is_available() : False
+cuda.device_count() : 0
+torch.cuda.init() -> RuntimeError No CUDA GPUs are available
+
+=== 7. 宿主机仍能看到卡（说明卡在，是容器权限被收回）===
+Model: 		 NVIDIA GeForce RTX 4090
+IRQ:   		 629
+GPU UUID: 	 GPU-6eb99c9c-65f5-c86b-5fe0-6cd90c1f9856
+Video BIOS: 	 95.02.3c.40.40
+Bus Type: 	 PCIe
+DMA Size: 	 47 bits
+DMA Mask: 	 0x7fffffffffff
+Bus Location: 	 0000:c1:00.0
+Device Minor: 	 5
+GPU Firmware: 	 595.71.05
+GPU Excluded:	 No
+NVRM version: NVIDIA UNIX Open Kernel Module for x86_64  595.71.05  Release Build  (dvs-builder@U22-I3-G08-03-1)  Fri Apr 24 06:42:30 UTC 2026
+GCC version:  gcc version 10.3.1 (GCC) 
+
+=== 8. 内核显示的主设备号（nvidia-caps=236 存在，但 /dev/nvidia-caps 未创建）===
+195 nvidia
+195 nvidia-modeset
+195 nvidiactl
+234 nvidia-nvswitch
+235 nvidia-nvlink
+236 nvidia-caps
+237 nvidia-caps-imex-channels
+508 nvidia-uvm
+
+=== 9. 驱动库位置（均存在）===
+	libnvidia-ml.so.1 (libc6,x86-64) => /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1
+	libcuda.so.1 (libc6,x86-64) => /usr/lib/x86_64-linux-gnu/libcuda.so.1
+
+=== 10. 环境变量（无 NVIDIA_VISIBLE_DEVICES / CUDA_VISIBLE_DEVICES）===
+(无任何 nvidia/cuda 环境变量)
+
+=== 11. 训练环境版本（供平台支持核对）===
+Python 3.12.12
+accelerate                               1.15.0
+datasets                                 5.1.0
+numpy                                    2.2.6
+peft                                     0.21.2
+safetensors                              0.7.0
+tokenizers                               0.22.2
+torch                                    2.10.0        3
+transformers                             4.57.6
+vllm                                     0.19.0
+
+=== 12. 结论 ===
+/dev/nvidia* 设备节点存在，但 root 打开一律 EPERM（Operation not permitted）；
+nvidia-smi 报 Failed to initialize NVML: Unknown Error；/dev/nvidia-caps 未创建；
+NVIDIA_VISIBLE_DEVICES 未设置；torch cuda_available=False。
+宿主机驱动 595.71.05 正常且仍枚举到该 RTX 4090。
+关键点：同一容器内该能力**先正常（05:37 计算出真实矩阵结果）后被收回（05:43 起）**，
+容器未重启。可排除用户态 Python 包变更导致（EPERM 发生在内核设备访问层，
+nvidia-smi 这一 C 程序同样失败）。
+请平台检查该 pod 的 GPU 设备分配与 device cgroup 权限，并说明为何运行中被收回。
+########################################################################

@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# 官方原始大数据：不进 Git（B 的核对记录也写明「原始大数据留本地」）
+# 由队伍提供的《数字人综合情感陪伴对话模型.zip》解压而来，逐字节可核对：
+#   train_public.jsonl sha256 184a47471f8d6f70fa21b9265b0a4d4e51c3748ba25af39a801884a2da35341a
+#   val_public.jsonl   sha256 097c0639ef7370a18a54670ec3c8390ce5dc87c1ed95f436cef07b68dfed7668
+official_raw/
