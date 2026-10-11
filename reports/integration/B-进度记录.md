@@ -4,6 +4,34 @@
 
 ## 当前阶段与操作边界
 
+> **当前B7阻塞检查点：用户STOR失败（2026-10-11 19:33）**。用户实际运行文件对话框并选最终归档，完整SHA/9,322,866,688字节检查通过（5.2秒），登录/NLST成功，但transfercmd开启普通STOR阶段553、0文件字节。旧日志无法区分内部PASV/STOR接受，目录预检TLS不可当文件TLS成功。用户随后重新登录，Agent仅只读诊断：根目录只有自己的旧残缺tar，SIZE=**63,963,136**字节；LIST成功，MLST/MLSD500，配额/目录权限不可知，553根因未知。未重传、删/覆盖文件或点击提交。一次性credentials.dpapi已被用户消费且实际不存在，临时诊断RSA桥已清理；不要按旧交接窗口重复启动/自动重配上传。等平台核查创建失败、确认路径/命名/权限/配额，再只重配凭据让用户操作。
+>
+> 支持转发文本已放 `D:/B2-B7-20261011/手动上传/发给平台客服-上传553.txt`，Agent没有发送。当前准确机器记录 [b7-storage-failure.json](b7-storage-failure.json)，原手动/冻结JSON保留当时范围。只补主机脱敏日志（phase、请求模式/安全名、错误分类、NLST/STOR标签），16mock/92断言通过；D盘两脚本同步，未变9GB镜像不重建/复制、不重跑GPU、不进入B8。Git推送原PR12，用户仍手动合并/拉取。
+
+### 上一次交接与发布历史（凭据现已消费）
+
+> 手动工具/交接提交 **e0f49813583eb270ff7dd1554dd0e14d37e2462a** 已实际推送并更新原 [PR #12](https://github.com/ZZZzzz-metal/digital-person/pull/12)；观察open/未合并、head一致、31个文件，[本次发布观察](b7-handoff-publication.json)与本记忆随后另作提交。用户接下来自己启动D盘手动入口并点赛事提交；Agent不要因恢复对话自动重试上传。Git合并/拉取仍由用户处理，当前仅B7，不进入B8。
+
+> **B7 手动交接检查点（2026-10-11）**：最新用户要求自己加载文件、等待上传和点赛事提交，并使用Edge。已停止全部自动上传，准确核对自有上传进程0；专用WSL无运行容器并已仅关闭B2-B6-Ubuntu22，不动其他环境。用户重新登录后，当前页面显示“已上传”且默认选中旧中断文件 `AI-team-B2-B7-20261011-601aaf08.tar`，**该残缺文件不可提交**；没有点击提交，没有成功测评/正式评分。正常调用Edge打开公开worksubmit链接exit0，但Edge登录/页面本身未核验。
+>
+> 证书信任已获用户明确授权，不再询问：控制/数据连接固定原指纹、TLSv1.3，首次STOU慢速上传中断，最后已报告62,914,560字节/273.3秒，远端最终大小/SHA未知且未删除。一次本地RSA桥失败未连FTP；随后两次STOU在0文件字节时返回553。553只证明STOU创建失败，普通STOR未试；4MiB缓冲尚无速度收益实测，不推断平台故障根因。原冻结JSON保留早期未上传观察，不改写历史。
+>
+> 已交付 `D:/B2-B7-20261011/手动上传/加载镜像并上传.cmd`：用户选已冻结9GB归档，启动前检查完整SHA，再消费24小时CurrentUser DPAPI凭据、固定证书加密上传，使用128位随机新名+NLST预检的标准STOR（不是原子防覆盖），失败不重试/删文件。源SHA和远端SIZE通过且exit0才生成UPLOAD-SUCCESS记录/打开Edge。凭据实际解密/绑定核对通过，有效至**2026-10-12 19:15:54北京时间**；临时RSA文件已删除，密文不进Git/镜像。若未启动前过期或首次上传失败，重新登录并只重配一次性密文，不重建/下载镜像。13组70断言mock、4项手动失败路径、10项FTPS保护路径、真实虚构DPAPI往返通过；没有实际STOR或用户文件对话框验收。完整准确记录见 [b7-upload-handoff.json](b7-upload-handoff.json) 和 [提交记录](../../docs/提交记录.md)，后续只读这些当前记录，不重做B0–B6。
+
+## B7 冻结时检查点（以下平台状态记录于后续上传尝试前）
+
+> **B7 冻结检查点（2026-10-11）**：用户已确认“A/C都完成了”，恢复B7。报名队名 **AI队**；只读确认PR10/PR11已合并，不fetch/pull/merge。当前分支 `codex/b7-submit`，资料层/校验/平台日志实现提交 `270688182f67e47c4834f7feb16bf99fe951cf82`。18份最终材料已打入新镜像，真实禁网GPU、官方三条输入、独立checker、资料摘要和标准导出身份链均通过；不是正式比赛评分。专项工具69 passed/1 skipped（Windows symlink权限），原B6回退不变。最终验收记录提交 `f8d627be92d8076c4a2a6810a5498079506e694b` 已实际推送，创建 [PR #12](https://github.com/ZZZzzz-metal/digital-person/pull/12)，观察open/未合并，远端head一致；[发布记录](b7-publication.json)与本记忆随后另作提交推送。赛事仍未上传或提交。
+>
+> 续做不要重读B0–B6或重下权重：A12交接附件已完整阅读，固定A报告来源 `f2c1fbd5638ef58f3f23130dc6dad4831814d126`，8份内容及Git blob逐项核验，导出 `MC/tmp/b7_20261011/a-source-export.json`。A完整SFT权重 `D:/digital-person/weights/sft-short` 及candidate config在此机确实不存在（已提升权限准确核对）；按已确认总约定继续基础模型，没有代训或宣称集成SFT。A4 official50是官方格式合成；A8真实官方200/60是后续整理，不混同训练来源。A平台GPU后来EPERM，只有CPU短训成果，固定原始平台日志摘录已打包。A/C区域未修改，C课程材料不是此次官方专家评审必需项。
+>
+> 最终镜像 `sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe`，25,969,383,103字节；4个同image ID容器network none/exit0并移除，真实CUDA初始化1次，完整3样例且ID原样、store隔离、无截断。平均9831.629241ms；required100但实际3，complete=false。基础模型真实回复，情绪/画像规则补齐，不能称共情质量或双4090成绩。最终18份材料manifest `60e0cf1fbd7267469555ddd1855ea20ff2baa5781f1fd68cc0d15b61bb7123ba`，材料目录 `/root/AI技术赛道-数字人综合情感对话模型-AI队`。机器记录见 [b7-freeze.json](b7-freeze.json)、[b7-gpu-offline.json](b7-gpu-offline.json)、[b7-build.json](b7-build.json)、[b7-samples.json](b7-samples.json)，人工说明 [提交记录](../../docs/提交记录.md)。
+>
+> 实际D盘最终归档 `D:/B2-B7-20261011/final-verified-20261011T093309Z/fallback-image.tar`，9,322,866,688字节，SHA256 `0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742`；直接导出D，Windows独立重读SHA一致。原B6镜像/归档原样保留；首份17材料草案保留历史但未选中。没有docker load重跑。环境继续使用专用 `B2-B6-Ubuntu22`/Docker29.9.0，WSL仍启动，自有四个验证容器已移除，不装新环境、不开云实例，不消耗训练卡券。大文件均D，不额外复制9GB、不广泛prune。
+>
+> 平台报名数字人赛题且成功；收尾登录曾失效，用户已重新登录，认证worksubmit再次核对数字人赛题、外部来源/西南一区“未上传”。真实截图本机 `D:/B2-B7-20261011/platform-not-uploaded-20261011.jpg`，不进Git/镜像。没有点击提交作品，没有上传对象、成功机会余额、最后成功或测评分。仅匿名探测FTP220/AUTH TLS234；正常TLS实际拒绝自签名证书，尚未获取/发送FTP密码或登录。公开证书SHA256 `a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e`，需要具体证书信任处理后再上传，不能静默关闭验证。私有链接、账号、密码不进Git或镜像。续做只完成未上传/提交及发布记录，不重新构建或验收未变产物、不进入B8。
+
+## B6 历史检查点（以下状态记录于B6交付时）
+
 - 用户点名的 **B6 已完成本机真实禁网 GPU 镜像验收**，不进入 B7–B8。使用一张 RTX 5060 Laptop（约8GB），不是正式双4090测评或模型质量验收；3条公开样例全输出，参考计时 complete=false，因为不足100条。
 - Agent 负责提交、推送分支/PR；用户手动合并和拉取。**不 fetch/pull/merge**。当前仓库 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0`、分支 `codex/b6-container`，原 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10) 已更新。本次实现/真实验收/说明提交 `6ed0cfd2f0911c73d6d75246efc277cbf8cb364b` 已实际推送，发布记录见 [b6-publication.json](b6-publication.json)；观察为open/未合并，不预写用户合并。
 - 本轮现有 `.venv`、A/B源码和完整基线复用；没有改 A model/prompts/weights 或 C 前端，没有重复下载权重。本机下载、大模型、镜像和 Linux VHD/交换盘均在 D。只修改 B 区域及共享总约定。

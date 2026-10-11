@@ -1,0 +1,36 @@
+{
+  "recorded_at_utc": "2026-10-11T10:06:28.055475+00:00",
+  "team_name": "AI队",
+  "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+  "base_image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+  "image_size_bytes": 25969383103,
+  "archive_path": "D:\\B2-B7-20261011\\final-verified-20261011T093309Z\\fallback-image.tar",
+  "archive_bytes": 9322866688,
+  "archive_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742",
+  "windows_archive_hash_verified": true,
+  "archive_identity_verified": true,
+  "materials_code_commit": "270688182f67e47c4834f7feb16bf99fe951cf82",
+  "model_pipeline_b_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+  "a_model_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+  "a_report_commit": "f2c1fbd5638ef58f3f23130dc6dad4831814d126",
+  "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+  "materials_sha256": "60e0cf1fbd7267469555ddd1855ea20ff2baa5781f1fd68cc0d15b61bb7123ba",
+  "gpu_offline_verified": true,
+  "scope": "actual single RTX5060 Laptop, 3 official public samples; no official score",
+  "fallback_retained": {
+    "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+    "archive_path": "D:/B2-B6-20261011/gpu-verified-20261011T050300Z/fallback-image.tar",
+    "archive_sha256": "3913aa097e32610fca2dfb910aaf30a25e37a99ae6b9ed3b9e72ebd056eddd8c"
+  },
+  "uploaded": false,
+  "contest_submitted": false,
+  "successful_opportunities_remaining": null,
+  "last_successful_submission": null,
+  "upload_blocker": "Platform FTP server AUTH TLS is supported but normal certificate verification fails: self-signed certificate",
+  "ftp_certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+  "tests": {
+    "passed": 69,
+    "skipped": 1,
+    "skip_reason": "Windows user cannot create symlink; WinError1314; pure tool tests, no quality score"
+  }
+}

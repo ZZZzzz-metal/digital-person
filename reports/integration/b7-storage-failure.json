@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "observed_at_beijing": "2026-10-11T19:47:05.539035+08:00",
+  "stage": "B7",
+  "user_operated_file_chooser_and_upload": true,
+  "source_log": "D:\\B2-B7-20261011\\手动上传\\upload-20261011-193253-e29743c5.jsonl",
+  "source_log_sha256": "c8e02fe9f561d2399e106bee143195b316440a205d17179dd38716548a565b80",
+  "source_events": [
+    {
+      "event": "archive_verification_started",
+      "expected_bytes": 9322866688,
+      "credentials_accessed": false,
+      "network_used": false
+    },
+    {
+      "event": "archive_verification_passed",
+      "checked_bytes": 9322866688,
+      "sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742",
+      "elapsed_seconds": 5.2,
+      "credentials_accessed": false,
+      "network_used": false
+    },
+    {
+      "event": "credentials_consumed",
+      "one_use": true,
+      "upload_mode": "manual_stor_unique",
+      "atomic_no_overwrite": false,
+      "no_automatic_retry_or_remote_delete": true
+    },
+    {
+      "event": "data_tls_connected",
+      "session_reused": true,
+      "send_buffer_bytes": 4194304,
+      "tls_version": "TLSv1.3"
+    },
+    {
+      "event": "ready",
+      "expected_bytes": 9322866688,
+      "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+      "control_tls_version": "TLSv1.3",
+      "encrypted_data_required": true,
+      "local_sha256_verified_this_run": false,
+      "expected_local_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742",
+      "transfer_mode": "STOR",
+      "atomic_no_overwrite": false
+    },
+    {
+      "event": "upload_not_verified",
+      "actual_remote_name": null,
+      "transferred_bytes": 0,
+      "no_remote_cleanup_performed": true
+    },
+    {
+      "event": "manual_upload_failed",
+      "exception_type": "error_perm",
+      "reason": null,
+      "ftp_reply_code": "553",
+      "no_automatic_retry_or_remote_delete": true,
+      "competition_submission_performed": false
+    }
+  ],
+  "diagnostic_log": "D:\\B2-B7-20261011\\手动上传\\只读存储诊断-20261011.jsonl",
+  "diagnostic_log_sha256": "08c484b6147a94e84d041c083ef96c3bd3ad3285fab2f40f7639167aa61c0558",
+  "diagnostic_events": [
+    {
+      "event": "diagnostic_authenticated",
+      "tls": "TLSv1.3",
+      "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+      "commands_read_only": true
+    },
+    {
+      "event": "diagnostic_result",
+      "command": "PWD",
+      "is_root": true
+    },
+    {
+      "event": "diagnostic_result",
+      "command": "FEAT",
+      "features": [
+        "SIZE",
+        "REST STREAM",
+        "UTF8",
+        "EPSV",
+        "PASV",
+        "AUTH TLS"
+      ]
+    },
+    {
+      "event": "diagnostic_result",
+      "command": "SIZE known partial",
+      "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+      "bytes": 63963136
+    },
+    {
+      "event": "diagnostic_unavailable",
+      "command": "MLST current directory",
+      "exception_type": "error_perm",
+      "reply_code": "500",
+      "safe_ftp_reason": null
+    },
+    {
+      "event": "diagnostic_unavailable",
+      "command": "MLSD current directory",
+      "exception_type": "error_perm",
+      "reply_code": "500",
+      "safe_ftp_reason": null
+    },
+    {
+      "event": "data_tls_connected",
+      "session_reused": true,
+      "send_buffer_bytes": 4194304,
+      "tls_version": "TLSv1.3"
+    },
+    {
+      "event": "diagnostic_result",
+      "command": "LIST current directory",
+      "entry_count": 1,
+      "own_files": [
+        {
+          "basename": "AI-team-B2-B7-20261011-601aaf08.tar",
+          "mode_bits": "-rw-r--r--",
+          "bytes": 63963136
+        }
+      ]
+    },
+    {
+      "event": "diagnostic_complete",
+      "uploads_performed": false,
+      "remote_mutations_performed": false,
+      "quota_read": false,
+      "quota_reason": "no_guessed_SITE_or_quota_commands",
+      "original_server_replies_logged": false
+    }
+  ],
+  "finding": {
+    "local_archive_sha256_passed": true,
+    "local_archive_bytes": 9322866688,
+    "archive_check_seconds": 5.2,
+    "ftps_login_and_directory_listing_succeeded": true,
+    "ordinary_stor_transfer_open_failed_reply": "553",
+    "new_file_bytes_sent": 0,
+    "old_remote_file_bytes": 63963136,
+    "old_remote_file_sha256": null,
+    "remote_archive_complete": false,
+    "platform_error_root_cause": null,
+    "quota_and_directory_permissions_verified": false,
+    "pasv_vs_stor_reply_origin_in_old_log_distinguishable": false,
+    "tls_session_reuse_in_old_log_scope": "NLST preflight, not STOR file connection"
+  },
+  "actions": {
+    "read_only_diagnostic_authenticated_with_pinned_tls": true,
+    "upload_retry_by_agent": false,
+    "remote_file_deleted_or_overwritten": false,
+    "contest_submit_clicked": false,
+    "temporary_credential_bridge_cleaned": true,
+    "one_use_upload_credentials_consumed_by_user": true,
+    "one_use_upload_credentials_reprepared": false,
+    "support_message_sent_by_agent": false
+  },
+  "host_tool_fix": {
+    "files": [
+      {
+        "name": "manual_upload.py",
+        "bytes": 15772,
+        "sha256": "d151bb708eade4fdd74e06fb037ca29c10a971276f9e344f05d9119a73d7a34f"
+      },
+      {
+        "name": "ftps_upload.py",
+        "bytes": 19848,
+        "sha256": "cf99b98598840315a2da2db9c82270f70b483ff6d1100fee991bdfc1211c52c4"
+      }
+    ],
+    "changes": [
+      "classify safe FTP error reason",
+      "log opening_transfer phase",
+      "label data connection command so NLST is not STOR success"
+    ],
+    "mock_tests": 16,
+    "mock_assertions": 92,
+    "mock_tests_passed": true,
+    "mock_not_actual_upload": true,
+    "image_rebuilt": false
+  },
+  "remaining": [
+    "平台核查此次553的新文件创建失败，说明有效目录/命名要求或恢复相应权限/配额；目前只读信息不能确定根因。",
+    "恢复后重新准备一次性上传凭据，由用户再启动上传；完整校验成功后才能点赛事提交。"
+  ]
+}

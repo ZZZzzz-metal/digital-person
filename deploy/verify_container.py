@@ -1,7 +1,8 @@
-"""Build and verify the B6 candidate. Never infer GPU success from preparation.
+"""Build a B6 candidate or verify a B7 immutable image with review materials.
 
 Requires a working Linux Docker daemon with NVIDIA GPU support. Only containers
 created by this invocation are removed; images and successful results remain.
+Never infer GPU success from preparation, existing images or material-only checks.
 """
 from __future__ import annotations
 
@@ -11,6 +12,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -18,6 +20,7 @@ import time
 import uuid
 
 from prepare_bundle import verify_bundle
+from review_materials import DIRECTORY_NAME, load_review_manifest
 from saved_image import verify_saved_image
 
 LIMIT_BYTES = 50_000_000_000  # Team budget, not a clarification of official 50G.
@@ -177,27 +180,53 @@ def run(args) -> dict:
     args.work.mkdir(parents=True)
     report = {"started_at_utc": datetime.now(timezone.utc).isoformat(),
               "image_built": False, "gpu_offline_verified": False, "fallback_image_verified": False,
+              "image_reused": False, "review_materials_required": False, "review_materials_verified": False,
               "official_score_verified": False, "contest_submitted": False,
               "image_id": None, "repo_digests": [], "save_tar_sha256": None,
               "team_size_limit_bytes": LIMIT_BYTES, "runs": {}}
     started = time.perf_counter()
     try:
+        existing = getattr(args, "existing_image", None)
+        if existing is not None and (not isinstance(existing, str)
+                or re.fullmatch(r"sha256:[0-9a-f]{64}", existing) is None):
+            raise ValueError("Existing image must be an immutable full sha256 image ID")
+        materials_path = getattr(args, "review_materials", None)
+        materials_manifest = None
+        if materials_path is not None:
+            report["review_materials_required"] = True
+            load_review_manifest(Path(materials_path))
+            expected_path = args.work / "review-materials.expected.json"
+            with expected_path.open("xb") as stream:
+                stream.write(Path(materials_path).read_bytes())
+            materials_manifest = load_review_manifest(expected_path)
+            materials_sha = sha(expected_path)
+            report["review_materials_expected_sha256"] = materials_sha
         if shutil.which("docker") is None:
             raise RuntimeError("Docker CLI is missing; requires Linux Docker + NVIDIA GPU access")
         daemon = json.loads(execute(["docker", "info", "--format", "{{json .}}"] ))
         if daemon.get("OSType") != "linux":
             raise RuntimeError("A Linux Docker daemon is required")
         report["docker_server"] = {k: daemon.get(k) for k in ("ServerVersion", "OSType", "Architecture")}
-        checked = prepare_context(args.bundle, args.work / "context")
+        if existing is None:
+            checked = prepare_context(args.bundle, args.work / "context")
+        else:
+            checked = verify_bundle(args.bundle)
         report["bundle"] = checked
         iid_file = args.work / "image-id.txt"
-        execute(["docker", "build", "--iidfile", str(iid_file), "--tag", args.tag,
-                 str(args.work / "context")], args.work / "build.log")
-        iid = iid_file.read_text().strip()
+        if existing is None:
+            execute(["docker", "build", "--iidfile", str(iid_file), "--tag", args.tag,
+                     str(args.work / "context")], args.work / "build.log")
+            iid = iid_file.read_text().strip()
+            report["image_built"] = True
+        else:
+            iid = existing
+            iid_file.write_text(iid + "\n", encoding="utf-8")
+            report["build_skipped"] = True
         image = inspect("image", iid)
         if image["Id"] != iid or not iid.startswith("sha256:"):
-            raise RuntimeError("Built image ID mismatch")
-        report.update(image_built=True, image_id=iid, repo_digests=image.get("RepoDigests") or [],
+            raise RuntimeError("Selected image ID mismatch")
+        report["image_reused"] = existing is not None
+        report.update(image_id=iid, repo_digests=image.get("RepoDigests") or [],
                       image_descriptor=image.get("Descriptor"),
                       image_size_bytes=image["Size"])
         if image["Size"] >= LIMIT_BYTES:
@@ -209,6 +238,24 @@ def run(args) -> dict:
         if sha(test) != original_sha:
             raise RuntimeError("Input changed during copy")
         report["input_sha256"] = original_sha
+        if materials_manifest is not None:
+            report["runs"]["materials"] = run_container(iid,
+                ["/opt/b2-tools/review_materials.py", "/root/" + DIRECTORY_NAME,
+                 "/b2-materials-evidence/materials-verify.json",
+                 "--expected-manifest-sha256", materials_sha],
+                mount(args.work, "/b2-materials-evidence"), args.work, "materials", entrypoint=PYTHON)
+            materials_evidence = json.loads((args.work / "materials-verify.json").read_text(encoding="utf-8"))
+            if (not isinstance(materials_evidence, dict) or materials_evidence.get("verified") is not True
+                    or materials_evidence.get("manifest_sha256") != materials_sha
+                    or materials_evidence.get("directory_name") != DIRECTORY_NAME
+                    or materials_evidence.get("code_commit") != materials_manifest["code_commit"]
+                    or type(materials_evidence.get("file_count")) is not int
+                    or materials_evidence["file_count"] != len(materials_manifest["files"])
+                    or type(materials_evidence.get("total_bytes")) is not int
+                    or materials_evidence["total_bytes"] != sum(e["bytes"] for e in materials_manifest["files"])
+                    or materials_evidence.get("files") != materials_manifest["files"]):
+                raise RuntimeError("Container review-material evidence does not match the frozen manifest")
+            report.update(review_materials_verified=True, review_materials=materials_evidence)
         probe_dir = args.work / "probe"
         probe_dir.mkdir()
         report["runs"]["gpu_probe"] = run_container(iid,
@@ -271,9 +318,12 @@ def main() -> int:
     parser.add_argument("--test-file", type=Path, required=True)
     parser.add_argument("--work", type=Path, required=True)
     parser.add_argument("--tag", default="b2-candidate:b6")
+    parser.add_argument("--existing-image", help="Verify an existing immutable sha256 image ID; skip build only")
+    parser.add_argument("--review-materials", type=Path, help="Frozen local review-material manifest to verify inside the image")
     args = parser.parse_args()
     report = run(args)
-    print(json.dumps({k: report.get(k) for k in ("image_built", "gpu_offline_verified", "fallback_image_verified", "image_id", "failure")}))
+    print(json.dumps({k: report.get(k) for k in ("image_built", "image_reused", "gpu_offline_verified",
+        "review_materials_required", "review_materials_verified", "fallback_image_verified", "image_id", "failure")}))
     return 0 if report["gpu_offline_verified"] else 1
 
 

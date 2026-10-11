@@ -1,0 +1,9 @@
+# B7 adds reviewer documents to the existing, verified B6 image.
+# Bind BASE_IMAGE to an inspected local tag; build offline with --pull=false.
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+COPY review_materials.py /opt/b2-tools/review_materials.py
+COPY materials/ /root/AI技术赛道-数字人综合情感对话模型-AI队/
+RUN /opt/conda/envs/conda_env/bin/python /opt/b2-tools/review_materials.py /root/AI技术赛道-数字人综合情感对话模型-AI队 /opt/b2-evidence/review-materials-build.json
+WORKDIR /root/participant
+ENTRYPOINT ["bash", "/root/participant/start.sh"]
