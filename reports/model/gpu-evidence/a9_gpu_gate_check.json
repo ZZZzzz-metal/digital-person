@@ -1,0 +1,60 @@
+{
+  "node": "A4 小规模训练尝试",
+  "config_path": "/mnt/storage/b2-a/repo/training/gpu/model_config_gpu.json",
+  "config": {
+    "config_version": "a-train-gpu-v1",
+    "note": "A9 GPU 实例训练配置。路径相对本文件所在目录（training/gpu/）解析；--out 可覆盖 output_dir。",
+    "base_model_dir": "../../weights/base-qwen2.5-0.5b-instruct",
+    "base_model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "output_dir": "../../../runs/gpu-sft-short",
+    "candidate_model_version": "b2-a-qwen2.5-0.5b-instruct-sft-gpu-v1",
+    "data": {
+      "train": "../../data/training/processed_official/train.jsonl",
+      "valid": "../../data/training/processed_official/valid.jsonl"
+    },
+    "data_version": "official-200-train-60-valid (training/gpu/prepare_official_samples.py, seed 20261010)",
+    "trainable_layers": 4,
+    "train_lm_head": false,
+    "max_len": 448,
+    "seed": 20261010,
+    "lr": 5e-05,
+    "weight_decay": 0.0,
+    "grad_accum": 8,
+    "micro_batch": 8,
+    "max_epochs": 2,
+    "max_steps": 30,
+    "max_minutes": 40,
+    "warmup_steps": 5,
+    "grad_clip": 1.0,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "torch_threads": 16,
+    "log_every": 5,
+    "val_every": 10,
+    "budget": {
+      "gpu_card_hours_cap": 6,
+      "stop_at_gpu_minutes": 330,
+      "gpu_card_hours_used": 0,
+      "note": "用户口径：累计训练最多 6 GPU 卡时且不得超过剩余额度（用户报剩余 ≥8 卡时）。停止条件设在 5.5 小时 = 330 分钟，留 0.5 小时余量。单卡 RTX 4090，GPU 卡时 = GPU 墙钟小时数。"
+    }
+  },
+  "smoke_mode": true,
+  "started_at": "2026-10-11 06:13:12",
+  "status": "failed",
+  "device": null,
+  "device_requested": "cuda",
+  "dtype": null,
+  "gpu_available": false,
+  "gpu_card_hours_used": 0,
+  "gpu_card_hours_cap": 6.0,
+  "max_gpu_minutes": 330.0,
+  "gpu_gate": {
+    "passed": false,
+    "reason": "torch.cuda.is_available() = False"
+  },
+  "notes": [],
+  "blockers": [],
+  "failures": [
+    "CUDA 真实可算性闸门未通过：torch.cuda.is_available() = False。仅 nvidia-smi 能看到显卡不算通过，因此不在该设备上开跑，以免浪费卡时。"
+  ]
+}
