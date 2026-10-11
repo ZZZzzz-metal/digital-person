@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "b2-digital-person"
+version = "0.1.0"
+description = "B2 shared contracts and demo backend skeleton"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi==0.143.0",
+    "pydantic==2.14.0",
+    "uvicorn==0.54.0",
+    "jsonschema==4.26.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.1.1", "httpx==0.28.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["b2_core*", "server*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/server"]
+addopts = "-ra"

@@ -1,0 +1,10 @@
+{
+  "response_text": "【protocol fixture】虚构回复，仅用于字段校验。",
+  "emotion_label": "neutral",
+  "user_profile": {
+    "personality_traits": [],
+    "interests": [],
+    "style": []
+  },
+  "memory_refs": []
+}

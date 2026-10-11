@@ -1,0 +1,11 @@
+{
+  "session_id": "session-fixture-1",
+  "client_turn_id": "turn-fixture-1",
+  "reply": "【虚构协议样例】你想从哪部分复习聊起？",
+  "emotion": "unknown",
+  "expression": "listening",
+  "retrieved_memories": [],
+  "model_version": "protocol-fixture-v1",
+  "elapsed_ms": 0,
+  "is_mock": true
+}

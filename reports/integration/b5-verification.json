@@ -1,0 +1,357 @@
+{
+  "checked_at_utc": "2026-10-10T15:53:18.844546+00:00",
+  "branch": "codex/b5-offline",
+  "base_commit": "58a2115b28f93ae73ad9948deeb26498b42c752d",
+  "previous_PR_8_merged_at_start": true,
+  "main_sha_observed": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+  "no_fetch_pull_merge_performed": true,
+  "project_A_or_C_implementation_files_modified": false,
+  "scope": "B5 official independent local-model adapter/CLI/checker and actual public-sample CPU acceptance",
+  "b5_acceptance_complete": true,
+  "official_container_verified": false,
+  "official_gpu_verified": false,
+  "training_performed": false,
+  "gpu_coupon_used": false,
+  "platform_submission_performed": false,
+  "official_quality_score_measured": false,
+  "sft_short_candidate_verified": false,
+  "environment_reused": "b4-real-environment.json; no dependency or model configuration changes",
+  "pytest": {
+    "full_regression_before_final_initialization_error_redaction": {
+      "tests": 368,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "groups": {
+        "tests.server.test_chat": 49,
+        "tests.server.test_contracts": 44,
+        "tests.server.test_health": 20,
+        "tests.server.test_memories": 39,
+        "tests.server.test_memory_context": 16,
+        "tests.server.test_memory_store": 38,
+        "tests.server.test_official_adapter": 47,
+        "tests.server.test_official_cli": 27,
+        "tests.server.test_sessions": 28,
+        "tests.server.test_store": 31,
+        "tests.server.test_turn": 29
+      },
+      "junit_suite_seconds": 18.107,
+      "reported_elapsed_seconds": 18.6,
+      "observed_exit_code": 0,
+      "junit_sha256": "88036fdb64f56f35ed0e95cbe5c1eaaab29012eaad339b92d58ea74fbfdc7646"
+    },
+    "final_affected_official_tests": {
+      "tests": 76,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "groups": {
+        "tests.server.test_official_adapter": 47,
+        "tests.server.test_official_cli": 29
+      },
+      "junit_suite_seconds": 7.651,
+      "reported_elapsed_seconds": 8.08,
+      "observed_exit_code": 0,
+      "junit_sha256": "5a0dce83ef0af155f6c356f9fc66f2b632f6884830fc8991d77b97336b61c913"
+    },
+    "unchanged_backend_groups": {
+      "tests.server.test_chat": 49,
+      "tests.server.test_contracts": 44,
+      "tests.server.test_health": 20,
+      "tests.server.test_memories": 39,
+      "tests.server.test_memory_context": 16,
+      "tests.server.test_memory_store": 38,
+      "tests.server.test_sessions": 28,
+      "tests.server.test_store": 31,
+      "tests.server.test_turn": 29
+    },
+    "distinct_validated_tests_across_runs": 370,
+    "note": "368 passed in the full run, then 76 official tests after the final failure-log-only fix; not a claimed single full 370-test run"
+  },
+  "schema_check": {
+    "command": "python contracts/export_schema.py --check",
+    "observed_exit_code": 0,
+    "schemas": 21,
+    "fictional_examples": 21,
+    "shared_DTO_fields_changed": false,
+    "team_raw_input_schema_valid": true,
+    "official_inputs_validated": 3
+  },
+  "dependency_check": {
+    "command": "python -m pip check",
+    "observed_exit_code": 0,
+    "stdout": "No broken requirements found."
+  },
+  "Bash_syntax_check": {
+    "command": "Git Bash -n submission/participant/start.sh",
+    "observed_exit_code": 0,
+    "conda_activation_or_Linux_runtime_verified": false
+  },
+  "reference_snapshots": {
+    "count": 12,
+    "all_unchanged": true,
+    "checks": [
+      {
+        "path": "submission/official-reference/README.md",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/README.md",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/configs/inference_config.json",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/requirements.txt",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/run_inference.py",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/start.sh",
+        "sha256_matches": true
+      },
+      {
+        "path": "contracts/official/submission.schema.json",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/templates/submission_template.json",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/test_inference_data.jsonl",
+        "sha256_matches": true
+      },
+      {
+        "path": "contracts/official/train_public.schema.json",
+        "sha256_matches": true
+      },
+      {
+        "path": "contracts/official/val_public.schema.json",
+        "sha256_matches": true
+      },
+      {
+        "path": "submission/official-reference/participant/templates/submission_schema.json",
+        "sha256_matches": true
+      }
+    ]
+  },
+  "process_network_guard": {
+    "four_connection_entrypoints_rejected_in_independent_subprocess": true,
+    "proof": "test_subprocess_offline_guard_blocks_all_connections_without_changing_pytest_sockets",
+    "Docker_network_none_verified": false
+  },
+  "real_offline": {
+    "report": "b5-real-offline.json",
+    "sha256": "89648fdcff57c424b55142e0363a261c637b5137f6812ee346df235cb6f5967f",
+    "observed_exit_code": 0,
+    "checks_passed": 53,
+    "checks_total": 53,
+    "sample_predictions": 5,
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "device": "CPU",
+    "is_mock": false,
+    "original_samples": 3,
+    "original_timed_rounds": 3,
+    "original_complete": false,
+    "parse_failure_samples": 3,
+    "A_JSON_parse_attempt_failures_per_sample": [
+      2,
+      2,
+      2
+    ],
+    "generation_paths": [
+      "fallback_rules",
+      "fallback_rules",
+      "fallback_rules"
+    ],
+    "response_source": "real local model",
+    "emotion_and_profile_source": "A rules",
+    "history_dropped_turns": [
+      0,
+      0,
+      0
+    ],
+    "reverse_samples": 2,
+    "complete_predictions_equal_by_ID": true,
+    "original_independent_checker_exit_code": 0,
+    "reversed_independent_checker_exit_code": 0,
+    "all_owned_processes_stopped": true,
+    "candidate_basic_text_checks": [
+      {
+        "id": "test1_000001_t5",
+        "response_chars": 308,
+        "response_contains_Chinese": true,
+        "emotion_label": "anxiety",
+        "memory_refs": []
+      },
+      {
+        "id": "test1_000001_t7",
+        "response_chars": 269,
+        "response_contains_Chinese": true,
+        "emotion_label": "relaxed",
+        "memory_refs": []
+      },
+      {
+        "id": "test1_000002_t5",
+        "response_chars": 52,
+        "response_contains_Chinese": true,
+        "emotion_label": "neutral",
+        "memory_refs": []
+      }
+    ],
+    "final_current_checker_revalidation_exit_code": 0,
+    "source_note": "Actual inference preceded final initialization error redaction and bytecode-cache disabling; generation, input projection, success output and timing paths were unchanged; affected entry/failure paths rerun in the final 76 tests"
+  },
+  "retained_CPU_fallback": {
+    "candidate": {
+      "input_ids": [
+        "test1_000001_t5",
+        "test1_000001_t7",
+        "test1_000002_t5"
+      ],
+      "output_ids": [
+        "test1_000001_t5",
+        "test1_000001_t7",
+        "test1_000002_t5"
+      ],
+      "submission_path": "reports/integration/.b5-work/real-20261010T154147Z-f99da41f/original-result/submission.jsonl",
+      "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+      "performance_path": "reports/integration/.b5-work/real-20261010T154147Z-f99da41f/original-result/performance_report.json",
+      "performance_sha256": "d1d336d205c053a422a5316edc36f4e5a5e89dfa5ad95911d82ea970109c4ca6",
+      "performance": {
+        "backend": "transformers",
+        "version": "b2_b5_official_v1",
+        "hardware_label": "local Windows CPU; independent B5 acceptance, not official GPU",
+        "timing_scope": "A official prompt/tokenization/generation/decode/parse/retry/fallback and B strict output validation; CUDA synchronized before/after; excludes model load, file writes and store creation",
+        "required_rounds": 100,
+        "rounds": 3,
+        "complete": false,
+        "samples": 3,
+        "test_file_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+        "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+        "parse_failure_count": 3,
+        "parse_failure_ids": [
+          "test1_000001_t5",
+          "test1_000001_t7",
+          "test1_000002_t5"
+        ],
+        "average_latency_ms": 26560.4208,
+        "median_latency_ms": 30498.4728,
+        "p95_latency_ms": 38611.9986,
+        "min_latency_ms": 10570.791,
+        "max_latency_ms": 38611.9986,
+        "latencies_ms": [
+          30498.4728,
+          38611.9986,
+          10570.791
+        ],
+        "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1"
+      },
+      "parse_trace_by_id": {
+        "test1_000001_t5": {
+          "elapsed_ms": 30498.4728,
+          "mode": "fallback_rules",
+          "parse_failures": 2,
+          "parse_failed": true,
+          "emotion_source": "rules",
+          "profile_source": "rules",
+          "response_source": "model",
+          "prompt_tokens": 1938,
+          "new_tokens": 581,
+          "dropped_turns": 0,
+          "schema_valid": true
+        },
+        "test1_000001_t7": {
+          "elapsed_ms": 38611.9986,
+          "mode": "fallback_rules",
+          "parse_failures": 2,
+          "parse_failed": true,
+          "emotion_source": "rules",
+          "profile_source": "rules",
+          "response_source": "model",
+          "prompt_tokens": 3176,
+          "new_tokens": 678,
+          "dropped_turns": 0,
+          "schema_valid": true
+        },
+        "test1_000002_t5": {
+          "elapsed_ms": 10570.791,
+          "mode": "fallback_rules",
+          "parse_failures": 2,
+          "parse_failed": true,
+          "emotion_source": "rules",
+          "profile_source": "rules",
+          "response_source": "model",
+          "prompt_tokens": 1043,
+          "new_tokens": 198,
+          "dropped_turns": 0,
+          "schema_valid": true
+        }
+      }
+    },
+    "environment": ".runtime/b4-real-env/",
+    "config": "reports/integration/.b4-work/real-assets/inference_config.base.json",
+    "A_source": "workspace/tmp/b5_20261010/upstream-A/src",
+    "protected_by_refuse_overwrite": true,
+    "formal_contest_GPU_candidate": false
+  },
+  "final_local_source_files": {
+    "submission/participant/adapter.py": {
+      "sha256": "60821a1439a72dd980700482ea2458f57ea3cea2619ece7c62f56dea189f7684",
+      "bytes": 11656
+    },
+    "submission/participant/run_inference.py": {
+      "sha256": "b90e3a7b8be9f37d509fd89b6957abc1a1b08c9191b33dab731c562ac5aab73e",
+      "bytes": 16969
+    },
+    "submission/participant/check_output.py": {
+      "sha256": "288cc9bd77c25af7d068a678ab095e3583668c3d2369085611cb9084efd7fe3a",
+      "bytes": 2008
+    },
+    "submission/participant/start.sh": {
+      "sha256": "dc104a95a2b39e572b67966f706a2dd60b18581e6b23356e31356447a7e55deb",
+      "bytes": 596
+    },
+    "reports/integration/verify_b5_offline.py": {
+      "sha256": "81fefdce6f18e61727df992b036019a0ea27c9946d1155d70a75b71114301e06",
+      "bytes": 28451
+    },
+    "contracts/official/inference_input.schema.json": {
+      "sha256": "028e90bbf3e1e02be9ee74d974e2a6c5c750a3271d6d03a83806530e28ce3da9",
+      "bytes": 1043
+    },
+    "contracts/official/effective_submission.schema.json": {
+      "sha256": "306e4e7bda738c2b6620d8f606ba907658468ce2c7a8af77a3c46e6d576e5bc8",
+      "bytes": 2158
+    },
+    "src/b2_core/contracts.py": {
+      "sha256": "85203a1cfc4aac1941f2fd44bb64ac8b9e3c2ed8818ab578e25a6da5871c4ab1",
+      "bytes": 6961
+    },
+    "src/b2_core/store.py": {
+      "sha256": "2c78aa8b942381d3a802dc054911af4e7a87b2cf261151b6f62b21ca1a2ad367",
+      "bytes": 23395
+    },
+    "tests/server/test_official_adapter.py": {
+      "sha256": "72dfc0837026e834a2ab131f1962699c1b5ef0a9776b96a2f59b2187fd5ea107",
+      "bytes": 10537
+    },
+    "tests/server/test_official_cli.py": {
+      "sha256": "b1e5c1b7eb32c06b55b9178ad50d44fb86a061474805ff1a4d9e928b2a9078a9",
+      "bytes": 20449
+    }
+  },
+  "hash_note": "Hashes are actual local tested bytes. Git may normalize text line endings; these do not claim every success run used the post-redaction source hash.",
+  "human_blockers_for_B5": [],
+  "future_stage_work": [
+    "B6 actual Linux conda_env/GPU container/network-none and result-mount hardlink verification",
+    "B6 freeze a Docker candidate below 50G with complete weights and exact runtime manifest",
+    "B7 real platform submission; C page and A trained candidate remain independently owned"
+  ]
+}

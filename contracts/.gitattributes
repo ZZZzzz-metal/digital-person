@@ -1,0 +1,4 @@
+# Generated contracts are byte-compared by export_schema.py --check.
+# Keep deterministic LF on Windows checkouts as well as on Linux.
+schema/*.json text eol=lf
+examples/*.json text eol=lf

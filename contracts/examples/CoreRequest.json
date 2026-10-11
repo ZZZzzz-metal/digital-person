@@ -1,0 +1,12 @@
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "【虚构协议样例】我想聊聊复习安排。"
+    }
+  ],
+  "memory_context": "",
+  "persona": "伴学：中文日常陪伴助手",
+  "max_new_tokens": 256,
+  "temperature": 0.3
+}

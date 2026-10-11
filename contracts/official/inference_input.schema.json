@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "B5 团队派生输入说明，非官方新 schema。参考程序必需 id/history；关联字段若存在则按本合同严格校验，末项为当前 user、target/唯一递增 turn ID 的关系由 Python 跨字段检查。额外字段不投影给模型。",
+  "type": "object",
+  "required": ["id", "history"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "conversation_id": {"type": "string", "minLength": 1, "pattern": "\\S"},
+    "target_user_turn_id": {"type": "integer", "minimum": 1},
+    "history": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "required": ["role", "content"], "additionalProperties": true,
+        "properties": {
+          "turn_id": {"type": "integer", "minimum": 1},
+          "role": {"enum": ["user", "assistant"]},
+          "content": {"type": "string", "minLength": 1, "pattern": "\\S"}
+        }
+      }
+    }
+  }
+}

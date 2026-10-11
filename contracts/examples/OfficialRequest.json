@@ -1,0 +1,10 @@
+{
+  "sample_id": "test1_protocol_fixture_t1",
+  "history": [
+    {
+      "role": "user",
+      "content": "【虚构协议样例】我想聊聊复习安排。"
+    }
+  ],
+  "memory_context": ""
+}

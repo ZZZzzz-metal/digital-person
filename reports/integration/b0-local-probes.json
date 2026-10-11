@@ -1,0 +1,114 @@
+{
+  "checked_at_beijing": "2026-10-10T18:26:25.246388+08:00",
+  "scope": "B0 reference bytes, input reader and missing-resource startup paths; no model inference",
+  "reference_files": [
+    {
+      "path": "submission/official-reference/README.md",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/README.md",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/configs/inference_config.json",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/requirements.txt",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/run_inference.py",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/start.sh",
+      "sha256_matches": true
+    },
+    {
+      "path": "contracts/official/submission.schema.json",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/templates/submission_template.json",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/test_inference_data.jsonl",
+      "sha256_matches": true
+    },
+    {
+      "path": "contracts/official/train_public.schema.json",
+      "sha256_matches": true
+    },
+    {
+      "path": "contracts/official/val_public.schema.json",
+      "sha256_matches": true
+    },
+    {
+      "path": "submission/official-reference/participant/templates/submission_schema.json",
+      "sha256_matches": true
+    }
+  ],
+  "python_version": "3.12.14",
+  "installed_package_versions": {
+    "torch": null,
+    "transformers": null,
+    "accelerate": null,
+    "vllm": null,
+    "jsonschema": null
+  },
+  "inference_sample": {
+    "rows": 3,
+    "unique_ids": 3,
+    "ids": [
+      "test1_000001_t5",
+      "test1_000001_t7",
+      "test1_000002_t5"
+    ],
+    "ids_matching_output_schema": 0,
+    "schema_pattern": "^test_[0-9]{6}_t[0-9]+$",
+    "schema_pattern_scope": "historical_original_snapshot_not_current_acceptance",
+    "current_id_rule": "exact_copy_of_corresponding_input_id",
+    "current_id_rule_source": "contracts/official/clarification-2026-10-10.json",
+    "effective_schema": "contracts/official/effective_submission.schema.json",
+    "effective_id_types_compatible": true
+  },
+  "probes": {
+    "empty_input": {
+      "expected_error_observed": true,
+      "message": "测试文件为空: <TEMP_RESULT>\\empty.jsonl"
+    },
+    "duplicate_ids": {
+      "expected_error_observed": true,
+      "message": "测试文件包含重复 id"
+    },
+    "python_missing_model": {
+      "command": "python submission/official-reference/participant/run_inference.py submission/official-reference/test_inference_data.jsonl <TEMP_RESULT>",
+      "exit_code": 1,
+      "expected_error_observed": true,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"<WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\run_inference.py\", line 465, in <module>\n    main()\n  File \"<WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\run_inference.py\", line 346, in main\n    local_model = model_path(config)\n                  ^^^^^^^^^^^^^^^^^^\n  File \"<WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\run_inference.py\", line 135, in model_path\n    raise FileNotFoundError(f\"本地模型目录不存在: {resolved}\")\nFileNotFoundError: 本地模型目录不存在: <WORKSPACE>\\digital-person-b0\\submission\\official-reference\\participant\\model\n",
+      "submission_created": false,
+      "performance_report_created": false
+    },
+    "shell_missing_environment": {
+      "command": "bash submission/official-reference/participant/start.sh submission/official-reference/test_inference_data.jsonl <TEMP_RESULT>",
+      "runtime": "Git Bash on Windows",
+      "exit_code": 1,
+      "expected_error_observed": true,
+      "stdout": "",
+      "stderr": "<WORKSPACE>/digital-person-b0/submission/official-reference/participant/start.sh: line 5: activate: No such file or directory\n",
+      "submission_created": false,
+      "performance_report_created": false,
+      "official_linux_container_validation": false
+    }
+  },
+  "protocol_probes_as_expected": true,
+  "predictions_generated": false,
+  "performance_report_generated": false,
+  "model_inference_verified": false,
+  "official_container_verified": false,
+  "official_submission_ready": false
+}

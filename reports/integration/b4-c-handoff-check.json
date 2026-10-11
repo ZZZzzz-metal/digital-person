@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-10T14:54:16Z",
+  "timestamp_note": "Time of recording the actual read-only observations from this task. The earlier GitHub GET response timestamps were not captured; the counts below describe that observed snapshot, not a later repository refresh.",
+  "repository": "https://github.com/ZZZzzz-metal/digital-person",
+  "scope": "Read-only C frontend handoff inspection for B4; no frontend implementation or browser integration performed.",
+  "github": {
+    "method": "Authenticated GitHub REST GETs; credentials were neither printed nor saved in this report.",
+    "endpoints": [
+      "https://api.github.com/repos/ZZZzzz-metal/digital-person/branches?per_page=100",
+      "https://api.github.com/repos/ZZZzzz-metal/digital-person/pulls?state=all&per_page=100"
+    ],
+    "main_sha": "259fac62d8d5bc8ceb6104e1d49b68cfd063996b",
+    "main_paths_evidence": "tmp/b4_20261010/prerequisite.json: all_paths; its main_sha matched the observed main branch SHA.",
+    "branch_count": 8,
+    "observed_branches": [
+      "codex/b2-a-model",
+      "codex/b2-agent-plan",
+      "codex/b2-b0-only",
+      "codex/b2-b1-contracts",
+      "codex/b2-official-protocol",
+      "codex/b2-storage-sessions",
+      "codex/b3-memory",
+      "main"
+    ],
+    "observed_pr_count": 7,
+    "pr_scope": "PRs 1 through 7, exactly the returned snapshot; this report makes no claim about later PRs.",
+    "observed_pr_numbers": [1, 2, 3, 4, 5, 6, 7],
+    "all_observed_prs_closed_and_merged": true,
+    "c_frontend_branch_found": false,
+    "c_frontend_pr_found": false,
+    "apps_web_source_in_observed_main_tree": false
+  },
+  "local_search": {
+    "scope": "MC workspace recursive file inventory, including digital-person, digital-person-b0, output and tmp.",
+    "method": "rg --files --hidden with filename patterns package.json, vite.config.*, *C*验收*, *C*交付*.",
+    "excluded_patterns": ["**/.venv*/**", "**/node_modules/**", "**/.git/**"],
+    "respects_ignore_rules": true,
+    "scope_limit": "No claim about ignored or excluded files, directories outside MC, other repositories, or unpublished C work.",
+    "frontend_package_or_vite_config_found": false,
+    "c_acceptance_or_handoff_report_found": false,
+    "only_matching_files": [
+      "output/B2三人并行开发计划/docs/分工/C-前端数字人与作品交付.md",
+      "digital-person-b0/docs/分工/C-前端数字人与作品交付.md",
+      "digital-person/docs/分工/C-前端数字人与作品交付.md"
+    ]
+  },
+  "c_integration": {
+    "performed": false,
+    "browser_check_performed": false,
+    "frontend_dependency_install_performed": false,
+    "frontend_started": false,
+    "actual_c_client_behaviour_verified": false,
+    "reason": "No published C frontend source or runnable local C handoff was found in the inspected snapshot and file inventory.",
+    "missing_handoff": [
+      "An exact C commit/branch/PR or source archive containing the frontend.",
+      "Frontend dependency declarations and npm lock file.",
+      "README with verified Node/npm requirements and actual start/build commands.",
+      "Actual API proxy/environment settings and mock-mode switch.",
+      "C acceptance notes for failed sends retaining text and client_turn_id, without fake replies."
+    ],
+    "expected_handoff_paths_to_obtain": [
+      "apps/web/package.json",
+      "apps/web/package-lock.json",
+      "apps/web/README.md",
+      "apps/web/vite.config.*",
+      "apps/web/src/**",
+      "apps/web/.env.example or the actual documented environment configuration",
+      "C's actual frontend acceptance/handoff record, location not yet known"
+    ]
+  },
+  "taskbook_requirements_only": {
+    "reference": "docs/分工/C-前端数字人与作品交付.md and docs/分工/00-总约定.md",
+    "is_actual_frontend_evidence": false,
+    "expected_stack": ["React", "TypeScript", "Vite"],
+    "expected_package_manager": "npm",
+    "expected_scripts": ["dev", "dev:mock", "build", "typecheck"],
+    "expected_mock_switch": "VITE_MOCK=1; real API is the default and does not automatically fall back to mock.",
+    "expected_proxy": "Same-origin /api and /health proxy to the local B backend, default http://127.0.0.1:8000.",
+    "expected_failure_retry": "Preserve input text and the original client_turn_id for the same failed send; no fabricated assistant success."
+  },
+  "git_fetch_pull_merge_performed": false,
+  "c_source_modified": false,
+  "authentication_information_saved": false
+}

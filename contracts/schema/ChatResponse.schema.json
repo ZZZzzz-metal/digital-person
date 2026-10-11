@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "MemoryItem": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "key": {
+          "enum": [
+            "preferred_name",
+            "study_goal",
+            "exam_subject",
+            "response_preference",
+            "hobby"
+          ],
+          "title": "Key",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Value",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "key",
+        "value",
+        "updated_at"
+      ],
+      "title": "MemoryItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "session_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Session Id",
+      "type": "string"
+    },
+    "client_turn_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Client Turn Id",
+      "type": "string"
+    },
+    "reply": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Reply",
+      "type": "string"
+    },
+    "emotion": {
+      "enum": [
+        "neutral",
+        "happy",
+        "sad",
+        "anxious",
+        "angry",
+        "unknown"
+      ],
+      "title": "Emotion",
+      "type": "string"
+    },
+    "expression": {
+      "enum": [
+        "neutral",
+        "smile",
+        "concern",
+        "listening"
+      ],
+      "title": "Expression",
+      "type": "string"
+    },
+    "retrieved_memories": {
+      "items": {
+        "$ref": "#/$defs/MemoryItem"
+      },
+      "title": "Retrieved Memories",
+      "type": "array"
+    },
+    "model_version": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Model Version",
+      "type": "string"
+    },
+    "elapsed_ms": {
+      "minimum": 0,
+      "title": "Elapsed Ms",
+      "type": "integer"
+    },
+    "is_mock": {
+      "title": "Is Mock",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "session_id",
+    "client_turn_id",
+    "reply",
+    "emotion",
+    "expression",
+    "retrieved_memories",
+    "model_version",
+    "elapsed_ms",
+    "is_mock"
+  ],
+  "title": "ChatResponse",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "B1 team contract; official snapshots remain separate. Examples are fictional protocol fixtures, not inference verification."
+}

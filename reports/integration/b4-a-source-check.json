@@ -1,0 +1,61 @@
+{
+  "checked_at_utc": "2026-10-10T14:35:58.209732+00:00",
+  "main_sha": "259fac62d8d5bc8ceb6104e1d49b68cfd063996b",
+  "previous_PR": 7,
+  "previous_PR_merged": true,
+  "A_readonly_review_copies": [
+    {
+      "path": "src/b2_core/a_impl/.gitignore",
+      "sha256": "ac2de72f51a815d5d4c3b2c16f8aa800a4c817c4b4f5e054218e300c661b47fa",
+      "bytes": 25
+    },
+    {
+      "path": "src/b2_core/a_impl/__init__.py",
+      "sha256": "268b8f12f706687d9ca8740b46f34b57cd9effbd30e6c761b3b1bfc4f0c1895f",
+      "bytes": 545
+    },
+    {
+      "path": "src/b2_core/a_impl/dtos.py",
+      "sha256": "b94b8205a96ab162b8dedf68b40f70cade642cbc756d167b7faee831772fc778",
+      "bytes": 16952
+    },
+    {
+      "path": "src/b2_core/a_impl/emotion_rules.py",
+      "sha256": "4a87f7bc61665cd51b0d692d47758bc991c2f7d8b9fdc712811abdb739075854",
+      "bytes": 8448
+    },
+    {
+      "path": "src/b2_core/a_impl/local_llm.py",
+      "sha256": "ca4e189cacd464c0d66cdae3b81812e7ca78dea219053ceab6596ce5c3b14896",
+      "bytes": 12892
+    },
+    {
+      "path": "src/b2_core/a_impl/official_spec.py",
+      "sha256": "99392294c04b53359111fb12555779fea3111cdb77f59c9e10a3ed762d73a9b8",
+      "bytes": 9678
+    },
+    {
+      "path": "src/b2_core/model.py",
+      "sha256": "9aeabec0536f706464d9b2616c108a18bb3a5cd7dc6b3503b3944a5441c5b7f6",
+      "bytes": 25250
+    },
+    {
+      "path": "src/b2_core/prompts/.gitignore",
+      "sha256": "ac2de72f51a815d5d4c3b2c16f8aa800a4c817c4b4f5e054218e300c661b47fa",
+      "bytes": 25
+    },
+    {
+      "path": "src/b2_core/prompts/__init__.py",
+      "sha256": "b1167daa74e334d789583b07744fe5dbb59b74db18c21a5d13fd9e0af8533272",
+      "bytes": 305
+    },
+    {
+      "path": "src/b2_core/prompts/empathy.py",
+      "sha256": "2b4c91e5466b49809cb47d40d1bdc3ea528de2646bf909c33fc530f5dd6b09a4",
+      "bytes": 4004
+    }
+  ],
+  "project_A_files_modified": false,
+  "no_fetch_pull_merge_performed": true,
+  "A6_code_manifest_note": "A6 manifest dtos.py hash differs from current main; this current-main snapshot and per-file hashes identify the actual source used."
+}

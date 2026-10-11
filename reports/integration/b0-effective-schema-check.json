@@ -1,0 +1,297 @@
+{
+  "checked_at_utc": "2026-10-10T10:26:31.368493+00:00",
+  "checked_at_beijing": "2026-10-10T18:26:31.368493+08:00",
+  "status": "PASS",
+  "scope": "B0 effective output contract verification",
+  "protocol_fixture_only": true,
+  "model_inference_verified": false,
+  "prediction_files_written": false,
+  "participant_code_executed": false,
+  "fixture_notice": "All synthetic replies existed only in process memory; fixture payloads and input chat text are not saved in this report.",
+  "clarification_source": "User relayed official clarification on 2026-10-10: output ID must exactly preserve the corresponding input ID; the original test_ pattern must not reject test1 input IDs.",
+  "environment": {
+    "python_version": "3.12.14",
+    "python_full_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "python_executable": "<WORKSPACE>\\digital-person\\.venv\\Scripts\\python.exe",
+    "jsonschema_version": "4.26.0",
+    "validator": "Draft202012Validator"
+  },
+  "snapshot": {
+    "path": "contracts/official/submission.schema.json",
+    "sha256_before": "91c42d56ae433212aab7905eabdbb96cf8463c2f887dc46b3f31647ab3a5d591",
+    "sha256_after": "91c42d56ae433212aab7905eabdbb96cf8463c2f887dc46b3f31647ab3a5d591",
+    "expected_sha256": "91c42d56ae433212aab7905eabdbb96cf8463c2f887dc46b3f31647ab3a5d591",
+    "sha256_source": {
+      "manifest_path": "contracts/official/source-manifest.json",
+      "manifest_checked_on": "2026-10-09",
+      "archive_name": "数字人综合情感陪伴对话模型.zip",
+      "archive_sha256": "fb10cf4a3baae576e3fdc411d53a7df16b039ea8596d8d79c907a17077ff5072",
+      "source_files_entry_path": "participant/templates/submission_schema.json",
+      "copies_entry_path": "contracts/official/submission.schema.json"
+    }
+  },
+  "effective_schema": {
+    "path": "contracts/official/effective_submission.schema.json",
+    "sha256": "306e4e7bda738c2b6620d8f606ba907658468ce2c7a8af77a3c46e6d576e5bc8",
+    "constraint_change": "Removed properties.id.pattern only",
+    "annotation_change": "Added top-level description with clarification provenance and independent ID alignment requirement",
+    "removed_pattern": "^test_[0-9]{6}_t[0-9]+$"
+  },
+  "inputs": {
+    "path": "submission/official-reference/test_inference_data.jsonl",
+    "sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+    "row_count": 3
+  },
+  "protocol_fixtures": [
+    {
+      "label": "protocol fixture",
+      "id": "test1_000001_t5",
+      "effective_schema_passed": true,
+      "input_alignment_passed": true,
+      "original_rejected_only_id_pattern": true
+    },
+    {
+      "label": "protocol fixture",
+      "id": "test1_000001_t7",
+      "effective_schema_passed": true,
+      "input_alignment_passed": true,
+      "original_rejected_only_id_pattern": true
+    },
+    {
+      "label": "protocol fixture",
+      "id": "test1_000002_t5",
+      "effective_schema_passed": true,
+      "input_alignment_passed": true,
+      "original_rejected_only_id_pattern": true
+    }
+  ],
+  "changed_id_alignment_check": {
+    "original_input_id": "test1_000001_t5",
+    "changed_output_id": "test_000001_t5",
+    "effective_schema_passed": true,
+    "original_schema_passed": true,
+    "alignment_error": "OUTPUT_ID_MISMATCH"
+  },
+  "structural_negative_cases": [
+    {
+      "name": "id_not_string",
+      "rejected_as_expected": true,
+      "expected_validator": "type",
+      "actual_validators": [
+        "type"
+      ]
+    },
+    {
+      "name": "id_missing",
+      "rejected_as_expected": true,
+      "expected_validator": "required",
+      "actual_validators": [
+        "required"
+      ]
+    },
+    {
+      "name": "additional_output_property",
+      "rejected_as_expected": true,
+      "expected_validator": "additionalProperties",
+      "actual_validators": [
+        "additionalProperties"
+      ]
+    },
+    {
+      "name": "invalid_emotion_enum",
+      "rejected_as_expected": true,
+      "expected_validator": "enum",
+      "actual_validators": [
+        "enum"
+      ]
+    },
+    {
+      "name": "missing_profile_field",
+      "rejected_as_expected": true,
+      "expected_validator": "required",
+      "actual_validators": [
+        "required"
+      ]
+    },
+    {
+      "name": "duplicate_profile_items",
+      "rejected_as_expected": true,
+      "expected_validator": "uniqueItems",
+      "actual_validators": [
+        "uniqueItems"
+      ]
+    },
+    {
+      "name": "invalid_memory_ref_pattern",
+      "rejected_as_expected": true,
+      "expected_validator": "pattern",
+      "actual_validators": [
+        "pattern"
+      ]
+    },
+    {
+      "name": "duplicate_memory_refs",
+      "rejected_as_expected": true,
+      "expected_validator": "uniqueItems",
+      "actual_validators": [
+        "uniqueItems"
+      ]
+    },
+    {
+      "name": "response_not_string",
+      "rejected_as_expected": true,
+      "expected_validator": "type",
+      "actual_validators": [
+        "type"
+      ]
+    }
+  ],
+  "counts": {
+    "checks_total": 34,
+    "checks_passed": 34,
+    "checks_failed": 0,
+    "protocol_fixtures_total": 3,
+    "protocol_fixtures_passed": 3,
+    "structural_negative_cases_total": 9,
+    "structural_negative_cases_passed": 9
+  },
+  "checks": [
+    {
+      "name": "snapshot_matches_original_recorded_sha256",
+      "passed": true
+    },
+    {
+      "name": "snapshot_manifest_provenance_matches",
+      "passed": true
+    },
+    {
+      "name": "snapshot_matches_untouched_reference_template",
+      "passed": true
+    },
+    {
+      "name": "input_fixture_matches_manifest_sha256",
+      "passed": true
+    },
+    {
+      "name": "original_schema_is_valid",
+      "passed": true
+    },
+    {
+      "name": "effective_schema_is_valid",
+      "passed": true
+    },
+    {
+      "name": "derivation_only_removes_id_pattern_and_adds_description",
+      "passed": true
+    },
+    {
+      "name": "clarification_source_is_documented",
+      "passed": true
+    },
+    {
+      "name": "id_remains_required_string",
+      "passed": true
+    },
+    {
+      "name": "original_three_fixture_ids_and_order",
+      "passed": true
+    },
+    {
+      "name": "fixture_effective_schema:test1_000001_t5",
+      "passed": true
+    },
+    {
+      "name": "fixture_input_alignment:test1_000001_t5",
+      "passed": true
+    },
+    {
+      "name": "fixture_original_rejects_only_id_pattern:test1_000001_t5",
+      "passed": true
+    },
+    {
+      "name": "fixture_effective_schema:test1_000001_t7",
+      "passed": true
+    },
+    {
+      "name": "fixture_input_alignment:test1_000001_t7",
+      "passed": true
+    },
+    {
+      "name": "fixture_original_rejects_only_id_pattern:test1_000001_t7",
+      "passed": true
+    },
+    {
+      "name": "fixture_effective_schema:test1_000002_t5",
+      "passed": true
+    },
+    {
+      "name": "fixture_input_alignment:test1_000002_t5",
+      "passed": true
+    },
+    {
+      "name": "fixture_original_rejects_only_id_pattern:test1_000002_t5",
+      "passed": true
+    },
+    {
+      "name": "changed_id_passes_effective_schema",
+      "passed": true
+    },
+    {
+      "name": "changed_id_also_passes_original_schema",
+      "passed": true
+    },
+    {
+      "name": "changed_id_rejected_by_input_alignment",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:id_not_string",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:id_missing",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:additional_output_property",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:invalid_emotion_enum",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:missing_profile_field",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:duplicate_profile_items",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:invalid_memory_ref_pattern",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:duplicate_memory_refs",
+      "passed": true
+    },
+    {
+      "name": "structural_negative:response_not_string",
+      "passed": true
+    },
+    {
+      "name": "original_empty_response_and_emotion_allowance_preserved",
+      "passed": true
+    },
+    {
+      "name": "empty_field_allowance_agrees_in_both_schemas",
+      "passed": true
+    },
+    {
+      "name": "original_snapshot_sha256_unchanged_after_checks",
+      "passed": true
+    }
+  ],
+  "reproduce": "python reports/integration/verify_b0_effective_schema.py (requires jsonschema; any working directory)"
+}

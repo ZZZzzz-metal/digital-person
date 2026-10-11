@@ -1,0 +1,85 @@
+{
+  "checked_at_utc": "2026-10-10T14:23:51.781099+00:00",
+  "branch": "codex/b3-memory",
+  "base_commit": "ac80f5892c2f1afce64cbec159fb02d496f02177",
+  "previous_PR_6_merged_at_start": true,
+  "main_sha_observed_before_publication": "1826b1a5a9a6cb209184f73768db4e4110e49d52",
+  "no_fetch_pull_merge_performed": true,
+  "scope": "B3 user-confirmed memory CRUD, correction, disabling, user isolation, and pure topic retrieval",
+  "b3_verified": true,
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "sqlite_version": "3.53.1",
+    "reused_B1_verified_environment": true,
+    "new_dependencies_added": false
+  },
+  "pytest": {
+    "tests": 216,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "groups": {
+      "tests.server.test_contracts": 44,
+      "tests.server.test_health": 20,
+      "tests.server.test_memories": 39,
+      "tests.server.test_memory_context": 16,
+      "tests.server.test_memory_store": 38,
+      "tests.server.test_sessions": 28,
+      "tests.server.test_store": 31
+    },
+    "junit_suite_seconds": 5.598,
+    "reported_elapsed_seconds": 5.74,
+    "command": "python -m pytest tests/server -q --junitxml=reports/integration/.b3-work/pytest.xml -o faulthandler_timeout=20",
+    "observed_exit_code": 0,
+    "warnings": [
+      "Existing Starlette httpx TestClient deprecation",
+      "Two existing serializer warnings for deliberately mutated non-bool mock field; strict validation rejected both"
+    ]
+  },
+  "schema_check": {
+    "command": "python contracts/export_schema.py --check",
+    "observed_exit_code": 0,
+    "schemas": 21,
+    "fictional_examples": 21,
+    "shared_DTO_fields_changed": false
+  },
+  "dependency_check": {
+    "command": "python -m pip check",
+    "observed_exit_code": 0,
+    "stdout": "No broken requirements found."
+  },
+  "HTTP": {
+    "report": "b3-http-smoke.json",
+    "observed_exit_code": 0,
+    "checks_passed": 10,
+    "owned_processes_started": 2,
+    "all_owned_processes_stopped": true,
+    "openapi_operations": 10,
+    "raw_cookies_recorded": false,
+    "input_source": "explicit fictional facts; CoreRequest construction only, no model generation"
+  },
+  "disabled_no_read_check": "SQLite authorizer denied every memories READ; disabled list/settings and blocked save made no such read attempt, then reenable restored the original fact",
+  "correction_check": "Same user/key high-math to linear-algebra keeps ID and only the corrected fact enters the next related CoreRequest fixture",
+  "concurrency_check": "Two independent SQLiteStore instances raced to save the same key; one stable ID and one stored record remained",
+  "B2_database_compatibility_check": "Opening a fixture with the prior B2 layout added memories without losing cookie identity, sessions, messages, completed turn retry, or disabled switch",
+  "code_file_sha256": {
+    "src/b2_core/memory.py": "f8dcbf8aad8d4cd6f537a513c8b226fa9979f66dc6e40dd9f9abcd40e77f65f1",
+    "src/b2_core/store.py": "2c78aa8b942381d3a802dc054911af4e7a87b2cf261151b6f62b21ca1a2ad367",
+    "src/server/app.py": "637c2a68707763d4c767037a556ae100ebf2a138864d7a3ef51fc8f2725a0374",
+    "src/server/memories.py": "ecfa7fd49a4b5ec9e92d6729c9bc350e80fabc111f22cdc1f300cf85bcd8bc77",
+    "tests/server/test_memory_store.py": "02599d3ea4b20fbdd8b90dca09601bd65dbe285941ffc03fb94f0f769ef60921",
+    "tests/server/test_memories.py": "aedd4cce1ecc26745eef41a47a02aa0baacae8e29a1e1fe3f8291c8dc3b31d1d",
+    "tests/server/test_memory_context.py": "48744e440d73d0560fcee48a824093f1084d5930b1145cbbb3c3ea70640da5cf",
+    "tests/server/test_health.py": "f8153f0b10e192813e7f6e4b88406596ff8f935f8b209152c9b27760d0573f4d",
+    "tests/server/test_sessions.py": "d9dad7a3667c64d20f36bad00faf35660b316cf8b3c6e26879b87c9eb9da3f6a",
+    "reports/integration/verify_b3_http.py": "d41fc3d910416e37817b74d79f26ef7514caf6084c56ed21d21ac412f0a26d9a"
+  },
+  "A_or_C_files_modified": false,
+  "chat_HTTP_implemented": false,
+  "real_inference_verified": false,
+  "official_container_verified": false,
+  "official_submission_ready": false,
+  "human_technical_blockers_for_B3": [],
+  "next_stage": "B4 only after user instruction"
+}

@@ -1,0 +1,6 @@
+{
+  "status": "ok",
+  "model_ready": true,
+  "is_mock": true,
+  "model_version": "protocol-fixture-v1"
+}

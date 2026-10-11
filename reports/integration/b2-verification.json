@@ -1,0 +1,77 @@
+{
+  "checked_at_utc": "2026-10-10T13:26:44.241970+00:00",
+  "branch": "codex/b2-storage-sessions",
+  "base_commit": "c85e9717d4e960e76169c9f35215de8cfdb32ef3",
+  "previous_PR_5_merged_at_start": true,
+  "main_sha_observed_at_start": "6c6bb78b8d754a28405585a491cb2b68d6453202",
+  "no_fetch_pull_merge_performed": true,
+  "scope": "B2 anonymous identity, sessions/messages API and atomic turn storage",
+  "b2_verified": true,
+  "environment": {
+    "python_version": "3.12.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "sqlite_version": "3.53.1",
+    "reused_B1_verified_environment": true,
+    "new_dependencies_added": false
+  },
+  "pytest": {
+    "tests": 123,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "groups": {
+      "tests.server.test_contracts": 44,
+      "tests.server.test_health": 20,
+      "tests.server.test_sessions": 28,
+      "tests.server.test_store": 31
+    },
+    "reported_elapsed_seconds": 2.44,
+    "junit_suite_seconds": 2.328,
+    "command": "python -m pytest tests/server -q --junitxml=reports/integration/.b2-work/pytest.xml -o faulthandler_timeout=20",
+    "warnings": [
+      "Existing StarletteDeprecationWarning about httpx TestClient",
+      "Two Pydantic serializer warnings caused by deliberate non-bool mock field mutation in negative tests; strict revalidation rejected both"
+    ]
+  },
+  "schema_check": {
+    "command": "python contracts/export_schema.py --check",
+    "observed_exit_code": 0,
+    "schemas": 21,
+    "fictional_examples": 21,
+    "shared_DTO_fields_changed": false
+  },
+  "dependency_check": {
+    "command": "python -m pip check",
+    "observed_exit_code": 0,
+    "stdout": "No broken requirements found."
+  },
+  "HTTP": {
+    "report": "b2-http-smoke.json",
+    "observed_exit_code": 0,
+    "checks_passed": 8,
+    "owned_processes_started": 2,
+    "all_owned_processes_stopped": true,
+    "openapi_operations": 5,
+    "raw_cookies_recorded": false,
+    "message_source": "explicit fictional fixture saved via Store, no model generation"
+  },
+  "turn_failure_check": "Actual SQLite trigger aborted the second message INSERT; transaction rolled back the first message and kept pending state, then retry and delete cascade passed",
+  "concurrency_check": "Two independent SQLiteStore connections raced at a thread barrier; one reservation won and one TurnInProgress conflict resulted",
+  "code_file_sha256": {
+    "src/b2_core/store.py": "7dba1f54853debb821f89284cbbc4231d1865ba72467e04033f3a189fdb6bc6f",
+    "src/server/app.py": "5e603604b6291c6537ebea91b53c53d3e4312a65906bc14312d91b7d16bfe538",
+    "src/server/sessions.py": "a5d95eaff696cd1dbef16808dbb68d7754f4d471d2dc4999463e67ce24a47e20",
+    "tests/server/test_store.py": "525af8fe0cc7a2db8ff96a045bd2ca6964a3f66161c5df9b8002f06546c6c047",
+    "tests/server/test_sessions.py": "92411fc40c5dbb1af653011235b5646199fc21b683b3e0d2280dafe60d0e28cb",
+    "tests/server/test_health.py": "31f16d4f2c368a3db13e95415cc95b233aea6f4453e875b168a07e7629b585b8",
+    "reports/integration/verify_b2_http.py": "76492fc18f5e9a6535810005d7906b5f76dc4c719ee79e71af4e7875d02ed7fb"
+  },
+  "A_or_C_files_modified": false,
+  "product_long_term_memory_implemented": false,
+  "chat_HTTP_implemented": false,
+  "real_inference_verified": false,
+  "official_container_verified": false,
+  "official_submission_ready": false,
+  "human_technical_blockers_for_B2": [],
+  "next_stage": "B3 only after user instruction"
+}
