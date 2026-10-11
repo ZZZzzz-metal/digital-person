@@ -1,0 +1,27 @@
+{
+  "observed_at_utc": "2026-10-11T10:31:30.233841+00:00",
+  "branch": "codex/b7-submit",
+  "implementation_and_final_verification_commit": "f8d627be92d8076c4a2a6810a5498079506e694b",
+  "scope": "Observed pushed B7 final verification commit and created PR; this publication record is committed afterward, so the final head may differ",
+  "PR": {
+    "number": 12,
+    "url": "https://github.com/ZZZzzz-metal/digital-person/pull/12",
+    "state": "open",
+    "head_sha": "f8d627be92d8076c4a2a6810a5498079506e694b",
+    "merged": false,
+    "mergeable": null,
+    "mergeable_state": "unknown",
+    "changed_files": 19
+  },
+  "manual_merge_and_pull_by_user": true,
+  "materials_code_commit": "270688182f67e47c4834f7feb16bf99fe951cf82",
+  "gpu_offline_verified": true,
+  "official_score_verified": false,
+  "uploaded": false,
+  "contest_submitted": false,
+  "successful_opportunities_remaining": null,
+  "last_successful_submission": null,
+  "B8_started": false,
+  "freeze_record": "b7-freeze.json",
+  "upload_blocker": "Normal TLS verification rejects the platform storage self-signed certificate; no FTP credential sent"
+}
