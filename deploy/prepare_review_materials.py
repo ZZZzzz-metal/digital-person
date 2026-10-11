@@ -4,7 +4,6 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import shutil
 import subprocess
 from review_materials import DIRECTORY_NAME, MANIFEST_NAME, verify_review_materials
 
@@ -19,6 +18,7 @@ A_FILES = (
 B_FILES = (
     "reports/integration/B7-材料索引.md", "reports/integration/B7-技术方案.md",
     "reports/integration/B7-实验设计与报告.md", "reports/integration/B7-A交接核对.md",
+    "reports/integration/B7-平台GPU尝试记录.md",
     "reports/integration/b6-gpu-offline.json", "reports/integration/b6-gpu-samples.json",
     "reports/integration/b6-gpu-environment.json", "deploy/requirements-gpu.actual.txt",
     "deploy/conda-gpu.actual.txt",
