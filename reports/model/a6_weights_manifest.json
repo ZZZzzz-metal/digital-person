@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-10 18:27:16",
+  "generated_at": "2026-10-11 11:29:25",
   "generator": "training/build_manifest.py",
   "repo_root": "D:\\digital-person",
   "bundles": {
@@ -180,8 +180,8 @@
     {
       "path": "src/b2_core/a_impl/dtos.py",
       "exists": true,
-      "bytes": 16234,
-      "sha256": "1ce1676f895a9e6ed0ffe6581c2a82cbf70f85609923c59caea6cc0617593c0c"
+      "bytes": 16952,
+      "sha256": "b94b8205a96ab162b8dedf68b40f70cade642cbc756d167b7faee831772fc778"
     },
     {
       "path": "src/b2_core/a_impl/official_spec.py",

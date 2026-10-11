@@ -1,0 +1,96 @@
+{
+ "说明": "官方训练集 -> A 小样本；只读官方数据，不用合成数据冒充。",
+ "官方训练集": {
+  "path": "D:\\digital-person\\data\\official_raw\\数字人综合情感陪伴对话模型\\训练-验证-数据集\\train\\train_public.jsonl",
+  "sha256": "184a47471f8d6f70fa21b9265b0a4d4e51c3748ba25af39a801884a2da35341a",
+  "物理行数": 8338,
+  "解析失败行": []
+ },
+ "硬性规则": {
+  "参考答案不进输入": "history 只取 turn_id <= target_user_turn_id，且以目标 user 轮结尾",
+  "验证集独立": "验证样本只来自 val_public.jsonl，会话不与训练集重叠",
+  "顺序异常隔离": "要求回复轮晚于目标 user 轮，并有已知黑名单兜底",
+  "去重": "完整对话指纹相同只保留第一次出现",
+  "上限": "训练 200 条"
+ },
+ "已知黑名单": [
+  "train_conv_000628 t15<-a14",
+  "train_conv_000817 t33<-a32",
+  "train_conv_003644 t7<-a6",
+  "train_conv_003695 t9<-a8"
+ ],
+ "结构违规行": [],
+ "train_拒绝原因": {
+  "顺序异常：回复轮不在目标 user 轮之后": 4,
+  "参考答案出现在输入里": 30
+ },
+ "valid_拒绝原因": {},
+ "train_会话数": 8338,
+ "train_去重丢弃会话数": 202,
+ "train_可用预测点数": 18115,
+ "train_选中样本数": 200,
+ "train_情绪分布": {
+  "anger": 13,
+  "anxiety": 13,
+  "care": 12,
+  "disgust": 12,
+  "fear": 13,
+  "gratitude": 12,
+  "helplessness": 13,
+  "joy": 12,
+  "loneliness": 13,
+  "mixed": 13,
+  "neutral": 12,
+  "pride": 12,
+  "relaxed": 13,
+  "sadness": 13,
+  "shame": 12,
+  "surprise": 12
+ },
+ "train_输入轮数": {
+  "最小": 1,
+  "最大": 45
+ },
+ "train_覆盖会话数": 198,
+ "官方验证集": {
+  "path": "D:\\digital-person\\data\\official_raw\\数字人综合情感陪伴对话模型\\训练-验证-数据集\\val\\val_public.jsonl",
+  "sha256": "097c0639ef7370a18a54670ec3c8390ce5dc87c1ed95f436cef07b68dfed7668",
+  "物理行数": 900,
+  "解析失败行": []
+ },
+ "valid_会话数": 900,
+ "valid_去重丢弃会话数": 0,
+ "valid_可用预测点数": 2354,
+ "valid_选中样本数": 60,
+ "valid_情绪分布": {
+  "anger": 4,
+  "anxiety": 4,
+  "care": 3,
+  "disgust": 3,
+  "fear": 4,
+  "gratitude": 4,
+  "helplessness": 4,
+  "joy": 3,
+  "loneliness": 4,
+  "mixed": 4,
+  "neutral": 4,
+  "pride": 4,
+  "relaxed": 4,
+  "sadness": 4,
+  "shame": 4,
+  "surprise": 3
+ },
+ "valid_输入轮数": {
+  "最小": 1,
+  "最大": 39
+ },
+ "valid_覆盖会话数": 60,
+ "训练验证会话重叠": [],
+ "最终": {
+  "训练样本": 200,
+  "验证样本": 60,
+  "上限": 200,
+  "未超上限": true,
+  "输出目录": "D:\\digital-person\\data\\training\\processed_official"
+ }
+}

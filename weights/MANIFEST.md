@@ -1,6 +1,6 @@
 # 权重与数据清单
 
-生成时间：2026-10-10 18:27:16
+生成时间：2026-10-11 11:29:25
 
 ## 权重包
 
@@ -55,7 +55,7 @@
 | 文件 | 大小 | sha256 |
 | --- | --- | --- |
 | `src/b2_core/model.py` | 24.7 KB | `9aeabec0536f706464d9b2616c108a18bb3a5cd7dc6b3503b3944a5441c5b7f6` |
-| `src/b2_core/a_impl/dtos.py` | 15.9 KB | `1ce1676f895a9e6ed0ffe6581c2a82cbf70f85609923c59caea6cc0617593c0c` |
+| `src/b2_core/a_impl/dtos.py` | 16.6 KB | `b94b8205a96ab162b8dedf68b40f70cade642cbc756d167b7faee831772fc778` |
 | `src/b2_core/a_impl/official_spec.py` | 9.5 KB | `99392294c04b53359111fb12555779fea3111cdb77f59c9e10a3ed762d73a9b8` |
 | `src/b2_core/a_impl/local_llm.py` | 12.6 KB | `ca4e189cacd464c0d66cdae3b81812e7ca78dea219053ceab6596ce5c3b14896` |
 | `src/b2_core/a_impl/emotion_rules.py` | 8.2 KB | `4a87f7bc61665cd51b0d692d47758bc991c2f7d8b9fdc712811abdb739075854` |
