@@ -1,0 +1,15 @@
+{
+  "number": 12,
+  "url": "https://github.com/ZZZzzz-metal/digital-person/pull/12",
+  "state": "open",
+  "head_sha": "e0f49813583eb270ff7dd1554dd0e14d37e2462a",
+  "merged": false,
+  "mergeable": null,
+  "mergeable_state": "unknown",
+  "changed_files": 31,
+  "observed_at_utc": "2026-10-11T11:25:29.229319+00:00",
+  "scope": "actual PR response after manual upload tooling push; later publication-memory commit can advance head",
+  "contest_upload_complete": false,
+  "contest_submitted": false,
+  "human_merge_and_pull": true
+}
