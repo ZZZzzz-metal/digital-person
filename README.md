@@ -11,7 +11,7 @@
 | B：记忆、后端与参赛部署 | [B 任务书](docs/分工/B-记忆后端与参赛部署.md) |
 | C：前端数字人与作品交付 | [C 任务书](docs/分工/C-前端数字人与作品交付.md) |
 
-当前 B4 已接入聊天编排、历史与记忆、成功去重和失败重试；B5 增加直接调用 A 本地模型的官方离线入口、严格输入输出校验与计时报告。入口代码见 [submission/participant](submission/participant/README.md)，本阶段实际结果见 [B5 验收](reports/integration/B5验收.md)。Linux/GPU 禁网镜像在 B6 实测。
+当前 B1–B6 已完成开发与阶段验收：B4 接入聊天、历史、记忆和重试，B5 提供官方离线入口，B6 在本机单张 RTX 5060 Laptop 上完成同镜像禁网 GPU 推理、独立校验与回退归档。三条公开样例全部输出，计时 `complete=false`；正式双 4090 评测、模型质量及赛事提交尚未验证。入口见 [submission/participant](submission/participant/README.md)，实际记录见 [B5 验收](reports/integration/B5验收.md) 与 [B6 离线验收](reports/integration/离线验收.md)。
 
 后续接手先读 [B 进度记录](reports/integration/B-进度记录.md)，核对分支和工作区变化，只补读当前阶段需要的资料。Agent 负责推送分支和 PR，用户手动合并、拉取；每完成用户点名的阶段就停止。
 
@@ -143,7 +143,7 @@ B2 存储提供 reserve/complete/abort，B4 已接入聊天：同会话一次占
 - [2026-10-10 官方答复](reports/integration/B0-官方答复-2026-10-10.md)：用户转贴的五条答复及执行口径；[有效输出合同](contracts/official/effective_submission.schema.json) 仅移除旧 ID 正则，保留原始文件。
 - [B0 验收](reports/integration/B0验收.md)：34/34 协议检查通过；未说明的细项和后续模型/容器验收分别记录。
 
-B0 核心协议核对完成；用户接受不阻碍开发的细项保留未知，不再主动追问。B1–B4 演示后端已验收，B5 官方 CPU 离线流程的实际结果见本轮报告；这些结论不能替代禁网容器或赛事提交验收。
+B0 核心协议核对完成；用户接受不阻碍开发的细项保留未知，不再主动追问。B1–B4 演示后端、B5 官方 CPU 离线流程与 B6 本机禁网 GPU 容器分别有独立验收记录；赛事提交仍未执行。
 
 官方运行方式（需先准备实际 Linux Docker 镜像、参考入口的 conda_env 和完整本地模型；镜像版本可参考平台，不限制）：
 
@@ -163,3 +163,11 @@ python submission/participant/check_output.py submission/official-reference/test
 结果目录须为新目录，已有两个官方结果文件任意一个都会拒绝覆盖。详细配置、已验证本机资源和复现方法见 [入口说明](submission/participant/README.md) 与 [B5 验收](reports/integration/B5验收.md)。此处 python 必须是装有 A 模型依赖的解释器，纯后端 .venv 不含 Torch/Transformers。
 
 训练由 A Agent 执行，B 使用算力做集成与离线验收；人提供实例和必要权限。Agent 推送 PR，用户手动合并和拉取。
+
+## B6 完整包与容器验证
+
+2026-10-11，本机专用 WSL `B2-B6-Ubuntu22` / Docker 29.9.0 已实际完成 B6 验收。GPU 探针、三条官方样例真实推理、独立校验均在同一不可变镜像上以 `--network none` 运行并退出 0；推理使用单张 RTX 5060 Laptop（约 8GB）、CUDA，模型初始化一次。平均样例耗时 8,890.429456 ms，全流程 231.688 秒。三条均为 A 的 `fallback_rules` 模式：回复来自模型，情绪/画像由规则补齐；这不是训练或质量评分结果。
+
+镜像 ID 为 `sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290`，inspect Size 为 25,969,069,324 字节。已核验导出回退保留在 `D:/B2-B6-20261011/gpu-verified-20261011T050300Z/fallback-image.tar`：9,322,812,928 字节，SHA-256 为 `3913aa097e32610fca2dfb910aaf30a25e37a99ae6b9ed3b9e72ebd056eddd8c`；D 盘副本摘要一致。归档身份链已验证，尚未执行 `docker load` 后重跑。完整包 `D:/B2-B6-20261011/candidate-a34f8df` 与 B5 CPU 回退保持原样，大文件不进 Git。
+
+此前云端双 4090 的 CUDA 成功与嵌套 Docker 权限失败保留为历史记录；本机环境阻塞已解决。用户通常只需手动合并、拉取本次 PR。固定镜像的可复制运行方法、实际依赖元数据与详细证据见 [部署说明](deploy/README.md)、[离线验收](reports/integration/离线验收.md) 和 [进度记忆](reports/integration/B-进度记录.md)。本轮不进入 B7，未上传赛事，`complete=false` 只表示不足 100 条计时。

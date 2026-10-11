@@ -1,0 +1,15 @@
+{
+  "recorded_at_utc": "2026-10-11T05:08:26.359355+00:00",
+  "archive_path": "D:\\B2-B6-20261011\\gpu-verified-20261011T050300Z\\fallback-image.tar",
+  "archive_sha256": "3913aa097e32610fca2dfb910aaf30a25e37a99ae6b9ed3b9e72ebd056eddd8c",
+  "archive_bytes": 9322812928,
+  "copy_sha256_verified": true,
+  "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+  "source_linux_work": "/root/b2-b6/runs/verify-20261011T050300Z-oci",
+  "actual_model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+  "gpu_count": 1,
+  "scope": "actual single RTX5060 Laptop offline container; not official dual4090 score; same verified image export, no load-and-rerun performed",
+  "image_load_reverified": false,
+  "contest_submitted": false,
+  "B7_started": false
+}

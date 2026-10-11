@@ -1,0 +1,12 @@
+{
+  "recorded_at_utc": "2026-10-11T05:11:27.9816103Z",
+  "distro": "B2-B6-Ubuntu22",
+  "terminate_exit_code": 0,
+  "owned_distro_stopped_verified": true,
+  "foreign_distro_stopped": false,
+  "all_three_verification_containers_removed": true,
+  "running_container_count_observed_before_stop": 0,
+  "archive_and_evidence_preserved": true,
+  "windows_restart_performed_by_agent": false,
+  "scope": "Only dedicated B6 WSL distro stopped after evidence copy; next explicit WSL launch restarts installed environment"
+}

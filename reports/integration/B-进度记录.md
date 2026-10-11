@@ -1,14 +1,18 @@
 # B 分工进度记录
 
-更新日期：2026-10-10（北京时间）。本文件是 Agent 的工作进度记忆，不是产品的长期记忆数据库。每次阶段交付更新；恢复工作时先读本文件、核对分支/工作区，只补读有变化的约定和当前阶段必要内容，不重复已经验收的资料获取或检查。
+更新日期：2026-10-11（北京时间）。本文件是 Agent 的工作进度记忆，不是产品的长期记忆数据库。每次阶段交付更新；恢复工作时先读本文件、核对分支/工作区，只补读有变化的约定和当前阶段必要内容，不重复已经验收的资料获取或检查。
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B5**；本轮官方离线入口/校验与真实样例 CPU 验证完成，已推送 [PR #9](https://github.com/ZZZzzz-metal/digital-person/pull/9)，之后停止，不进入 B6–B8。C 页面仍可独立交付，不阻塞官方适配。
-- Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
-- 当前工作分支 `codex/b5-offline`，从 B4 最后文档提交 `58a2115b28f93ae73ad9948deeb26498b42c752d` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
-- 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
-- B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
+- 用户点名的 **B6 已完成本机真实禁网 GPU 镜像验收**，不进入 B7–B8。使用一张 RTX 5060 Laptop（约8GB），不是正式双4090测评或模型质量验收；3条公开样例全输出，参考计时 complete=false，因为不足100条。
+- Agent 负责提交、推送分支/PR；用户手动合并和拉取。**不 fetch/pull/merge**。当前仓库 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0`、分支 `codex/b6-container`，原 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10) 已更新。本次实现/真实验收/说明提交 `6ed0cfd2f0911c73d6d75246efc277cbf8cb364b` 已实际推送，发布记录见 [b6-publication.json](b6-publication.json)；观察为open/未合并，不预写用户合并。
+- 本轮现有 `.venv`、A/B源码和完整基线复用；没有改 A model/prompts/weights 或 C 前端，没有重复下载权重。本机下载、大模型、镜像和 Linux VHD/交换盘均在 D。只修改 B 区域及共享总约定。
+- Windows已由人重启，WSL3.0.1、专用 B2-B6-Ubuntu22、Docker29.9.0/NVIDIA工具包1.20.1实际可用；Linux/Docker数据在 `D:/B2-B6-20261011/setup/wsl/B2-B6-Ubuntu22/ext4.vhdx`。不要再要求用户重启、重装或开云端实例。全局WSL配置已恢复原D交换盘配置；专用发行版DNS修复通过，真实安装/历史失败见 [本机续做](B6-本机环境续做.md)。不改其他环境或网络安全设置。
+- 最新真实全流程目录 `/root/b2-b6/runs/verify-20261011T050300Z-oci`，同实际 image ID 的3个容器 network none、退出0并清理自有CID；GPU内核、CUDA模型推理、独立checker、标准导出和完整OCI身份链均通过。实际结果 [b6-gpu-offline.json](b6-gpu-offline.json)、[交付摘要](b6-gpu-delivery.json)、[离线验收](离线验收.md)。
+- 已核验Windows交付 `D:/B2-B6-20261011/gpu-verified-20261011T050300Z/fallback-image.tar`；9,322,812,928字节，SHA `3913aa097e32610fca2dfb910aaf30a25e37a99ae6b9ed3b9e72ebd056eddd8c`；完整包 `D:/B2-B6-20261011/candidate-a34f8df` 保持原30文件摘要。B5 CPU回退和两次镜像失败证据均保留，没有 docker load 后重跑或赛事上传。
+- A 的平台GPU仍是他自己的 `/dev/nvidiactl` EPERM/torch unavailable 问题，B没有替他修复或训练。已给 [A小白操作说明](A-GPU训练操作说明.md)，桌面 `A成员-GPU训练一步步操作说明.txt` 和原始 `数字人综合情感陪伴对话模型.zip` 可转发；训练先真实CUDA小矩阵，再小样本试跑、短训练、保存模型/日志并推送，队长合并拉取。
+- 收尾仅停止专用 B2-B6-Ubuntu22，exit0且已核对不再运行；镜像、D盘副本和环境保留，见 [本机资源清理](b6-local-cleanup.json)。需要运行时明确启动该发行版即可，不必重装；不停止其他发行版。
+- 后续恢复先读本文件，核对当前工作区/发布记录，只补读变化和下一阶段资料。不重跑未变的B0–B5或79项工具检查，不重下权重。没有当前需人解决的B6技术阻塞；下一阶段由用户点名。
 
 ## 已完成：B0
 
@@ -70,7 +74,20 @@
 - 本轮报告 [B4验收](B4验收.md)、[结构化结果](b4-verification.json)、[真实HTTP](b4-real-http.json)、资源/环境/源码摘要均已保存。未消耗算力券、未训练、未fetch/pull/merge。
 - 实现/验收提交 `8b5d43b94acc5da1cc5e4d35c1bde56e118ce729` 已实际推送，创建 [PR #8](https://github.com/ZZZzzz-metal/digital-person/pull/8)，目标main，23个文件仅B分工区域。创建时open/未合并，head与本地一致；不把用户未来合并预写为完成。本文发布记录另作一次文档提交并推送到同一PR。
 
-## 恢复与下一步
+## B6：本机禁网 GPU 镜像与导出已实际验收
+
+- B 打包实现来源 `a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394`，A 固定来源 `fce84b354ca0e6ab9cd1ec650198c0d45ab994bd`。完整包30文件/999,760,049字节，manifest SHA `c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca`；原模型配置与许可未改。
+- 先前单次79项工具测试14.19s、CPU独立包30/30、云端双4090小矩阵成功均保留历史范围；云端嵌套Docker只读cgroup/runc proc EPERM导致失败，实例已关机。显示总卡时29.23仅是当时混合券余额，不是实时GPU余额。
+- Windows前置安装与人重启后，专用WSL/Docker/NVIDIA环境实际完成。APT第一次DNS失败100、第二次中止130及最终安装0均保留；专用DNS修复未改变Windows全局DNS、VPN、TLS或防火墙。
+- 镜像尝试01：上游Conda缓存清理使 `--clone base --offline` 失败；仅允许构建期获取原环境包，推理仍禁网。尝试02：构建/真实GPU/独立checker/docker save成功，但原校验硬把OCI index ID当配置SHA，最终失败。原失败JSON不覆盖。
+- 修复导出身份校验，支持经典Docker配置ID和OCI index/manifest ID。新30归档风险+原33容器控制检查实际 **63 passed，0.91s，exit0**，属于模拟/合成测试。随后重新实际执行完整GPU流程，CLI退出0。
+- 最终实际image ID `sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290`；Linux amd64 manifest `sha256:70cddf121d9b5d756a38086af9f4447f3a4cb37fc6ed706b1200a63645bb4312`，config `sha256:9377c287feb1f31f350529174f6f3af9b769a402a265c5d75a1c60eefcd150a3`，三个实际容器manifest相同。标准docker save归档验证全部引用blob、层压缩摘要和实际解压diff_ids；image inspect Size 25,969,069,324字节，tar 9,322,812,928字节，都低于团队50,000,000,000字节预算。
+- Torch2.8.0+cu128/CUDA12.8、Python3.11.13、激活conda_env，真实CUDA矩阵并同步通过；A ModelEngine非mock、初始化1次，全3公开样例历史不截断，每条独立空store关闭。输出SHA `52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0`，平均生成 8890.429456ms；3条均两次JSON解析失败后A真实文本回退，情绪/画像规则补齐，没有质量/官方分数结论。
+- 保存实际依赖元数据 `deploy/requirements-gpu.actual.txt` 与 `conda-gpu.actual.txt`。上游file URL是观察快照，不是可独立pip重新安装的配方；恢复首选已核验标准镜像归档。此轮未执行docker load后的再次GPU运行。
+- GPU回退镜像/结果/日志已复制D并校验SHA；B5旧CPU回退保留。`gpu_offline_verified=true`、`fallback_image_verified=true`仅限本机B6流程，`official_score_verified=false`、`contest_submitted=false`、B7未开始。
+- 发布沿用PR #10；实际实现/验收/说明提交 `6ed0cfd2f0911c73d6d75246efc277cbf8cb364b` 已推送，PR标题/说明已更新，观察open/未合并、远端head相同。当时mergeable仍在GitHub计算（null/unknown），不编造clean；本文和发布记录另作文档提交推送，最终head再实际核对。用户手动合并拉取，不新增云实例，不使用卡券训练A，不代写C。
+
+## B5 历史验收与恢复依据（后续以当前 B6 状态为准）
 
 - B5 已验收：共享合同/schema先改、团队官方独立入口/结果检查器已实现。沿用B4已验证CPU环境/完整基线，不重装/重下、不改A模型配置；启动只读确认PR#8合并，main `fce84b354ca0e6ab9cd1ec650198c0d45ab994bd`，A源码固定副本在 `../tmp/b5_20261010/upstream-A/src`，源摘要在b5-real-offline.json。没有fetch/pull/merge。
 - 实际新旧全回归368通过；最后仅改初始化异常脱敏/字节码缓存，受影响官方专项最终76通过，未变后端294保留。21 schemas/21 examples、pip check、Bash-n、原始参考12份摘要一致。不同测试合计370，不能写成单次全370。
@@ -85,8 +102,8 @@
 - B4当前实际运行方法与剩余项见上节/B4验收；A源码只读副本为 `../tmp/b4_20261010/upstream-A/src`，可配合公开 b4-a-source-check.json 核验后复现，不需要重下载基线或重装环境。不得将准备报告的 model_inference_verified=false 误读为最终真实HTTP未通过，它们是不同时间/范围的记录。
 
 1. 核对当前分支和工作区，再阅读本轮验收记录。若记录说已通过而代码/锁/样例后来改变，仅重跑受影响的最小检查。
-2. B0–B5已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下次先核对B5实际发布记录及远端只读状态。
-3. 本轮发布后停止，等待用户点名B6；不提前构建/上传镜像。C交付后才补实际页面联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
-4. 正式模型、训练、GPU 容器、可回退参赛候选和赛事上传尚未验收；需要相应后续阶段实际运行，不能由 B1 演示成功替代。
+2. B0–B5已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下一轮先读当前 B6 状态/发布记录，仅继续未通过的环境验证。
+3. 用户已点名B6；不提前进入B7上传。C页面现已交付，本轮未联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
+4. B6本机真实GPU禁网镜像和导出已验收；A训练候选、正式双4090得分与赛事上传仍需对应阶段实际执行，不能扩大当前结论。
 
 主要依据：[总约定](../../docs/分工/00-总约定.md)、[B 任务书](../../docs/分工/B-记忆后端与参赛部署.md)、[B0 验收](B0验收.md)、[官方答复](B0-官方答复-2026-10-10.md)。本文件不保存账号、密码、cookie、token 或真实聊天。

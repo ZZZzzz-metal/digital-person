@@ -1,0 +1,325 @@
+{
+  "started_at_utc": "2026-10-11T04:40:54.663422+00:00",
+  "image_built": true,
+  "gpu_offline_verified": false,
+  "fallback_image_verified": false,
+  "official_score_verified": false,
+  "contest_submitted": false,
+  "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+  "repo_digests": [
+    "b2-candidate@sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba"
+  ],
+  "save_tar_sha256": "0a69532c68141ec78641a4886dcc90a3f526fadec29253609636e4ed51e5edba",
+  "team_size_limit_bytes": 50000000000,
+  "runs": {
+    "gpu_probe": {
+      "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+      "network_mode": "none",
+      "device_requests": [
+        {
+          "Driver": "",
+          "Count": -1,
+          "DeviceIDs": null,
+          "Capabilities": [
+            [
+              "gpu"
+            ]
+          ],
+          "Options": {}
+        }
+      ],
+      "exit_code": 0,
+      "started_at": "2026-10-11T04:46:59.634052382Z",
+      "finished_at": "2026-10-11T04:47:05.470355131Z",
+      "container_id": "667766af92a5eceb893fae4d5c9c04ed7f2af29989865b377b8c2bb215182f15",
+      "log_sha256": "b6371a49a5256e508cf68e6f9227e52848f4d792ece06d4bf8212b22a134d9f3",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-3194e26b09ba4438ab58344d4e30c30f",
+        "--network",
+        "none",
+        "--gpus",
+        "all",
+        "--entrypoint",
+        "bash",
+        "--mount",
+        "type=bind,source=/root/b2-b6/runs/verify-20261011T044110Z-clone/probe,target=/b2-probe",
+        "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+        "-c",
+        "source activate conda_env && exec python /opt/b2-tools/runtime_probe.py /b2-probe/runtime.json"
+      ]
+    },
+    "inference": {
+      "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+      "network_mode": "none",
+      "device_requests": [
+        {
+          "Driver": "",
+          "Count": -1,
+          "DeviceIDs": null,
+          "Capabilities": [
+            [
+              "gpu"
+            ]
+          ],
+          "Options": {}
+        }
+      ],
+      "exit_code": 0,
+      "started_at": "2026-10-11T04:47:06.236461026Z",
+      "finished_at": "2026-10-11T04:47:39.283999144Z",
+      "container_id": "596d81f0fe5456144b231ba43d1638549a77627d833b12939cd206c92f938cd5",
+      "log_sha256": "c56ac73a8170dec043bd449abcf2e0ab3e57aed544a926eebbae043d4756a2a3",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-5487ef1478474667872d83a2829e1ca8",
+        "--network",
+        "none",
+        "--gpus",
+        "all",
+        "--mount",
+        "type=bind,source=/root/b2-b6/runs/verify-20261011T044110Z-clone/test-input.jsonl,target=/b2-input.jsonl,readonly",
+        "--mount",
+        "type=bind,source=/root/b2-b6/runs/verify-20261011T044110Z-clone/result,target=/b2-result",
+        "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+        "/b2-input.jsonl",
+        "/b2-result"
+      ]
+    },
+    "checker": {
+      "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+      "network_mode": "none",
+      "device_requests": [],
+      "exit_code": 0,
+      "started_at": "2026-10-11T04:47:40.067669787Z",
+      "finished_at": "2026-10-11T04:47:41.879488811Z",
+      "container_id": "f6f4b9a2687f5c310bd2dd022ab9df1d1bcdccc80712551fe083dcb83fd855e7",
+      "log_sha256": "4b0cc20a8fea7da2b082c9e9244f7924a675f337aba346fa37acf956ec10aeca",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-8e0a5f8d41994ddfa8724dbf0f89e33c",
+        "--network",
+        "none",
+        "--entrypoint",
+        "/opt/conda/envs/conda_env/bin/python",
+        "--mount",
+        "type=bind,source=/root/b2-b6/runs/verify-20261011T044110Z-clone/test-input.jsonl,target=/b2-input.jsonl,readonly",
+        "--mount",
+        "type=bind,source=/root/b2-b6/runs/verify-20261011T044110Z-clone/result,target=/b2-result,readonly",
+        "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+        "/root/participant/check_output.py",
+        "/b2-input.jsonl",
+        "/b2-result"
+      ]
+    }
+  },
+  "docker_server": {
+    "ServerVersion": "29.9.0",
+    "OSType": "linux",
+    "Architecture": "x86_64"
+  },
+  "bundle": {
+    "verified": true,
+    "file_count": 30,
+    "total_bytes": 999760049,
+    "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+    "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+    "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "config_path": "weights/inference_config.base.json"
+  },
+  "image_size_bytes": 25969069324,
+  "input_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+  "runtime": {
+    "version": 1,
+    "probe_scope": "runtime_dependencies_bundle_sha_cuda_kernels",
+    "checked_at_utc": "2026-10-11T04:47:03.445767+00:00",
+    "status": "passed",
+    "gpu_verified": true,
+    "device_count": 1,
+    "python": {
+      "version": "3.11.13",
+      "implementation": "CPython",
+      "executable": "/opt/conda/envs/conda_env/bin/python",
+      "prefix": "/opt/conda/envs/conda_env"
+    },
+    "platform": {
+      "system": "Linux",
+      "release": "6.18.40.1-microsoft-standard-WSL2",
+      "machine": "x86_64"
+    },
+    "conda": {
+      "active_name": "conda_env",
+      "active_prefix": "/opt/conda/envs/conda_env"
+    },
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.19.0",
+      "accelerate": "1.12.0",
+      "pydantic": "2.14.0",
+      "jsonschema": "4.26.0",
+      "safetensors": "0.8.0"
+    },
+    "bundle": {
+      "verified": true,
+      "file_count": 30,
+      "total_bytes": 999760049,
+      "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+      "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+      "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "config_path": "weights/inference_config.base.json"
+    },
+    "pip": {
+      "freeze": {
+        "command": [
+          "/opt/conda/envs/conda_env/bin/python",
+          "-m",
+          "pip",
+          "--isolated",
+          "--disable-pip-version-check",
+          "freeze",
+          "--all"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "duration_ms": 186.735823,
+        "stdout": "accelerate==1.12.0\nannotated-doc==0.0.5\nannotated-types==0.8.0\nanyio==4.15.1\narchspec @ file:///home/conda/feedstock_root/build_artifacts/archspec_1737352602016/work\nasttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1733250440834/work\nastunparse==1.6.3\nattrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1741918516150/work\nbeautifulsoup4 @ file:///home/conda/feedstock_root/build_artifacts/beautifulsoup4_1744783198182/work\nboltons @ file:///home/conda/feedstock_root/build_artifacts/boltons_1749686179973/work\nBrotli @ file:///home/conda/feedstock_root/build_artifacts/brotli-split_1749229842835/work\ncertifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1754231422783/work/certifi\ncffi @ file:///home/conda/feedstock_root/build_artifacts/cffi_1725560564262/work\nchardet @ file:///home/conda/feedstock_root/build_artifacts/chardet_1741797914774/work\ncharset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1746214863626/work\nclick==8.5.0\ncmake==4.0.3\ncolorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work\nconda @ file:///home/conda/feedstock_root/build_artifacts/conda_1754405241914/work/conda-src\nconda-build @ file:///home/conda/feedstock_root/build_artifacts/conda-build_1754316273870/work\nconda-libmamba-solver @ file:///home/conda/feedstock_root/build_artifacts/conda-libmamba-solver_1742219570693/work/src\nconda-package-handling @ file:///home/conda/feedstock_root/build_artifacts/conda-package-handling_1736345463896/work\nconda_index @ file:///home/conda/feedstock_root/build_artifacts/conda-index_1748375757308/work\nconda_package_streaming @ file:///home/conda/feedstock_root/build_artifacts/conda-package-streaming_1751548120229/work\ndecorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1740384970518/work\ndistro @ file:///home/conda/feedstock_root/build_artifacts/distro_1734729835256/work\ndnspython==2.7.0\nevalidate @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_evalidate_1746793833/work\nexceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1746947292760/work\nexecuting @ file:///home/conda/feedstock_root/build_artifacts/executing_1745502089858/work\nexpecttest==0.3.0\nfilelock @ file:///home/conda/feedstock_root/build_artifacts/filelock_1741969488311/work\nfrozendict @ file:///home/conda/feedstock_root/build_artifacts/frozendict_1728841334936/work\nfsspec==2025.7.0\nh11==0.16.0\nh2 @ file:///home/conda/feedstock_root/build_artifacts/h2_1738578511449/work\nhf-xet==1.7.0\nhpack @ file:///home/conda/feedstock_root/build_artifacts/hpack_1737618293087/work\nhttpcore2==2.13.1\nhttpx2==2.13.1\nhuggingface_hub==2.2.0\nhyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1737618333194/work\nhypothesis==6.137.1\nidna==3.20\nipython @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_ipython_1751465044/work\nipython_pygments_lexers @ file:///home/conda/feedstock_root/build_artifacts/ipython_pygments_lexers_1737123620466/work\njedi @ file:///home/conda/feedstock_root/build_artifacts/jedi_1733300866624/work\nJinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1741263328855/work\njsonpatch @ file:///home/conda/feedstock_root/build_artifacts/jsonpatch_1733814567314/work\njsonpointer @ file:///home/conda/feedstock_root/build_artifacts/jsonpointer_1725302941992/work\njsonschema==4.26.0\njsonschema-specifications @ file:///tmp/tmpuvkyqc9y/src\nlibarchive-c @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_python-libarchive-c_1747927321/work\nlibmambapy @ file:///home/conda/feedstock_root/build_artifacts/mamba-split_1746515836725/work/libmambapy\nlief @ file:///home/conda/feedstock_root/build_artifacts/lief_1750151383011/work/api/python\nlintrunner==0.12.7\nmarkdown-it-py==4.2.0\nMarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1733219680183/work\nmatplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1733416936468/work\nmdurl==0.1.2\nmenuinst @ file:///home/conda/feedstock_root/build_artifacts/menuinst_1753546279984/work\nmpmath==1.3.0\nmsgpack @ file:///home/conda/feedstock_root/build_artifacts/msgpack-python_1749813202382/work\nnetworkx==3.5\nninja==1.11.1.4\nnumpy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_1753401560/work/dist/numpy-2.3.2-cp311-cp311-linux_x86_64.whl#sha256=469440884ff65cdd5601d2ff9e1c5b9bcc2d8176c37e37ec78a0666703a54157\nnvidia-cublas-cu12==12.8.4.1\nnvidia-cuda-cupti-cu12==12.8.90\nnvidia-cuda-nvrtc-cu12==12.8.93\nnvidia-cuda-runtime-cu12==12.8.90\nnvidia-cudnn-cu12==9.10.2.21\nnvidia-cufft-cu12==11.3.3.83\nnvidia-cufile-cu12==1.13.1.3\nnvidia-curand-cu12==10.3.9.90\nnvidia-cusolver-cu12==11.7.3.90\nnvidia-cusparse-cu12==12.5.8.93\nnvidia-cusparselt-cu12==0.7.1\nnvidia-nccl-cu12==2.27.3\nnvidia-nvjitlink-cu12==12.8.93\nnvidia-nvtx-cu12==12.8.90\noptree==0.17.0\npackaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1745345660/work\nparso @ file:///home/conda/feedstock_root/build_artifacts/parso_1733271261340/work\npexpect @ file:///home/conda/feedstock_root/build_artifacts/pexpect_1733301927746/work\npickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1733327343728/work\npillow==11.0.0\npip @ file:///home/conda/feedstock_root/build_artifacts/pip_1746249878903/work\npkginfo @ file:///home/conda/feedstock_root/build_artifacts/pkginfo_1739984581450/work\nplatformdirs @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_platformdirs_1746710438/work\npluggy @ file:///home/conda/feedstock_root/build_artifacts/pluggy_1747339660894/work\nprompt_toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1744724089886/work\npsutil @ file:///home/conda/feedstock_root/build_artifacts/psutil_1740663149797/work\nptyprocess @ file:///home/conda/feedstock_root/build_artifacts/ptyprocess_1733302279685/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl#sha256=92c32ff62b5fd8cf325bec5ab90d7be3d2a8ca8c8a3813ff487a8d2002630d1f\npure_eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1733569405015/work\npycosat @ file:///home/conda/feedstock_root/build_artifacts/pycosat_1732588400443/work\npycparser @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pycparser_1733195786/work\npydantic==2.14.0\npydantic_core==2.50.0\nPygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1750615794071/work\nPySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1733217236728/work\npython-etcd==0.4.5\npytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1742920838005/work\nPyYAML @ file:///home/conda/feedstock_root/build_artifacts/pyyaml_1737454647378/work\nreferencing @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_referencing_1737836872/work\nregex==2026.9.29\nrequests @ file:///home/conda/feedstock_root/build_artifacts/requests_1749498106507/work\nrich==15.0.0\nrpds-py @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_rpds-py_1751468291/work\nruamel.yaml @ file:///home/conda/feedstock_root/build_artifacts/ruamel.yaml_1749479918291/work\nruamel.yaml.clib @ file:///home/conda/feedstock_root/build_artifacts/ruamel.yaml.clib_1728724459810/work\nsafetensors==0.8.0\nsetuptools==80.9.0\nshellingham==1.5.4\nsix==1.17.0\nsortedcontainers==2.4.0\nsoupsieve @ file:///home/conda/feedstock_root/build_artifacts/soupsieve_1746563585861/work\nstack_data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1733569443808/work\nsympy==1.14.0\ntokenizers==0.23.3\ntorch==2.8.0+cu128\ntorchelastic==0.2.2\ntqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1735661334605/work\ntraitlets @ file:///home/conda/feedstock_root/build_artifacts/traitlets_1733367359838/work\ntransformers==5.19.0\ntriton==3.4.0\ntruststore @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_truststore_1739009763/work\ntyper==0.27.3\ntypes-dataclasses==0.6.6\ntyping-inspection==0.4.4\ntyping_extensions==4.16.0\nurllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1750271362675/work\nwcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1733231326287/work\nwheel==0.45.1\nzstandard==0.23.0\n",
+        "stderr": "",
+        "credential_redaction_applied": false
+      },
+      "check": {
+        "command": [
+          "/opt/conda/envs/conda_env/bin/python",
+          "-m",
+          "pip",
+          "--isolated",
+          "--disable-pip-version-check",
+          "check"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "duration_ms": 214.6309,
+        "stdout": "No broken requirements found.\n",
+        "stderr": "",
+        "credential_redaction_applied": false
+      }
+    },
+    "checks": {
+      "linux_runtime": true,
+      "conda_env_active": true,
+      "required_packages_present": true,
+      "bundle_verified": true,
+      "pip_freeze_succeeded": true,
+      "pip_check_succeeded": true,
+      "cuda_init": true,
+      "all_visible_devices_kernel_verified": true
+    },
+    "model_inference_verified": false,
+    "container_network_verified": false,
+    "errors": [],
+    "torch": {
+      "version": "2.8.0+cu128",
+      "cuda_built_version": "12.8",
+      "cuda_available": true,
+      "device_count": 1,
+      "cuda_initialized": true,
+      "devices": [
+        {
+          "index": 0,
+          "kernel_verified": true,
+          "synchronize_succeeded": true,
+          "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+          "total_memory_bytes": 8546484224,
+          "compute_capability": [
+            12,
+            0
+          ],
+          "multiprocessor_count": 26,
+          "kernel": "float32 torch.mm of two 32x32 all-one matrices",
+          "matrix_shape": [
+            32,
+            32
+          ],
+          "expected_element": 32.0,
+          "result_sum": 32768.0,
+          "elapsed_ms": 202.566541
+        }
+      ]
+    }
+  },
+  "inference_process": {
+    "runtime": {
+      "event": "runtime",
+      "device": "cuda",
+      "torch_version": "2.8.0+cu128",
+      "cuda_available": true,
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "is_mock": false
+    },
+    "model_ready": {
+      "event": "model_ready",
+      "is_mock": false,
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "initializations": 1
+    },
+    "batch_complete": {
+      "event": "batch_complete",
+      "samples": 3,
+      "rounds": 3,
+      "complete": false,
+      "result_dir": "/b2-result"
+    },
+    "sample_events": 3
+  },
+  "result_hashes": {
+    "submission.jsonl": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+    "performance_report.json": "4ffbf566f2f18f67a83b84f63c54cb1853d5f44a0d77f3e03fd0fcc037441f54"
+  },
+  "performance": {
+    "backend": "transformers",
+    "version": "b2_b5_official_v1",
+    "hardware_label": "local automatic device; see runtime event for actual CPU/CUDA",
+    "timing_scope": "A official prompt/tokenization/generation/decode/parse/retry/fallback and B strict output validation; CUDA synchronized before/after; excludes model load, file writes and store creation",
+    "required_rounds": 100,
+    "rounds": 3,
+    "complete": false,
+    "samples": 3,
+    "test_file_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+    "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+    "parse_failure_count": 3,
+    "parse_failure_ids": [
+      "test1_000001_t5",
+      "test1_000001_t7",
+      "test1_000002_t5"
+    ],
+    "parse_failure_policy": "number of samples with at least one A JSON parse failure, once per sample including retries",
+    "average_latency_ms": 9319.750861,
+    "median_latency_ms": 10874.373243,
+    "p95_latency_ms": 12956.480187,
+    "min_latency_ms": 4128.399153,
+    "max_latency_ms": 12956.480187,
+    "latencies_ms": [
+      10874.373243,
+      12956.480187,
+      4128.399153
+    ],
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "model_path_name": "base-qwen2.5-0.5b-instruct",
+    "model_loader": "A ModelEngine direct local Transformers"
+  },
+  "save_tar_bytes": 9322812928,
+  "failure_type": "RuntimeError",
+  "failure": "Saved archive config differs from the verified image ID",
+  "elapsed_seconds": 517.157,
+  "finished_at_utc": "2026-10-11T04:49:09.708648+00:00"
+}

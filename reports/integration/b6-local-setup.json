@@ -1,0 +1,837 @@
+{
+  "recorded_at_utc": "2026-10-11T05:14:02.357629+00:00",
+  "scope": "B6 local full GPU offline pipeline and strict OCI archive identity passed; D-drive tar copy SHA matched; dedicated distro subsequently stopped. Single RTX5060/3 public samples only, no official dual4090 score/quality/submission/load-and-rerun",
+  "sources": {
+    "resolved_at_utc": "2026-10-11T01:59:21.700924+00:00",
+    "WSL": {
+      "release": "3.0.1",
+      "release_url": "https://github.com/microsoft/WSL/releases/tag/3.0.1",
+      "name": "wsl.3.0.1.0.x64.msi",
+      "url": "https://github.com/microsoft/WSL/releases/download/3.0.1/wsl.3.0.1.0.x64.msi",
+      "bytes": 367669248,
+      "official_digest": "sha256:28b1a0d013640a2ac95898ea705fa186e5b4ff767a1c1b49257161bc106599c6"
+    },
+    "Ubuntu": {
+      "name": "Ubuntu-22.04",
+      "url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl",
+      "sha256": "4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f"
+    },
+    "planned_windows_download_root": "D:/B2-B6-20261011/setup/downloads",
+    "planned_distro_name": "B2-B6-Ubuntu22",
+    "planned_distro_disk_root": "D:/B2-B6-20261011/setup/wsl/B2-B6-Ubuntu22",
+    "route": "WSL2 + Docker Engine + NVIDIA Container Toolkit; no Docker Desktop installation planned"
+  },
+  "downloads": {
+    "finished_at_utc": "2026-10-11T02:01:12.977918+00:00",
+    "files": [
+      {
+        "kind": "WSL",
+        "path": "D:\\B2-B6-20261011\\setup\\downloads\\wsl.3.0.1.0.x64.msi",
+        "source": "https://github.com/microsoft/WSL/releases/download/3.0.1/wsl.3.0.1.0.x64.msi",
+        "bytes": 367669248,
+        "sha256": "28b1a0d013640a2ac95898ea705fa186e5b4ff767a1c1b49257161bc106599c6",
+        "matches_official_digest": true,
+        "reused": false
+      },
+      {
+        "kind": "Ubuntu",
+        "path": "D:\\B2-B6-20261011\\setup\\downloads\\ubuntu-22.04.5-wsl-amd64.wsl",
+        "source": "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl",
+        "bytes": 360684292,
+        "sha256": "4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f",
+        "matches_official_digest": true,
+        "reused": false
+      }
+    ],
+    "installation_performed": false,
+    "installation_performed_field_scope": "Historical state at download completion; current installation result is recorded above"
+  },
+  "windows_setup": {
+    "started_at_utc": "2026-10-11T02:02:17.6009425Z",
+    "administrator": true,
+    "succeeded": true,
+    "restart_requested": false,
+    "steps": [
+      {
+        "name": "official_wsl_msi",
+        "exit_code": 0,
+        "log": "D:\\B2-B6-20261011\\setup\\logs\\wsl-msi.log"
+      },
+      {
+        "name": "enable_virtual_machine_platform",
+        "exit_code": 3010,
+        "stdout_log": "D:\\B2-B6-20261011\\setup\\logs\\virtual-machine-platform.stdout.txt",
+        "stderr_log": "D:\\B2-B6-20261011\\setup\\logs\\virtual-machine-platform.stderr.txt"
+      }
+    ],
+    "restart_required": false,
+    "finished_at_utc": "2026-10-11T02:02:58.3477087Z",
+    "restart_required_at_installer_completion": true,
+    "restart_requirement_satisfied_by_human_reboot": true
+  },
+  "wsl_installed": true,
+  "wsl_version": "3.0.1.0",
+  "kernel_version": "6.18.40.1-1",
+  "microsoft_signature_status": "Valid",
+  "swap_config": {
+    "config_path": "C:\\Users\\20964\\.wslconfig",
+    "swap_path": "D:/B2-B6-20261011/setup/wsl/swap.vhdx",
+    "existing_config_backed_up": null,
+    "other_settings_preserved": true,
+    "actual_write": true,
+    "current_content": "Original swap-only configuration restored",
+    "current_sha256": "83c083d77aed88ce9a8f468bcdf50bda91933f56ee32823dc320c562bdb6d1fa"
+  },
+  "ubuntu_distro_imported": true,
+  "docker_engine_installed": true,
+  "nvidia_container_toolkit_installed": true,
+  "image_built": true,
+  "gpu_offline_verified": true,
+  "windows_restart_performed": true,
+  "next_command": null,
+  "requires_human_now": null,
+  "setup_tool_validation": {
+    "python_ast_parse": true,
+    "windows_resume_help_exit_code": 0,
+    "powershell_parser_errors": 0,
+    "git_bash_syntax_exit_code": 0,
+    "linux_script_has_no_cr": true,
+    "local_document_links_exist": true,
+    "independent_readonly_review_blockers": 0,
+    "container_control_tests": {
+      "passed": 33,
+      "elapsed_seconds": 0.5,
+      "new_cancellation_cleanup_cases": 3,
+      "scope": "synthetic Docker fixtures; not actual GPU/container acceptance"
+    },
+    "linux_script_executed": true,
+    "resume_driver_executed_for_setup": true,
+    "scripts_sha256": {
+      "deploy/resume_b6_local.py": "3d25483fd7a39231435e611b13b1f763201655235274e87c986018beb5bd742d",
+      "deploy/enable_b6_wsl.ps1": "fd5c6ce712629b6842b8bb0c0b254797b73d1e7347df18f226ba6ec729281979",
+      "deploy/setup_b6_linux.sh": "0ec0890e183efe40d9f07594e8e8e1daf1d0803b5a2ee1aee86990d15ddde415",
+      "deploy/verify_container.py": "c6c70fd6e8a77ebd5771b13d896c78e6433f7d51194b4dcc7b88f3fba775ded6",
+      "deploy/saved_image.py": "39e7cae301dbae97ebd8f9fb68ec97e59206fa142f1a2bee30c3e9b3dd8051cb"
+    },
+    "historical_synthetic_checks_not_repeated_for_this_record": true,
+    "latest_linux_setup_exit_code": 0,
+    "apt_index_updates_fail_on_any_error": true,
+    "apt_update_command": "apt-get --error-on=any update",
+    "scripts_sha256_scope": "Current repository script byte hashes at this final record; original pre-restart static validation remains in history",
+    "current_linux_script_sha256": "0ec0890e183efe40d9f07594e8e8e1daf1d0803b5a2ee1aee86990d15ddde415",
+    "latest_linux_bash_syntax_exit_code": 0,
+    "container_verifier_executed_for_final_gpu_run": true,
+    "final_container_verifier_exit_code": 0,
+    "final_container_verifier_report": "reports/integration/b6-gpu-offline.json"
+  },
+  "history": [
+    {
+      "stage": "pre-restart_windows_prerequisites",
+      "record": {
+        "recorded_at_utc": "2026-10-11T02:07:10.282541+00:00",
+        "scope": "actual Windows component setup; Linux/image acceptance not performed",
+        "sources": {
+          "resolved_at_utc": "2026-10-11T01:59:21.700924+00:00",
+          "WSL": {
+            "release": "3.0.1",
+            "release_url": "https://github.com/microsoft/WSL/releases/tag/3.0.1",
+            "name": "wsl.3.0.1.0.x64.msi",
+            "url": "https://github.com/microsoft/WSL/releases/download/3.0.1/wsl.3.0.1.0.x64.msi",
+            "bytes": 367669248,
+            "official_digest": "sha256:28b1a0d013640a2ac95898ea705fa186e5b4ff767a1c1b49257161bc106599c6"
+          },
+          "Ubuntu": {
+            "name": "Ubuntu-22.04",
+            "url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl",
+            "sha256": "4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f"
+          },
+          "planned_windows_download_root": "D:/B2-B6-20261011/setup/downloads",
+          "planned_distro_name": "B2-B6-Ubuntu22",
+          "planned_distro_disk_root": "D:/B2-B6-20261011/setup/wsl/B2-B6-Ubuntu22",
+          "route": "WSL2 + Docker Engine + NVIDIA Container Toolkit; no Docker Desktop installation planned"
+        },
+        "downloads": {
+          "finished_at_utc": "2026-10-11T02:01:12.977918+00:00",
+          "files": [
+            {
+              "kind": "WSL",
+              "path": "D:\\B2-B6-20261011\\setup\\downloads\\wsl.3.0.1.0.x64.msi",
+              "source": "https://github.com/microsoft/WSL/releases/download/3.0.1/wsl.3.0.1.0.x64.msi",
+              "bytes": 367669248,
+              "sha256": "28b1a0d013640a2ac95898ea705fa186e5b4ff767a1c1b49257161bc106599c6",
+              "matches_official_digest": true,
+              "reused": false
+            },
+            {
+              "kind": "Ubuntu",
+              "path": "D:\\B2-B6-20261011\\setup\\downloads\\ubuntu-22.04.5-wsl-amd64.wsl",
+              "source": "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl",
+              "bytes": 360684292,
+              "sha256": "4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f",
+              "matches_official_digest": true,
+              "reused": false
+            }
+          ],
+          "installation_performed": false
+        },
+        "windows_setup": {
+          "started_at_utc": "2026-10-11T02:02:17.6009425Z",
+          "administrator": true,
+          "succeeded": true,
+          "restart_requested": false,
+          "steps": [
+            {
+              "name": "official_wsl_msi",
+              "exit_code": 0,
+              "log": "D:\\B2-B6-20261011\\setup\\logs\\wsl-msi.log"
+            },
+            {
+              "name": "enable_virtual_machine_platform",
+              "exit_code": 3010,
+              "stdout_log": "D:\\B2-B6-20261011\\setup\\logs\\virtual-machine-platform.stdout.txt",
+              "stderr_log": "D:\\B2-B6-20261011\\setup\\logs\\virtual-machine-platform.stderr.txt"
+            }
+          ],
+          "restart_required": true,
+          "finished_at_utc": "2026-10-11T02:02:58.3477087Z"
+        },
+        "wsl_installed": true,
+        "wsl_version": "3.0.1.0",
+        "kernel_version": "6.18.40.1-1",
+        "microsoft_signature_status": "Valid",
+        "swap_config": {
+          "config_path": "C:\\Users\\20964\\.wslconfig",
+          "swap_path": "D:/B2-B6-20261011/setup/wsl/swap.vhdx",
+          "existing_config_backed_up": null,
+          "other_settings_preserved": true,
+          "actual_write": true
+        },
+        "ubuntu_distro_imported": false,
+        "docker_engine_installed": false,
+        "nvidia_container_toolkit_installed": false,
+        "image_built": false,
+        "gpu_offline_verified": false,
+        "windows_restart_performed": false,
+        "next_command": ".venv/Scripts/python.exe -B deploy/resume_b6_local.py --verify",
+        "requires_human_now": "Save work and restart Windows to apply VirtualMachinePlatform (actual DISM exit3010)",
+        "setup_tool_validation": {
+          "python_ast_parse": true,
+          "windows_resume_help_exit_code": 0,
+          "powershell_parser_errors": 0,
+          "git_bash_syntax_exit_code": 0,
+          "linux_script_has_no_cr": true,
+          "local_document_links_exist": true,
+          "independent_readonly_review_blockers": 0,
+          "container_control_tests": {
+            "passed": 33,
+            "elapsed_seconds": 0.5,
+            "new_cancellation_cleanup_cases": 3,
+            "scope": "synthetic Docker fixtures; not actual GPU/container acceptance"
+          },
+          "linux_script_executed": false,
+          "resume_driver_executed_for_setup": false,
+          "scripts_sha256": {
+            "deploy/resume_b6_local.py": "3d25483fd7a39231435e611b13b1f763201655235274e87c986018beb5bd742d",
+            "deploy/enable_b6_wsl.ps1": "fd5c6ce712629b6842b8bb0c0b254797b73d1e7347df18f226ba6ec729281979",
+            "deploy/setup_b6_linux.sh": "5059c72efd82dd55cf72ac1c40055bdec264774bf90baeecafd457734dc17c71",
+            "deploy/verify_container.py": "40bdc3d3cabd464e04a71af9571ea104e7302c7563bbea867a685557c1faabea"
+          }
+        }
+      }
+    },
+    {
+      "stage": "linux_prerequisites_succeeded_before_completed_gpu_image_attempts",
+      "recorded_at_utc": "2026-10-11T04:36:55.131088+00:00",
+      "status_observed_at_utc": "2026-10-11T04:34:00Z",
+      "image_built": false,
+      "gpu_offline_verified": false,
+      "image_exported": false,
+      "current_activity": "Original candidate Docker image build already running; do not start a duplicate verification"
+    },
+    {
+      "stage": "second_image_attempt_failed_archive_identity_before_final_success",
+      "recorded_at_utc": "2026-10-11T04:57:25.452857+00:00",
+      "status_observed_at_utc": "2026-10-11T04:49:09.708648+00:00",
+      "scope": "Actual image build, no-network CUDA matrix/model inference and independent output checker succeeded in attempt 2; overall B6/export identity acceptance still failed and pending strict OCI verification repair/re-run",
+      "gpu_offline_verified": false,
+      "fallback_image_verified": false,
+      "actual_image_observation": {
+        "docker_image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+        "docker_image_id_kind": "OCI index",
+        "image_size_bytes": 25969069324,
+        "image_config_digest": "sha256:9377c287feb1f31f350529174f6f3af9b769a402a265c5d75a1c60eefcd150a3",
+        "archive_bytes": 9322812928,
+        "archive_sha256": "0a69532c68141ec78641a4886dcc90a3f526fadec29253609636e4ed51e5edba",
+        "archive_created": true,
+        "archive_identity_verified": false,
+        "team_size_limit_bytes": 50000000000,
+        "both_observed_sizes_under_team_limit": true,
+        "official_50G_unit_reinterpreted": false,
+        "required_identity_chain": "OCI index -> unique Linux amd64 manifest -> actual config and layer content hashes",
+        "digest_equivalence_not_assumed": true
+      },
+      "actual_gpu_phase": {
+        "source_report": "reports/integration/b6-image-attempt-02.json",
+        "runs": {
+          "gpu_probe": {
+            "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+            "network_mode": "none",
+            "exit_code": 0
+          },
+          "inference": {
+            "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+            "network_mode": "none",
+            "exit_code": 0
+          },
+          "checker": {
+            "image_id": "sha256:93ba57d188dfcc4c255ded147de296b18fe8fc3a468ac58c2169ae93a5fb34ba",
+            "network_mode": "none",
+            "exit_code": 0
+          }
+        },
+        "cuda_kernel_probe_passed": true,
+        "devices": [
+          {
+            "index": 0,
+            "kernel_verified": true,
+            "synchronize_succeeded": true,
+            "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+            "total_memory_bytes": 8546484224,
+            "compute_capability": [
+              12,
+              0
+            ],
+            "multiprocessor_count": 26,
+            "kernel": "float32 torch.mm of two 32x32 all-one matrices",
+            "matrix_shape": [
+              32,
+              32
+            ],
+            "expected_element": 32.0,
+            "result_sum": 32768.0,
+            "elapsed_ms": 202.566541
+          }
+        ],
+        "device_count": 1,
+        "packages": {
+          "torch": "2.8.0+cu128",
+          "transformers": "5.19.0",
+          "accelerate": "1.12.0",
+          "pydantic": "2.14.0",
+          "jsonschema": "4.26.0",
+          "safetensors": "0.8.0"
+        },
+        "python_version": "3.11.13",
+        "pip_check_exit_code": 0,
+        "model_runtime": {
+          "event": "runtime",
+          "device": "cuda",
+          "torch_version": "2.8.0+cu128",
+          "cuda_available": true,
+          "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+          "is_mock": false
+        },
+        "model_initializations": 1,
+        "sample_events": 3,
+        "independent_checker_passed": true,
+        "all_supplied_public_input_processed": true,
+        "each_fresh_store_closed": true,
+        "original_history_preserved": true,
+        "a_dropped_turns_per_sample": 0,
+        "response_source": "model",
+        "emotion_and_profile_source": "fallback_rules",
+        "json_parse_failure_attempts_per_sample": 2,
+        "samples_using_rules_fallback": 3,
+        "performance": {
+          "backend": "transformers",
+          "version": "b2_b5_official_v1",
+          "hardware_label": "local automatic device; see runtime event for actual CPU/CUDA",
+          "timing_scope": "A official prompt/tokenization/generation/decode/parse/retry/fallback and B strict output validation; CUDA synchronized before/after; excludes model load, file writes and store creation",
+          "required_rounds": 100,
+          "rounds": 3,
+          "complete": false,
+          "samples": 3,
+          "test_file_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+          "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+          "parse_failure_count": 3,
+          "parse_failure_ids": [
+            "test1_000001_t5",
+            "test1_000001_t7",
+            "test1_000002_t5"
+          ],
+          "parse_failure_policy": "number of samples with at least one A JSON parse failure, once per sample including retries",
+          "average_latency_ms": 9319.750861,
+          "median_latency_ms": 10874.373243,
+          "p95_latency_ms": 12956.480187,
+          "min_latency_ms": 4128.399153,
+          "max_latency_ms": 12956.480187,
+          "latencies_ms": [
+            10874.373243,
+            12956.480187,
+            4128.399153
+          ],
+          "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+          "model_path_name": "base-qwen2.5-0.5b-instruct",
+          "model_loader": "A ModelEngine direct local Transformers"
+        },
+        "complete_false_reason": "Only 3 supplied samples; does not reach the 100-sample timing completeness threshold",
+        "parse_failure_count_semantics": "Count of samples with at least one A JSON parse failure, once per sample including retries",
+        "quality_verified": false,
+        "trained_model_quality_claimed": false,
+        "official_dual_4090_verified": false,
+        "official_score_verified": false
+      },
+      "verification_in_progress": {
+        "workflow_continues": true,
+        "stage_observed": "OCI archive identity verifier repair; a new complete cached run is pending",
+        "candidate_bundle": "D:/B2-B6-20261011/candidate-a34f8df",
+        "initial_resume_windows_logs": "D:/B2-B6-20261011/setup/logs/resume-20261011T043045Z-3acaf854",
+        "latest_attempt_run_id": "20261011T044110Z-clone",
+        "latest_attempt_linux_work": "/root/b2-b6/runs/verify-20261011T044110Z-clone",
+        "latest_attempt_finished_at_utc": "2026-10-11T04:49:09.708648+00:00",
+        "latest_attempt_overall_exit_code": 1,
+        "source_weights_and_a_configuration_preserved": true,
+        "gpu_offline_verified": false,
+        "image_export_verified": false,
+        "requires_new_a_model_to_continue": false,
+        "cached_build_planned_for_next_complete_run": true,
+        "environment_reinstall_planned": false,
+        "model_redownload_planned": false,
+        "new_full_verification_result": null,
+        "actual_final_image_result_to_be_recorded_after_completion": true
+      }
+    }
+  ],
+  "status_observed_at_utc": "2026-10-11T05:11:27.9816103Z",
+  "windows_restart_performed_by_agent": false,
+  "human_restart": {
+    "completed": true,
+    "last_boot_up_time": "2026-10-11T11:02:49.5+08:00",
+    "another_restart_required_now": false
+  },
+  "ubuntu_distro_booted": true,
+  "linux_prerequisites_installed": true,
+  "model_verified": true,
+  "image_exported": true,
+  "fallback_image_verified": true,
+  "official_dual_4090_verified": false,
+  "official_score_verified": false,
+  "contest_submitted": false,
+  "current_activity": "B6 local technical verification and D-drive delivery complete; owned distro stopped after evidence preservation; no further system command scheduled",
+  "linux_environment": {
+    "distro_name": "B2-B6-Ubuntu22",
+    "disk_root": "D:/B2-B6-20261011/setup/wsl/B2-B6-Ubuntu22",
+    "ubuntu_version": "22.04",
+    "architecture": "amd64",
+    "root_fstype": "ext4",
+    "systemd_pid1_verified": true,
+    "all_linux_installation_and_runtime_data_backed_by_d_drive_vhd": true,
+    "docker_root_dir": "/var/lib/docker",
+    "containerd_default_root": "/var/lib/containerd",
+    "driver_environment": "/opt/b2-b6/env",
+    "current_distro_state": "stopped",
+    "installed_runtime_preserved": true
+  },
+  "linux_setup_attempts": [
+    {
+      "attempt": 1,
+      "exit_code": 100,
+      "result": "failed",
+      "reason": "DNS resolution failure; not installation success"
+    },
+    {
+      "attempt": 2,
+      "exit_code": 130,
+      "result": "interrupted",
+      "reason": "Configuration first-reread problem persisted; only the Agent-owned APT was interrupted"
+    },
+    {
+      "attempt": 3,
+      "exit_code": 0,
+      "result": "succeeded",
+      "finished_at_utc": "2026-10-11T04:31:39Z",
+      "evidence_path": "/root/b2-b6/setup-evidence/run-251faTkZ",
+      "evidence_storage": "Dedicated ext4 VHD at the stated D-drive disk root"
+    }
+  ],
+  "dns_repair": {
+    "final_scope": "Only the dedicated B2-B6-Ubuntu22 distro resolver configuration",
+    "wsl_conf_generate_resolv_conf": false,
+    "systemd_configuration_preserved": true,
+    "resolv_conf_is_regular_file": true,
+    "resolver_source": "Existing Windows DNS verified reachable from this dedicated distro",
+    "private_dns_addresses_in_public_record": false,
+    "vpn_interface_details_in_public_record": false,
+    "dedicated_distro_terminated_then_booted": true,
+    "resolution_persisted_after_restart": true,
+    "official_inrelease_checks": {
+      "count": 4,
+      "protocols": [
+        "HTTP",
+        "HTTPS"
+      ],
+      "all_status_200": true,
+      "all_contents_contained_pgp_signature": true,
+      "scope": "Fetch/content check; distinct from APT signature validation"
+    },
+    "raw_diagnostics_storage": "Private D:/B2-B6-20261011/setup/logs only",
+    "windows_dns_changed": false,
+    "windows_vpn_changed": false,
+    "windows_firewall_changed": false,
+    "tls_verification_disabled": false,
+    "linux_display_driver_installed": false
+  },
+  "installed_runtime": {
+    "versions_summary_from_actual_dpkg": {
+      "docker-ce": "29.9.0-1 (jammy build)",
+      "docker-ce-cli": "29.9.0-1 (jammy build)",
+      "containerd.io": "2.4.1-2",
+      "docker-buildx-plugin": "0.38.0-1",
+      "docker-compose-plugin": "5.6.0-1",
+      "nvidia-container-toolkit": "1.20.1-1",
+      "nvidia-container-toolkit-base": "1.20.1-1",
+      "libnvidia-container-tools": "1.20.1-1",
+      "libnvidia-container1": "1.20.1-1",
+      "python3": "3.10.6-1",
+      "python3-venv": "3.10.6-1"
+    },
+    "full_dpkg_evidence_path": "/root/b2-b6/setup-evidence/run-251faTkZ/dpkg-versions.tsv",
+    "driver_jsonschema_version": "4.26.0",
+    "driver_pip_check_passed": true,
+    "docker_unix_socket_info_verified": true,
+    "docker_socket": "unix:///var/run/docker.sock",
+    "docker_root_dir": "/var/lib/docker",
+    "docker_default_runtime": "nvidia",
+    "wsl_driver_bridge": {
+      "nvidia_smi_succeeded": true,
+      "gpu": "RTX 5060 Laptop",
+      "memory_mib": 8151,
+      "driver_version": "592.01",
+      "scope": "Bridge metadata only; does not establish CUDA kernel or GPU container/model acceptance"
+    },
+    "gpu_image_dependencies_observed": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.19.0",
+      "accelerate": "1.12.0",
+      "pydantic": "2.14.0",
+      "jsonschema": "4.26.0",
+      "safetensors": "0.8.0"
+    },
+    "gpu_image_python_observed": "3.11.13",
+    "gpu_image_pip_check_exit_code": 0,
+    "actual_gpu_environment_evidence_verified": true,
+    "actual_gpu_environment_evidence_source": "reports/integration/b6-gpu-environment.json",
+    "actual_dependency_snapshot_files": {
+      "requirements.actual.txt": {
+        "bytes": 8138,
+        "sha256": "924918dde5edd416dad2c42bf2712e84426be806ffd805b07e6127469b14892b"
+      },
+      "conda.actual.txt": {
+        "bytes": 12184,
+        "sha256": "87cfe91708bc51e4b46082c07821ec64be45817e56ba940f955a6139907191ba"
+      }
+    },
+    "dependency_snapshot_scope": "Actual same-image pip/conda files copied from an unstarted container; not a separate dependency reinstall or model execution"
+  },
+  "verification_in_progress": {
+    "workflow_continues": false,
+    "completed": true,
+    "stage_observed": "B6 local full technical acceptance complete; dedicated distro stopped",
+    "candidate_bundle": "D:/B2-B6-20261011/candidate-a34f8df",
+    "final_attempt_run_id": "20261011T050300Z-oci",
+    "final_attempt_linux_work": "/root/b2-b6/runs/verify-20261011T050300Z-oci",
+    "final_attempt_finished_at_utc": "2026-10-11T05:04:26.747248+00:00",
+    "final_attempt_overall_exit_code": 0,
+    "source_weights_and_a_configuration_preserved": true,
+    "gpu_offline_verified": true,
+    "image_export_verified": true,
+    "requires_new_a_model_to_continue": false,
+    "environment_reinstall_performed_for_final_run": false,
+    "model_redownload_performed_for_final_run": false,
+    "new_full_verification_result": "reports/integration/b6-gpu-offline.json",
+    "actual_final_image_result_to_be_recorded_after_completion": false
+  },
+  "model_verified_flag_scope": "B6 actual local single-GPU offline execution of 3 public samples with independent checker; not model quality, training benefit or official dual4090 evaluation",
+  "model_cuda_inference_phase_passed": true,
+  "image_export_verified": true,
+  "image_attempts": [
+    {
+      "attempt": 1,
+      "started_at_utc": "2026-10-11T04:31:40.016075+00:00",
+      "finished_at_utc": "2026-10-11T04:40:01.039676+00:00",
+      "overall_exit_code": 1,
+      "image_built": false,
+      "gpu_offline_verified": false,
+      "fallback_image_verified": false,
+      "failure_stage": "build",
+      "failure_reason": "Offline conda clone required package cache that was removed from the base image",
+      "failure_message": "Command failed (1); see build.log",
+      "source_report": "reports/integration/b6-image-attempt-01.json",
+      "source_report_sha256": "a71603da6c1fab38201bd74ff8ff20bbfd42188e94a86ceaf4f89b40d7cf0cc6",
+      "linux_work": "/root/b2-b6/runs/verify-20261011T043045Z-3acaf854"
+    },
+    {
+      "attempt": 2,
+      "started_at_utc": "2026-10-11T04:40:54.663422+00:00",
+      "finished_at_utc": "2026-10-11T04:49:09.708648+00:00",
+      "overall_exit_code": 1,
+      "image_built": true,
+      "gpu_offline_verified": false,
+      "fallback_image_verified": false,
+      "build_change": "Removed --offline only from build-time conda clone; runtime containers remained network none",
+      "failure_stage": "saved_archive_identity",
+      "failure_reason": "Old verifier equated the OCI index digest with the image config digest",
+      "failure_message": "Saved archive config differs from the verified image ID",
+      "source_report": "reports/integration/b6-image-attempt-02.json",
+      "source_report_sha256": "4284c1ea842632fc126459331d4914c6155ce7dbf1c5c9e8cac0a48a2c144a0b",
+      "linux_work": "/root/b2-b6/runs/verify-20261011T044110Z-clone"
+    },
+    {
+      "attempt": 3,
+      "started_at_utc": "2026-10-11T05:00:44.697960+00:00",
+      "finished_at_utc": "2026-10-11T05:04:26.747248+00:00",
+      "overall_exit_code": 0,
+      "image_built": true,
+      "gpu_offline_verified": true,
+      "fallback_image_verified": true,
+      "build_cache_reused": true,
+      "source_report": "reports/integration/b6-gpu-offline.json",
+      "source_report_sha256": "5ad6aef16c154190f9fb67595f2293d19b378b117a360b97eaea83a719439c66",
+      "linux_work": "/root/b2-b6/runs/verify-20261011T050300Z-oci",
+      "identity_validator": "Strict actual OCI index/platform manifest/config/layers/diff_ids validation",
+      "no_environment_reinstall": true,
+      "no_model_redownload": true
+    }
+  ],
+  "actual_image_observation": {
+    "docker_image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+    "docker_image_id_kind": "OCI index",
+    "repo_digests_observed": [
+      "b2-candidate@sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290"
+    ],
+    "registry_upload_claimed": false,
+    "image_size_bytes": 25969069324,
+    "platform_manifest_digest": "sha256:70cddf121d9b5d756a38086af9f4447f3a4cb37fc6ed706b1200a63645bb4312",
+    "image_config_digest": "sha256:9377c287feb1f31f350529174f6f3af9b769a402a265c5d75a1c60eefcd150a3",
+    "archive_bytes": 9322812928,
+    "archive_sha256": "3913aa097e32610fca2dfb910aaf30a25e37a99ae6b9ed3b9e72ebd056eddd8c",
+    "archive_created": true,
+    "archive_identity_verified": true,
+    "archive_format": "oci-index",
+    "platform": "linux/amd64",
+    "layers_verified": 12,
+    "verified_blob_count": 17,
+    "uncompressed_layer_diff_ids_verified": true,
+    "identity_proof_source": "reports/integration/b6-gpu-offline.json#/save_tar_identity",
+    "team_size_limit_bytes": 50000000000,
+    "both_observed_sizes_under_team_limit": true,
+    "official_50G_unit_reinterpreted": false,
+    "required_identity_chain": "OCI index -> unique Linux amd64 manifest -> actual config/layer content hashes and uncompressed diff_ids",
+    "digest_equivalence_not_assumed": true,
+    "windows_archive_path": "D:\\B2-B6-20261011\\gpu-verified-20261011T050300Z\\fallback-image.tar",
+    "windows_copy_sha256_verified": true,
+    "image_load_reverified": false
+  },
+  "actual_gpu_phase": {
+    "source_report": "reports/integration/b6-gpu-offline.json",
+    "sample_diagnostics_source": "reports/integration/b6-gpu-samples.json",
+    "runs": {
+      "gpu_probe": {
+        "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+        "network_mode": "none",
+        "exit_code": 0,
+        "platform_manifest_digest": "sha256:70cddf121d9b5d756a38086af9f4447f3a4cb37fc6ed706b1200a63645bb4312"
+      },
+      "inference": {
+        "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+        "network_mode": "none",
+        "exit_code": 0,
+        "platform_manifest_digest": "sha256:70cddf121d9b5d756a38086af9f4447f3a4cb37fc6ed706b1200a63645bb4312"
+      },
+      "checker": {
+        "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+        "network_mode": "none",
+        "exit_code": 0,
+        "platform_manifest_digest": "sha256:70cddf121d9b5d756a38086af9f4447f3a4cb37fc6ed706b1200a63645bb4312"
+      }
+    },
+    "cuda_kernel_probe_passed": true,
+    "devices": [
+      {
+        "index": 0,
+        "kernel_verified": true,
+        "synchronize_succeeded": true,
+        "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+        "total_memory_bytes": 8546484224,
+        "compute_capability": [
+          12,
+          0
+        ],
+        "multiprocessor_count": 26,
+        "kernel": "float32 torch.mm of two 32x32 all-one matrices",
+        "matrix_shape": [
+          32,
+          32
+        ],
+        "expected_element": 32.0,
+        "result_sum": 32768.0,
+        "elapsed_ms": 235.279673
+      }
+    ],
+    "device_count": 1,
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.19.0",
+      "accelerate": "1.12.0",
+      "pydantic": "2.14.0",
+      "jsonschema": "4.26.0",
+      "safetensors": "0.8.0"
+    },
+    "python_version": "3.11.13",
+    "pip_check_exit_code": 0,
+    "model_runtime": {
+      "event": "runtime",
+      "device": "cuda",
+      "torch_version": "2.8.0+cu128",
+      "cuda_available": true,
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "is_mock": false
+    },
+    "model_initializations": 1,
+    "sample_events": 3,
+    "independent_checker_passed": true,
+    "all_supplied_public_input_processed": true,
+    "each_fresh_store_closed": true,
+    "original_history_preserved": true,
+    "a_dropped_turns_per_sample": 0,
+    "response_source": "model",
+    "emotion_and_profile_source": "fallback_rules",
+    "json_parse_failure_attempts_per_sample": 2,
+    "samples_using_rules_fallback": 3,
+    "samples": [
+      {
+        "id": "test1_000001_t5",
+        "mode": "fallback_rules",
+        "parse_failures": 2,
+        "emotion_source": "rules",
+        "profile_source": "rules",
+        "response_source": "model",
+        "dropped_turns": 0,
+        "fresh_store_closed": true
+      },
+      {
+        "id": "test1_000001_t7",
+        "mode": "fallback_rules",
+        "parse_failures": 2,
+        "emotion_source": "rules",
+        "profile_source": "rules",
+        "response_source": "model",
+        "dropped_turns": 0,
+        "fresh_store_closed": true
+      },
+      {
+        "id": "test1_000002_t5",
+        "mode": "fallback_rules",
+        "parse_failures": 2,
+        "emotion_source": "rules",
+        "profile_source": "rules",
+        "response_source": "model",
+        "dropped_turns": 0,
+        "fresh_store_closed": true
+      }
+    ],
+    "performance": {
+      "backend": "transformers",
+      "version": "b2_b5_official_v1",
+      "hardware_label": "local automatic device; see runtime event for actual CPU/CUDA",
+      "timing_scope": "A official prompt/tokenization/generation/decode/parse/retry/fallback and B strict output validation; CUDA synchronized before/after; excludes model load, file writes and store creation",
+      "required_rounds": 100,
+      "rounds": 3,
+      "complete": false,
+      "samples": 3,
+      "test_file_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+      "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+      "parse_failure_count": 3,
+      "parse_failure_ids": [
+        "test1_000001_t5",
+        "test1_000001_t7",
+        "test1_000002_t5"
+      ],
+      "parse_failure_policy": "number of samples with at least one A JSON parse failure, once per sample including retries",
+      "average_latency_ms": 8890.429456,
+      "median_latency_ms": 11161.280663,
+      "p95_latency_ms": 11988.83636,
+      "min_latency_ms": 3521.171345,
+      "max_latency_ms": 11988.83636,
+      "latencies_ms": [
+        11161.280663,
+        11988.83636,
+        3521.171345
+      ],
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "model_path_name": "base-qwen2.5-0.5b-instruct",
+      "model_loader": "A ModelEngine direct local Transformers"
+    },
+    "complete_false_reason": "Only 3 supplied samples; does not reach the 100-sample timing completeness threshold",
+    "parse_failure_count_semantics": "Count of samples with at least one A JSON parse failure, once per sample including retries",
+    "quality_verified": false,
+    "trained_model_quality_claimed": false,
+    "official_dual_4090_verified": false,
+    "official_score_verified": false
+  },
+  "B6_complete": true,
+  "formal_acceptance_complete": true,
+  "image_load_reverified": false,
+  "quality_verified": false,
+  "B7_started": false,
+  "blockers": [],
+  "ubuntu_distro_running": false,
+  "ubuntu_distro_current_state": "stopped",
+  "final_verification": {
+    "source_report": "reports/integration/b6-gpu-offline.json",
+    "started_at_utc": "2026-10-11T05:00:44.697960+00:00",
+    "finished_at_utc": "2026-10-11T05:04:26.747248+00:00",
+    "overall_exit_code": 0,
+    "linux_work": "/root/b2-b6/runs/verify-20261011T050300Z-oci",
+    "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+    "gpu_offline_verified": true,
+    "fallback_image_verified": true,
+    "save_tar_image_id_verified": true,
+    "elapsed_seconds": 231.688,
+    "result_hashes": {
+      "submission.jsonl": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+      "performance_report.json": "5eef8c418e50e3cbfc14d232160b5aa48991b6db99c85d8fcf5b42e9ef82b7b5"
+    },
+    "environment_report": "reports/integration/b6-gpu-environment.json",
+    "samples_report": "reports/integration/b6-gpu-samples.json",
+    "delivery_report": "reports/integration/b6-gpu-delivery.json",
+    "delivery_recorded_at_utc": "2026-10-11T05:08:26.359355+00:00",
+    "windows_copy_sha256_verified": true,
+    "official_score_verified": false,
+    "contest_submitted": false,
+    "image_load_reverified": false
+  },
+  "resource_cleanup": {
+    "recorded_at_utc": "2026-10-11T05:11:27.9816103Z",
+    "distro": "B2-B6-Ubuntu22",
+    "terminate_exit_code": 0,
+    "owned_distro_stopped_verified": true,
+    "foreign_distro_stopped": false,
+    "all_three_verification_containers_removed": true,
+    "running_container_count_observed_before_stop": 0,
+    "archive_and_evidence_preserved": true,
+    "windows_restart_performed_by_agent": false,
+    "scope": "Only dedicated B6 WSL distro stopped after evidence copy; next explicit WSL launch restarts installed environment",
+    "source_report": "reports/integration/b6-local-cleanup.json",
+    "docker_engine_uninstalled": false,
+    "next_explicit_distro_launch_uses_existing_enabled_systemd_services": true
+  },
+  "final_evidence_sha256": {
+    "b6-gpu-offline.json": "5ad6aef16c154190f9fb67595f2293d19b378b117a360b97eaea83a719439c66",
+    "b6-gpu-delivery.json": "9bcaa2e8b566aee466b3b6d743a9169fcd4486f790b6f0d8100b86c3cf3c8fea",
+    "b6-gpu-environment.json": "9fb2f5e87612ecaa4926fc4ab36c42bca63b614f91849b672669dfc5599c3642",
+    "b6-gpu-samples.json": "591605dcdccab9a1396980868a59675a0411219926f348abaeb5963213058062",
+    "b6-local-cleanup.json": "74997e779945cf506c4792b433c7ad73d138f25241333215d2d3fb59e7ccd7a5"
+  },
+  "final_evidence_sha256_scope": "Stable LF-normalized repository publication-copy bytes; recorded facts unchanged, original D-drive archive/logs/JSON unchanged"
+}
