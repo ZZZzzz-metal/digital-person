@@ -110,6 +110,9 @@ class TransferModeTests(LocalOnly):
         ready = next(e for e in events if e["event"] == "ready")
         self.equal(ready["transfer_mode"], "STOR")
         self.equal(ready["atomic_no_overwrite"], False)
+        precheck = next(e for e in events if e["event"] == "remote_directory_precheck")
+        self.equal(precheck["requirement"], "support_one_file_at_a_time")
+        self.equal(precheck["directory_empty"], True)
         done = next(e for e in events if e["event"] == "uploaded")
         self.equal(done["actual_remote_name"], NAME)
         self.check(done["remote_size_verified"] and done["source_hash_verified"])
@@ -131,6 +134,33 @@ class TransferModeTests(LocalOnly):
         self.equal(ready["atomic_no_overwrite"], True)
         done = next(e for e in events if e["event"] == "uploaded")
         self.equal(done["actual_remote_name"], "candidate.tar.1")
+
+    def test_nlst_ascii_mode_is_restored_to_binary_at_stor_open(self):
+        args, server, data, events = self.setup_upload(manual=True)
+        state = {"type": None, "listing_used_ascii": False, "upload_open_type": None}
+
+        def command(value):
+            if value in {"TYPE I", "TYPE A"}:
+                state["type"] = value[-1]
+            return "200 Local mock reply"
+
+        def listing():
+            state["type"] = "A"  # The real ftplib NLST uses retrlines/TYPE A.
+            state["listing_used_ascii"] = True
+            return []
+
+        def open_transfer(value):
+            self.equal(value, "STOR " + NAME)
+            state["upload_open_type"] = state["type"]
+            self.equal(state["upload_open_type"], "I")
+            return data
+
+        server.voidcmd.side_effect = command
+        server.nlst.side_effect = listing
+        server.transfercmd.side_effect = open_transfer
+        ftp.run_upload(args)
+        self.equal(state["listing_used_ascii"], True)
+        self.equal(state["upload_open_type"], "I")
 
     def test_invalid_manual_names_rejected_before_ftp(self):
         for name in ("candidate.tar", "b7-601aaf08-" + "a" * 31 + ".tar",
@@ -160,6 +190,23 @@ class TransferModeTests(LocalOnly):
         self.equal(server.transfercmd.call_count, 0)
         self.equal(server.close.call_count, 1)
 
+    def test_any_other_remote_file_blocks_stor_and_stou_without_mutation(self):
+        for manual_mode in (True, False):
+            with self.subTest(manual_mode=manual_mode):
+                other = "unrelated-fake-private-file.tar"
+                args, server, data, events = self.setup_upload(manual=manual_mode, listed=[other])
+                self.failure("remote_directory_not_empty", lambda: ftp.run_upload(args))
+                self.equal(server.transfercmd.call_count, 0)
+                self.equal(data.sendall.call_count, 0)
+                self.equal(server.delete.call_count, 0)
+                self.equal(server.rename.call_count, 0)
+                self.equal(server.close.call_count, 1)
+                precheck = next(e for e in events if e["event"] == "remote_directory_precheck")
+                self.equal(precheck["requirement"], "support_one_file_at_a_time")
+                self.equal(precheck["directory_empty"], False)
+                self.check(other not in json.dumps(events))
+                self.check(not any(e["event"] == "transfer_requested" for e in events))
+
     def test_listing_failure_does_not_assume_empty_or_leak_reply(self):
         args, server, data, events = self.setup_upload(manual=True,
             listing_error=ftp.ftplib.error_perm("550 fake-secret-account denied"))
@@ -168,7 +215,14 @@ class TransferModeTests(LocalOnly):
         with self.assertRaises(ftp.ftplib.error_perm):
             ftp.run_upload(args)
         self.equal(server.transfercmd.call_count, 0)
+        self.equal(data.sendall.call_count, 0)
+        self.equal(server.delete.call_count, 0)
+        self.equal(server.rename.call_count, 0)
         self.equal(server.close.call_count, 1)
+        self.check(not any(e["event"] == "remote_directory_precheck" for e in events))
+        failure = next(e for e in events if e["event"] == "upload_not_verified")
+        self.equal(failure["phase"], "checking_remote_name")
+        self.equal(failure["ftp_reply_code"], "550")
         self.check("fake-secret-account" not in json.dumps(events))
 
     def test_remote_size_failure_is_not_reported_uploaded(self):
@@ -250,6 +304,14 @@ class ManualDiagnosticTests(LocalOnly):
 
 
 class LauncherTests(LocalOnly):
+    def test_nonempty_directory_message_is_clear_and_has_no_remote_names(self):
+        output = io.StringIO()
+        with mock.patch.object(launcher.sys, "stdout", output):
+            launcher.display_event({"event": "manual_upload_failed", "reason": "remote_directory_not_empty"})
+        self.check("服务器目录不是空目录" in output.getvalue())
+        self.check("请勿重试" in output.getvalue())
+        self.check("重新配置一次性凭据" in output.getvalue())
+
     def run_launcher(self, event, exit_code=0):
         child = mock.Mock()
         child.stdout = io.StringIO(json.dumps(event) + "\n")

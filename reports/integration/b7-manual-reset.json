@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "stage": "B7",
+  "prepared_at_beijing": "2026-10-11T20:22:11.731267+08:00",
+  "user_provided_support_rule": "外部上传文件确认上传前服务端没有文件，同一时间只能有一个文件，且文件大小不能超过50g",
+  "user_support_network_suggestion": "建议本地移动网络上传",
+  "rule_source": "User pasted customer support response; not an independently tested server quota.",
+  "handoff_directory": "D:\\B2-B7-20261011\\手动上传",
+  "archive": "D:\\B2-B7-20261011\\final-verified-20261011T093309Z\\fallback-image.tar",
+  "archive_bytes": 9322866688,
+  "archive_sha256_rechecked_this_preparation": false,
+  "archive_copied_or_downloaded": false,
+  "runtime_will_check_entire_archive_sha256_before_credentials": true,
+  "credentials_current_user_dpapi_locally_verified": true,
+  "credentials_one_use": true,
+  "credentials_consumed": false,
+  "credentials_valid_until_beijing": "2026-10-12T20:17:31+08:00",
+  "temporary_rsa_bridge_cleaned": true,
+  "remote_empty_directory_preflight_required": true,
+  "remote_preflight_atomic": false,
+  "last_verified_remote_empty_scope": "Deletion run 2026-10-11 20:03; uploader rechecks at runtime, not assumed permanently empty.",
+  "files_matched_repository": [
+    {
+      "name": "ftps_upload.py",
+      "bytes": 20606,
+      "sha256": "f5a2e65b8592d1d5f3b2330a8905ae7572aa5b35964b7bed64bd26f490f38452"
+    },
+    {
+      "name": "manual_upload.py",
+      "bytes": 15772,
+      "sha256": "d151bb708eade4fdd74e06fb037ca29c10a971276f9e344f05d9119a73d7a34f"
+    },
+    {
+      "name": "upload_launcher.py",
+      "bytes": 8347,
+      "sha256": "8bf05399d9fc74ce512dfc3fee80e2099e920d41b3da6288ecadaa1bc8d8171a"
+    },
+    {
+      "name": "manual-upload.json",
+      "bytes": 546,
+      "sha256": "52188894c0d074ddb2ed70f6af7c4b582dffeaff692340bb1c5655a1c8aa1b07"
+    },
+    {
+      "name": "ftp-peer.pem",
+      "bytes": 1273,
+      "sha256": "e4aa3ec6d4e6fbf83e1f7ec363be79875d8f7f650ca56d8cb2c95df23cceaa29"
+    },
+    {
+      "name": "加载镜像并上传.cmd",
+      "bytes": 161,
+      "sha256": "76c747fea074afe872b31d3acdd21849fd87d50dc0c6c64c477261f9137db161"
+    },
+    {
+      "name": "用Edge打开提交页.cmd",
+      "bytes": 119,
+      "sha256": "56935ffb24f228bcdbc04662a35e15fb99f7405bcf1e7fd615473ae0c3510fed"
+    },
+    {
+      "name": "操作说明.txt",
+      "bytes": 3610,
+      "sha256": "4e1755008c956a2038ebee9e20cd4033d8d2e3130aaa1157c70a35f8adfb04e2"
+    }
+  ],
+  "network_used_by_preparation_or_local_verification": false,
+  "upload_started_by_agent": false,
+  "competition_submit_clicked": false,
+  "Edge_open_command_exited_zero": true,
+  "Edge_UI_or_login_verified": false,
+  "network_switched_by_agent": false,
+  "STOR_553_resolved_verified": false,
+  "local_mock_tests": {
+    "event": "local_manual_handoff_mock_result",
+    "tests": 19,
+    "assertions": 129,
+    "passed": true,
+    "network_used": false,
+    "real_archive_or_credentials_read": false,
+    "gui_opened": false,
+    "edge_launched": false,
+    "process_exit_code": 0,
+    "actual_network_used": false,
+    "actual_upload_performed": false,
+    "verified_at_utc": "2026-10-11T12:20:30.897454+00:00"
+  }
+}
