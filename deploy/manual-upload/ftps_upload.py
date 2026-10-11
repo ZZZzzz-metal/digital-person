@@ -178,12 +178,20 @@ def credentials(stream) -> tuple[str, str]:
 
 def refuse_existing(ftp, name: str) -> None:
     # NLST uses the same encrypted, pinned data connection implementation.
-    # A server error is not treated as an empty directory: fail closed.
+    # Support requires an empty directory before upload: one file at a time.
+    # A server error (including 550) is never treated as an empty directory.
+    emit("remote_directory_precheck_started", requirement="support_one_file_at_a_time")
     listed = ftp.nlst()
+    if not isinstance(listed, list) or not all(isinstance(entry, str) for entry in listed):
+        raise UploadError("remote_directory_listing_invalid")
+    emit("remote_directory_precheck", requirement="support_one_file_at_a_time",
+         directory_empty=not bool(listed))
     for entry in listed:
         basename = entry.rsplit("/", 1)[-1]
         if basename == name or basename.startswith(name + "."):
             raise UploadError("requested_remote_name_or_residue_exists")
+    if listed:
+        raise UploadError("remote_directory_not_empty")
 
 
 def stou_name(reply: str) -> str:
@@ -279,6 +287,10 @@ def run_upload(args) -> None:
                 raise UploadError("local_tar_changed_before_transfer")
             # User-started compatibility mode uses a fresh 128-bit random name
             # plus NLST preflight. STOR cannot promise atomic no-overwrite.
+            # ftplib.nlst()/retrlines() switches to TYPE A; restore binary mode
+            # after that directory precheck and immediately before file upload.
+            phase = "setting_binary_transfer"
+            ftp.voidcmd("TYPE I")
             phase = "opening_transfer"
             emit("transfer_requested", requested_remote_name=name,
                  transfer_mode="STOR" if manual_stor else "STOU")

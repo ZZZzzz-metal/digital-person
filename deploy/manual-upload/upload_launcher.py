@@ -62,12 +62,28 @@ def display_event(event: dict) -> None:
         print(f"镜像完整性检查 {event['checked_bytes'] / event['expected_bytes']:.1%}", flush=True)
     elif kind == "archive_verification_passed":
         print("镜像完整性检查通过，开始连接上传。", flush=True)
+    elif kind == "remote_directory_precheck_started":
+        print("正在检查服务器目录是否为空；客服要求同一时间只能有一个文件。请勿并行启动。", flush=True)
+    elif kind == "remote_directory_precheck":
+        if event.get("directory_empty") is True:
+            print("服务器目录空目录检查通过，准备上传。", flush=True)
+        else:
+            print("服务器目录已有文件，上传停止。请保留日志并让负责本项目的 Agent 核查；程序不会删除远端文件。", flush=True)
     elif kind == "upload_started":
         print("此次作品文件名：" + event["actual_remote_name"], flush=True)
     elif kind == "progress":
         sent, total = event["transferred_bytes"], event["total_bytes"]
         print(f"已上传 {sent / total:.1%}（{sent / 1e9:.2f}/{total / 1e9:.2f} GB）", flush=True)
     elif kind == "manual_upload_failed":
+        if event.get("reason") in {"remote_directory_not_empty", "requested_remote_name_or_residue_exists"}:
+            print("服务器目录不是空目录，不能开始新上传。请勿重试或在网页提交残缺文件；需要人工确认目录清理后重新配置一次性凭据。", flush=True)
+            return
+        if event.get("reason") == "remote_directory_listing_invalid":
+            print("无法确认服务器目录为空，上传已停止。请保留日志核查；程序不会按空目录继续。", flush=True)
+            return
+        if event.get("ftp_reply_code") == "553":
+            print("服务器拒绝创建文件（553），已停止。请保留日志核查目录和存储权限；此时不能在网页提交。", flush=True)
+            return
         reason = event.get("reason") or event.get("ftp_reply_code") or event.get("exception_type")
         print("上传未通过检查，停止。错误：" + str(reason), flush=True)
 
