@@ -163,3 +163,11 @@ python submission/participant/check_output.py submission/official-reference/test
 结果目录须为新目录，已有两个官方结果文件任意一个都会拒绝覆盖。详细配置、已验证本机资源和复现方法见 [入口说明](submission/participant/README.md) 与 [B5 验收](reports/integration/B5验收.md)。此处 python 必须是装有 A 模型依赖的解释器，纯后端 .venv 不含 Torch/Transformers。
 
 训练由 A Agent 执行，B 使用算力做集成与离线验收；人提供实例和必要权限。Agent 推送 PR，用户手动合并和拉取。
+
+## B6 完整包与容器验证
+
+完整打包、镜像配方与自动验证工具已交付，79 项专项检查通过。实际完整包位于本机 `D:/B2-B6-20261011/candidate-a34f8df`，沿用 A 已发布基线/原配置，包含模型本体和 tokenizer。模型包不在 Git 中；后续本机下载、大模型与镜像均放 D 盘。
+
+正式禁网 GPU Docker 验收仍因运行环境权限阻塞：平台两张 4090 的 CUDA 运算成功，但嵌套容器启动被只读 cgroup 限制；备用 runc 又因 proc 挂载无权限失败。本机没有 Docker/可用 WSL，测试实例已关机。GPU 能力和工具检查不等于参赛镜像已通过；现阶段仍保留 B5 已验证 CPU 开发回退，不进入 B7。
+
+部署 CLI、完整清单、实际证据与仅需人解决的 Docker/GPU 环境条件见 [部署说明](deploy/README.md)、[离线验收](reports/integration/离线验收.md) 和 [进度记忆](reports/integration/B-进度记录.md)。环境到位后运行 `deploy/verify_container.py`，同一实际 image ID 禁网读取官方 JSONL、真实 GPU 推理、独立校验并导出回退镜像；成功才标记正式验收通过。

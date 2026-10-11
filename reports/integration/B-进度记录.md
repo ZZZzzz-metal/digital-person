@@ -1,12 +1,13 @@
 # B 分工进度记录
 
-更新日期：2026-10-10（北京时间）。本文件是 Agent 的工作进度记忆，不是产品的长期记忆数据库。每次阶段交付更新；恢复工作时先读本文件、核对分支/工作区，只补读有变化的约定和当前阶段必要内容，不重复已经验收的资料获取或检查。
+更新日期：2026-10-11（北京时间）。本文件是 Agent 的工作进度记忆，不是产品的长期记忆数据库。每次阶段交付更新；恢复工作时先读本文件、核对分支/工作区，只补读有变化的约定和当前阶段必要内容，不重复已经验收的资料获取或检查。
 
 ## 当前阶段与操作边界
 
-- 用户已要求 **继续 B5**；本轮官方离线入口/校验与真实样例 CPU 验证完成，已推送 [PR #9](https://github.com/ZZZzzz-metal/digital-person/pull/9)，之后停止，不进入 B6–B8。C 页面仍可独立交付，不阻塞官方适配。
+- 用户已要求 **继续 B6**，并明确允许 B 使用卡券。完整打包/容器验收准备完成；正式 GPU 禁网 Docker 验收因平台权限阻塞，不能记成 B6 完成，不进入 B7–B8。PR #9 已只读确认合并，当前远端 C 页面已存在但本轮未联调。
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
-- 当前工作分支 `codex/b5-offline`，从 B4 最后文档提交 `58a2115b28f93ae73ad9948deeb26498b42c752d` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
+- 当前工作分支 `codex/b6-container`，从 B5 最后文档提交 `23ddfedbdbdd65d82c0a1fb14635dd1d89007b19` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
+- 用户新增偏好：**所有后续本机下载、大模型、打包产物与镜像放 D 盘**，C 盘空间不足。B6 实际包在 `D:/B2-B6-20261011/candidate-a34f8df`；已验证旧 B4/B5 资产不重下，保留原位置。云端下载使用实例磁盘。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
@@ -70,7 +71,21 @@
 - 本轮报告 [B4验收](B4验收.md)、[结构化结果](b4-verification.json)、[真实HTTP](b4-real-http.json)、资源/环境/源码摘要均已保存。未消耗算力券、未训练、未fetch/pull/merge。
 - 实现/验收提交 `8b5d43b94acc5da1cc5e4d35c1bde56e118ce729` 已实际推送，创建 [PR #8](https://github.com/ZZZzzz-metal/digital-person/pull/8)，目标main，23个文件仅B分工区域。创建时open/未合并，head与本地一致；不把用户未来合并预写为完成。本文发布记录另作一次文档提交并推送到同一PR。
 
-## 恢复与下一步
+## B6：准备完成，正式 GPU 禁网验收因环境权限未通过
+
+- 先改总约定与 bundle schema，再实现完整打包、GPU 运行探针和 Docker 自动验收。B 实现提交 `a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394`；单次新增专项 **79/79 通过，14.19 秒**，包含模拟 GPU/Docker 与失败路径，不能称 79 次实际 GPU 验收。
+- 完整包 `D:/B2-B6-20261011/candidate-a34f8df`，30 文件/999,760,049 字节，manifest SHA `c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca`。绑定 B 实现提交 a34f8df 与 A 固定来源 fce84b3，沿用原基线/配置/许可；未改 A/C 文件或下载新权重。另保留 D:/B2-B6-20261011/participant 早期包，主候选以 candidate-a34f8df 为准。
+- 本轮只读确认 PR #9 已合并，merge SHA `44bc9301b8b42f033526261d95b30d36545abda5`；main 观察值 `9bb9ba9a79156b40887117a4de22838c6f2075d2`，八个 A Python 文件与 fce84b3 固定副本一致。无 fetch/pull/merge，无重复取得源内容。
+- 候选 Dockerfile 固定 public PyTorch2.8/CUDA12.8 镜像 digest 与四个直接依赖；base-source 仅公开元数据，镜像未拉取/构建，不是已验证 GPU 完整锁。自动工具以同 image ID 执行 network none/gpus all、GPU 内核、实际模型 CUDA 事件、独立 checker、标准 docker save/大小/摘要；成功才置正式标志。
+- 用户授权后创建自有平台实例 b6-offline-test-1011；公有 vLLM0.19.0 镜像实际 torch2.10+cu128，两张4090每卡24,564MiB内核计算成功。此能力探测没有 B2 模型推理，不能代替禁网镜像验收。
+- 官方静态 Docker29.8.2 自建服务可启动，微型 Bash 镜像可导入；容器启动因只读 /sys/fs/cgroup/cpuset/docker 失败。备用 runc 新 keyring 无权限；单次 no-new-keyring 后仍 proc mount EPERM。runc 默认 rootless 配置未请求 network namespace，不算网络隔离。没有改变平台宿主权限/安全限制。
+- 自有 Docker 服务已请求停止，实例已实际关机；最终页面总卡时余额29.23，最初30，显示差额0.77，包含不同券种，不称GPU-only余额。该值仅为本轮观察。截图本机 `.b6-work/platform-stopped-final.png`，不上传账号截图/认证值。
+- 本机无 Docker CLI/可用 WSL，进程非管理员；没有安装或重启系统。仅需人提供可实际启动 GPU Docker 的 Linux 主机/平台服务，或处理本机 WSL2/Docker 的管理员安装与必要重启；无需等待 A/C。
+- 单样例独立完整包真实 CPU 检查 **30/30通过**；推理/独立checker各退出0，原样5条历史、初始化1次、真实回复、独立空store关闭，原包前后30文件摘要一致。实际生成24,691.3615ms，两次JSON失败后A真实fallback_rules，情绪/画像rules，质量未评分。结果 D:/B2-B6-20261011/cpu-smoke-a34f8df/result，submission SHA7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828；安全报告 [b6-bundle-cpu-smoke.json](b6-bundle-cpu-smoke.json)，可复现helper verify_b6_bundle_cpu.py。它不等于 GPU/容器验收。B5原始CPU回退保留，不覆盖。
+- 本轮运行方法和准确缺项：[离线验收](离线验收.md)、[部署说明](../../deploy/README.md)、[结构化结果](b6-verification.json)。正式候选image ID/tar/GPULock均未取得，gpu_offline_verified=false、fallback_image_verified=false、contest_submitted=false，B7未开始。
+- 下一步仅在 Docker/GPU 环境到位后迁移已有包并运行 deploy/verify_container.py 的完整公开输入；不再重跑未变的 B0–B5、不重新领券/开机徒耗卡时、不把能力镜像当参赛镜像。上传工作仍由 Agent，用户合并/拉取。
+
+## B5 历史验收与恢复依据（后续以当前 B6 状态为准）
 
 - B5 已验收：共享合同/schema先改、团队官方独立入口/结果检查器已实现。沿用B4已验证CPU环境/完整基线，不重装/重下、不改A模型配置；启动只读确认PR#8合并，main `fce84b354ca0e6ab9cd1ec650198c0d45ab994bd`，A源码固定副本在 `../tmp/b5_20261010/upstream-A/src`，源摘要在b5-real-offline.json。没有fetch/pull/merge。
 - 实际新旧全回归368通过；最后仅改初始化异常脱敏/字节码缓存，受影响官方专项最终76通过，未变后端294保留。21 schemas/21 examples、pip check、Bash-n、原始参考12份摘要一致。不同测试合计370，不能写成单次全370。
@@ -85,8 +100,8 @@
 - B4当前实际运行方法与剩余项见上节/B4验收；A源码只读副本为 `../tmp/b4_20261010/upstream-A/src`，可配合公开 b4-a-source-check.json 核验后复现，不需要重下载基线或重装环境。不得将准备报告的 model_inference_verified=false 误读为最终真实HTTP未通过，它们是不同时间/范围的记录。
 
 1. 核对当前分支和工作区，再阅读本轮验收记录。若记录说已通过而代码/锁/样例后来改变，仅重跑受影响的最小检查。
-2. B0–B5已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下次先核对B5实际发布记录及远端只读状态。
-3. 本轮发布后停止，等待用户点名B6；不提前构建/上传镜像。C交付后才补实际页面联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
+2. B0–B5已验证，未变的部分不重复从头核对、重装或重测；用户手动合并/拉取。下一轮先读当前 B6 状态/发布记录，仅继续未通过的环境验证。
+3. 用户已点名B6；不提前进入B7上传。C页面现已交付，本轮未联调；本机真实CPU结果不能替代A训练候选/正式容器验收。
 4. 正式模型、训练、GPU 容器、可回退参赛候选和赛事上传尚未验收；需要相应后续阶段实际运行，不能由 B1 演示成功替代。
 
 主要依据：[总约定](../../docs/分工/00-总约定.md)、[B 任务书](../../docs/分工/B-记忆后端与参赛部署.md)、[B0 验收](B0验收.md)、[官方答复](B0-官方答复-2026-10-10.md)。本文件不保存账号、密码、cookie、token 或真实聊天。
