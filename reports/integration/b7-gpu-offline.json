@@ -1,0 +1,608 @@
+{
+  "started_at_utc": "2026-10-11T09:33:11.864751+00:00",
+  "image_built": false,
+  "gpu_offline_verified": true,
+  "fallback_image_verified": true,
+  "image_reused": true,
+  "review_materials_required": true,
+  "review_materials_verified": true,
+  "official_score_verified": false,
+  "contest_submitted": false,
+  "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+  "repo_digests": [
+    "b2-submission@sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe"
+  ],
+  "save_tar_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742",
+  "team_size_limit_bytes": 50000000000,
+  "runs": {
+    "materials": {
+      "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+      "network_mode": "none",
+      "device_requests": [],
+      "exit_code": 0,
+      "image_manifest_descriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:4f8778faf94994c0f21cee3ffc5f9ab92bc84340ca35be0281de2d18bb096a8d",
+        "size": 3334,
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        }
+      },
+      "started_at": "2026-10-11T09:33:19.803528035Z",
+      "finished_at": "2026-10-11T09:33:23.165840547Z",
+      "container_id": "94cb4cf43840a4be3ae0d712ca54d3845b472fa07458bdad381709aa5409b25f",
+      "log_sha256": "8e878831937d9db2e5ac827a5e3250efc99e490e2cd0eb0c23ed8a24f11902e4",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-38788a4496f34340a08984091563d480",
+        "--network",
+        "none",
+        "--entrypoint",
+        "/opt/conda/envs/conda_env/bin/python",
+        "--mount",
+        "type=bind,source=/mnt/d/B2-B7-20261011/final-verified-20261011T093309Z,target=/b2-materials-evidence",
+        "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+        "/opt/b2-tools/review_materials.py",
+        "/root/AI技术赛道-数字人综合情感对话模型-AI队",
+        "/b2-materials-evidence/materials-verify.json",
+        "--expected-manifest-sha256",
+        "60e0cf1fbd7267469555ddd1855ea20ff2baa5781f1fd68cc0d15b61bb7123ba"
+      ]
+    },
+    "gpu_probe": {
+      "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+      "network_mode": "none",
+      "device_requests": [
+        {
+          "Driver": "",
+          "Count": -1,
+          "DeviceIDs": null,
+          "Capabilities": [
+            [
+              "gpu"
+            ]
+          ],
+          "Options": {}
+        }
+      ],
+      "exit_code": 0,
+      "image_manifest_descriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:4f8778faf94994c0f21cee3ffc5f9ab92bc84340ca35be0281de2d18bb096a8d",
+        "size": 3334,
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        }
+      },
+      "started_at": "2026-10-11T09:33:23.941592046Z",
+      "finished_at": "2026-10-11T09:33:30.281473172Z",
+      "container_id": "e40cfa98368ee3789776a972504cd138fc3dfb1f217608c174f9c6dba7535226",
+      "log_sha256": "b6371a49a5256e508cf68e6f9227e52848f4d792ece06d4bf8212b22a134d9f3",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-308f046da6f04be6901e4aa9b328f13d",
+        "--network",
+        "none",
+        "--gpus",
+        "all",
+        "--entrypoint",
+        "bash",
+        "--mount",
+        "type=bind,source=/mnt/d/B2-B7-20261011/final-verified-20261011T093309Z/probe,target=/b2-probe",
+        "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+        "-c",
+        "source activate conda_env && exec python /opt/b2-tools/runtime_probe.py /b2-probe/runtime.json"
+      ]
+    },
+    "inference": {
+      "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+      "network_mode": "none",
+      "device_requests": [
+        {
+          "Driver": "",
+          "Count": -1,
+          "DeviceIDs": null,
+          "Capabilities": [
+            [
+              "gpu"
+            ]
+          ],
+          "Options": {}
+        }
+      ],
+      "exit_code": 0,
+      "image_manifest_descriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:4f8778faf94994c0f21cee3ffc5f9ab92bc84340ca35be0281de2d18bb096a8d",
+        "size": 3334,
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        }
+      },
+      "started_at": "2026-10-11T09:33:31.080052948Z",
+      "finished_at": "2026-10-11T09:34:50.978495485Z",
+      "container_id": "11abd651a090aeea80cb0e9997ae189db453dca54dc7d2106a118ff057c62545",
+      "log_sha256": "8982985414b46b532ab499433c60001774e532ee7fbedb33b1d1ed2e466d81b7",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-e871e281e2bd4a94955e92535d467bea",
+        "--network",
+        "none",
+        "--gpus",
+        "all",
+        "--mount",
+        "type=bind,source=/mnt/d/B2-B7-20261011/final-verified-20261011T093309Z/test-input.jsonl,target=/b2-input.jsonl,readonly",
+        "--mount",
+        "type=bind,source=/mnt/d/B2-B7-20261011/final-verified-20261011T093309Z/result,target=/b2-result",
+        "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+        "/b2-input.jsonl",
+        "/b2-result"
+      ]
+    },
+    "checker": {
+      "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+      "network_mode": "none",
+      "device_requests": [],
+      "exit_code": 0,
+      "image_manifest_descriptor": {
+        "mediaType": "application/vnd.oci.image.manifest.v1+json",
+        "digest": "sha256:4f8778faf94994c0f21cee3ffc5f9ab92bc84340ca35be0281de2d18bb096a8d",
+        "size": 3334,
+        "platform": {
+          "architecture": "amd64",
+          "os": "linux"
+        }
+      },
+      "started_at": "2026-10-11T09:34:52.240644186Z",
+      "finished_at": "2026-10-11T09:34:54.644677708Z",
+      "container_id": "2915b3aceb000755f594d79df059ed247b2fe890c23f2c6445fcd509c673ef91",
+      "log_sha256": "4b0cc20a8fea7da2b082c9e9244f7924a675f337aba346fa37acf956ec10aeca",
+      "create_command": [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "b2-b6-17b891efcaa6451bab44c908a5a1c2c5",
+        "--network",
+        "none",
+        "--entrypoint",
+        "/opt/conda/envs/conda_env/bin/python",
+        "--mount",
+        "type=bind,source=/mnt/d/B2-B7-20261011/final-verified-20261011T093309Z/test-input.jsonl,target=/b2-input.jsonl,readonly",
+        "--mount",
+        "type=bind,source=/mnt/d/B2-B7-20261011/final-verified-20261011T093309Z/result,target=/b2-result,readonly",
+        "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+        "/root/participant/check_output.py",
+        "/b2-input.jsonl",
+        "/b2-result"
+      ]
+    }
+  },
+  "review_materials_expected_sha256": "60e0cf1fbd7267469555ddd1855ea20ff2baa5781f1fd68cc0d15b61bb7123ba",
+  "docker_server": {
+    "ServerVersion": "29.9.0",
+    "OSType": "linux",
+    "Architecture": "x86_64"
+  },
+  "bundle": {
+    "verified": true,
+    "file_count": 30,
+    "total_bytes": 999760049,
+    "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+    "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+    "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "config_path": "weights/inference_config.base.json"
+  },
+  "build_skipped": true,
+  "image_descriptor": {
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "digest": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+    "size": 856
+  },
+  "image_size_bytes": 25969383103,
+  "input_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+  "review_materials": {
+    "verified": true,
+    "directory_name": "AI技术赛道-数字人综合情感对话模型-AI队",
+    "code_commit": "270688182f67e47c4834f7feb16bf99fe951cf82",
+    "file_count": 18,
+    "total_bytes": 118911,
+    "manifest_sha256": "60e0cf1fbd7267469555ddd1855ea20ff2baa5781f1fd68cc0d15b61bb7123ba",
+    "files": [
+      {
+        "path": "A/data/training/processed_official/official_samples_report.json",
+        "bytes": 2646,
+        "sha256": "a5968cb3e4e1a71889a591caae1034794599b583197543962ae431fb69e510dc",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:data/training/processed_official/official_samples_report.json"
+      },
+      {
+        "path": "A/reports/model/A2-数据来源与许可清单.md",
+        "bytes": 3675,
+        "sha256": "0459f8c417aa601cf3d7bbaeb316ca1f5dfceaf9a2e274b3415fcb7e536ed801",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:reports/model/A2-数据来源与许可清单.md"
+      },
+      {
+        "path": "A/reports/model/A4-训练尝试记录.md",
+        "bytes": 5619,
+        "sha256": "ce3c7f783f65a809eb35b0497f522bcaf15e3ec380cbbbab74062e15123b0b53",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:reports/model/A4-训练尝试记录.md"
+      },
+      {
+        "path": "A/reports/model/A5-评测结果.md",
+        "bytes": 8071,
+        "sha256": "7343aa496d505d284583d928605d012e51cd80167bdcb0f09315bf1e1cac0b01",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:reports/model/A5-评测结果.md"
+      },
+      {
+        "path": "A/reports/model/A8-官方数据整理记录.md",
+        "bytes": 4511,
+        "sha256": "266328c16e3048563d7f85cc9e79fae7c866a894e21a261327df3a20b3a4c806",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:reports/model/A8-官方数据整理记录.md"
+      },
+      {
+        "path": "A/reports/model/a4_training_short.json",
+        "bytes": 3466,
+        "sha256": "57e17761fc395295866ff7da22362dc92d5c40ae6c328b103e31885924c196a4",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:reports/model/a4_training_short.json"
+      },
+      {
+        "path": "A/reports/model/a5_eval_compare.json",
+        "bytes": 24497,
+        "sha256": "07bb3d118c0135f703174379dc57a326bd4d36ce7d40f11039e4ab22b86cb193",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:reports/model/a5_eval_compare.json"
+      },
+      {
+        "path": "A/training/logs/sft-short.steps.jsonl",
+        "bytes": 207,
+        "sha256": "4f897ee640edd1e7925487c5c28a3f27f774811f2b9e687477947c5c864e41fa",
+        "source": "GitHub:f2c1fbd5638ef58f3f23130dc6dad4831814d126:training/logs/sft-short.steps.jsonl"
+      },
+      {
+        "path": "B/B7-A交接核对.md",
+        "bytes": 7944,
+        "sha256": "5aa30d306322137a1054bd43299593127d19d6b5f7f4346a50189a5ddc0907e3",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/B7-A交接核对.md"
+      },
+      {
+        "path": "B/B7-实验设计与报告.md",
+        "bytes": 4135,
+        "sha256": "04a458a687d41eab410c28e4f556bbff1b1d59fcc38cc2d826642d7bd3144e01",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/B7-实验设计与报告.md"
+      },
+      {
+        "path": "B/B7-平台GPU尝试记录.md",
+        "bytes": 2216,
+        "sha256": "944b5a3096626b1ae9047927655b50b2ab6dd41bd37a69fc01d04c5c6f854e8f",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/B7-平台GPU尝试记录.md"
+      },
+      {
+        "path": "B/B7-技术方案.md",
+        "bytes": 4258,
+        "sha256": "bf4a5e52743f49671eaa6eafe2838f791e623e92cd10fbf0f966a6059c3a8c45",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/B7-技术方案.md"
+      },
+      {
+        "path": "B/B7-材料索引.md",
+        "bytes": 2145,
+        "sha256": "d24c7a5e756f85ce7cf445eb654a7045dc99abcaa9c6e03e73bf4d1eb9310b3f",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/B7-材料索引.md"
+      },
+      {
+        "path": "B/evidence/b6-gpu-environment.json",
+        "bytes": 670,
+        "sha256": "9fb2f5e87612ecaa4926fc4ab36c42bca63b614f91849b672669dfc5599c3642",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/b6-gpu-environment.json"
+      },
+      {
+        "path": "B/evidence/b6-gpu-offline.json",
+        "bytes": 23529,
+        "sha256": "5ad6aef16c154190f9fb67595f2293d19b378b117a360b97eaea83a719439c66",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/b6-gpu-offline.json"
+      },
+      {
+        "path": "B/evidence/b6-gpu-samples.json",
+        "bytes": 888,
+        "sha256": "591605dcdccab9a1396980868a59675a0411219926f348abaeb5963213058062",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:reports/integration/b6-gpu-samples.json"
+      },
+      {
+        "path": "B/evidence/conda-gpu.actual.txt",
+        "bytes": 12184,
+        "sha256": "87cfe91708bc51e4b46082c07821ec64be45817e56ba940f955a6139907191ba",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:deploy/conda-gpu.actual.txt"
+      },
+      {
+        "path": "B/evidence/requirements-gpu.actual.txt",
+        "bytes": 8250,
+        "sha256": "049327a6e36ededacc1343250666dcd64c28d6924b6c564c9e8127ab82ecaab6",
+        "source": "Git:270688182f67e47c4834f7feb16bf99fe951cf82:deploy/requirements-gpu.actual.txt"
+      }
+    ]
+  },
+  "runtime": {
+    "version": 1,
+    "probe_scope": "runtime_dependencies_bundle_sha_cuda_kernels",
+    "checked_at_utc": "2026-10-11T09:33:25.652887+00:00",
+    "status": "passed",
+    "gpu_verified": true,
+    "device_count": 1,
+    "python": {
+      "version": "3.11.13",
+      "implementation": "CPython",
+      "executable": "/opt/conda/envs/conda_env/bin/python",
+      "prefix": "/opt/conda/envs/conda_env"
+    },
+    "platform": {
+      "system": "Linux",
+      "release": "6.18.40.1-microsoft-standard-WSL2",
+      "machine": "x86_64"
+    },
+    "conda": {
+      "active_name": "conda_env",
+      "active_prefix": "/opt/conda/envs/conda_env"
+    },
+    "packages": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.19.0",
+      "accelerate": "1.12.0",
+      "pydantic": "2.14.0",
+      "jsonschema": "4.26.0",
+      "safetensors": "0.8.0"
+    },
+    "bundle": {
+      "verified": true,
+      "file_count": 30,
+      "total_bytes": 999760049,
+      "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+      "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+      "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "config_path": "weights/inference_config.base.json"
+    },
+    "pip": {
+      "freeze": {
+        "command": [
+          "/opt/conda/envs/conda_env/bin/python",
+          "-m",
+          "pip",
+          "--isolated",
+          "--disable-pip-version-check",
+          "freeze",
+          "--all"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "duration_ms": 331.82926,
+        "stdout": "accelerate==1.12.0\nannotated-doc==0.0.5\nannotated-types==0.8.0\nanyio==4.15.1\narchspec @ file:///home/conda/feedstock_root/build_artifacts/archspec_1737352602016/work\nasttokens @ file:///home/conda/feedstock_root/build_artifacts/asttokens_1733250440834/work\nastunparse==1.6.3\nattrs @ file:///home/conda/feedstock_root/build_artifacts/attrs_1741918516150/work\nbeautifulsoup4 @ file:///home/conda/feedstock_root/build_artifacts/beautifulsoup4_1744783198182/work\nboltons @ file:///home/conda/feedstock_root/build_artifacts/boltons_1749686179973/work\nBrotli @ file:///home/conda/feedstock_root/build_artifacts/brotli-split_1749229842835/work\ncertifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1754231422783/work/certifi\ncffi @ file:///home/conda/feedstock_root/build_artifacts/cffi_1725560564262/work\nchardet @ file:///home/conda/feedstock_root/build_artifacts/chardet_1741797914774/work\ncharset-normalizer @ file:///home/conda/feedstock_root/build_artifacts/charset-normalizer_1746214863626/work\nclick==8.5.0\ncmake==4.0.3\ncolorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1733218098505/work\nconda @ file:///home/conda/feedstock_root/build_artifacts/conda_1754405241914/work/conda-src\nconda-build @ file:///home/conda/feedstock_root/build_artifacts/conda-build_1754316273870/work\nconda-libmamba-solver @ file:///home/conda/feedstock_root/build_artifacts/conda-libmamba-solver_1742219570693/work/src\nconda-package-handling @ file:///home/conda/feedstock_root/build_artifacts/conda-package-handling_1736345463896/work\nconda_index @ file:///home/conda/feedstock_root/build_artifacts/conda-index_1748375757308/work\nconda_package_streaming @ file:///home/conda/feedstock_root/build_artifacts/conda-package-streaming_1751548120229/work\ndecorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1740384970518/work\ndistro @ file:///home/conda/feedstock_root/build_artifacts/distro_1734729835256/work\ndnspython==2.7.0\nevalidate @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_evalidate_1746793833/work\nexceptiongroup @ file:///home/conda/feedstock_root/build_artifacts/exceptiongroup_1746947292760/work\nexecuting @ file:///home/conda/feedstock_root/build_artifacts/executing_1745502089858/work\nexpecttest==0.3.0\nfilelock @ file:///home/conda/feedstock_root/build_artifacts/filelock_1741969488311/work\nfrozendict @ file:///home/conda/feedstock_root/build_artifacts/frozendict_1728841334936/work\nfsspec==2025.7.0\nh11==0.16.0\nh2 @ file:///home/conda/feedstock_root/build_artifacts/h2_1738578511449/work\nhf-xet==1.7.0\nhpack @ file:///home/conda/feedstock_root/build_artifacts/hpack_1737618293087/work\nhttpcore2==2.13.1\nhttpx2==2.13.1\nhuggingface_hub==2.2.0\nhyperframe @ file:///home/conda/feedstock_root/build_artifacts/hyperframe_1737618333194/work\nhypothesis==6.137.1\nidna==3.20\nipython @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_ipython_1751465044/work\nipython_pygments_lexers @ file:///home/conda/feedstock_root/build_artifacts/ipython_pygments_lexers_1737123620466/work\njedi @ file:///home/conda/feedstock_root/build_artifacts/jedi_1733300866624/work\nJinja2 @ file:///home/conda/feedstock_root/build_artifacts/jinja2_1741263328855/work\njsonpatch @ file:///home/conda/feedstock_root/build_artifacts/jsonpatch_1733814567314/work\njsonpointer @ file:///home/conda/feedstock_root/build_artifacts/jsonpointer_1725302941992/work\njsonschema==4.26.0\njsonschema-specifications @ file:///tmp/tmpuvkyqc9y/src\nlibarchive-c @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_python-libarchive-c_1747927321/work\nlibmambapy @ file:///home/conda/feedstock_root/build_artifacts/mamba-split_1746515836725/work/libmambapy\nlief @ file:///home/conda/feedstock_root/build_artifacts/lief_1750151383011/work/api/python\nlintrunner==0.12.7\nmarkdown-it-py==4.2.0\nMarkupSafe @ file:///home/conda/feedstock_root/build_artifacts/markupsafe_1733219680183/work\nmatplotlib-inline @ file:///home/conda/feedstock_root/build_artifacts/matplotlib-inline_1733416936468/work\nmdurl==0.1.2\nmenuinst @ file:///home/conda/feedstock_root/build_artifacts/menuinst_1753546279984/work\nmpmath==1.3.0\nmsgpack @ file:///home/conda/feedstock_root/build_artifacts/msgpack-python_1749813202382/work\nnetworkx==3.5\nninja==1.11.1.4\nnumpy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_1753401560/work/dist/numpy-2.3.2-cp311-cp311-linux_x86_64.whl#sha256=469440884ff65cdd5601d2ff9e1c5b9bcc2d8176c37e37ec78a0666703a54157\nnvidia-cublas-cu12==12.8.4.1\nnvidia-cuda-cupti-cu12==12.8.90\nnvidia-cuda-nvrtc-cu12==12.8.93\nnvidia-cuda-runtime-cu12==12.8.90\nnvidia-cudnn-cu12==9.10.2.21\nnvidia-cufft-cu12==11.3.3.83\nnvidia-cufile-cu12==1.13.1.3\nnvidia-curand-cu12==10.3.9.90\nnvidia-cusolver-cu12==11.7.3.90\nnvidia-cusparse-cu12==12.5.8.93\nnvidia-cusparselt-cu12==0.7.1\nnvidia-nccl-cu12==2.27.3\nnvidia-nvjitlink-cu12==12.8.93\nnvidia-nvtx-cu12==12.8.90\noptree==0.17.0\npackaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1745345660/work\nparso @ file:///home/conda/feedstock_root/build_artifacts/parso_1733271261340/work\npexpect @ file:///home/conda/feedstock_root/build_artifacts/pexpect_1733301927746/work\npickleshare @ file:///home/conda/feedstock_root/build_artifacts/pickleshare_1733327343728/work\npillow==11.0.0\npip @ file:///home/conda/feedstock_root/build_artifacts/pip_1746249878903/work\npkginfo @ file:///home/conda/feedstock_root/build_artifacts/pkginfo_1739984581450/work\nplatformdirs @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_platformdirs_1746710438/work\npluggy @ file:///home/conda/feedstock_root/build_artifacts/pluggy_1747339660894/work\nprompt_toolkit @ file:///home/conda/feedstock_root/build_artifacts/prompt-toolkit_1744724089886/work\npsutil @ file:///home/conda/feedstock_root/build_artifacts/psutil_1740663149797/work\nptyprocess @ file:///home/conda/feedstock_root/build_artifacts/ptyprocess_1733302279685/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl#sha256=92c32ff62b5fd8cf325bec5ab90d7be3d2a8ca8c8a3813ff487a8d2002630d1f\npure_eval @ file:///home/conda/feedstock_root/build_artifacts/pure_eval_1733569405015/work\npycosat @ file:///home/conda/feedstock_root/build_artifacts/pycosat_1732588400443/work\npycparser @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pycparser_1733195786/work\npydantic==2.14.0\npydantic_core==2.50.0\nPygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1750615794071/work\nPySocks @ file:///home/conda/feedstock_root/build_artifacts/pysocks_1733217236728/work\npython-etcd==0.4.5\npytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1742920838005/work\nPyYAML @ file:///home/conda/feedstock_root/build_artifacts/pyyaml_1737454647378/work\nreferencing @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_referencing_1737836872/work\nregex==2026.9.29\nrequests @ file:///home/conda/feedstock_root/build_artifacts/requests_1749498106507/work\nrich==15.0.0\nrpds-py @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_rpds-py_1751468291/work\nruamel.yaml @ file:///home/conda/feedstock_root/build_artifacts/ruamel.yaml_1749479918291/work\nruamel.yaml.clib @ file:///home/conda/feedstock_root/build_artifacts/ruamel.yaml.clib_1728724459810/work\nsafetensors==0.8.0\nsetuptools==80.9.0\nshellingham==1.5.4\nsix==1.17.0\nsortedcontainers==2.4.0\nsoupsieve @ file:///home/conda/feedstock_root/build_artifacts/soupsieve_1746563585861/work\nstack_data @ file:///home/conda/feedstock_root/build_artifacts/stack_data_1733569443808/work\nsympy==1.14.0\ntokenizers==0.23.3\ntorch==2.8.0+cu128\ntorchelastic==0.2.2\ntqdm @ file:///home/conda/feedstock_root/build_artifacts/tqdm_1735661334605/work\ntraitlets @ file:///home/conda/feedstock_root/build_artifacts/traitlets_1733367359838/work\ntransformers==5.19.0\ntriton==3.4.0\ntruststore @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_truststore_1739009763/work\ntyper==0.27.3\ntypes-dataclasses==0.6.6\ntyping-inspection==0.4.4\ntyping_extensions==4.16.0\nurllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1750271362675/work\nwcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1733231326287/work\nwheel==0.45.1\nzstandard==0.23.0\n",
+        "stderr": "",
+        "credential_redaction_applied": false
+      },
+      "check": {
+        "command": [
+          "/opt/conda/envs/conda_env/bin/python",
+          "-m",
+          "pip",
+          "--isolated",
+          "--disable-pip-version-check",
+          "check"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "duration_ms": 249.957948,
+        "stdout": "No broken requirements found.\n",
+        "stderr": "",
+        "credential_redaction_applied": false
+      }
+    },
+    "checks": {
+      "linux_runtime": true,
+      "conda_env_active": true,
+      "required_packages_present": true,
+      "bundle_verified": true,
+      "pip_freeze_succeeded": true,
+      "pip_check_succeeded": true,
+      "cuda_init": true,
+      "all_visible_devices_kernel_verified": true
+    },
+    "model_inference_verified": false,
+    "container_network_verified": false,
+    "errors": [],
+    "torch": {
+      "version": "2.8.0+cu128",
+      "cuda_built_version": "12.8",
+      "cuda_available": true,
+      "device_count": 1,
+      "cuda_initialized": true,
+      "devices": [
+        {
+          "index": 0,
+          "kernel_verified": true,
+          "synchronize_succeeded": true,
+          "name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+          "total_memory_bytes": 8546484224,
+          "compute_capability": [
+            12,
+            0
+          ],
+          "multiprocessor_count": 26,
+          "kernel": "float32 torch.mm of two 32x32 all-one matrices",
+          "matrix_shape": [
+            32,
+            32
+          ],
+          "expected_element": 32.0,
+          "result_sum": 32768.0,
+          "elapsed_ms": 237.589118
+        }
+      ]
+    }
+  },
+  "inference_process": {
+    "runtime": {
+      "event": "runtime",
+      "device": "cuda",
+      "torch_version": "2.8.0+cu128",
+      "cuda_available": true,
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "is_mock": false
+    },
+    "model_ready": {
+      "event": "model_ready",
+      "is_mock": false,
+      "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+      "initializations": 1
+    },
+    "batch_complete": {
+      "event": "batch_complete",
+      "samples": 3,
+      "rounds": 3,
+      "complete": false,
+      "result_dir": "/b2-result"
+    },
+    "sample_events": 3
+  },
+  "result_hashes": {
+    "submission.jsonl": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+    "performance_report.json": "af97e9bb3520c111c376892f91fb8aa47db668fca2aebab8d3bdf69a1c5e394a"
+  },
+  "performance": {
+    "backend": "transformers",
+    "version": "b2_b5_official_v1",
+    "hardware_label": "local automatic device; see runtime event for actual CPU/CUDA",
+    "timing_scope": "A official prompt/tokenization/generation/decode/parse/retry/fallback and B strict output validation; CUDA synchronized before/after; excludes model load, file writes and store creation",
+    "required_rounds": 100,
+    "rounds": 3,
+    "complete": false,
+    "samples": 3,
+    "test_file_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+    "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+    "parse_failure_count": 3,
+    "parse_failure_ids": [
+      "test1_000001_t5",
+      "test1_000001_t7",
+      "test1_000002_t5"
+    ],
+    "parse_failure_policy": "number of samples with at least one A JSON parse failure, once per sample including retries",
+    "average_latency_ms": 9831.629241,
+    "median_latency_ms": 10573.160978,
+    "p95_latency_ms": 12253.801537,
+    "min_latency_ms": 6667.925207,
+    "max_latency_ms": 12253.801537,
+    "latencies_ms": [
+      10573.160978,
+      12253.801537,
+      6667.925207
+    ],
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "model_path_name": "base-qwen2.5-0.5b-instruct",
+    "model_loader": "A ModelEngine direct local Transformers"
+  },
+  "save_tar_bytes": 9322866688,
+  "save_tar_identity": {
+    "verified": true,
+    "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+    "platform": "linux/amd64",
+    "format": "oci-index",
+    "platform_manifest_digest": "sha256:4f8778faf94994c0f21cee3ffc5f9ab92bc84340ca35be0281de2d18bb096a8d",
+    "config_digest": "sha256:e9944009ba12c7553fa1ed41286b0ad6756e7a672acbd55a7e4d907945ac481a",
+    "layers": [
+      {
+        "digest": "sha256:66587c81b81a58d07e40c48d900a1517516bbf58c4378c687d89d645824f5e5f",
+        "size_bytes": 30446997,
+        "diff_id": "sha256:3cc982388b71ef357e0157e0b7d3059dcefa4dc9fd2e3815bde6c6ce040302f3"
+      },
+      {
+        "digest": "sha256:653c16bb1f7bbf244aca8a719695abe818c8343614d1706ff249df9dc7e4afe3",
+        "size_bytes": 7211916,
+        "diff_id": "sha256:574501c8d7d0c0a3e4756cf91d6d517a50d69b3355f3eadd9a6cb7b8f88334e1"
+      },
+      {
+        "digest": "sha256:27f025450560594e82b23efaaf1184b1434d3e60c9e712f070e154da0d898f3b",
+        "size_bytes": 4250599501,
+        "diff_id": "sha256:99a4f2df9c934e6a4efc4f61a96ebe8f44727f5213776355b1795290b197533c"
+      },
+      {
+        "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+        "size_bytes": 32,
+        "diff_id": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "digest": "sha256:fe02679948c8f9694674f682dd9bd2e15105c83da90b1be1affc52549eadf14c",
+        "size_bytes": 99,
+        "diff_id": "sha256:026db027580493d2f7409238901521387c4961a6d0f99242e20394f994904412"
+      },
+      {
+        "digest": "sha256:89d2402dc3c8697b4131783f3120e674161d32ce5db6449089ab0cb3867b5672",
+        "size_bytes": 4207158817,
+        "diff_id": "sha256:2cbb2d4e7bf112ca41bf0cdfd4e65b1739e8266be3fc7b4430d174a75379de82"
+      },
+      {
+        "digest": "sha256:9f20b7c0649f3c4745b031011a09be61c81862d24916cf900989fd38aa4ef838",
+        "size_bytes": 367,
+        "diff_id": "sha256:215fd780286bf23863e250ed9372911f422946653702d34a8719fdd3b81ae9cf"
+      },
+      {
+        "digest": "sha256:b95f6964503fa55d0dbcaa454d86f0d91c940395cf1338f9d79785a7df1fd492",
+        "size_bytes": 51085724,
+        "diff_id": "sha256:37db15c18ca3cd21109b3474578f3b6a55ef1d3209c7c0f27dcf4fdd3b213b1b"
+      },
+      {
+        "digest": "sha256:f266f1a28e1a562a5d11561147ada0b5892b8ca7a7765095b5c6cfa6d2bd3e06",
+        "size_bytes": 10315,
+        "diff_id": "sha256:d1b989c463e5135524b2ac5822a97abd67ff596d0cae58c586c13ed985b74957"
+      },
+      {
+        "digest": "sha256:3bc97fb3e23f93cd6d7351ed298b859b78a84a82d55cda9f8f2c8649aee9793d",
+        "size_bytes": 776261509,
+        "diff_id": "sha256:4665878a2fda57a26a4a2c852ca0d04989f3981d02b85d1a03706746a69090cc"
+      },
+      {
+        "digest": "sha256:b22080ecb73895e5983f90fabd5dd52c6849ef5983cd942c1e15e39592e4037c",
+        "size_bytes": 4466,
+        "diff_id": "sha256:dd8f032afe1e2dfe610d019dd73155f7d9e3e166d45ce557417e47f060b92d97"
+      },
+      {
+        "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+        "size_bytes": 32,
+        "diff_id": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      },
+      {
+        "digest": "sha256:997762326f6942c8a61250a01146352e805a9719521ffefb11034ef0a03a6421",
+        "size_bytes": 2702,
+        "diff_id": "sha256:5a528990f04b51d14fe82ece41b079687bba55600819b7f37cf8922f722ed60f"
+      },
+      {
+        "digest": "sha256:cbd0dc574e6cc69e67e67137d70463a07d5dbddb4abaf269e4225af0be68deb2",
+        "size_bytes": 45096,
+        "diff_id": "sha256:a2247c1aabdf05fd6cf9724047dbc5fffa0aa22bbc4072f168b3f92363e8d3d9"
+      },
+      {
+        "digest": "sha256:aa2cef76544ac83201cc9e2578df6b99e3adf387ae15e22f18d7cb0b3e18e944",
+        "size_bytes": 1780,
+        "diff_id": "sha256:1b64413b52985b6549d57d6c3c3d385a3b7ed8fb6ee5fe8ac6a874ee60e5a154"
+      },
+      {
+        "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+        "size_bytes": 32,
+        "diff_id": "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+      }
+    ],
+    "verified_blob_count": 20
+  },
+  "save_tar_image_id_verified": true,
+  "elapsed_seconds": 585.068,
+  "finished_at_utc": "2026-10-11T09:43:21.071708+00:00"
+}

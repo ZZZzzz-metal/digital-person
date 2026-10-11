@@ -1,0 +1,12 @@
+{
+  "image_built": true,
+  "base_image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+  "image_id": "sha256:601aaf082340ebd3f3bd909c9d51508fabbf9e46e07dba95402e590700a38fbe",
+  "unchanged_base_layers": true,
+  "base_layer_count": 12,
+  "new_layer_count": 16,
+  "image_size_bytes": 25969383103,
+  "materials_code_commit": "270688182f67e47c4834f7feb16bf99fe951cf82",
+  "build_network": "none",
+  "pull": false
+}
