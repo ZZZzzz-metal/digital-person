@@ -1,0 +1,5 @@
+credentials.dpapi
+*.jsonl
+UPLOAD-SUCCESS-*.txt
+__pycache__/
+配置状态.json

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "host": "183.222.230.93",
+  "port": 50001,
+  "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+  "certificate_file": "ftp-peer.pem",
+  "credentials_file": "credentials.dpapi",
+  "approved_tar_name": "fallback-image.tar",
+  "expected_tar_bytes": 9322866688,
+  "expected_tar_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742",
+  "remote_prefix": "b7-601aaf08-",
+  "upload_mode": "manual_stor_unique",
+  "credential_lifetime_seconds": 86400
+}

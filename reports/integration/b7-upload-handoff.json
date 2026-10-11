@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-11T11:19:56.180820+00:00",
+  "stage": "B7",
+  "user_requested_manual_upload_and_submission": true,
+  "automatic_uploads_stopped": true,
+  "upload_attempts": [
+    {
+      "attempt": 1,
+      "result": "stopped_by_agent_before_user_handoff",
+      "local_log_path": "D:\\B2-B7-20261011\\ftps-upload-20261011.jsonl",
+      "log_sha256": "1a6e2cae7b29d48680cc03bf9a60330073676f0aa0b404159317562081089a4a",
+      "events": [
+        {
+          "event": "ready",
+          "expected_bytes": 9322866688,
+          "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+          "control_tls_version": "TLSv1.3",
+          "encrypted_data_required": true,
+          "local_sha256_verified_this_run": false,
+          "expected_local_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742"
+        },
+        {
+          "event": "upload_started",
+          "requested_remote_name": "AI-team-B2-B7-20261011-601aaf08.tar",
+          "actual_remote_name": "AI-team-B2-B7-20261011-601aaf08.tar"
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 9437184,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 43.0
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 16777216,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 78.8
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 20971520,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 109.6
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 30408704,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 142.5
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 36700160,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 175.8
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 50331648,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 206.1
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 58720256,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 239.7
+        },
+        {
+          "event": "progress",
+          "transferred_bytes": 62914560,
+          "total_bytes": 9322866688,
+          "elapsed_seconds": 273.3
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "result": "local_rsa_bridge_failed_before_ftp",
+      "local_log_path": "D:\\B2-B7-20261011\\ftps-upload-attempt2-20261011.jsonl",
+      "log_sha256": "f5270ed731808d2b06fee7dbfd66a62deaa45cabf5f84cc921c1ddeb24b0db44",
+      "events": [
+        {
+          "event": "local_bridge_failed",
+          "error_type": "Error"
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "result": "stou_rejected_553",
+      "local_log_path": "D:\\B2-B7-20261011\\ftps-upload-attempt3-20261011.jsonl",
+      "log_sha256": "ca63c02e7483340109b1aebe6cbfab2d7a4ac59c78b54271496c4383696a6e66",
+      "events": [
+        {
+          "event": "data_tls_connected",
+          "session_reused": true,
+          "send_buffer_bytes": 4194304,
+          "tls_version": "TLSv1.3"
+        },
+        {
+          "event": "ready",
+          "expected_bytes": 9322866688,
+          "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+          "control_tls_version": "TLSv1.3",
+          "encrypted_data_required": true,
+          "local_sha256_verified_this_run": false,
+          "expected_local_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742"
+        },
+        {
+          "event": "upload_not_verified",
+          "actual_remote_name": null,
+          "transferred_bytes": 0,
+          "no_remote_cleanup_performed": true
+        },
+        {
+          "event": "failed",
+          "exception_type": "error_perm",
+          "reason": null,
+          "ftp_reply_code": "553",
+          "no_automatic_delete_or_retry": true,
+          "competition_submission_performed": false
+        }
+      ]
+    },
+    {
+      "attempt": 4,
+      "result": "stou_rejected_553",
+      "local_log_path": "D:\\B2-B7-20261011\\ftps-upload-attempt4-20261011.jsonl",
+      "log_sha256": "2f5becbba268417403cf93c5c64c5c79be60bbb0a02e31ea11e24b5733859ae9",
+      "events": [
+        {
+          "event": "data_tls_connected",
+          "session_reused": true,
+          "send_buffer_bytes": 4194304,
+          "tls_version": "TLSv1.3"
+        },
+        {
+          "event": "ready",
+          "expected_bytes": 9322866688,
+          "certificate_sha256": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+          "control_tls_version": "TLSv1.3",
+          "encrypted_data_required": true,
+          "local_sha256_verified_this_run": false,
+          "expected_local_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742"
+        },
+        {
+          "event": "upload_not_verified",
+          "actual_remote_name": null,
+          "transferred_bytes": 0,
+          "no_remote_cleanup_performed": true
+        },
+        {
+          "event": "failed",
+          "exception_type": "error_perm",
+          "reason": null,
+          "safe_ftp_reason": "server_could_not_create_file",
+          "ftp_reply_code": "553",
+          "no_automatic_delete_or_retry": true,
+          "competition_submission_performed": false
+        }
+      ]
+    }
+  ],
+  "verified_remote_candidate": false,
+  "contest_submitted": false,
+  "official_score": null,
+  "partial_remote_file": {
+    "name": "AI-team-B2-B7-20261011-601aaf08.tar",
+    "final_size_and_hash": null,
+    "must_not_submit": true,
+    "remote_deletion_performed": false
+  },
+  "platform_observation": {
+    "logged_in": true,
+    "selected_track": "数字人综合情感陪伴对话模型",
+    "source": "外部平台",
+    "region": "西南一区",
+    "ui_status": "已上传（请确保参赛文件已全部上传完成再提交作品）",
+    "default_selected_file_is_partial": true,
+    "submit_clicked": false,
+    "screenshot_path": "D:\\B2-B7-20261011\\手动上传\\当前提交页-旧残缺文件不可提交.png",
+    "screenshot_in_git_or_image": false
+  },
+  "manual_handoff": {
+    "configuration_verified_at_utc": "2026-10-11T11:17:07.652689+00:00",
+    "credentials_current_user_dpapi_verified": true,
+    "credentials_one_use": true,
+    "credentials_consumed": false,
+    "credentials_valid_until_utc": "2026-10-12T11:15:54+00:00",
+    "credentials_valid_until_beijing": "2026-10-12T19:15:54+08:00",
+    "certificate_pin": "a92d9e4cd61b1147eed8778af1b3aa6d9034c10f0aac82e3997418e41c63f86e",
+    "handoff_directory": "D:\\B2-B7-20261011\\手动上传",
+    "network_used": false,
+    "upload_performed": false,
+    "competition_submission_performed": false,
+    "temporary_rsa_bridge_files_removed": true,
+    "public_files": [
+      {
+        "name": ".gitignore",
+        "bytes": 83,
+        "sha256": "b3ff5af1ad9e60538221f6c7217c4dea67e40462e3e7eb5097b0ebbed1269451"
+      },
+      {
+        "name": "ftp-peer.pem",
+        "bytes": 1273,
+        "sha256": "e4aa3ec6d4e6fbf83e1f7ec363be79875d8f7f650ca56d8cb2c95df23cceaa29"
+      },
+      {
+        "name": "ftps_upload.py",
+        "bytes": 18847,
+        "sha256": "466040870e15cf4c370b54596e2c7c99a87eeb9844732022ef9774034c6c949c"
+      },
+      {
+        "name": "manual-upload.json",
+        "bytes": 546,
+        "sha256": "52188894c0d074ddb2ed70f6af7c4b582dffeaff692340bb1c5655a1c8aa1b07"
+      },
+      {
+        "name": "manual_upload.py",
+        "bytes": 15699,
+        "sha256": "547f7d83f111271c97f405d69a84a4a2d175f0abf69e8367eae73429e1ff0cf4"
+      },
+      {
+        "name": "upload_launcher.py",
+        "bytes": 6999,
+        "sha256": "b7dbc0296db86c8fe2c889129ac6a0970686854df235fa6cc4e0db4ee078d1e4"
+      },
+      {
+        "name": "加载镜像并上传.cmd",
+        "bytes": 161,
+        "sha256": "76c747fea074afe872b31d3acdd21849fd87d50dc0c6c64c477261f9137db161"
+      },
+      {
+        "name": "操作说明.txt",
+        "bytes": 2177,
+        "sha256": "7b650174aca9e12199a285614a28b30e36b3f8d130d945b130387e1fb7978c62"
+      },
+      {
+        "name": "用Edge打开提交页.cmd",
+        "bytes": 119,
+        "sha256": "56935ffb24f228bcdbc04662a35e15fb99f7405bcf1e7fd615473ae0c3510fed"
+      }
+    ],
+    "python": "C:\\Users\\20964\\Documents\\ChatGPT\\MC\\digital-person-b0\\.venv\\Scripts\\python.exe",
+    "frozen_archive_path": "D:\\B2-B7-20261011\\final-verified-20261011T093309Z\\fallback-image.tar",
+    "frozen_archive_bytes": 9322866688,
+    "frozen_archive_sha256": "0082322b4cac4637baffed4b3caae42a80ceb21322ded6a8e84c7b9647589742",
+    "archive_rebuilt_copied_or_rehashed_during_handoff": false,
+    "manual_entry_started_by_agent": false,
+    "stor_platform_compatibility_verified": false,
+    "send_buffer_throughput_improvement_verified": false,
+    "edge_public_url_launch_exit_code": 0,
+    "edge_page_or_login_verified": false,
+    "credential_ciphertext_in_git_or_image": false
+  },
+  "local_verification": {
+    "manual_self_test_checks": 4,
+    "ftps_self_test_checks": 10,
+    "mock_tests": 13,
+    "mock_assertions": 70,
+    "mock_tests_passed": true,
+    "launcher_structure_test_passed": true,
+    "actual_current_user_dpapi_dummy_roundtrip_passed": true,
+    "actual_prepared_credentials_dpapi_binding_verified": true,
+    "live_stor_upload_tested": false,
+    "file_dialog_user_selection_tested": false
+  },
+  "cleanup": {
+    "initial_cim_query_failed_in_sandbox": true,
+    "escalated_cim_query_succeeded": true,
+    "matching_upload_process_count": 0,
+    "dedicated_wsl": "B2-B6-Ubuntu22",
+    "running_containers_observed": 0,
+    "dedicated_wsl_terminate_exit_code": 0,
+    "other_environments_stopped": false
+  },
+  "git_workflow": {
+    "branch": "codex/b7-submit",
+    "pr": "https://github.com/ZZZzzz-metal/digital-person/pull/12",
+    "human_merge_and_pull": true,
+    "agent_fetch_pull_merge_performed": false
+  },
+  "interpretation": [
+    "历史553仅来自STOU，不能断言普通STOR同样失败。",
+    "新STOR使用128位随机名字并NLST预检，不能保证原子防覆盖。",
+    "网页已上传包含中断文件，不能替代远端完整性校验或赛事成功。",
+    "原冻结/真实GPU记录保留历史观察时间，不因后续上传尝试改写。"
+  ]
+}
