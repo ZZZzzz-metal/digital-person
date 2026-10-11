@@ -79,7 +79,7 @@ temporary=$(mktemp -d /tmp/b2-b6-setup-XXXXXXXX)
 export DEBIAN_FRONTEND=noninteractive
 
 stage='ubuntu-prerequisites'
-apt-get update
+apt-get --error-on=any update
 apt-get install -y --no-remove --no-install-recommends ca-certificates curl gnupg python3 python3-venv
 
 stage='official-signed-repositories'
@@ -105,7 +105,7 @@ install -m 0644 "$temporary/nvidia.gpg" /usr/share/keyrings/nvidia-container-too
 printf '%s\n' 'deb [arch=amd64 signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://nvidia.github.io/libnvidia-container/stable/deb/amd64 /' \
     > /etc/apt/sources.list.d/nvidia-container-toolkit.list
 chmod 0644 /etc/apt/sources.list.d/nvidia-container-toolkit.list
-apt-get update
+apt-get --error-on=any update
 
 stage='available-runtime-versions'
 toolkit_packages=(nvidia-container-toolkit nvidia-container-toolkit-base libnvidia-container-tools libnvidia-container1)

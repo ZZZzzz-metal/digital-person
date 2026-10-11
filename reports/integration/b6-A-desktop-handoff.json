@@ -1,0 +1,14 @@
+{
+  "recorded_at_utc": "2026-10-11T05:15:11.3051462Z",
+  "desktop_guide_path": "C:\\Users\\20964\\Desktop\\A成员-GPU训练一步步操作说明.txt",
+  "desktop_guide_bytes": 8218,
+  "desktop_guide_sha256": "6ecea5880b370b05aeda06d575481562eba0403587b84e0fa1ce01d691dd8683",
+  "desktop_official_zip_path": "C:\\Users\\20964\\Desktop\\数字人综合情感陪伴对话模型.zip",
+  "official_zip_bytes": 27076587,
+  "official_zip_sha256": "fb10cf4a3baae576e3fdc411d53a7df16b039ea8596d8d79c907a17077ff5072",
+  "original_D_source_preserved": true,
+  "desktop_zip_copied_this_check": true,
+  "existing_file_overwritten": false,
+  "A_GPU_fixed_by_B": false,
+  "A_training_performed_by_B": false
+}

@@ -2,7 +2,9 @@
 # This recipe becomes a verified environment only after build + GPU self-test.
 FROM pytorch/pytorch@sha256:417bd75df6365104c283ea4c1651fb3530d9eb5a4c2fafa51943cff2a94e6385
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN conda create --name conda_env --clone base --offline -y \
+# The upstream runtime clears package caches; clone may fetch the exact base
+# packages during construction. Runtime inference remains network-isolated.
+RUN conda create --name conda_env --clone base -y \
     && /opt/conda/envs/conda_env/bin/python -m pip uninstall -y torchvision torchaudio
 COPY requirements-gpu.txt /opt/b2-tools/requirements-gpu.txt
 RUN /opt/conda/envs/conda_env/bin/python -m pip install --no-cache-dir -r /opt/b2-tools/requirements-gpu.txt \

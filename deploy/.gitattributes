@@ -1,1 +1,3 @@
 *.sh text eol=lf
+requirements-gpu.actual.txt text eol=lf
+conda-gpu.actual.txt text eol=lf

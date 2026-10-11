@@ -1,0 +1,32 @@
+{
+  "started_at_utc": "2026-10-11T04:31:40.016075+00:00",
+  "image_built": false,
+  "gpu_offline_verified": false,
+  "fallback_image_verified": false,
+  "official_score_verified": false,
+  "contest_submitted": false,
+  "image_id": null,
+  "repo_digests": [],
+  "save_tar_sha256": null,
+  "team_size_limit_bytes": 50000000000,
+  "runs": {},
+  "docker_server": {
+    "ServerVersion": "29.9.0",
+    "OSType": "linux",
+    "Architecture": "x86_64"
+  },
+  "bundle": {
+    "verified": true,
+    "file_count": 30,
+    "total_bytes": 999760049,
+    "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+    "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+    "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "config_path": "weights/inference_config.base.json"
+  },
+  "failure_type": "RuntimeError",
+  "failure": "Command failed (1); see build.log",
+  "elapsed_seconds": 524.364,
+  "finished_at_utc": "2026-10-11T04:40:01.039676+00:00"
+}

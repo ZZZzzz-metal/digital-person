@@ -14,11 +14,11 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
-import tarfile
 import time
 import uuid
 
 from prepare_bundle import verify_bundle
+from saved_image import verify_saved_image
 
 LIMIT_BYTES = 50_000_000_000  # Team budget, not a clarification of official 50G.
 DEPLOY = Path(__file__).resolve().parent
@@ -65,6 +65,7 @@ def validate_container(info: dict, image_id: str, gpu: bool) -> dict:
         raise RuntimeError("Container did not finish successfully")
     return {"image_id": info["Image"], "network_mode": host["NetworkMode"],
             "device_requests": requests, "exit_code": state["ExitCode"],
+            "image_manifest_descriptor": info.get("ImageManifestDescriptor"),
             "started_at": state["StartedAt"], "finished_at": state["FinishedAt"]}
 
 
@@ -131,6 +132,7 @@ def run_container(image_id: str, command: list[str], mounts: list[str], work: Pa
         info = inspect("container", cid)
         evidence = {"container_id": cid, "create_command": args,
                     "image_id": info["Image"], "network_mode": info["HostConfig"]["NetworkMode"],
+                    "image_manifest_descriptor": info.get("ImageManifestDescriptor"),
                     "device_requests": info["HostConfig"].get("DeviceRequests"),
                     "state": info["State"], "log_sha256": sha(log)}
         (work / (name + "-inspect.json")).write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
@@ -196,6 +198,7 @@ def run(args) -> dict:
         if image["Id"] != iid or not iid.startswith("sha256:"):
             raise RuntimeError("Built image ID mismatch")
         report.update(image_built=True, image_id=iid, repo_digests=image.get("RepoDigests") or [],
+                      image_descriptor=image.get("Descriptor"),
                       image_size_bytes=image["Size"])
         if image["Size"] >= LIMIT_BYTES:
             raise RuntimeError("Image exceeds the team size budget")
@@ -237,13 +240,17 @@ def run(args) -> dict:
         execute(["docker", "image", "save", "--output", str(tar), iid], args.work / "save.log")
         report["save_tar_bytes"] = tar.stat().st_size
         report["save_tar_sha256"] = sha(tar)
-        with tarfile.open(tar, "r") as archive:
-            manifests = json.load(archive.extractfile("manifest.json"))
-            if len(manifests) != 1:
-                raise RuntimeError("Saved image archive is ambiguous")
-            config = archive.extractfile(manifests[0]["Config"]).read()
-            if "sha256:" + hashlib.sha256(config).hexdigest() != iid:
-                raise RuntimeError("Saved archive config differs from the verified image ID")
+        actual_manifest = None
+        if image.get("Descriptor"):
+            if image["Descriptor"].get("digest") != iid:
+                raise RuntimeError("Image descriptor differs from the verified image ID")
+            descriptors = [run.get("image_manifest_descriptor") for run in report["runs"].values()]
+            if any(not isinstance(item, dict) or not item.get("digest") for item in descriptors):
+                raise RuntimeError("Actual container platform manifest identity is missing")
+            actual_manifest = descriptors[0]["digest"]
+            if any(item["digest"] != actual_manifest for item in descriptors):
+                raise RuntimeError("Actual containers did not use the same platform manifest")
+        report["save_tar_identity"] = verify_saved_image(tar, iid, platform_manifest_digest=actual_manifest)
         report["save_tar_image_id_verified"] = True
         if report["save_tar_bytes"] >= LIMIT_BYTES:
             raise RuntimeError("Saved Docker image exceeds the team size budget")

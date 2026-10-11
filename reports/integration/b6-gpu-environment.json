@@ -1,0 +1,19 @@
+{
+  "image_id": "sha256:94f7c4741860ccc0bd1f8ad8ecae03c35806551c845b04e120f16ae33fbc1290",
+  "container_id": "c287742840c4816ea5856cef007e4718a4d306e78b613cfd3feab96ed0257398",
+  "container_started": false,
+  "network_mode": "none",
+  "files": {
+    "requirements.actual.txt": {
+      "bytes": 8138,
+      "sha256": "924918dde5edd416dad2c42bf2712e84426be806ffd805b07e6127469b14892b"
+    },
+    "conda.actual.txt": {
+      "bytes": 12184,
+      "sha256": "87cfe91708bc51e4b46082c07821ec64be45817e56ba940f955a6139907191ba"
+    }
+  },
+  "own_container_removed": true,
+  "recorded_at_utc": "2026-10-11T05:06:26.423042+00:00",
+  "conda_credential_redaction_applied": false
+}

@@ -1,0 +1,35 @@
+{
+  "source": "copied inference.log with SHA matching runs.inference.log_sha256",
+  "samples": [
+    {
+      "id": "test1_000001_t5",
+      "mode": "fallback_rules",
+      "parse_failures": 2,
+      "emotion_source": "rules",
+      "profile_source": "rules",
+      "response_source": "model",
+      "dropped_turns": 0,
+      "fresh_store_closed": true
+    },
+    {
+      "id": "test1_000001_t7",
+      "mode": "fallback_rules",
+      "parse_failures": 2,
+      "emotion_source": "rules",
+      "profile_source": "rules",
+      "response_source": "model",
+      "dropped_turns": 0,
+      "fresh_store_closed": true
+    },
+    {
+      "id": "test1_000002_t5",
+      "mode": "fallback_rules",
+      "parse_failures": 2,
+      "emotion_source": "rules",
+      "profile_source": "rules",
+      "response_source": "model",
+      "dropped_turns": 0,
+      "fresh_store_closed": true
+    }
+  ]
+}
