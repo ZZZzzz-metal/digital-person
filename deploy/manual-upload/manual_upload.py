@@ -321,6 +321,7 @@ def main() -> int:
         reason = str(exc) if isinstance(exc, (HandoffError, ftp_helper.UploadError)) else None
         ftp_helper.emit("manual_upload_failed", exception_type=type(exc).__name__, reason=reason,
                         ftp_reply_code=ftp_helper.reply_code(exc),
+                        safe_ftp_reason=ftp_helper.safe_ftp_reason(exc),
                         no_automatic_retry_or_remote_delete=True, competition_submission_performed=False)
         return 1
 

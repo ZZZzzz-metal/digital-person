@@ -9,11 +9,13 @@ import json
 from pathlib import Path
 import socket
 import stat
+import time
 from types import SimpleNamespace
 import unittest
 from unittest import mock
 
 import ftps_upload as ftp
+import manual_upload as manual
 import upload_launcher as launcher
 
 ASSERTIONS = 0
@@ -176,6 +178,75 @@ class TransferModeTests(LocalOnly):
         self.equal(server.transfercmd.call_count, 1)
         self.equal(server.delete.call_count, 0)
         self.equal(server.rename.call_count, 0)
+
+    def test_stor_553_is_classified_at_opening_transfer_without_reply_leak(self):
+        args, server, data, events = self.setup_upload(manual=True)
+        original_reply = "553 Could not create file for fake-secret-account fake-secret-password"
+        server.transfercmd.side_effect = ftp.ftplib.error_perm(original_reply)
+        with self.assertRaises(ftp.ftplib.error_perm):
+            ftp.run_upload(args)
+        request = next(e for e in events if e["event"] == "transfer_requested")
+        self.equal(request, {"event": "transfer_requested", "requested_remote_name": NAME,
+                             "transfer_mode": "STOR"})
+        failure = next(e for e in events if e["event"] == "upload_not_verified")
+        self.equal(failure["phase"], "opening_transfer")
+        self.equal(failure["ftp_reply_code"], "553")
+        self.equal(failure["safe_ftp_reason"], "server_could_not_create_file")
+        self.equal(failure["transferred_bytes"], 0)
+        self.equal(failure["actual_remote_name"], None)
+        self.equal(data.sendall.call_count, 0)
+        self.check(not any(e["event"] in {"upload_started", "uploaded"} for e in events))
+        logged = json.dumps(events)
+        self.check(original_reply not in logged and "fake-secret-account" not in logged
+                   and "fake-secret-password" not in logged)
+        self.equal(server.close.call_count, 1)
+        self.equal(server.delete.call_count, 0)
+        self.equal(server.rename.call_count, 0)
+
+    def test_data_tls_log_identifies_nlst_without_command_arguments(self):
+        certificate = b"local-only-fake-certificate"
+        control = mock.Mock()
+        control.getpeercert.return_value = certificate
+        data = mock.Mock()
+        data.getpeercert.return_value = certificate
+        data.session_reused = True
+        data.getsockopt.return_value = 4 * 1024 * 1024
+        data.version.return_value = "TLSv1.3"
+        context = mock.Mock()
+        context.wrap_socket.return_value = data
+        client = ftp.PinnedFTPS(context=context, pin=hashlib.sha256(certificate).hexdigest(),
+                                deadline=time.monotonic() + 60)
+        client.sock = control
+        client.host = "local-only-invalid-host"
+        client.control_verified = True
+        client._prot_p = True
+        events = []
+        with mock.patch.object(ftp.ftplib.FTP, "ntransfercmd", return_value=(mock.Mock(), None)), \
+             mock.patch.object(ftp, "emit", side_effect=lambda event, **fields: events.append({"event": event, **fields})):
+            client.ntransfercmd("NLST fake-private-directory")
+        connected = next(e for e in events if e["event"] == "data_tls_connected")
+        self.equal(connected["transfer_command"], "NLST")
+        self.check("fake-private-directory" not in json.dumps(events))
+        self.equal(data.sendall.call_count, 0)
+
+
+class ManualDiagnosticTests(LocalOnly):
+    def test_manual_main_reports_safe_553_classification_only(self):
+        events = []
+        original_reply = "553 Could not create file for fake-secret-account fake-secret-password"
+        with mock.patch.object(manual.sys, "argv", ["manual_upload.py", "--upload", "--local-tar", "fake-only.tar"]), \
+             mock.patch.object(manual, "upload", side_effect=ftp.ftplib.error_perm(original_reply)), \
+             mock.patch.object(ftp, "emit", side_effect=lambda event, **fields: events.append({"event": event, **fields})):
+            result = manual.main()
+        self.equal(result, 1)
+        self.equal(len(events), 1)
+        self.equal(events[0]["event"], "manual_upload_failed")
+        self.equal(events[0]["ftp_reply_code"], "553")
+        self.equal(events[0]["safe_ftp_reason"], "server_could_not_create_file")
+        self.equal(events[0]["reason"], None)
+        logged = json.dumps(events)
+        self.check(original_reply not in logged and "fake-secret-account" not in logged
+                   and "fake-secret-password" not in logged)
 
 
 class LauncherTests(LocalOnly):

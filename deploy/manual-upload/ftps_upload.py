@@ -128,7 +128,10 @@ class PinnedFTPS(ftplib.FTP_TLS):
             )
             check_pin(conn, self.pin)
             self.data_sessions.append(bool(conn.session_reused))
+            command = cmd.partition(" ")[0].upper()
+            safe_command = command if command in {"NLST", "LIST", "MLSD", "STOR", "STOU", "RETR"} else "OTHER"
             emit("data_tls_connected", session_reused=bool(conn.session_reused),
+                 transfer_command=safe_command,
                  send_buffer_bytes=conn.getsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF),
                  tls_version=conn.version())
             return conn, size
@@ -249,14 +252,19 @@ def run_upload(args) -> None:
     ftp = PinnedFTPS(context=context, pin=PIN, deadline=deadline)
     transferred = 0
     actual_name = None
+    phase = "connecting"
     try:
         ftp.connect(HOST, PORT, timeout=remaining(deadline, 30))
+        phase = "authenticating_tls"
         ftp.auth()  # Pin is checked before USER/PASS is ever sent.
+        phase = "logging_in"
         ftp.login(user, password)
         user = password = ""
+        phase = "protecting_data"
         ftp.prot_p()
         ftp.set_pasv(True)
         ftp.voidcmd("TYPE I")
+        phase = "checking_remote_name"
         refuse_existing(ftp, name)
         emit("ready", expected_bytes=EXPECTED_SIZE, certificate_sha256=PIN,
              control_tls_version=ftp.sock.version(), encrypted_data_required=True,
@@ -265,15 +273,21 @@ def run_upload(args) -> None:
              atomic_no_overwrite=not manual_stor)
         last_progress = time.monotonic()
         source_hash = hashlib.sha256()
+        phase = "opening_local_source"
         with local.open("rb") as source:
             if identity(os.fstat(source.fileno())) != identity(info):
                 raise UploadError("local_tar_changed_before_transfer")
             # User-started compatibility mode uses a fresh 128-bit random name
             # plus NLST preflight. STOR cannot promise atomic no-overwrite.
+            phase = "opening_transfer"
+            emit("transfer_requested", requested_remote_name=name,
+                 transfer_mode="STOR" if manual_stor else "STOU")
             data = ftp.transfercmd(("STOR " if manual_stor else "STOU ") + name)
             try:
+                phase = "resolving_remote_name"
                 actual_name = name if manual_stor else stou_name(ftp.transfer_reply)
                 emit("upload_started", requested_remote_name=name, actual_remote_name=actual_name)
+                phase = "transferring"
                 while True:
                     data.settimeout(remaining(deadline))
                     block = source.read(1024 * 1024)
@@ -289,19 +303,24 @@ def run_upload(args) -> None:
                         last_progress = now
                 if identity(os.fstat(source.fileno())) != identity(info):
                     raise UploadError("local_tar_changed_during_transfer")
+                phase = "closing_data_connection"
                 data.settimeout(remaining(deadline))
                 data.unwrap().close()
             finally:
                 data.close()
+        phase = "waiting_transfer_reply"
         ftp.voidresp()
+        phase = "verifying_local_source"
         if transferred != EXPECTED_SIZE or identity(local.stat()) != identity(info):
             raise UploadError("local_transfer_length_or_identity_mismatch")
         if source_hash.hexdigest() != EXPECTED_SHA256:
             raise UploadError("uploaded_source_sha256_mismatch")
+        phase = "verifying_remote_size"
         ftp.voidcmd("TYPE I")
         remote_size = ftp.size(actual_name)
         if remote_size != EXPECTED_SIZE:
             raise UploadError("remote_size_mismatch")
+        phase = "verifying_remote_hash"
         hash_verified, hash_method = remote_hash(ftp, actual_name)
         emit("uploaded", actual_remote_name=actual_name, transferred_bytes=transferred,
              remote_size_bytes=remote_size, remote_size_verified=True,
@@ -311,9 +330,11 @@ def run_upload(args) -> None:
              data_tls_session_reused=ftp.data_sessions,
              elapsed_seconds=round(time.monotonic() - started, 1),
              competition_submission_performed=False)
-    except Exception:
+    except Exception as exc:
         emit("upload_not_verified", actual_remote_name=actual_name,
-             transferred_bytes=transferred, no_remote_cleanup_performed=True)
+             transferred_bytes=transferred, phase=phase,
+             ftp_reply_code=reply_code(exc), safe_ftp_reason=safe_ftp_reason(exc),
+             no_remote_cleanup_performed=True)
         raise
     finally:
         # Close only this connection. No delete, rename or automatic retry.
