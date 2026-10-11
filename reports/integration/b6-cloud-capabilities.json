@@ -1,0 +1,138 @@
+{
+  "collected_utc": "2026-10-11T01:46:40.210896+00:00",
+  "scope": "platform capability probes; no B2 candidate inference or image build",
+  "records": {
+    "capabilities.json": {
+      "checked_at_utc": "2026-10-11T01:28:30.962157+00:00",
+      "scope": "platform_capability_probe_only_not_offline_image_acceptance",
+      "tools": {
+        "docker": null,
+        "podman": null,
+        "buildah": null,
+        "nerdctl": null,
+        "unshare": "/usr/bin/unshare",
+        "conda": "/opt/conda/condabin/conda",
+        "python3": "/opt/conda/envs/conda_env/bin/python3"
+      },
+      "docker_socket_exists": false,
+      "image_built": false,
+      "gpu_offline_verified": false,
+      "gpu_inventory": {
+        "exit_code": 0,
+        "stdout": "NVIDIA GeForce RTX 4090, 24564 MiB, 595.71.05\nNVIDIA GeForce RTX 4090, 24564 MiB, 595.71.05\n",
+        "stderr": ""
+      },
+      "network_namespace": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "effective_capabilities": "00000000a82425fb",
+      "torch": {
+        "version": "2.10.0+cu128",
+        "cuda_version": "12.8",
+        "gpu_available": true,
+        "device_count": 2,
+        "kernels": [
+          {
+            "device": 0,
+            "name": "NVIDIA GeForce RTX 4090",
+            "verified": true
+          },
+          {
+            "device": 1,
+            "name": "NVIDIA GeForce RTX 4090",
+            "verified": true
+          }
+        ]
+      }
+    },
+    "docker-bootstrap.json": {
+      "source": "https://download.docker.com/linux/static/stable/x86_64/docker-29.8.2.tgz",
+      "archive_bytes": 85591344,
+      "archive_sha256": "995d1ef289677f74fd58d8d2c35727b6a4ee389c69db8638a3e42d0487aa5b0f",
+      "daemon_pid": 153,
+      "daemon_ready": true,
+      "server": {
+        "ServerVersion": "29.8.2",
+        "OSType": "linux",
+        "Architecture": "x86_64"
+      }
+    },
+    "nested-container-test.json": {
+      "command": [
+        "docker",
+        "run",
+        "--network",
+        "none",
+        "hello-world:latest"
+      ],
+      "exit_code": 125,
+      "stdout": "",
+      "stderr": "Unable to find image 'hello-world:latest' locally\ndocker: Error response from daemon: Get \"https://registry-1.docker.io/v2/\": read tcp [endpoint redacted]: read: connection reset by peer\n\nRun 'docker run --help' for more information\n"
+    },
+    "nested-shell-test.json": {
+      "import_exit_code": 0,
+      "import_stdout": "sha256:0a02a97aa71aaf489780c8629afa94d07343f5926dfa09c6fc4ea88fd7a5b152\n",
+      "import_stderr": "",
+      "source": "explicit bash and ldd libraries from the public platform image",
+      "file_allowlist": [
+        "/bin/bash",
+        "/usr/lib/x86_64-linux-gnu/libtinfo.so.6",
+        "/usr/lib/x86_64-linux-gnu/libc.so.6",
+        "/lib64/ld-linux-x86-64.so.2"
+      ],
+      "run": {
+        "image_id": "sha256:0a02a97aa71aaf489780c8629afa94d07343f5926dfa09c6fc4ea88fd7a5b152",
+        "exit_code": 125,
+        "stdout": "",
+        "stderr": "docker: Error response from daemon: failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: unable to apply cgroup configuration: mkdir /sys/fs/cgroup/cpuset/docker: read-only file system\n\nRun 'docker run --help' for more information\n"
+      },
+      "inspect": {
+        "image_id": "sha256:0a02a97aa71aaf489780c8629afa94d07343f5926dfa09c6fc4ea88fd7a5b152",
+        "network_mode": "none",
+        "state": {
+          "Status": "created",
+          "Running": false,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 0,
+          "ExitCode": 128,
+          "Error": "failed to create task for container: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: unable to apply cgroup configuration: mkdir /sys/fs/cgroup/cpuset/docker: read-only file system",
+          "StartedAt": "0001-01-01T00:00:00Z",
+          "FinishedAt": "0001-01-01T00:00:00Z"
+        }
+      }
+    },
+    "runc-probe.json": {
+      "scope": "minimal_OCI_runtime_capability_not_model_acceptance",
+      "command": [
+        "runc",
+        "--rootless=true",
+        "run",
+        "b2-b6-oci-f5e7c692d723453ab8720b3c7ef129e3"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "time=\"2026-10-11T01:39:21Z\" level=warning msg=\"KeyctlJoinSessionKeyring: unable to create session key: operation not permitted\"\ntime=\"2026-10-11T01:39:21Z\" level=warning msg=\"unable to get oom kill count\" error=\"no directory specified for memory.oom_control\"\ntime=\"2026-10-11T01:39:21Z\" level=error msg=\"runc run failed: unable to start container process: error during container init: unable to join session keyring: unable to create session key: operation not permitted\"\n",
+      "network_namespace_requested": false
+    },
+    "runc-probe2.json": {
+      "scope": "minimal_OCI_runtime_capability_not_model_acceptance",
+      "command": [
+        "runc",
+        "--rootless=true",
+        "run",
+        "--no-new-keyring",
+        "b2-b6-oci2-a9b95d83355748c0bbee066e0f1f8bc6"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "time=\"2026-10-11T01:40:09Z\" level=warning msg=\"unable to get oom kill count\" error=\"no directory specified for memory.oom_control\"\ntime=\"2026-10-11T01:40:09Z\" level=error msg=\"runc run failed: unable to start container process: error during container init: error mounting \\\"proc\\\" to rootfs at \\\"/proc\\\": mount src=proc, dst=/proc, dstFd=/proc/thread-self/fd/13: operation not permitted\"\n"
+    }
+  },
+  "own_daemon_stop_requested": true,
+  "redaction": "Only network endpoint addresses were removed from the Docker Hub failure; no authentication values collected."
+}

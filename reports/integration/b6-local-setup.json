@@ -1,0 +1,111 @@
+{
+  "recorded_at_utc": "2026-10-11T02:07:10.282541+00:00",
+  "scope": "actual Windows component setup; Linux/image acceptance not performed",
+  "sources": {
+    "resolved_at_utc": "2026-10-11T01:59:21.700924+00:00",
+    "WSL": {
+      "release": "3.0.1",
+      "release_url": "https://github.com/microsoft/WSL/releases/tag/3.0.1",
+      "name": "wsl.3.0.1.0.x64.msi",
+      "url": "https://github.com/microsoft/WSL/releases/download/3.0.1/wsl.3.0.1.0.x64.msi",
+      "bytes": 367669248,
+      "official_digest": "sha256:28b1a0d013640a2ac95898ea705fa186e5b4ff767a1c1b49257161bc106599c6"
+    },
+    "Ubuntu": {
+      "name": "Ubuntu-22.04",
+      "url": "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl",
+      "sha256": "4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f"
+    },
+    "planned_windows_download_root": "D:/B2-B6-20261011/setup/downloads",
+    "planned_distro_name": "B2-B6-Ubuntu22",
+    "planned_distro_disk_root": "D:/B2-B6-20261011/setup/wsl/B2-B6-Ubuntu22",
+    "route": "WSL2 + Docker Engine + NVIDIA Container Toolkit; no Docker Desktop installation planned"
+  },
+  "downloads": {
+    "finished_at_utc": "2026-10-11T02:01:12.977918+00:00",
+    "files": [
+      {
+        "kind": "WSL",
+        "path": "D:\\B2-B6-20261011\\setup\\downloads\\wsl.3.0.1.0.x64.msi",
+        "source": "https://github.com/microsoft/WSL/releases/download/3.0.1/wsl.3.0.1.0.x64.msi",
+        "bytes": 367669248,
+        "sha256": "28b1a0d013640a2ac95898ea705fa186e5b4ff767a1c1b49257161bc106599c6",
+        "matches_official_digest": true,
+        "reused": false
+      },
+      {
+        "kind": "Ubuntu",
+        "path": "D:\\B2-B6-20261011\\setup\\downloads\\ubuntu-22.04.5-wsl-amd64.wsl",
+        "source": "https://releases.ubuntu.com/jammy/ubuntu-22.04.5-wsl-amd64.wsl",
+        "bytes": 360684292,
+        "sha256": "4499c4fe257f2fc83145b429ce211a0a43fd590e70d6261ede616210947d9f8f",
+        "matches_official_digest": true,
+        "reused": false
+      }
+    ],
+    "installation_performed": false
+  },
+  "windows_setup": {
+    "started_at_utc": "2026-10-11T02:02:17.6009425Z",
+    "administrator": true,
+    "succeeded": true,
+    "restart_requested": false,
+    "steps": [
+      {
+        "name": "official_wsl_msi",
+        "exit_code": 0,
+        "log": "D:\\B2-B6-20261011\\setup\\logs\\wsl-msi.log"
+      },
+      {
+        "name": "enable_virtual_machine_platform",
+        "exit_code": 3010,
+        "stdout_log": "D:\\B2-B6-20261011\\setup\\logs\\virtual-machine-platform.stdout.txt",
+        "stderr_log": "D:\\B2-B6-20261011\\setup\\logs\\virtual-machine-platform.stderr.txt"
+      }
+    ],
+    "restart_required": true,
+    "finished_at_utc": "2026-10-11T02:02:58.3477087Z"
+  },
+  "wsl_installed": true,
+  "wsl_version": "3.0.1.0",
+  "kernel_version": "6.18.40.1-1",
+  "microsoft_signature_status": "Valid",
+  "swap_config": {
+    "config_path": "C:\\Users\\20964\\.wslconfig",
+    "swap_path": "D:/B2-B6-20261011/setup/wsl/swap.vhdx",
+    "existing_config_backed_up": null,
+    "other_settings_preserved": true,
+    "actual_write": true
+  },
+  "ubuntu_distro_imported": false,
+  "docker_engine_installed": false,
+  "nvidia_container_toolkit_installed": false,
+  "image_built": false,
+  "gpu_offline_verified": false,
+  "windows_restart_performed": false,
+  "next_command": ".venv/Scripts/python.exe -B deploy/resume_b6_local.py --verify",
+  "requires_human_now": "Save work and restart Windows to apply VirtualMachinePlatform (actual DISM exit3010)",
+  "setup_tool_validation": {
+    "python_ast_parse": true,
+    "windows_resume_help_exit_code": 0,
+    "powershell_parser_errors": 0,
+    "git_bash_syntax_exit_code": 0,
+    "linux_script_has_no_cr": true,
+    "local_document_links_exist": true,
+    "independent_readonly_review_blockers": 0,
+    "container_control_tests": {
+      "passed": 33,
+      "elapsed_seconds": 0.5,
+      "new_cancellation_cleanup_cases": 3,
+      "scope": "synthetic Docker fixtures; not actual GPU/container acceptance"
+    },
+    "linux_script_executed": false,
+    "resume_driver_executed_for_setup": false,
+    "scripts_sha256": {
+      "deploy/resume_b6_local.py": "3d25483fd7a39231435e611b13b1f763201655235274e87c986018beb5bd742d",
+      "deploy/enable_b6_wsl.ps1": "fd5c6ce712629b6842b8bb0c0b254797b73d1e7347df18f226ba6ec729281979",
+      "deploy/setup_b6_linux.sh": "5059c72efd82dd55cf72ac1c40055bdec264774bf90baeecafd457734dc17c71",
+      "deploy/verify_container.py": "40bdc3d3cabd464e04a71af9571ea104e7302c7563bbea867a685557c1faabea"
+    }
+  }
+}

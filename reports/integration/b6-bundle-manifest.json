@@ -1,0 +1,189 @@
+{
+  "version": 1,
+  "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+  "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+  "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+  "config_path": "weights/inference_config.base.json",
+  "files": [
+    {
+      "path": "README.md",
+      "role": "B",
+      "sha256": "02712d1ebeef7559e2c3ce5756976461c7989f0be7922b90fcc8d59d006e5d06",
+      "bytes": 4760
+    },
+    {
+      "path": "__init__.py",
+      "role": "B",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "adapter.py",
+      "role": "B",
+      "sha256": "60821a1439a72dd980700482ea2458f57ea3cea2619ece7c62f56dea189f7684",
+      "bytes": 11656
+    },
+    {
+      "path": "check_output.py",
+      "role": "B",
+      "sha256": "288cc9bd77c25af7d068a678ab095e3583668c3d2369085611cb9084efd7fe3a",
+      "bytes": 2008
+    },
+    {
+      "path": "contracts/deploy/bundle_manifest.schema.json",
+      "role": "schema",
+      "sha256": "d7317b8b5a284b9dbe30c388e427569e01f84c93e0e0964764a8e84a53e7d4b6",
+      "bytes": 1071
+    },
+    {
+      "path": "contracts/official/effective_submission.schema.json",
+      "role": "schema",
+      "sha256": "306e4e7bda738c2b6620d8f606ba907658468ce2c7a8af77a3c46e6d576e5bc8",
+      "bytes": 2158
+    },
+    {
+      "path": "contracts/official/inference_input.schema.json",
+      "role": "schema",
+      "sha256": "028e90bbf3e1e02be9ee74d974e2a6c5c750a3271d6d03a83806530e28ce3da9",
+      "bytes": 1043
+    },
+    {
+      "path": "run_inference.py",
+      "role": "B",
+      "sha256": "b90e3a7b8be9f37d509fd89b6957abc1a1b08c9191b33dab731c562ac5aab73e",
+      "bytes": 16969
+    },
+    {
+      "path": "src/b2_core/__init__.py",
+      "role": "B",
+      "sha256": "ee334e1fc123a67cbfca19be1eeabe926a8667c7c3d820114997cc3dabb17749",
+      "bytes": 1046
+    },
+    {
+      "path": "src/b2_core/a_impl/__init__.py",
+      "role": "A",
+      "sha256": "268b8f12f706687d9ca8740b46f34b57cd9effbd30e6c761b3b1bfc4f0c1895f",
+      "bytes": 545
+    },
+    {
+      "path": "src/b2_core/a_impl/dtos.py",
+      "role": "A",
+      "sha256": "b94b8205a96ab162b8dedf68b40f70cade642cbc756d167b7faee831772fc778",
+      "bytes": 16952
+    },
+    {
+      "path": "src/b2_core/a_impl/emotion_rules.py",
+      "role": "A",
+      "sha256": "4a87f7bc61665cd51b0d692d47758bc991c2f7d8b9fdc712811abdb739075854",
+      "bytes": 8448
+    },
+    {
+      "path": "src/b2_core/a_impl/local_llm.py",
+      "role": "A",
+      "sha256": "ca4e189cacd464c0d66cdae3b81812e7ca78dea219053ceab6596ce5c3b14896",
+      "bytes": 12892
+    },
+    {
+      "path": "src/b2_core/a_impl/official_spec.py",
+      "role": "A",
+      "sha256": "99392294c04b53359111fb12555779fea3111cdb77f59c9e10a3ed762d73a9b8",
+      "bytes": 9678
+    },
+    {
+      "path": "src/b2_core/contracts.py",
+      "role": "B",
+      "sha256": "85203a1cfc4aac1941f2fd44bb64ac8b9e3c2ed8818ab578e25a6da5871c4ab1",
+      "bytes": 6961
+    },
+    {
+      "path": "src/b2_core/model.py",
+      "role": "A",
+      "sha256": "9aeabec0536f706464d9b2616c108a18bb3a5cd7dc6b3503b3944a5441c5b7f6",
+      "bytes": 25250
+    },
+    {
+      "path": "src/b2_core/prompts/__init__.py",
+      "role": "A",
+      "sha256": "b1167daa74e334d789583b07744fe5dbb59b74db18c21a5d13fd9e0af8533272",
+      "bytes": 305
+    },
+    {
+      "path": "src/b2_core/prompts/empathy.py",
+      "role": "A",
+      "sha256": "2b4c91e5466b49809cb47d40d1bdc3ea528de2646bf909c33fc530f5dd6b09a4",
+      "bytes": 4004
+    },
+    {
+      "path": "src/b2_core/store.py",
+      "role": "B",
+      "sha256": "2c78aa8b942381d3a802dc054911af4e7a87b2cf261151b6f62b21ca1a2ad367",
+      "bytes": 23395
+    },
+    {
+      "path": "start.sh",
+      "role": "B",
+      "sha256": "dc104a95a2b39e572b67966f706a2dd60b18581e6b23356e31356447a7e55deb",
+      "bytes": 596
+    },
+    {
+      "path": "weights/LICENSES/Qwen2.5-0.5B-Instruct-LICENSE.txt",
+      "role": "license",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "bytes": 11343
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/LICENSE",
+      "role": "model",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "bytes": 11343
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/config.json",
+      "role": "model",
+      "sha256": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+      "bytes": 659
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/generation_config.json",
+      "role": "model",
+      "sha256": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+      "bytes": 242
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/merges.txt",
+      "role": "model",
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "bytes": 1671839
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/model.safetensors",
+      "role": "model",
+      "sha256": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+      "bytes": 988097824
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/tokenizer.json",
+      "role": "model",
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "bytes": 7031645
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/tokenizer_config.json",
+      "role": "model",
+      "sha256": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+      "bytes": 7305
+    },
+    {
+      "path": "weights/base-qwen2.5-0.5b-instruct/vocab.json",
+      "role": "model",
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "bytes": 2776833
+    },
+    {
+      "path": "weights/inference_config.base.json",
+      "role": "config",
+      "sha256": "2443d69eed113753d0c9532496d98d30fffa2499a4459361ac6898b84288d723",
+      "bytes": 1279
+    }
+  ]
+}

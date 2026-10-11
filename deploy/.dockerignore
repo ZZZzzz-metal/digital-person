@@ -1,0 +1,7 @@
+**
+!Dockerfile
+!requirements-gpu.txt
+!tools/
+!tools/**
+!participant/
+!participant/**

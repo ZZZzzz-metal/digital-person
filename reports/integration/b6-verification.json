@@ -1,0 +1,131 @@
+{
+  "recorded_at_utc": "2026-10-11T01:51:25.062755+00:00",
+  "stage": "B6",
+  "preparation_complete": true,
+  "formal_acceptance_complete": false,
+  "B_implementation_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+  "tests": {
+    "command": ".venv/Scripts/python.exe -m pytest tests/server/test_deploy_bundle.py tests/server/test_deploy_container.py tests/server/test_runtime_probe.py -q --basetemp reports/integration/.b6-work/final-new-tests-20261011",
+    "passed": 79,
+    "elapsed_seconds": 14.19,
+    "exit_code": 0,
+    "scope": "tools unit/risk tests; GPU/Docker subprocesses simulated except actual no-Docker failure"
+  },
+  "bundle": {
+    "path": "D:\\B2-B6-20261011\\candidate-a34f8df",
+    "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+    "file_count": 30,
+    "total_bytes": 999760049,
+    "verified": true,
+    "A_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "baseline_reused_without_download": true,
+    "A_original_config_changed": false
+  },
+  "cpu_bundle_smoke_report": "b6-bundle-cpu-smoke.json",
+  "cloud_capabilities_report": "b6-cloud-capabilities.json",
+  "platform": {
+    "instance_name": "b6-offline-test-1011",
+    "base_version": "vLLM:0.19.0-ubuntu22.04-p3.12-cuda12.8",
+    "gpu_count": 2,
+    "gpu_names": [
+      "NVIDIA GeForce RTX 4090",
+      "NVIDIA GeForce RTX 4090"
+    ],
+    "actual_gpu_kernel_verified": true,
+    "B2_model_inference_performed": false,
+    "instance_final_state": "stopped",
+    "displayed_total_card_hours_remaining": 29.23,
+    "displayed_initial_total_card_hours": 30,
+    "displayed_total_card_hours_difference": 0.77,
+    "balance_scope": "all voucher types; not GPU-only remaining balance",
+    "own_daemon_stop_requested": true
+  },
+  "local_docker_attempt": {
+    "started_at_utc": "2026-10-11T01:28:00.180880+00:00",
+    "image_built": false,
+    "gpu_offline_verified": false,
+    "fallback_image_verified": false,
+    "official_score_verified": false,
+    "contest_submitted": false,
+    "image_id": null,
+    "repo_digests": [],
+    "save_tar_sha256": null,
+    "team_size_limit_bytes": 50000000000,
+    "runs": {},
+    "failure_type": "RuntimeError",
+    "failure": "Docker CLI is missing; requires Linux Docker + NVIDIA GPU access",
+    "elapsed_seconds": 0.022,
+    "finished_at_utc": "2026-10-11T01:28:00.203558+00:00"
+  },
+  "local_host": {
+    "docker_cli_present": false,
+    "wsl_installed": false,
+    "current_process_is_admin": false,
+    "hypervisor_present_readonly_observation": true,
+    "system_install_or_restart_performed": false
+  },
+  "candidate_image": {
+    "image_built": false,
+    "image_id": null,
+    "repo_digests": [],
+    "gpu_offline_verified": false,
+    "fallback_image_verified": false,
+    "size_bytes": null,
+    "save_tar_bytes": null,
+    "save_tar_sha256": null,
+    "actual_full_gpu_dependency_lock": null
+  },
+  "team_size_limit_bytes": 50000000000,
+  "official_size_unit_clarified": false,
+  "fallback": {
+    "scope": "verified B5 CPU development candidate, not GPU Docker submission candidate",
+    "result_path": "reports/integration/.b5-work/real-20261010T154147Z-f99da41f/original-result",
+    "submission_sha256": "52e5d3e9323e51e9caf92fc278f4ed26aff5e68c6ec9d283f972369cd480d4c0",
+    "preserved": true
+  },
+  "blockers": [
+    {
+      "type": "runtime_permissions",
+      "actual_failure": "Docker nested run: read-only /sys/fs/cgroup/cpuset/docker; runc alternate: proc mount operation not permitted",
+      "required": "Linux GPU Docker host/runtime with working cgroups and NVIDIA GPU access; platform host/service permission or human administrator setup of local WSL2/Docker",
+      "awaits_A_or_C": false
+    }
+  ],
+  "official_score_verified": false,
+  "contest_submitted": false,
+  "B7_started": false,
+  "fetch_pull_merge_performed": false,
+  "cpu_bundle_smoke": {
+    "passed": true,
+    "checks_passed": 30,
+    "checks_total": 30,
+    "elapsed_seconds": 61.895,
+    "sample_count": 1,
+    "actual_device": "cpu",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "inference_exit_code": 0,
+    "independent_checker_exit_code": 0,
+    "bundle_manifest_unchanged": true,
+    "outputs": {
+      "submission.jsonl": {
+        "path": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result\\submission.jsonl",
+        "sha256": "7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828",
+        "bytes": 1118
+      },
+      "performance_report.json": {
+        "path": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result\\performance_report.json",
+        "sha256": "ded0aecce5728b02a9944425f2d73a99fb3b12cbfae480367b2c7c105cedec76",
+        "bytes": 1239
+      }
+    },
+    "quality_scored": false,
+    "gpu_verified": false,
+    "docker_run": false
+  },
+  "publication": {
+    "url": "https://github.com/ZZZzzz-metal/digital-person/pull/10",
+    "record": "b6-publication.json",
+    "user_merges_and_pulls": true
+  }
+}

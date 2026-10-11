@@ -1,0 +1,314 @@
+{
+  "started_at_utc": "2026-10-11T01:51:13.394750+00:00",
+  "scope": "B6 independent bundle, one real public sample on Windows CPU",
+  "passed": true,
+  "docker_run": false,
+  "gpu_verified": false,
+  "official_score_verified": false,
+  "competition_submitted": false,
+  "model_training_performed": false,
+  "bundle_path": "D:\\B2-B6-20261011\\candidate-a34f8df",
+  "work_path": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df",
+  "checks": [
+    {
+      "name": "all_30_bundle_files_verified_before_run",
+      "passed": true
+    },
+    {
+      "name": "manifest_matches_fixed_candidate",
+      "passed": true
+    },
+    {
+      "name": "candidate_code_commit_matches",
+      "passed": true
+    },
+    {
+      "name": "candidate_model_version_matches",
+      "passed": true
+    },
+    {
+      "name": "existing_real_cpu_python_available",
+      "passed": true
+    },
+    {
+      "name": "official_source_unchanged_since_B5",
+      "passed": true
+    },
+    {
+      "name": "one_original_sample_bytes_copied_without_edits",
+      "passed": true
+    },
+    {
+      "name": "real_bundle_inference_exit_zero",
+      "passed": true
+    },
+    {
+      "name": "exactly_one_runtime_event",
+      "passed": true
+    },
+    {
+      "name": "exactly_one_model_ready_event",
+      "passed": true
+    },
+    {
+      "name": "exactly_one_sample_complete_event",
+      "passed": true
+    },
+    {
+      "name": "exactly_one_batch_complete_event",
+      "passed": true
+    },
+    {
+      "name": "runtime_is_actual_cpu_without_cuda",
+      "passed": true
+    },
+    {
+      "name": "runtime_is_real_bundled_model",
+      "passed": true
+    },
+    {
+      "name": "model_initialized_once_with_expected_real_identity",
+      "passed": true
+    },
+    {
+      "name": "sample_keeps_original_id_and_full_history_once",
+      "passed": true
+    },
+    {
+      "name": "sample_original_history_digest_matches",
+      "passed": true
+    },
+    {
+      "name": "sample_has_empty_memory_and_fresh_closed_store",
+      "passed": true
+    },
+    {
+      "name": "sample_response_is_real_model_and_schema_valid",
+      "passed": true
+    },
+    {
+      "name": "batch_has_one_sample_one_round_complete_false",
+      "passed": true
+    },
+    {
+      "name": "independent_bundle_checker_exit_zero",
+      "passed": true
+    },
+    {
+      "name": "independent_checker_confirms_one_output",
+      "passed": true
+    },
+    {
+      "name": "result_contains_only_two_success_files",
+      "passed": true
+    },
+    {
+      "name": "output_and_input_digests_bind_to_performance",
+      "passed": true
+    },
+    {
+      "name": "performance_matches_bundled_model",
+      "passed": true
+    },
+    {
+      "name": "performance_truthfully_records_one_not_100",
+      "passed": true
+    },
+    {
+      "name": "original_test_copy_unchanged",
+      "passed": true
+    },
+    {
+      "name": "all_30_bundle_files_verified_after_run",
+      "passed": true
+    },
+    {
+      "name": "bundle_manifest_and_source_identity_unchanged",
+      "passed": true
+    },
+    {
+      "name": "original_official_file_not_modified",
+      "passed": true
+    }
+  ],
+  "processes": {
+    "inference": {
+      "command": [
+        "C:\\Users\\20964\\Documents\\ChatGPT\\MC\\digital-person-b0\\.runtime\\b4-real-env\\Scripts\\python.exe",
+        "-B",
+        "D:\\B2-B6-20261011\\candidate-a34f8df\\run_inference.py",
+        "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\input.jsonl",
+        "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result",
+        "--config",
+        "D:\\B2-B6-20261011\\candidate-a34f8df\\weights\\inference_config.base.json",
+        "--hardware-label",
+        "local Windows CPU; B6 independent-bundle smoke only, not Docker/GPU acceptance"
+      ],
+      "cwd": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df",
+      "exit_code": 0,
+      "duration_ms": 59144.5005,
+      "events": [
+        {
+          "event": "runtime",
+          "device": "cpu",
+          "torch_version": "2.14.1+cpu",
+          "cuda_available": false,
+          "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+          "is_mock": false
+        },
+        {
+          "event": "model_ready",
+          "is_mock": false,
+          "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+          "initializations": 1
+        },
+        {
+          "event": "sample_complete",
+          "index": 1,
+          "id": "test1_000001_t5",
+          "history_messages": 5,
+          "history_sha256": "74133f3d65fade10c1607c57e6c431de32aeb94b190de719e1eb50f129cf8f9d",
+          "memory_context_empty": true,
+          "fresh_store_created": true,
+          "fresh_store_closed": true,
+          "elapsed_ms": 24691.3615,
+          "mode": "fallback_rules",
+          "parse_failures": 2,
+          "parse_failed": true,
+          "emotion_source": "rules",
+          "profile_source": "rules",
+          "response_source": "model",
+          "prompt_tokens": 1938,
+          "new_tokens": 581,
+          "dropped_turns": 0,
+          "schema_valid": true
+        },
+        {
+          "event": "batch_complete",
+          "samples": 1,
+          "rounds": 1,
+          "complete": false,
+          "result_dir": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result"
+        }
+      ],
+      "non_json_stdout_lines": 0,
+      "unknown_json_stdout_lines": 0,
+      "stdout_bytes": 951,
+      "stdout_sha256": "0ca34c6bb209afea521ab2806ded9a40809fb82b005638075455c34f17951f96",
+      "stderr_bytes": 506,
+      "stderr_sha256": "b1af95570729ea230418a65a3d6737da8f691e37a724a34efd1af50a00ee0566",
+      "raw_stdout_or_stderr_saved": false
+    },
+    "checker": {
+      "command": [
+        "C:\\Users\\20964\\Documents\\ChatGPT\\MC\\digital-person-b0\\.runtime\\b4-real-env\\Scripts\\python.exe",
+        "-B",
+        "D:\\B2-B6-20261011\\candidate-a34f8df\\check_output.py",
+        "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\input.jsonl",
+        "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result"
+      ],
+      "cwd": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df",
+      "exit_code": 0,
+      "duration_ms": 1191.4712,
+      "events": [
+        {
+          "event": "output_valid",
+          "samples": 1,
+          "sha256": "7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828",
+          "rounds": 1,
+          "complete": false
+        }
+      ],
+      "non_json_stdout_lines": 0,
+      "unknown_json_stdout_lines": 0,
+      "stdout_bytes": 151,
+      "stdout_sha256": "23f6f44333af1b3ad3f224bb3cee15961aac0ec6701c91829e74ad82986d8e58",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_stdout_or_stderr_saved": false
+    }
+  },
+  "cpu_runtime_reused_without_installation": "C:\\Users\\20964\\Documents\\ChatGPT\\MC\\digital-person-b0\\.runtime\\b4-real-env\\Scripts\\python.exe",
+  "chat_body_in_report": false,
+  "bundle_before": {
+    "verified": true,
+    "file_count": 30,
+    "total_bytes": 999760049,
+    "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+    "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+    "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "config_path": "weights/inference_config.base.json"
+  },
+  "original_official_file_sha256": "194f824a70fcc5a73e05e818eb0968045c165edc0cdf31e197d135103b910ebd",
+  "input": {
+    "path": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\input.jsonl",
+    "sha256": "03dfd25409e6e6cbece35361371b030de7c0e798ec1be6839dca932a61785537",
+    "samples": 1,
+    "id": "test1_000001_t5",
+    "history_messages": 5
+  },
+  "child_environment_overrides": {
+    "PYTHONPATH": "D:\\B2-B6-20261011\\candidate-a34f8df\\src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_HUB_DISABLE_TELEMETRY": "1",
+    "CUDA_VISIBLE_DEVICES": "",
+    "B2_OFFICIAL_MODEL_CONFIG": "D:\\B2-B6-20261011\\candidate-a34f8df\\weights\\inference_config.base.json"
+  },
+  "outputs": {
+    "submission.jsonl": {
+      "path": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result\\submission.jsonl",
+      "sha256": "7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828",
+      "bytes": 1118
+    },
+    "performance_report.json": {
+      "path": "D:\\B2-B6-20261011\\cpu-smoke-a34f8df\\result\\performance_report.json",
+      "sha256": "ded0aecce5728b02a9944425f2d73a99fb3b12cbfae480367b2c7c105cedec76",
+      "bytes": 1239
+    }
+  },
+  "performance": {
+    "backend": "transformers",
+    "version": "b2_b5_official_v1",
+    "hardware_label": "local Windows CPU; B6 independent-bundle smoke only, not Docker/GPU acceptance",
+    "timing_scope": "A official prompt/tokenization/generation/decode/parse/retry/fallback and B strict output validation; CUDA synchronized before/after; excludes model load, file writes and store creation",
+    "required_rounds": 100,
+    "rounds": 1,
+    "complete": false,
+    "samples": 1,
+    "test_file_sha256": "03dfd25409e6e6cbece35361371b030de7c0e798ec1be6839dca932a61785537",
+    "submission_sha256": "7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828",
+    "parse_failure_count": 1,
+    "parse_failure_ids": [
+      "test1_000001_t5"
+    ],
+    "parse_failure_policy": "number of samples with at least one A JSON parse failure, once per sample including retries",
+    "average_latency_ms": 24691.3615,
+    "median_latency_ms": 24691.3615,
+    "p95_latency_ms": 24691.3615,
+    "min_latency_ms": 24691.3615,
+    "max_latency_ms": 24691.3615,
+    "latencies_ms": [
+      24691.3615
+    ],
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "model_path_name": "base-qwen2.5-0.5b-instruct",
+    "model_loader": "A ModelEngine direct local Transformers"
+  },
+  "bundle_after": {
+    "verified": true,
+    "file_count": 30,
+    "total_bytes": 999760049,
+    "manifest_sha256": "c384dfbaa3b1e51558afb7db64e0628f778a4e157825f7a69a3f8b76de3150ca",
+    "code_commit": "a34f8df7bd089f5d975c2ec1d0760bb4cb6ce394",
+    "a_source_commit": "fce84b354ca0e6ab9cd1ec650198c0d45ab994bd",
+    "model_version": "b2-a-qwen2.5-0.5b-instruct-base-v1",
+    "config_path": "weights/inference_config.base.json"
+  },
+  "elapsed_seconds": 61.895,
+  "finished_at_utc": "2026-10-11T01:52:15.433747+00:00",
+  "checks_passed": 30,
+  "checks_total": 30
+}

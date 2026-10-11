@@ -1,0 +1,7 @@
+# Candidate direct requirements; not a tested GPU lock.
+# PyTorch 2.8.0/CUDA12.8 comes from the digest-pinned base image.
+# freeze and conda explicit are captured from the image after a successful build.
+transformers==5.19.0
+accelerate==1.12.0
+pydantic==2.14.0
+jsonschema==4.26.0
