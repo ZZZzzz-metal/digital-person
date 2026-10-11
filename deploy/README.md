@@ -2,7 +2,9 @@
 
 截至 2026-10-11，准备工具专项检查 79 项通过，完整基线包已生成并核验：本地 `D:/B2-B6-20261011/candidate-a34f8df`，清单 30 个文件、合计 999,760,049 字节。这个数字是包内清单文件总量，不是 Docker 镜像或导出 tar 的大小。**正式 Docker GPU 禁网验证尚未完成，B6 仍有环境阻塞。**
 
-平台独立项目目录中的 Docker daemon 能启动，也能导入最小 Bash 镜像，但容器启动因只读 cgroup 失败；备用 runc 探测使用单次 `--no-new-keyring` 参数后仍因挂载 `/proc` 的 EPERM 失败。本机没有可用 Docker/WSL。平台两张 4090 的 CUDA 小矩阵运算、`unshare -n` 成功均只证明各自的能力，不能合并成同镜像禁网 GPU 推理成功。原始记录见 [平台能力探测](../reports/integration/b6-cloud-capabilities.json)。继续验证需要提供允许启动 GPU Docker 容器的 Linux 环境，无需等待 A/C 新实现。
+平台独立项目目录中的 Docker daemon 能启动，也能导入最小 Bash 镜像，但容器启动因只读 cgroup 失败；备用 runc 探测使用单次 `--no-new-keyring` 参数后仍因挂载 `/proc` 的 EPERM 失败。第一轮收尾时本机没有可用 Docker/WSL。平台两张 4090 的 CUDA 小矩阵运算、`unshare -n` 成功均只证明各自的能力，不能合并成同镜像禁网 GPU 推理成功。原始记录见 [平台能力探测](../reports/integration/b6-cloud-capabilities.json)。继续验证需要可启动 GPU Docker 容器的 Linux 环境，无需等待 A/C 新实现。
+
+后续用户已授权 Agent 自行准备本机环境。WSL3.0.1 MSI 与虚拟机组件已实际安装/启用，Windows返回3010需重启；官方安装文件、交换盘和拟建独立发行版均放D。重启后在项目根目录运行 `.venv/Scripts/python.exe -B deploy/resume_b6_local.py --verify`，只管理专用 B2-B6-Ubuntu22，安装官方 Docker Engine/NVIDIA工具包再执行原验证流程。实际边界与日志见 [本机续做](../reports/integration/B6-本机环境续做.md)，该说明不表示Linux安装或镜像已通过。
 
 ## 文件与候选环境
 

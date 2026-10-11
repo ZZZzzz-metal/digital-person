@@ -8,6 +8,8 @@
 - Agent 负责上传分支和 PR，用户手动合并和拉取；Agent 不 fetch/pull/merge。项目仓库为 [digital-person](https://github.com/ZZZzzz-metal/digital-person)。
 - 当前工作分支 `codex/b6-container`，从 B5 最后文档提交 `23ddfedbdbdd65d82c0a1fb14635dd1d89007b19` 开始。工作目录 `C:/Users/20964/Documents/ChatGPT/MC/digital-person-b0` 历史名不代表当前阶段。
 - 用户新增偏好：**所有后续本机下载、大模型、打包产物与镜像放 D 盘**，C 盘空间不足。B6 实际包在 `D:/B2-B6-20261011/candidate-a34f8df`；已验证旧 B4/B5 资产不重下，保留原位置。云端下载使用实例磁盘。
+- **最新续做状态**：用户明确要求 Agent 自行安装配置。本机官方 WSL3.0.1 已实际安装，MSI退出0；VirtualMachinePlatform启用退出3010，需要Windows重启。WSL/Ubuntu两个安装包已在D下载并核对官方SHA/微软签名；交换盘也已设D。当前只待用户保存工作、手动重启，再回复继续。下一条实际命令 `.venv/Scripts/python.exe -B deploy/resume_b6_local.py --verify`；先核对boot和专用发行版D路径，不重复下载安装、不再开平台实例。详见 [本机环境续做](B6-本机环境续做.md)/[实际状态](b6-local-setup.json)。Ubuntu/Docker/NVIDIA工具包/正式镜像还未安装验收，不预写成功。
+- 续做工具增加Linux侧限时与超时输出记录；原容器验证工具补充自有CID限时停止/移除和cleanup失败记录。变更后仅重跑相关容器控制模块，实际33项通过（3项新增取消/清理风险场景，模拟Docker，非真实GPU验收）；Python/PowerShell/Bash静态检查和CLI通过。原79项/CPU30项保持历史证据，不重新下载/运行旧模型。
 - 旁边的旧 `digital-person` 目录还有早期混合 B1–B5 提交及后续未提交文件，没有按本次逐阶段流程发布，不能当成当前已交付内容或整批带入本轮。
 - B 只改自己的 contracts/core 类型、server、tests/server、环境声明、README、总约定、集成报告。A 的 model/prompts/a_impl 和 C 的前端由各自主责；不代写或覆盖。共享合同变更先更新总约定/schema，由队伍合并拉取同步。
 
@@ -80,11 +82,11 @@
 - 用户授权后创建自有平台实例 b6-offline-test-1011；公有 vLLM0.19.0 镜像实际 torch2.10+cu128，两张4090每卡24,564MiB内核计算成功。此能力探测没有 B2 模型推理，不能代替禁网镜像验收。
 - 官方静态 Docker29.8.2 自建服务可启动，微型 Bash 镜像可导入；容器启动因只读 /sys/fs/cgroup/cpuset/docker 失败。备用 runc 新 keyring 无权限；单次 no-new-keyring 后仍 proc mount EPERM。runc 默认 rootless 配置未请求 network namespace，不算网络隔离。没有改变平台宿主权限/安全限制。
 - 自有 Docker 服务已请求停止，实例已实际关机；最终页面总卡时余额29.23，最初30，显示差额0.77，包含不同券种，不称GPU-only余额。该值仅为本轮观察。截图本机 `.b6-work/platform-stopped-final.png`，不上传账号截图/认证值。
-- 本机无 Docker CLI/可用 WSL，进程非管理员；没有安装或重启系统。仅需人提供可实际启动 GPU Docker 的 Linux 主机/平台服务，或处理本机 WSL2/Docker 的管理员安装与必要重启；无需等待 A/C。
+- 第一轮收尾时本机无 Docker CLI/可用 WSL，进程非管理员；当时没有安装或重启系统。之后用户明确授权 Agent 自行安装配置，已实际完成 WSL MSI 与 VMP 启用，当前需要一次Windows重启，最新动作以文首续做状态为准；无需等待 A/C。
 - 单样例独立完整包真实 CPU 检查 **30/30通过**；推理/独立checker各退出0，原样5条历史、初始化1次、真实回复、独立空store关闭，原包前后30文件摘要一致。实际生成24,691.3615ms，两次JSON失败后A真实fallback_rules，情绪/画像rules，质量未评分。结果 D:/B2-B6-20261011/cpu-smoke-a34f8df/result，submission SHA7683a393a46353bc250b83bb1646d9f77491cc1cb969f8db0d353b21fd936828；安全报告 [b6-bundle-cpu-smoke.json](b6-bundle-cpu-smoke.json)，可复现helper verify_b6_bundle_cpu.py。它不等于 GPU/容器验收。B5原始CPU回退保留，不覆盖。
 - 本轮运行方法和准确缺项：[离线验收](离线验收.md)、[部署说明](../../deploy/README.md)、[结构化结果](b6-verification.json)。正式候选image ID/tar/GPULock均未取得，gpu_offline_verified=false、fallback_image_verified=false、contest_submitted=false，B7未开始。
 - 实现与验收报告已实际推送，报告提交 `92b57f92e70506bf65ae47538771902c91f0cf1e`，创建 [PR #10](https://github.com/ZZZzzz-metal/digital-person/pull/10)，目标 main，共23文件，仅B负责区域。创建后只读核对 open/未合并、head与本地一致、mergeable=true/clean；不把用户未来合并预写为完成。GitHub连接器创建返回403，使用同仓库既有Git凭据成功创建，凭据不保存/输出。本文发布记忆另作一次文档提交并推送到同PR，最终head另在实际远端核对。
-- 下一步仅在 Docker/GPU 环境到位后迁移已有包并运行 deploy/verify_container.py 的完整公开输入；不再重跑未变的 B0–B5、不重新领券/开机徒耗卡时、不把能力镜像当参赛镜像。上传工作仍由 Agent，用户合并/拉取。
+- 下一步待Windows重启完成后运行 deploy/resume_b6_local.py --verify，自行准备D上的专用WSL发行版、Docker/NVIDIA环境并运行完整公开输入；不再重跑未变的 B0–B5、不重新领券/开机徒耗卡时、不把能力镜像当参赛镜像。上传工作仍由 Agent，用户合并/拉取。
 
 ## B5 历史验收与恢复依据（后续以当前 B6 状态为准）
 

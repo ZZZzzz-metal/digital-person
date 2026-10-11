@@ -126,7 +126,8 @@ def run_container(image_id: str, command: list[str], mounts: list[str], work: Pa
             execute(["docker", "container", "start", "--attach", cid], log)
         except (Exception, KeyboardInterrupt) as exc:
             failure = exc
-            subprocess.run(["docker", "container", "stop", cid], capture_output=True, check=False)
+            subprocess.run(["docker", "container", "stop", "--time", "10", cid],
+                           capture_output=True, check=False, timeout=20)
         info = inspect("container", cid)
         evidence = {"container_id": cid, "create_command": args,
                     "image_id": info["Image"], "network_mode": info["HostConfig"]["NetworkMode"],
@@ -139,7 +140,17 @@ def run_container(image_id: str, command: list[str], mounts: list[str], work: Pa
                 "log_sha256": evidence["log_sha256"], "create_command": args}
     finally:
         # No broad prune, daemon reset, image deletion or foreign resource stop.
-        subprocess.run(["docker", "container", "rm", cid], capture_output=True, check=False)
+        cleanup = {"container_id": cid, "removed": False, "timed_out": False}
+        try:
+            removed = subprocess.run(["docker", "container", "rm", "--force", cid],
+                                     capture_output=True, check=False, timeout=20)
+            cleanup.update(exit_code=removed.returncode, removed=removed.returncode == 0)
+        except subprocess.TimeoutExpired:
+            cleanup["timed_out"] = True
+        finally:
+            (work / (name + "-cleanup.json")).write_text(json.dumps(cleanup, indent=2) + "\n", encoding="utf-8")
+        if not cleanup["removed"]:
+            raise RuntimeError("Own container cleanup failed; see " + name + "-cleanup.json")
 
 
 def prepare_context(bundle: Path, context: Path) -> dict:

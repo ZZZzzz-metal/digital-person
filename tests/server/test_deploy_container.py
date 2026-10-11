@@ -4,6 +4,7 @@ from copy import deepcopy
 import importlib.util
 import json
 from pathlib import Path
+import subprocess
 from types import SimpleNamespace
 
 import pytest
@@ -223,3 +224,62 @@ def test_event_validator_rejects_cpu_mock_missing_or_mismatched_prediction_evide
     write_synthetic_events(log, events)
     with pytest.raises(RuntimeError):
         container_tools.validate_inference_events(log, performance["model_version"], performance)
+
+
+def mock_owned_container(monkeypatch, tools, *, interrupted=False):
+    """Synthetic Docker calls only; no actual containers or GPU are used."""
+    cid = "c" * 64
+
+    def execute(command, log=None):
+        if command[2] == "create":
+            return cid
+        assert command[2] == "start" and command[-1] == cid
+        log.write_text("Synthetic unit-only container output\n", encoding="utf-8")
+        if interrupted:
+            raise KeyboardInterrupt()
+        return ""
+
+    monkeypatch.setattr(tools, "execute", execute)
+    monkeypatch.setattr(tools, "inspect", lambda kind, identity: synthetic_inspect())
+    return cid
+
+
+def test_interrupted_runner_stops_and_removes_only_its_own_container(container_tools, tmp_path, monkeypatch):
+    cid = mock_owned_container(monkeypatch, container_tools, interrupted=True)
+    commands = []
+    foreign = tmp_path / "foreign.txt"
+    foreign.write_bytes(b"UNCHANGED")
+
+    def run(command, **kwargs):
+        commands.append((command, kwargs["timeout"]))
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(container_tools.subprocess, "run", run)
+    with pytest.raises(KeyboardInterrupt):
+        container_tools.run_container(FIXTURE_IMAGE_ID, [], [], tmp_path, "interrupted", gpu=True)
+    assert commands == [
+        (["docker", "container", "stop", "--time", "10", cid], 20),
+        (["docker", "container", "rm", "--force", cid], 20),
+    ]
+    cleanup = json.loads((tmp_path / "interrupted-cleanup.json").read_text())
+    assert cleanup == {"container_id": cid, "removed": True, "timed_out": False, "exit_code": 0}
+    assert foreign.read_bytes() == b"UNCHANGED"
+
+
+@pytest.mark.parametrize("failure", ["nonzero", "timeout"])
+def test_cleanup_failure_is_recorded_and_never_returns_success(container_tools, tmp_path, monkeypatch, failure):
+    cid = mock_owned_container(monkeypatch, container_tools)
+
+    def run(command, **kwargs):
+        assert command == ["docker", "container", "rm", "--force", cid]
+        assert kwargs["timeout"] == 20
+        if failure == "timeout":
+            raise subprocess.TimeoutExpired(command, kwargs["timeout"])
+        return SimpleNamespace(returncode=1)
+
+    monkeypatch.setattr(container_tools.subprocess, "run", run)
+    with pytest.raises(RuntimeError, match="Own container cleanup failed"):
+        container_tools.run_container(FIXTURE_IMAGE_ID, [], [], tmp_path, "failed-cleanup", gpu=True)
+    cleanup = json.loads((tmp_path / "failed-cleanup-cleanup.json").read_text())
+    assert cleanup["container_id"] == cid and cleanup["removed"] is False
+    assert cleanup["timed_out"] is (failure == "timeout")
